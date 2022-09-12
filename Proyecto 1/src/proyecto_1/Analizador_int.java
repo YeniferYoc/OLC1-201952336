@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -31,6 +33,7 @@ import java.awt.MenuItem;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 
 public class Analizador_int extends JFrame {
@@ -128,6 +131,29 @@ public class Analizador_int extends JFrame {
 
             	}
             }
+		});
+        save_as.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { 
+				JFileChooser guardar = new JFileChooser();
+		    guardar.showSaveDialog(null);
+		    guardar.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+		    File archivo = guardar.getSelectedFile();
+
+		    try {
+
+		        FileWriter escribir = new FileWriter(archivo, true);
+		        escribir.write(area_autom.getText());
+		        escribir.close();
+		        JOptionPane.showMessageDialog(null, "Guardado con exito");
+
+		    } catch (FileNotFoundException ex) {
+		        JOptionPane.showMessageDialog(null, "Error al guardar, ponga nombre al archivo");
+		    } catch (IOException ex) {
+		        JOptionPane.showMessageDialog(null, "Error al guardar, en la salida");
+		    }
+
+		    }
 		});
         
         

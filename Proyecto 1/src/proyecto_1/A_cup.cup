@@ -1,0 +1,49 @@
+package proyecto_1;
+import java_cup.runtime.Symbol;
+
+
+parser code
+{:
+ private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+:}
+
+
+terminal tipo_dato, identificador, cadena, caracter, numero, pr_inicio, pr_fin, pr_pot, pr_mod, pr_ingresar, pr_como;
+terminal pr_convalor, pr_si, pr_entonces, pr_finsi, pr_contrario, pr_o_si, pr_segun, pr_hacer, pr_contra_entonces;
+terminal pr_para, pr_hasta, pr_incremento, pr_mientras, pr_f_mientras, pr_repetir, pr_hasta, pr_retornar;
+terminal pr_metodo, pr_f_metodo, pr_funcion, pr_f_funcion, pr_ejecutar, pr_imprimir, s_suma, s_resta, s_mult, s_div, s_coma, par_a, par_c;
+terminal s_puntoComa, s_asignacion, s_interrogacion_a, s_interrogacion_c, s_igual, comen_linea, comen_m_linea_a, comen_m_linea_c;
+
+non terminal INICIO, INTRUCCIONES, DECLARACION, EXPRESION, ES_FOR, ES_IF, ES_IF_ELSE, ES_WHILE, ES_DO_WHILE, CONTE_FOR, ES_BOOL, DECLARA_FOR;
+
+start with INICIO; 
+
+INICIO ::= pr_inicio INSTRUCCIONES pr_fin
+;
+
+INSTRUCCIONES  ::= 
+	INSTRUCCIONES DECLARACION |
+	DECLARACION |
+	INSTRUCCIONES ES_DO_WHILE |
+	ES_DO_WHILE |
+	INSTRUCCIONES ES_FOR |
+	ES_FOR
+	INSTRUCCIONES ES_IF |
+	ES_IF |
+	INSTRUCCIONES ES_IF_ELSE |
+	ES_IF_ELSE|
+	INSTRUCCIONES ES_WHILE |
+	ES_WHILE |
+;
+
+DECLARACION ::= 
+	pr_ingresar identificador pr_como tipo_dato pr_convvalor numero s_puntoComa EXPRESION|
+	
+;
