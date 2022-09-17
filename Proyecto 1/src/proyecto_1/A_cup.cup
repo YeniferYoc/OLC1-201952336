@@ -1,49 +1,176 @@
 package proyecto_1;
 import java_cup.runtime.Symbol;
 
+import java.util.LinkedList;
+
 
 parser code
 {:
- private Symbol s;
+ //java -jar java-cup-11b.jar -parser Analizador_sintactico -symbols Simbolos A_cup.cup
+    public LinkedList<Instruccion> AST;
+    public LinkedList<Mi_error> errores_sintac = new LinkedList<>();
+    public void syntax_error(Symbol s){ 
+    					System.out.println("ERROR RECUPERABLE ");
+            System.err.println("Error De Sintaxis en la linea " + (s.right) +" Columna "+s.left+ ". El error es: " +s.value); 
+            errores_sintac.add(new Mi_error((String)s.value, s.left, s.right)); 
+            for(int i = 0; i<errores_sintac.size(); i++){ 
+            System.out.println(i+"ERROR SINTACTICO: "+errores_sintac.get(i).lexema+" fila "+errores_sintac.get(i).fila+ " Columna "+errores_sintac.get(i).columna); }
+            System.out.println("\n");
+    } 
     
-    public void syntax_error(Symbol s){
-        this.s = s;
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+    		System.out.println("ERROR NO RECUPERABLE ");
+    
+            System.err.println("Error síntactico en la Línea " + (s.right)+ " Columna "+s.left+". Componente " + s.value + " no se reconoce."); 
+            errores_sintac.add(new Mi_error((String)s.value, s.left, s.right)); 
+            for(int i = 0; i<errores_sintac.size(); i++){ 
+            System.out.println(i+"ERROR SINTACTICO: "+errores_sintac.get(i).lexema+" fila "+errores_sintac.get(i).fila+ " Columna "+errores_sintac.get(i).columna); }
+            System.out.println("\n");
+    }  
+    
+    public LinkedList<Instruccion> getAST() {
+        return AST;
     }
-
-    public Symbol getS(){
-        return this.s;
 :}
 
 
-terminal tipo_dato, identificador, cadena, caracter, numero, pr_inicio, pr_fin, pr_pot, pr_mod, pr_ingresar, pr_como;
-terminal pr_convalor, pr_si, pr_entonces, pr_finsi, pr_contrario, pr_o_si, pr_segun, pr_hacer, pr_contra_entonces;
-terminal pr_para, pr_hasta, pr_incremento, pr_mientras, pr_f_mientras, pr_repetir, pr_hasta, pr_retornar;
-terminal pr_metodo, pr_f_metodo, pr_funcion, pr_f_funcion, pr_ejecutar, pr_imprimir, s_suma, s_resta, s_mult, s_div, s_coma, par_a, par_c;
-terminal s_puntoComa, s_asignacion, s_interrogacion_a, s_interrogacion_c, s_igual, comen_linea, comen_m_linea_a, comen_m_linea_c;
+terminal String tipo_dato, identificador, cadena, caracter, numero, pr_inicio, pr_fin, pr_pot, pr_mod, pr_ingresar, pr_como;
+terminal String pr_convalor, pr_si, pr_entonces, pr_finsi, pr_contrario, pr_o_si, pr_segun,pr_f_segun, pr_hacer, pr_contra_entonces;
+terminal String pr_para, pr_incremento,pr_fin_para, pr_mientras, pr_f_mientras, pr_repetir, pr_hasta,pr_hastaq, pr_retornar;
+terminal String pr_metodo, pr_f_metodo, pr_funcion, pr_f_funcion, pr_ejecutar, pr_imprimir, pr_imprimir_nl, s_suma, s_resta, s_mult, s_div, s_coma, par_a, par_c;
+terminal String s_puntoComa, s_asignacion,boolean_, s_interrogacion_a,menorque,mayorque, pr_param, s_interrogacion_c,  comen_linea, pr_con, comen_m_linea_a, comen_m_linea_;
+terminal String cor_a, cor_c, menorigual, mayorigual, igual, diferente, pr_or, pr_and, pr_not;
 
-non terminal INICIO, INTRUCCIONES, DECLARACION, EXPRESION, ES_FOR, ES_IF, ES_IF_ELSE, ES_WHILE, ES_DO_WHILE, CONTE_FOR, ES_BOOL, DECLARA_FOR;
+non terminal INICIO;
+non terminal LinkedList<Instruccion> instrucciones;
+non terminal Instruccion instruccion;
+non terminal Expresion expresion;
+//non terminal Expresion condicion_log;
+non terminal LinkedList<O_si> o_sis;
+non terminal LinkedList<String> lista_identificadores;
+non terminal LinkedList<Caso> casos;
+non terminal LinkedList<Parametro> parametros;
+
+precedence left s_suma;
+precedence left s_resta;
+precedence left s_div;
+precedence left s_mult;
+precedence left menorque;
+precedence left mayorque;
+precedence left s_asignacion;
+precedence left pr_pot;
+precedence left pr_mod;
+precedence left menorigual;
+precedence left mayorigual;
+precedence left igual;
+precedence left diferente;
+precedence left pr_or;
+precedence left pr_and;
+precedence right pr_not;
+
+
 
 start with INICIO; 
 
-INICIO ::= pr_inicio INSTRUCCIONES pr_fin
+INICIO ::= pr_inicio instrucciones:instr pr_fin {: parser.AST=instr; :}
+			|pr_inicio pr_fin
 ;
 
-INSTRUCCIONES  ::= 
-	INSTRUCCIONES DECLARACION |
-	DECLARACION |
-	INSTRUCCIONES ES_DO_WHILE |
-	ES_DO_WHILE |
-	INSTRUCCIONES ES_FOR |
-	ES_FOR
-	INSTRUCCIONES ES_IF |
-	ES_IF |
-	INSTRUCCIONES ES_IF_ELSE |
-	ES_IF_ELSE|
-	INSTRUCCIONES ES_WHILE |
-	ES_WHILE |
+instrucciones ::= 
+	instrucciones:inst instruccion: instt {: RESULT= inst; RESULT.add(instt);:}
+	| instruccion:inst	{:RESULT = new LinkedList<>(); RESULT.add(inst);:}
 ;
 
-DECLARACION ::= 
-	pr_ingresar identificador pr_como tipo_dato pr_convvalor numero s_puntoComa EXPRESION|
+instruccion ::= 
+	pr_ingresar lista_identificadores:list_id pr_como tipo_dato:tipo pr_convalor expresion:ex s_puntoComa	{:RESULT = new Declaracion_var(list_id, tipo, ex);:}
+	|lista_identificadores:list_id s_asignacion expresion:ex s_puntoComa {:RESULT = new Asignacion(list_id, ex);:} 
+	|pr_si expresion:cond pr_entonces instrucciones:inst pr_finsi {:RESULT = new Si(cond, inst) ;:}
+	|pr_si expresion:cond pr_entonces instrucciones:inst pr_contrario instrucciones:ins_else pr_finsi {:RESULT = new Si(cond, inst, ins_else) ;:}
+	|pr_si expresion:cond pr_entonces instrucciones:inst o_sis:os pr_contrario pr_entonces instrucciones:ins_else pr_finsi {:RESULT = new Si(cond, inst, os, ins_else) ;:}
+	|pr_si expresion:cond pr_entonces instrucciones:inst o_sis:os  pr_finsi {:RESULT = new Si(cond, inst, os, 1) ;:}
+	|pr_segun expresion:expr pr_hacer casos:casos_ 	pr_f_segun {:RESULT = new Segun(expr, casos_) ;:}
+	|pr_segun expresion:expr pr_hacer casos:casos_  pr_contra_entonces instrucciones:ins	pr_f_segun {:RESULT = new Segun(expr, casos_, ins) ;:}
+	|pr_para identificador:id s_asignacion expresion:expr pr_hasta expresion:expre pr_hacer instrucciones:instr pr_fin_para {:RESULT = new Para(id, expr, expre, instr);:}
+	|pr_para identificador:id s_asignacion expresion:expr pr_hasta expresion:expre pr_hacer  pr_fin_para {:RESULT = new Para(id, expr, expre);:}
+	|pr_para identificador:id s_asignacion expresion:expr pr_hasta expresion:expre pr_con pr_incremento expresion:exp pr_hacer instrucciones:instr pr_fin_para {:RESULT = new Para(id, expr, expre, instr, exp);:}
+	|pr_mientras expresion:logi pr_hacer instrucciones:intrucc pr_f_mientras {:RESULT = new Mientras(logi, intrucc);:} 
+	|pr_mientras expresion:logi pr_hacer  pr_f_mientras {:RESULT = new Mientras(logi);:} 
+	|pr_repetir instrucciones:ins pr_hastaq expresion:cond {:RESULT = new  Repetir(ins, cond);:}
+	|pr_repetir  pr_hastaq expresion:cond {:RESULT = new Repetir( cond);:}
+	|pr_metodo identificador:id instrucciones:ins pr_f_metodo {:RESULT = new Metodo(id, ins);:}
+	|pr_metodo identificador:id par_a pr_param parametros:paramet par_c instrucciones:ins pr_f_metodo {:RESULT = new Metodo(id, ins, paramet);:}
+	|pr_funcion identificador:id tipo_dato:tipo pr_param parametros:p instrucciones:ins pr_retornar expresion:ex s_puntoComa pr_f_funcion    {:RESULT = new Funcion(id, tipo, ins, p, ex);:}
+	|pr_funcion identificador:id tipo_dato:tipo instrucciones:ins pr_retornar expresion:ex s_puntoComa pr_f_funcion    {:RESULT = new Funcion(id, tipo, ins,ex);:}
+	|pr_ejecutar identificador:id par_a par_c s_puntoComa {:RESULT = new Ejecutar(id);:}
+	|pr_ejecutar identificador:id par_a parametros:p par_c s_puntoComa {:RESULT = new Ejecutar(id,p);:}
+	|pr_imprimir expresion:ex s_puntoComa {:RESULT = new Imprimir(ex, 0);:}
+	|pr_imprimir_nl expresion:ex s_puntoComa {:RESULT = new Imprimir(ex, 1);:}
+	|comen_linea:c {:RESULT = new Comentario(c);:}
+	|comen_m_linea_a:c {:RESULT = new Comentario_mas(c);:}
+	|comen_m_linea_:c {:RESULT = new Comentario(c);:}
+	|error
+;
+
+lista_identificadores ::= lista_identificadores:l s_coma identificador:id {:RESULT = l; RESULT.add(id);:}
+						|identificador:id {:RESULT = new LinkedList<String>(); RESULT.add(id);:}
+;
+o_sis ::= o_sis:o pr_o_si expresion:c pr_entonces instrucciones:inst {:RESULT=o; RESULT.add(new O_si(c,inst));:}
+	|pr_o_si expresion:c pr_entonces instrucciones:inst {:RESULT = new LinkedList<O_si>(); RESULT.add(new O_si(c, inst));:}
+;
+parametros ::= parametros:p s_coma identificador:id tipo_dato:tipo {:RESULT=p; RESULT.add(new Parametro(id,tipo)) ;:}
+			|identificador:id tipo_dato:tipo {:RESULT= new LinkedList<Parametro>(); RESULT.add(new Parametro(id, tipo));:}
+;
+casos ::= casos:c s_interrogacion_a expresion:ex s_interrogacion_c pr_entonces instrucciones:ins 	{:RESULT=c; RESULT.add(new Caso(ex, ins));:}
+		| s_interrogacion_a expresion:ex s_interrogacion_c pr_entonces instrucciones:ins 	{:RESULT= new LinkedList<Caso>(); RESULT.add(new Caso(ex, ins));:}
+;
+expresion ::= 
+	expresion:e s_suma expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Suma);:}
+	|expresion:e s_resta expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Resta);:}
+	|expresion:e s_mult expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Multiplicacion);:}
+	|expresion:e s_div expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Division);:}
+	|expresion:e pr_pot expresion:ex  		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Potencia);:}
+	|expresion:e pr_mod expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Modulo);:}
 	
-;
+	|par_a expresion:e par_c 				{:RESULT= e;:}
+	|cor_a expresion:e cor_c 				{:RESULT= e;:}
+	|numero:n								{:RESULT=new Expresion(n, Expresion.Tipo.Numero);:}
+	|cadena:c								{:RESULT=new Expresion(c, Expresion.Tipo.Cadena);:}
+	|caracter:c								{:RESULT=new Expresion(c, Expresion.Tipo.Caracter);:}
+	|boolean_:b								{:RESULT=new Expresion(b, Expresion.Tipo.Boolean_);:}
+	|identificador:id						{:RESULT=new Expresion(id, Expresion.Tipo.Identificador);:}
+
+	|expresion:a mayorque expresion:ex		{:RESULT=new Expresion(a, ex, Expresion.Tipo.Mayor);:}
+	|expresion:a menorque expresion:ex		{:RESULT=new Expresion(a, ex, Expresion.Tipo.Menor);:}
+	|expresion:e mayorigual expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Mayorigual);:}
+	|expresion:e menorigual expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Menorigual);:}
+	|expresion:e igual expresion:ex  		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Igual);:}
+	|expresion:e diferente expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Diferente);:}
+	|expresion:e pr_or expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Or_);:}
+	|expresion:e pr_and expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.And_);:}
+	|pr_not expresion:e 					{:RESULT= new Expresion(e, Expresion.Tipo.Not_);:}
+;	
+		
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

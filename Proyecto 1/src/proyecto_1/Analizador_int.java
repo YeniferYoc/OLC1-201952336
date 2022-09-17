@@ -186,6 +186,8 @@ public class Analizador_int extends JFrame {
 		ver_python.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//presiona el regresar
+				String contenido = area_autom.getText();
+				Main.traducir(contenido);
 				
 			}
 		});
