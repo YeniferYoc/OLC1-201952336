@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class Funcion implements Instruccion{
 	private String id, tipo;
+	public static int contador =0;
 	private Expresion ex;
 	private LinkedList<Instruccion> instrucciones;
 	private LinkedList<Parametro> parametros;
@@ -54,6 +55,37 @@ public class Funcion implements Instruccion{
 	public Object Codigo_golang() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public String CodigoDot() {
+		// TODO Auto-generated method stub
+		
+		String dot = "";
+		
+		int fun = contador;
+		dot+="nodo"+(fun)+"_fun;";
+		dot+="nodo"+(fun)+"_fun"+" [ label =\"FUNCION "+"\"];\n";
+		dot+="nodo"+(fun+1)+"_id_fun"+" [ label =\""+id.toString()+"\"];\n";
+		dot+="nodo"+(fun)+"_fun"+" ->nodo"+(fun+1)+"_id_fun;";
+		dot+="nodo"+(fun)+"_param"+" [ label =\"PARAMETROS\"];\n";
+		dot+="nodo"+(fun)+"_fun"+" ->nodo"+(fun)+"_param;";
+		
+		if(parametros != null) {
+			for(Parametro p_:parametros) {
+				
+				dot+="nodo"+fun+"_param"+" ->"+p_.CodigoDot();
+				
+				
+				contador++;
+					
+			}
+		}else {
+			contador++;
+		}
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		return dot;
 	}
 	
 

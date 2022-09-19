@@ -86,7 +86,7 @@ public class Analizador_int extends JFrame {
 		area_autom.setBounds(34, 169, 841, 250);
 		area_autom.setLayout(null);
 		//prin_aut.add(area_autom);
-		area_autom.setText("//Here is for the code");
+		//area_autom.setText("//Here is for the code");
 		
 		JScrollPane scroll = new JScrollPane(area_autom);
 		scroll.setBounds(34, 169, 841, 270);

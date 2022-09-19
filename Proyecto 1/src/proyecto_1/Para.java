@@ -76,6 +76,11 @@ public class Para implements Instruccion{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public String CodigoDot() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

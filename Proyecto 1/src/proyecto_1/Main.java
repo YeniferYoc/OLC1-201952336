@@ -3,10 +3,14 @@ package proyecto_1;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.util.LinkedList;
 
 import javax.swing.JFrame;
+
 
 
 
@@ -18,6 +22,7 @@ public class Main {
 		Analizador_int Principal_v = new Analizador_int();
 		Principal_v.setVisible(true);
 		Principal_v.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//LO QUE PASE CUANDO SE CIERRE LA VENTANA
+		
 		/* try {
 
 	            Analizador_Lexico lexico = new Analizador_Lexico(
@@ -48,21 +53,40 @@ public class Main {
 		}
 		arbol(arbol);
 		
+		
 	}
 	public static void arbol(LinkedList<Instruccion> arbol_) {
 		if (arbol_ == null) {
 			System.out.println("no hay nada");
 			return;
 		}
-		int contador = 0;
+		
+		String dot = "";
+		dot+="raiz"+" [ label =\"INICIO\"];\n";
+		//System.out.println(dot);
 		for(Instruccion instruccion: arbol_) {
 			if(instruccion != null) {
-				contador ++;
-				System.out.println(instruccion.Codigo_python());
+				dot+="raiz"+" ->";
+				//System.out.println(dot);
+				dot+= instruccion.CodigoDot();
+				
+				//System.out.println(instruccion.Codigo_python());
+				//System.out.println(instruccion);
+				
 			}
 			
 		}
-		System.out.println(contador);
+		System.out.println(dot);
+		for(Instruccion instruccion: arbol_) {
+			if(instruccion != null) {
+				
+				System.out.println(instruccion.Codigo_python());
+				//System.out.println(instruccion);
+				//System.out.println(instruccion.CodigoDot());
+			}
+			
+		}
+		
 	}
-
+	
 }

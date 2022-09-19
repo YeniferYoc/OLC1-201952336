@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Caso implements Instruccion{
 	private Expresion expresion;
 	private LinkedList<Instruccion> instrucciones;
-	
+	public static int contador=0;
 	public Caso(Expresion expresion, LinkedList<Instruccion> instrucciones) {
 		this.expresion = expresion;
 		this.instrucciones= instrucciones;
@@ -24,15 +24,20 @@ public class Caso implements Instruccion{
 		// TODO Auto-generated method stub
 		String pyt = "";
 		if(indice != 0) {
-			pyt += "elif("+expresion_switch.Codigo_python()+"=="+expresion+"): \n";
+			pyt += "elif("+expresion_switch.Codigo_python()+"=="+expresion.Codigo_python()+"): \n";
 			for(Instruccion instruccion: instrucciones) {
 				pyt += instruccion.Codigo_python().toString();
+				pyt += "\n";
 			}
 			
 		}else {
-		pyt += "if("+expresion_switch.Codigo_python()+"=="+expresion+"): \n";
+		pyt += "if("+expresion_switch.Codigo_python()+"=="+expresion.Codigo_python()+"): \n";
 		for(Instruccion instruccion: instrucciones) {
-			pyt += instruccion.Codigo_python().toString();
+			if(instruccion != null) {
+
+				pyt += instruccion.Codigo_python().toString();
+				pyt += "\n";
+			}
 		}
 		}
 		pyt += "\n";
@@ -46,6 +51,30 @@ public class Caso implements Instruccion{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	@Override
+	public String CodigoDot() {
+		String dot = "";
+		
+		int cas_ = contador;
+		dot+="nodo"+(contador)+"_cas;\n";
+		dot+="nodo"+(cas_)+"_cas"+" [ label =\"CASO "+"\"];\n";
+		dot+="nodo"+cas_+"_cas"+" ->"+expresion.CodigoDot();
+		
+		
+		
+		if(instrucciones != null) {
+			for(Instruccion ins:instrucciones) {
+				if(ins != null) {
+					dot+="nodo"+cas_+"_cas"+" ->"+ins.CodigoDot();
+					
+				}
+				contador++;	
+			}
+		}else {
+			contador++;
+		}
+		
+		return dot;
+	}
 
 }

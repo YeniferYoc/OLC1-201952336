@@ -34,6 +34,11 @@ public class Identificador implements Instruccion{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public String CodigoDot() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

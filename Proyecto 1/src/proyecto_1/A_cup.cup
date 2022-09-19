@@ -50,6 +50,7 @@ non terminal LinkedList<O_si> o_sis;
 non terminal LinkedList<String> lista_identificadores;
 non terminal LinkedList<Caso> casos;
 non terminal LinkedList<Parametro> parametros;
+non terminal LinkedList<Parametro_f> parametros_f;
 
 precedence left s_suma;
 precedence left s_resta;
@@ -98,11 +99,11 @@ instruccion ::=
 	|pr_repetir instrucciones:ins pr_hastaq expresion:cond {:RESULT = new  Repetir(ins, cond);:}
 	|pr_repetir  pr_hastaq expresion:cond {:RESULT = new Repetir( cond);:}
 	|pr_metodo identificador:id instrucciones:ins pr_f_metodo {:RESULT = new Metodo(id, ins);:}
-	|pr_metodo identificador:id par_a pr_param parametros:paramet par_c instrucciones:ins pr_f_metodo {:RESULT = new Metodo(id, ins, paramet);:}
-	|pr_funcion identificador:id tipo_dato:tipo pr_param parametros:p instrucciones:ins pr_retornar expresion:ex s_puntoComa pr_f_funcion    {:RESULT = new Funcion(id, tipo, ins, p, ex);:}
+	|pr_metodo identificador:id  pr_param par_a parametros:paramet par_c instrucciones:ins pr_f_metodo {:RESULT = new Metodo(id, ins, paramet);:}
+	|pr_funcion identificador:id tipo_dato:tipo pr_param par_a parametros:p par_c instrucciones:ins pr_retornar expresion:ex s_puntoComa pr_f_funcion    {:RESULT = new Funcion(id, tipo, ins, p, ex);:}
 	|pr_funcion identificador:id tipo_dato:tipo instrucciones:ins pr_retornar expresion:ex s_puntoComa pr_f_funcion    {:RESULT = new Funcion(id, tipo, ins,ex);:}
 	|pr_ejecutar identificador:id par_a par_c s_puntoComa {:RESULT = new Ejecutar(id);:}
-	|pr_ejecutar identificador:id par_a parametros:p par_c s_puntoComa {:RESULT = new Ejecutar(id,p);:}
+	|pr_ejecutar identificador:id par_a parametros_f:p par_c s_puntoComa {:RESULT = new Ejecutar(id,p);:}
 	|pr_imprimir expresion:ex s_puntoComa {:RESULT = new Imprimir(ex, 0);:}
 	|pr_imprimir_nl expresion:ex s_puntoComa {:RESULT = new Imprimir(ex, 1);:}
 	|comen_linea:c {:RESULT = new Comentario(c);:}
@@ -120,6 +121,9 @@ o_sis ::= o_sis:o pr_o_si expresion:c pr_entonces instrucciones:inst {:RESULT=o;
 parametros ::= parametros:p s_coma identificador:id tipo_dato:tipo {:RESULT=p; RESULT.add(new Parametro(id,tipo)) ;:}
 			|identificador:id tipo_dato:tipo {:RESULT= new LinkedList<Parametro>(); RESULT.add(new Parametro(id, tipo));:}
 ;
+parametros_f ::= parametros_f:f s_coma expresion:id {:RESULT=f; RESULT.add(new Parametro_f(id)) ;:}
+			|expresion:id  {:RESULT= new LinkedList<Parametro_f>(); RESULT.add(new Parametro_f(id));:}
+;
 casos ::= casos:c s_interrogacion_a expresion:ex s_interrogacion_c pr_entonces instrucciones:ins 	{:RESULT=c; RESULT.add(new Caso(ex, ins));:}
 		| s_interrogacion_a expresion:ex s_interrogacion_c pr_entonces instrucciones:ins 	{:RESULT= new LinkedList<Caso>(); RESULT.add(new Caso(ex, ins));:}
 ;
@@ -130,9 +134,11 @@ expresion ::=
 	|expresion:e s_div expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Division);:}
 	|expresion:e pr_pot expresion:ex  		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Potencia);:}
 	|expresion:e pr_mod expresion:ex 		{:RESULT= new Expresion(e,ex, Expresion.Tipo.Modulo);:}
+	|pr_ejecutar identificador:id par_a par_c  {:RESULT = new Expresion(id, Expresion.Tipo.Ejecutar_print);:}
+	|pr_ejecutar identificador:id par_a parametros_f:p par_c  {:RESULT = new Expresion(id,p, Expresion.Tipo.Ejecutar_print);:}
 	
-	|par_a expresion:e par_c 				{:RESULT= e;:}
-	|cor_a expresion:e cor_c 				{:RESULT= e;:}
+	|par_a expresion:e par_c 				{:RESULT= new Expresion(e, Expresion.Tipo.Parentesis);:}
+	|cor_a expresion:e cor_c 				{:RESULT= new Expresion(e, Expresion.Tipo.Corchetes);:}
 	|numero:n								{:RESULT=new Expresion(n, Expresion.Tipo.Numero);:}
 	|cadena:c								{:RESULT=new Expresion(c, Expresion.Tipo.Cadena);:}
 	|caracter:c								{:RESULT=new Expresion(c, Expresion.Tipo.Caracter);:}

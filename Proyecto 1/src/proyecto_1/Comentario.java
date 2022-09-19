@@ -2,6 +2,7 @@ package proyecto_1;
 
 public class Comentario implements Instruccion{
 	private String contenido;
+	public static int contador=0;
 	public Comentario(String contenido) {
 		this.contenido = contenido;
 	}
@@ -10,10 +11,10 @@ public class Comentario implements Instruccion{
 	public Object Codigo_python() {
 		// TODO Auto-generated method stub
 		String pyt = "";
-		
-			pyt += "# "+contenido.toString()+"\n";
+			contenido = contenido.toString().replace('/', '#');
+			pyt += contenido.toString()+"\n";
 				
-		System.out.println(pyt+" comentario");
+		//System.out.println(pyt+" comentario");
 		return pyt;
 	}
 
@@ -22,7 +23,23 @@ public class Comentario implements Instruccion{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	@Override
+	public String CodigoDot() {
+
+		String dot = "";
+		
+		int comen = contador;
+		dot+="nodo"+(comen)+"_com";
+		dot+="nodo"+(comen)+"_com"+" [ label =\"Comentario "+"\"];\n";
+		dot+="nodo"+(comen+1)+"_id_c"+" [ label =\""+contenido.toString()+"\"];\n";
+		dot+="nodo"+(comen)+"_com"+" ->nodo"+(comen+1)+"_id_c;\n";
+		contador++;
+		
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		return dot;
+	}
 
 }
 

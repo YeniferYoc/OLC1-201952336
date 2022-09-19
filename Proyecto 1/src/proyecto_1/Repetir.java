@@ -7,11 +7,11 @@ public class Repetir implements Instruccion{
 	private LinkedList<Instruccion> instrucciones;
 	
 	public Repetir(LinkedList<Instruccion> inst, Expresion expresion_log) {
-		expresion_log = expresion_log;
-		instrucciones = inst;
+		this.expresion_log = expresion_log;
+		this.instrucciones = inst;
 	}
 	public Repetir(Expresion expresion_log) {
-		expresion_log = expresion_log;
+		this.expresion_log = expresion_log;
 	}
 	
 	
@@ -39,6 +39,11 @@ public class Repetir implements Instruccion{
 
 	@Override
 	public Object Codigo_golang() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String CodigoDot() {
 		// TODO Auto-generated method stub
 		return null;
 	}
