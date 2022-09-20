@@ -88,7 +88,7 @@ public class Analizador_int extends JFrame {
 				Path ab = ruta.toAbsolutePath();
 				System.out.println(ab);
 				try {
-					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler"+"\""+ab+"\"");
+					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+"\""+ab+"\"");
 				
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -100,6 +100,24 @@ public class Analizador_int extends JFrame {
 			}
 		});
         m_view.add(tec);
+        tec.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//presiona el regresar
+				Path ruta = Paths.get("manualt.pdf");
+				Path ab = ruta.toAbsolutePath();
+				System.out.println(ab);
+				try {
+					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+"\""+ab+"\"");
+				
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				
+			}
+		});
         mi_menu.add(m_file);
         mi_menu.add(m_view);
         mi_menu.add(m_report);

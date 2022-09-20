@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -158,6 +160,16 @@ public class Main {
         try {
             String cmd = "dot -Tpng arbol.dot -o arbol.png";
             Runtime.getRuntime().exec(cmd);
+            Path ruta = Paths.get("arbol.png");
+			Path ab = ruta.toAbsolutePath();
+			System.out.println(ab);
+			try {
+				Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+"\""+ab+"\"");
+			
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
             System.out.println("abierto");
         } catch (IOException ioe) {
             System.out.println(ioe +" ");
@@ -239,6 +251,16 @@ public class Main {
         try {
             String cmd = "dot -Tpng diagrama.dot -o diagrama.png";
             Runtime.getRuntime().exec(cmd);
+            Path ruta = Paths.get("diagrama.png");
+			Path ab = ruta.toAbsolutePath();
+			System.out.println(ab);
+			try {
+				Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+"\""+ab+"\"");
+			
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
             System.out.println("abierto");
         } catch (IOException ioe) {
             System.out.println(ioe +" ");
@@ -347,7 +369,16 @@ public class Main {
 				escribir.println("</BODY>\r\n"
 						+ "</HTML>");
 				escribir.close();
+				Path ruta = Paths.get(nombre+".html");
+				Path ab = ruta.toAbsolutePath();
+				System.out.println(ab);
+				try {
+					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+"\""+ab+"\"");
 				
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				System.out.println(" ");
 				System.out.println("SE HA CREADO CON EXITO EL REPORTE DE ERRORES");
 				
