@@ -1,0 +1,122 @@
+
+terminal String tipo_dato, identificador, cadena, caracter, numero, pr_inicio, pr_fin, pr_pot, pr_mod, pr_ingresar, pr_como;
+terminal String pr_convalor, pr_si, pr_entonces, pr_finsi, pr_contrario, pr_o_si, pr_segun,pr_f_segun, pr_hacer, pr_contra_entonces;
+terminal String pr_para, pr_incremento,pr_fin_para, pr_mientras, pr_f_mientras, pr_repetir, pr_hasta,pr_hastaq, pr_retornar;
+terminal String pr_metodo, pr_f_metodo, pr_funcion, pr_f_funcion, pr_ejecutar, pr_imprimir, pr_imprimir_nl, s_suma, s_resta, s_mult, s_div, s_coma, par_a, par_c;
+terminal String s_puntoComa, s_asignacion,boolean_, s_interrogacion_a,menorque,mayorque, pr_param, s_interrogacion_c,  comen_linea, pr_con, comen_m_linea_a, comen_m_linea_;
+terminal String cor_a, cor_c, menorigual, mayorigual, igual, diferente, pr_or, pr_and, pr_not;
+
+non terminal INICIO;
+non terminal LinkedList<Instruccion> instrucciones;
+non terminal Instruccion instruccion;
+non terminal Expresion expresion;
+non terminal LinkedList<O_si> o_sis;
+non terminal LinkedList<String> lista_identificadores;
+non terminal LinkedList<Caso> casos;
+non terminal LinkedList<Parametro> parametros;
+non terminal LinkedList<Parametro_f> parametros_f;
+
+precedence left s_suma;
+precedence left s_resta;
+precedence left s_div;
+precedence left s_mult;
+precedence left menorque;
+precedence left mayorque;
+precedence left s_asignacion;
+precedence left pr_pot;
+precedence left pr_mod;
+precedence left menorigual;
+precedence left mayorigual;
+precedence left igual;
+precedence left diferente;
+precedence left pr_or;
+precedence left pr_and;
+precedence right pr_not;
+
+
+
+start with INICIO; 
+
+INICIO ::= pr_inicio instrucciones:instr pr_fin
+			|pr_inicio pr_fin
+;
+
+instrucciones ::= 
+	instrucciones:inst instruccion: instt 
+	| instruccion:inst	
+;
+
+instruccion ::= 
+	pr_ingresar lista_identificadores:list_id pr_como tipo_dato:tipo pr_convalor expresion:ex s_puntoComa	
+	|lista_identificadores:list_id s_asignacion expresion:ex s_puntoComa 
+	|pr_si expresion:cond pr_entonces instrucciones:inst pr_finsi
+	|pr_si expresion:cond pr_entonces instrucciones:inst pr_contrario pr_entonces instrucciones:ins_else pr_finsi
+	|pr_si expresion:cond pr_entonces instrucciones:inst o_sis:os pr_contrario pr_entonces instrucciones:ins_else pr_finsi
+	|pr_si expresion:cond pr_entonces instrucciones:inst o_sis:os  pr_finsi
+	|pr_segun expresion:expr pr_hacer casos:casos_ 	pr_f_segun 
+	|pr_segun expresion:expr pr_hacer casos:casos_  pr_contra_entonces instrucciones:ins	pr_f_segun 
+	|pr_para identificador:id s_asignacion expresion:expr pr_hasta expresion:expre pr_hacer instrucciones:instr pr_fin_para 
+	|pr_para identificador:id s_asignacion expresion:expr pr_hasta expresion:expre pr_hacer  pr_fin_para
+	|pr_para identificador:id s_asignacion expresion:expr pr_hasta expresion:expre pr_con pr_incremento expresion:exp pr_hacer instrucciones:instr pr_fin_para 
+	|pr_mientras expresion:logi pr_hacer instrucciones:intrucc pr_f_mientras 
+	|pr_mientras expresion:logi pr_hacer  pr_f_mientras 
+	|pr_repetir instrucciones:ins pr_hastaq expresion:cond
+	|pr_repetir  pr_hastaq expresion:cond 
+	|pr_metodo identificador:id instrucciones:ins pr_f_metodo 
+	|pr_metodo identificador:id  pr_param par_a parametros:paramet par_c instrucciones:ins pr_f_metodo 
+	|pr_funcion identificador:id tipo_dato:tipo pr_param par_a parametros:p par_c instrucciones:ins pr_retornar expresion:ex s_puntoComa pr_f_funcion    
+	|pr_funcion identificador:id tipo_dato:tipo instrucciones:ins pr_retornar expresion:ex s_puntoComa pr_f_funcion 
+	|pr_ejecutar identificador:id par_a par_c s_puntoComa 
+	|pr_ejecutar identificador:id par_a parametros_f:p par_c s_puntoComa
+	|pr_imprimir expresion:ex s_puntoComa 
+	|pr_imprimir_nl expresion:ex s_puntoComa 
+	|comen_linea:c
+	|comen_m_linea_a:c 
+	|comen_m_linea_:c
+	|error
+;
+
+lista_identificadores ::= lista_identificadores:l s_coma identificador:id 
+						|identificador:id 
+;
+o_sis ::= o_sis:o pr_o_si expresion:c pr_entonces instrucciones:inst
+	|pr_o_si expresion:c pr_entonces instrucciones:inst 
+;    
+parametros ::= parametros:p s_coma identificador:id tipo_dato:tipo
+			|identificador:id tipo_dato:tipo 
+;
+parametros_f ::= parametros_f:f s_coma expresion:id 
+			|expresion:id  
+;
+casos ::= casos:c s_interrogacion_a expresion:ex s_interrogacion_c pr_entonces instrucciones:ins 	
+		| s_interrogacion_a expresion:ex s_interrogacion_c pr_entonces instrucciones:ins 	
+;
+expresion ::= 
+	expresion:e s_suma expresion:ex 		
+	|expresion:e s_resta expresion:ex 		
+	|expresion:e s_mult expresion:ex 		
+	|expresion:e s_div expresion:ex 		
+	|expresion:e pr_pot expresion:ex  	
+	|expresion:e pr_mod expresion:ex 		
+	|pr_ejecutar identificador:id par_a par_c 
+	|pr_ejecutar identificador:id par_a parametros_f:p par_c  
+	|par_a expresion:e par_c 				
+	|cor_a expresion:e cor_c 				
+	|numero:n							
+	|cadena:c								
+	|caracter:c								
+	|identificador:id	
+	|expresion:a mayorque expresion:ex		
+	|expresion:a menorque expresion:ex		
+	|expresion:e mayorigual expresion:ex 		
+	|expresion:e menorigual expresion:ex 		
+	|expresion:e igual expresion:ex  
+	|expresion:e diferente expresion:ex 		
+	|expresion:e pr_or expresion:ex 		
+	|expresion:e pr_and expresion:ex 		
+	|pr_not expresion:e 					
+;	
+		
+	
+	
+	

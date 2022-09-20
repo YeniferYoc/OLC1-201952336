@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -79,6 +81,24 @@ public class Analizador_int extends JFrame {
         m_report.add(err);
         
         m_view.add(user);
+        user.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//presiona el regresar
+				Path ruta = Paths.get("manualus.pdf");
+				Path ab = ruta.toAbsolutePath();
+				System.out.println(ab);
+				try {
+					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler"+"\""+ab+"\"");
+				
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				
+			}
+		});
         m_view.add(tec);
         mi_menu.add(m_file);
         mi_menu.add(m_view);
@@ -200,22 +220,7 @@ public class Analizador_int extends JFrame {
 		prin_aut.add(e_titulo);
 			
 		
-		JButton ver_golang = new JButton("View code Golang");
-		ver_golang.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(e.getSource() == ver_golang) {
-					//SE PRESIONA EL BOTON DE INICIAR
-					//contador_mov = ((int)Math.pow(2, n_discos__))-1;
-					//e_n_mov.setText(Integer.toString(contador_mov));
-				}
-			}
-
-			
-		});
-		ver_golang.setFont(new Font("Broadway", Font.PLAIN, 16));
-		ver_golang.setBackground(Color.GRAY);
-		ver_golang.setBounds(462, 455, 197, 34);
-		prin_aut.add(ver_golang);
+		
 		
 		JButton ver_python = new JButton("View code Python");
 		ver_python.addActionListener(new ActionListener() {

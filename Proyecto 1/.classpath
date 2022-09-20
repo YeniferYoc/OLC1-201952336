@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/java-cup-11b.jar"/>
 	<classpathentry kind="lib" path="lib/jflex-full-1.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-5.3.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

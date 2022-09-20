@@ -347,9 +347,12 @@ public class Main {
 				escribir.println("</BODY>\r\n"
 						+ "</HTML>");
 				escribir.close();
+				
 				System.out.println(" ");
 				System.out.println("SE HA CREADO CON EXITO EL REPORTE DE ERRORES");
-			}
+				
+	            
+				}
 			}catch(IOException e) {
 				System.err.println("NO SE HA PODIDO CREAR EL ARCHIVO");
 			}

@@ -94,11 +94,11 @@ public class Si implements Instruccion{
 				if(ins_else != null) {
 					//String instr = "";
 					//pyt+= ins_else.Codigo_python().toString();
-					instru =ins_else.Codigo_python().toString();;
+					instru +=ins_else.Codigo_python().toString();;
 					//System.out.println(instr);
 				}
 				else {
-					pyt += "\tpass";
+					pyt += "\tpass\n";
 				}
 				
 			}
