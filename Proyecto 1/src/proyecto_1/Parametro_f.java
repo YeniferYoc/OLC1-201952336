@@ -3,6 +3,7 @@ package proyecto_1;
 public class Parametro_f implements Instruccion{
 	private Expresion ex;
 	public static int contador=0;
+	public static int contador2=0;
 	
 	public Parametro_f(Expresion e) {
 		this.ex= e;
@@ -34,6 +35,13 @@ public class Parametro_f implements Instruccion{
 		
 		dot+="nodo"+(par)+"_par"+" ->"+(ex.CodigoDot())+"\n";
 		contador++;
+		
+		return dot;
+	}
+	@Override
+	public String dot_flu() {
+		String dot = "";
+		dot += ex.dot_flu().toString();
 		
 		return dot;
 	}

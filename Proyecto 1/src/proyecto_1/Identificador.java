@@ -39,6 +39,15 @@ public class Identificador implements Instruccion{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public String dot_flu() {
+		String dot = "";
+		
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		return dot;
+	}
 	
 
 }

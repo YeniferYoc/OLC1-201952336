@@ -7,6 +7,7 @@ public class Declaracion_var implements Instruccion{
 	private LinkedList<String> identificadores;
 	private Expresion valor;
 	public static int contador =0;
+	public static int contador2 =0;
 	public Declaracion_var(LinkedList<String> identificadores, String tipo_dato, Expresion valor) {
 		super();
 		this.tipo_dato = tipo_dato;
@@ -94,5 +95,41 @@ public class Declaracion_var implements Instruccion{
 		return dot;
 		
 	}
+
+	@Override
+	public String dot_flu() {
+		// TODO Auto-generated method stub
+		//System.out.println("entro");
+		String dot = "";
+		
+		int declaracion = contador2;
+		if(identificadores != null) {
+			for(String id:identificadores) {
+				
+				declaracion = contador2;
+				//System.out.println(declaracion);
+				dot+="nodo"+(declaracion)+"_id;";
+			
+				dot+="nodo"+(declaracion)+"_id"+" [shape=parallelogram, style=filled, label =\""+tipo_dato+" "+id.toString()+" = "+valor.dot_flu()+"\"];\n";
+				dot+="nodo"+declaracion+"_id"+" ->";
+				
+				
+				contador2++;
+					
+			}
+		}else {
+			contador2++;
+		}
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		
+			
+		
+		return dot;
+		
+	}
+	
+	
 
 }

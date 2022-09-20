@@ -7,6 +7,7 @@ public class Segun implements Instruccion{
 	private LinkedList<Caso> casos;
 	private LinkedList<Instruccion> contrario;
 	public static int contador =0;
+	public static int contador2 =0;
 	
 	public Segun(Expresion expresion, LinkedList<Caso> casos) {
 		this.expresion = expresion;
@@ -34,9 +35,17 @@ public class Segun implements Instruccion{
 		}
 		if(contrario != null) {
 			pyt += "else: \n";
+			String instru = "";
 			for(Instruccion ins:contrario) {
-				pyt += ins.Codigo_python().toString();
+				instru += ins.Codigo_python().toString();
 			}
+			String [] partes = instru.split("\n");
+			 
+			 for(String part:partes) {
+				 String con_ident ="\t";
+				 con_ident += part+"\n";
+				 pyt += con_ident;
+			 }
 		}
 		pyt +="\n";
 		
@@ -85,6 +94,60 @@ public class Segun implements Instruccion{
 	//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
 	
 	return dot;}
-	
+	@Override
+	public String dot_flu() {
+		String dot = "";
+		
+		int si_ = contador2;
+		dot+="nodo"+(si_)+"_se;";
+		dot+="nodo"+(si_)+"_se"+" [ shape=diamond, style=filled, label =\"SEGUN "+expresion.dot_flu()+"\"];\n";
+		dot+="nodo"+si_+"_se"+" ->";
+		
+		
+		
+		
+		if(casos != null) {
+			
+			for(Caso _elif: casos) {
+				if(_elif !=null) {
+					dot+=_elif.dot_flu();
+					
+					
+				}
+			}
+			if(contrario != null) {
+				dot+="nodo"+(si_)+"_els_s";
+				dot+="nodo"+(si_)+"_els_s"+" [ label =\"ELSE "+"\"];\n";
+				dot+="nodo"+(si_)+"_els_s"+" ->";
+				
+				
+				for(Instruccion ins_else: contrario) {
+					if(ins_else != null) {
+						//String instr = "";
+						dot+=ins_else.dot_flu();;
+						
+					}
+					
+			}
+				dot+="nodo"+(si_)+"_els_s_f;";
+				dot+="nodo"+(si_)+"_els_s_f"+" [ label =\"Fin else \"];\n";
+				dot+="nodo"+(si_)+"_els_s_f ->";
+		
+		}
+			}
+			dot+="nodo"+(si_)+"_se_f;";
+			dot+="nodo"+(si_)+"_se_f"+" [ label =\"Fin SEGUN \"];\n";
+			
+		
+		
+		dot+="nodo"+(si_)+"_se_f"+" ->";
+		
+		
+		
+		contador2++;
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		return dot;
+	}
 
 }

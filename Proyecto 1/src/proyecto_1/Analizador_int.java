@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 import javax.swing.JButton;
@@ -42,7 +43,9 @@ public class Analizador_int extends JFrame {
 	private JPanel prin_aut;
 	static String mensaje;
 	JTextArea area_autom;
+	public static JTextArea area_er;
 	JLabel e_n_mov;
+	public static JLabel n_errores ;
 	
 	public Analizador_int() {
 		//Frame mi_fr = new Frame();
@@ -83,17 +86,45 @@ public class Analizador_int extends JFrame {
         mi_menu.setBounds(34, 20, 150, 30);
         prin_aut.add(mi_menu);
         area_autom = new JTextArea();
-		area_autom.setBounds(34, 169, 841, 250);
+		area_autom.setBounds(34, 140, 600, 269);
 		area_autom.setLayout(null);
+		
+		area_er = new JTextArea();
+		area_er.setBounds(634, 140, 241, 269);
+		area_er.setLayout(null);
 		//prin_aut.add(area_autom);
 		//area_autom.setText("//Here is for the code");
+		flow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//presiona el regresar
+				String contenido = area_autom.getText();
+				Main.Analizar_diagrama(contenido);
+				
+				
+				
+			}
+		});
+		
+		
+		err.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//presiona el regresar
+				String nombre = JOptionPane.showInputDialog("INGRESE EL NOMBRE DE REPORTE DE ARCHIVOS ");
+				Main.reporte(nombre);
+				
+			}
+		});
 		
 		JScrollPane scroll = new JScrollPane(area_autom);
-		scroll.setBounds(34, 169, 841, 270);
+		scroll.setBounds(34, 140, 600, 289);
 		prin_aut.add(scroll);
+		
+		JScrollPane scroll2 = new JScrollPane(area_er);
+		scroll2.setBounds(634, 140, 241, 289);
+		prin_aut.add(scroll2);
         open_file.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-            	System.out.println("ohola");
+            	//System.out.println("ohola");
             	//Creamos el objeto JFileChooser
             	JFileChooser fc=new JFileChooser();
             	//Creamos el filtro
@@ -135,23 +166,27 @@ public class Analizador_int extends JFrame {
         save_as.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
 				JFileChooser guardar = new JFileChooser();
-		    guardar.showSaveDialog(null);
-		    guardar.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				guardar.addChoosableFileFilter(new FileNameExtensionFilter("todos los archivos *.OLC", "olc","OLC"));//filtro para ver solo archivos .edu
+				int seleccion = guardar.showSaveDialog(null);
+	            try{
+	                if (seleccion == JFileChooser.APPROVE_OPTION){
+	                	File archivo = guardar.getSelectedFile();
+	                    String PATH = archivo.getAbsolutePath();
+	                    FileWriter escribir = new FileWriter(archivo, true);
+	    		        escribir.write(area_autom.getText());
+	    		        escribir.close();
+	                   if(!(PATH.endsWith(".olc"))){
+	                        File temp = new File(PATH+".olc");
+	                        archivo.renameTo(temp);
+	                    }
+	                    
+	                    JOptionPane.showMessageDialog(null,"Guardado exitoso!", "Guardado exitoso!", JOptionPane.INFORMATION_MESSAGE);
+	                }
+	            }catch (Exception eD){
+	            	JOptionPane.showMessageDialog(null,"Error al guardar el archivo!", "OK", JOptionPane.ERROR_MESSAGE);
+	            }
+		    
 
-		    File archivo = guardar.getSelectedFile();
-
-		    try {
-
-		        FileWriter escribir = new FileWriter(archivo, true);
-		        escribir.write(area_autom.getText());
-		        escribir.close();
-		        JOptionPane.showMessageDialog(null, "Guardado con exito");
-
-		    } catch (FileNotFoundException ex) {
-		        JOptionPane.showMessageDialog(null, "Error al guardar, ponga nombre al archivo");
-		    } catch (IOException ex) {
-		        JOptionPane.showMessageDialog(null, "Error al guardar, en la salida");
-		    }
 
 		    }
 		});
@@ -186,8 +221,13 @@ public class Analizador_int extends JFrame {
 		ver_python.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//presiona el regresar
+				
 				String contenido = area_autom.getText();
-				Main.traducir(contenido);
+				if (contenido.matches("[[ ]*[\n]*[\t]]*")) {
+		            JOptionPane.showMessageDialog(null,"No hay texto para traducir!", "OK", JOptionPane.ERROR_MESSAGE);
+		        }else{
+				Main.traducir_py(contenido);
+				}
 				
 			}
 		});
@@ -198,19 +238,46 @@ public class Analizador_int extends JFrame {
 		
 		 
 		
-		JLabel n_errores = new JLabel("0 errores");
+		n_errores = new JLabel("0 errores");
 		n_errores.setForeground(Color.WHITE);
 		n_errores.setFont(new Font("Broadway", Font.PLAIN, 16));
 		n_errores.setBounds(34, 462, 107, 21);
 		prin_aut.add(n_errores);
 		
 		JButton b_clean = new JButton("Clean");
+		b_clean.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//presiona el regresar
+				area_autom.setText("");
+				
+			}
+		});
 		b_clean.setBackground(Color.CYAN);
 		b_clean.setFont(new Font("Broadway", Font.PLAIN, 14));
 		b_clean.setBounds(670, 81, 92, 34);
 		prin_aut.add(b_clean);
 		
 		JButton b_run = new JButton("Run");
+		b_run.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//presiona el regresar
+				String contenido = area_autom.getText();
+				Main.run(contenido);
+				FileWriter archivo = null;
+		        PrintWriter pw = null;
+				try{
+		            archivo = new FileWriter("entrada.olc");
+		            pw = new PrintWriter(archivo);
+		            pw.println(contenido);
+		            archivo.close();
+		            
+		        }catch (Exception es) {
+		            System.out.println(es +" 1");
+		        }
+
+				
+			}
+		});
 		b_run.setBackground(Color.GREEN);
 		b_run.setFont(new Font("Broadway", Font.PLAIN, 14));
 		b_run.setBounds(783, 81, 92, 34);

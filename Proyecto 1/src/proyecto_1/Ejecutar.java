@@ -6,6 +6,7 @@ public class Ejecutar implements Instruccion{
 	private String id;
 	private LinkedList<Parametro_f> parametros;
 	public static int contador = 0;
+	public static int contador2 = 0;
 	public Ejecutar(String id) {
 		this.id = id;
 	}
@@ -71,6 +72,32 @@ public class Ejecutar implements Instruccion{
 			contador++;
 		}
 		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		return dot;
+	}
+	@Override
+	public String dot_flu() {
+		// TODO Auto-generated method stub
+		
+		String dot = "";
+		
+		int eje = contador2;
+		dot+="nodo"+(eje)+"_eje;";
+		dot+="nodo"+(eje)+"_eje"+" [ label =\"Ejecutar "+id.toString()+" con parametros (";
+		
+		if(parametros != null) {
+			for(int i = 0; i<parametros.size(); i++) {
+				dot += parametros.get(i).dot_flu().toString();
+				
+				if(i != parametros.size()-1){
+					dot += ",";
+				}
+				
+			}
+		}
+		dot += ")\"];\n";
+		dot+="nodo"+(eje)+"_eje"+" ->";
 		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
 		
 		return dot;

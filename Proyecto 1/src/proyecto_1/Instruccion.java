@@ -7,4 +7,5 @@ public interface Instruccion {
 	public Object Codigo_python();
 	public Object Codigo_golang();
 	public String CodigoDot();
+	public String dot_flu();
 }

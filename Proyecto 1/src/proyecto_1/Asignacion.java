@@ -6,6 +6,8 @@ public class Asignacion implements Instruccion{
 	private LinkedList<String> identificadores;
 	private Expresion valor;
 	public static int contador =0;
+
+	public static int contador2 =0;
 	public Asignacion( LinkedList<String> identificadores, Expresion valor) {
 		super();
 		this.identificadores = identificadores;
@@ -77,6 +79,39 @@ public class Asignacion implements Instruccion{
 			
 		
 		return dot;
+	}
+	@Override
+	public String dot_flu() {
+		// TODO Auto-generated method stub
+		//System.out.println("entro");
+		String dot = "";
+		
+		int declaracion = contador2;
+		if(identificadores != null) {
+			for(String id:identificadores) {
+				
+				declaracion = contador2;
+				//System.out.println(declaracion);
+				dot+="nodo"+(declaracion)+"_id_as;";
+			
+				dot+="nodo"+(declaracion)+"_id_as"+" [ label =\""+id.toString()+" -> "+valor.dot_flu()+"\"];\n";
+				dot+="nodo"+declaracion+"_id_as"+" ->";
+				
+				
+				contador2++;
+					
+			}
+		}else {
+			contador2++;
+		}
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		
+			
+		
+		return dot;
+		
 	}
 
 }

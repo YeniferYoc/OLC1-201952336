@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 public class Funcion implements Instruccion{
 	private String id, tipo;
+
+	public static int contador2 =0;
 	public static int contador =0;
 	private Expresion ex;
 	private LinkedList<Instruccion> instrucciones;
@@ -41,12 +43,21 @@ public class Funcion implements Instruccion{
 		}
 		pyt += "): \n";
 		if(instrucciones !=null) {
+			String instru = "";
 			for(Instruccion ins: instrucciones) {
-				pyt+= ins.Codigo_python().toString();
-			pyt += "\n";
+				instru+= ins.Codigo_python().toString();
+			instru += "\n";
 			}	
+			String [] partes = instru.split("\n");
+			 
+			 for(String part:partes) {
+				 String con_ident ="\t";
+				 con_ident += part+"\n";
+				 pyt += con_ident;
+			 }
+			
 		}
-		pyt += "return "+ex.Codigo_python().toString()+"\n";
+		pyt += "\treturn "+ex.Codigo_python().toString()+"\n";
 		
 		return pyt;
 	}
@@ -83,6 +94,68 @@ public class Funcion implements Instruccion{
 			contador++;
 		}
 		
+		dot+="nodo"+(fun)+"_instru_fun"+" [ label =\"INSTRUCCIONES\"];\n";
+		dot+="nodo"+(fun)+"_fun"+" ->nodo"+(fun)+"_instru_fun;";
+		if(instrucciones != null) {
+			for(Instruccion ins:instrucciones) {
+				if(ins != null) {
+					dot+="nodo"+fun+"_instru_fun"+" ->"+ins.CodigoDot();
+					
+				}
+			}
+		}
+		else {
+			dot+="nodo"+fun+"_instru_fun"+" ->"+"nodo"+fun+"_null_fu;";
+			dot+="nodo"+(fun)+"_null_fu"+" [ label =\"NULL "+"\"];\n";
+			
+		}
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		return dot;
+	}
+	@Override
+	public String dot_flu() {
+		// TODO Auto-generated method stub
+		
+		String dot = "";
+		
+		int fun = contador2;
+		dot+="nodo"+(fun)+"_fun;";
+		dot+="nodo"+(fun)+"_fun"+" [ label =\"FUNCION "+id.toString()+" con parametros (";
+		if(parametros != null) {
+			for(int i = 0; i<parametros.size(); i++) {
+				dot += parametros.get(i).dot_flu().toString();
+				
+				if(i != parametros.size()-1){
+					dot += ",";
+				}
+				
+			}
+		}
+		dot += ")\"];\n";
+		dot+="nodo"+(fun)+"_fun"+" ->nodo"+(fun)+"_instru_fun;";
+		
+		dot+="nodo"+(fun)+"_instru_fun"+" [ label =\"INSTRUCCIONES\"];\n";
+		dot+="nodo"+(fun)+"_instru_fun"+" ->";
+		if(instrucciones != null) {
+			for(Instruccion ins:instrucciones) {
+				if(ins != null) {
+					dot+=ins.dot_flu();
+					
+				}
+			}
+		}
+		else {
+			dot+="nodo"+fun+"_instru_fun"+" ->"+"nodo"+fun+"_null_fu;";
+			dot+="nodo"+(fun)+"_null_fu"+" [ label =\"NULL "+"\"];\n";
+			dot+="nodo"+fun+"_null_fu"+" ->";
+		}
+		dot+="nodo"+(fun)+"_fun_f;";
+		dot+="nodo"+(fun)+"_fun_f"+" [ label =\"Fin funcion "+ex.dot_flu()+"\"];\n";
+		
+		dot+="nodo"+(fun)+"_fun"+" ->";
+		contador2++;
 		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
 		
 		return dot;

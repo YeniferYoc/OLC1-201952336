@@ -36,6 +36,7 @@ public class Expresion implements Instruccion{
 	private LinkedList<Parametro_f> parametros;
 	public static int cont_der =0;
 	public static int cont_iz =0;
+	public static int contador2 = 0;
 	
 	
 	
@@ -120,7 +121,7 @@ public class Expresion implements Instruccion{
 			return pyt += cadena.toString();
 		}else if(tipo == Tipo.Caracter) {
 			String carac =valor.toString();
-			System.out.println(carac);
+			//System.out.println(carac);
 			String comparacion = "$";
 			
 			String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -210,9 +211,7 @@ public class Expresion implements Instruccion{
 		
 		return "0";
 	}
-	public static String  charToString(char ca) {
-		return String.valueOf(ca);
-	}
+	
 
 	@Override
 	public Object Codigo_golang() {
@@ -454,7 +453,99 @@ public class Expresion implements Instruccion{
 		
 		return dot;
 	}
-
+	@Override
+	public String dot_flu() {
+		// TODO Auto-generated method stub
+		String pyt = "";
+		if(tipo == Tipo.Suma) {
+			//System.out.println("entro suma");
+			return pyt += ""+izquierda.dot_flu() + " + "+derecha.dot_flu()+"";
+		}else if(tipo == Tipo.Resta) {
+			return pyt += ""+izquierda.dot_flu() + " - "+derecha.dot_flu()+"";
+		}
+		else if(tipo == Tipo.Multiplicacion) {
+			return pyt += ""+izquierda.dot_flu() + " * "+derecha.dot_flu()+"";
+		}else if(tipo == Tipo.Division) {
+			return pyt += ""+izquierda.dot_flu() + " / "+derecha.dot_flu()+"";
+		}else if(tipo == Tipo.Potencia) {
+			/*String va_izquierda = "base_"+cont_iz+"="+izquierda.Codigo_python().toString()+"\n";
+			pyt += va_izquierda;
+			
+			String va_derecha = "expo_"+cont_der+"="+derecha.Codigo_python().toString()+"\n";
+			pyt += va_derecha;*/
+			pyt += ""+izquierda.dot_flu().toString()+ " ** "+derecha.dot_flu().toString()+"";
+			//cont_iz++;
+			//cont_der++;
+			return pyt;
+		}else if(tipo == Tipo.Modulo) {
+			return pyt += ""+izquierda.dot_flu() + " % "+derecha.dot_flu()+"";
+		}
+		else if(tipo == Tipo.Parentesis) {
+			return pyt += "("+derecha.dot_flu() +")";
+		}
+		else if(tipo == Tipo.Corchetes) {
+			return pyt += "["+derecha.dot_flu() +"]";
+		}
+		else if(tipo == Tipo.Ejecutar_print) {
+			if(parametros!= null) {
+				Ejecutar mi_ejecutar = new Ejecutar(id.toString(), parametros);
+				pyt += mi_ejecutar.dot_flu();
+			}else {
+				Ejecutar mi_ejecutar = new Ejecutar(id.toString());
+				pyt +=mi_ejecutar.dot_flu();
+				
+			}
+			return pyt;
+		}
+		
+		
+		else if(tipo == Tipo.Numero) {
+			//System.out.println("entro numero");
+			return pyt += valor.toString();
+		}else if(tipo == Tipo.Cadena) {
+			String cadena = valor.toString();
+			cadena = cadena.replace('\"', '\'');
+			cadena = cadena.replace('\n', ' ');
+			return pyt += cadena.toString();
+		}else if(tipo == Tipo.Caracter) {
+			String carac =valor.toString();
+			
+			
+			return pyt += carac.toString();
+		}else if(tipo == Tipo.Boolean_) {
+			return pyt += valor.toString();
+			
+			
+		}else if(tipo == Tipo.Mayor) {
+			return pyt += " "+izquierda.dot_flu()+">"+derecha.dot_flu()+"";
+		}else if(tipo == Tipo.Menor) {
+			return pyt += ""+izquierda.dot_flu()+"<"+derecha.dot_flu()+"";
+		}
+		else if(tipo == Tipo.Mayorigual) {
+			return pyt += ""+izquierda.dot_flu()+">="+derecha.dot_flu()+"";
+		}else if(tipo == Tipo.Menorigual) {
+			return pyt += ""+izquierda.dot_flu()+"<="+derecha.dot_flu()+"";
+		}
+		else if(tipo == Tipo.Igual) {
+			return pyt += ""+izquierda.dot_flu()+"=="+derecha.dot_flu()+"";
+		}else if(tipo == Tipo.Diferente) {
+			return pyt += ""+izquierda.dot_flu()+"!="+derecha.dot_flu()+"";
+		}
+		else if(tipo == Tipo.Or_) {
+			return pyt += ""+izquierda.dot_flu()+" or "+derecha.dot_flu()+"";
+		}else if(tipo == Tipo.And_) {
+			return pyt += ""+izquierda.dot_flu()+" and "+derecha.dot_flu()+"";
+		}
+		else if(tipo == Tipo.Not_) {
+			return pyt += ""+" not "+derecha.dot_flu()+"";
+		}
+		else if(tipo == Tipo.Identificador) {
+			return pyt += valor.toString();
+		}
+		//System.out.println(pyt);
+		
+		return "0";
+	}
 		
     
 

@@ -45,4 +45,11 @@ public class Parametro implements Instruccion{
 		
 		return dot;
 	}
+	@Override
+	public String dot_flu() {
+		String dot = "";
+		dot += id+" "+tipo_dat;
+		
+		return dot;
+	}
 }

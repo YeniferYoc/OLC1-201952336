@@ -7,6 +7,7 @@ public class Metodo implements Instruccion{
 	private LinkedList<Instruccion> instrucciones;
 	private LinkedList<Parametro> parametros;
 	public static int contador =0;
+	public static int contador2 =0;
 	public int indi=0;
 	public Metodo(String id, LinkedList<Instruccion> inst) {
 		this.id = id;
@@ -43,15 +44,23 @@ public class Metodo implements Instruccion{
 		}
 		pyt += "): \n";
 		if(instrucciones !=null) {
+			String instru = "";
 			for(Instruccion ins: instrucciones) {
 				if(ins != null) {
-					pyt+= ins.Codigo_python().toString();
-					pyt += "\n";
+					instru+= ins.Codigo_python().toString();
+					instru += "\n";
 				}else {
-					pyt += "pass";
+					instru += "pass";
 				}
 				
 			}	
+			String [] partes = instru.split("\n");
+			 
+			 for(String part:partes) {
+				 String con_ident ="\t";
+				 con_ident += part+"\n";
+				 pyt += con_ident;
+			 }
 		}
 		
 		return pyt;
@@ -88,7 +97,69 @@ public class Metodo implements Instruccion{
 		}else {
 			contador++;
 		}
+
+		dot+="nodo"+(met)+"_instru_met"+" [ label =\"INSTRUCCIONES\"];\n";
+		dot+="nodo"+(met)+"_met"+" ->nodo"+(met)+"_instru_met;";
+		if(instrucciones != null) {
+			for(Instruccion ins:instrucciones) {
+				if(ins != null) {
+					dot+="nodo"+met+"_instru_met"+" ->"+ins.CodigoDot();
+					
+				}
+			}
+		}
+		else {
+			dot+="nodo"+met+"_instru_met"+" ->"+"nodo"+met+"_null_met;";
+			dot+="nodo"+(met)+"_null_met"+" [ label =\"NULL "+"\"];\n";
+			
+		}
 		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		return dot;
+	}
+	@Override
+	public String dot_flu() {
+		// TODO Auto-generated method stub
+		
+		String dot = "";
+		
+		int met = contador2;
+		dot+="nodo"+(met)+"met;";
+		dot+="nodo"+(met)+"met"+" [ label =\"Metodo "+id.toString()+" con parametros (";
+		if(parametros != null) {
+			for(int i = 0; i<parametros.size(); i++) {
+				dot += parametros.get(i).dot_flu().toString();
+				
+				if(i != parametros.size()-1){
+					dot += ",";
+				}
+				
+			}
+		}
+		dot += ")\"];\n";
+		dot+="nodo"+(met)+"met"+" ->nodo"+(met)+"_instru_met;";
+		
+		dot+="nodo"+(met)+"_instru_met"+" [ label =\"INSTRUCCIONES\"];\n";
+		dot+="nodo"+(met)+"_instru_met"+" ->";
+		if(instrucciones != null) {
+			for(Instruccion ins:instrucciones) {
+				if(ins != null) {
+					dot+=ins.dot_flu();
+					
+				}
+			}
+		}
+		else {
+			dot+="nodo"+met+"_instru_met"+" ->"+"nodo"+met+"_null_met;";
+			dot+="nodo"+(met)+"_null_met"+" [ label =\"NULL "+"\"];\n";
+			dot+="nodo"+met+"_null_met"+" ->";
+		}
+		dot+="nodo"+(met)+"_met_f;";
+		dot+="nodo"+(met)+"_met_f"+" [ label =\"Fin Metodo \"];\n";
+		
+		dot+="nodo"+(met)+"met"+" ->";
+		contador2++;
 		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
 		
 		return dot;
