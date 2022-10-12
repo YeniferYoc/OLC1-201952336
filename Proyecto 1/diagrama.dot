@@ -1,154 +1,263 @@
 digraph G {node[shape=box, style=filled, color=blanchedalmond]; edge[color=chocolate3];rankdir=UD 
 
 raiz [  shape=circle, style=filled, label ="INICIO"];
-raiz ->nodo0_com;nodo0_com [ label ="Comentario /////inicio de la traduccion
+raiz ->nodo0_com_m;nodo0_com_m [ label ="Comentario /*Archivo de calificacion Organizacion de lenguajes y compiladores 1*******/"];
+nodo0_com_m ->nodo1_com_m;nodo1_com_m [ label ="Comentario /******** Usac */"];
+nodo1_com_m ->nodo0_com;nodo0_com [ label ="Comentario //Segundo Semestre
 "];
-nodo0_com ->nodo0_com_m;nodo0_com_m [ label ="Comentario /*
+nodo0_com ->nodo1_com;nodo1_com [ label ="Comentario /////inicio de la traduccion
+"];
+nodo1_com ->nodo2_com_m;nodo2_com_m [ label ="Comentario /*
         Primer archivo de entrada para proyecto organizacion de lenguajes y compiladores 1
 */"];
-nodo0_com_m ->nodo1_com;nodo1_com [ label ="Comentario //errores lexicos, se tienen que recuperar!
+nodo2_com_m ->nodo2_com;nodo2_com [ label ="Comentario //errores lexicos, se tienen que recuperar!
 "];
-nodo1_com ->nodo2_com;nodo2_com [ label ="Comentario //seccion de declraciones de funciones de variables
+nodo2_com ->nodo3_com;nodo3_com [ label ="Comentario //seccion de declraciones de funciones de variables
 "];
-nodo2_com ->nodo0_id;nodo0_id [shape=parallelogram, style=filled, label ="NumEro _variable1_ = 5"];
-nodo0_id ->nodo3_com;nodo3_com [ label ="Comentario //ERROR sintactico, reportar que falta un punto y coma, recuperarse del error
+nodo3_com ->nodo0_id;nodo0_id [shape=parallelogram, style=filled, label ="NumEro _variable1_ = 5"];
+nodo0_id ->nodo1_id;nodo1_id [shape=parallelogram, style=filled, label ="NumEro _variable2_ = 50"];
+nodo1_id ->nodo2_id;nodo2_id [shape=parallelogram, style=filled, label ="CadenA _v1_ = 'esta es una cadena'"];
+nodo2_id ->nodo3_id;nodo3_id [shape=parallelogram, style=filled, label ="CadenA _v2_ = 'esta es una cadena'"];
+nodo3_id ->nodo4_id;nodo4_id [shape=parallelogram, style=filled, label ="CadenA _v3_ = 'esta es una cadena'"];
+nodo4_id ->nodo5_id;nodo5_id [shape=parallelogram, style=filled, label ="cadena _curso1_ = 'olc'"];
+nodo5_id ->nodo6_id;nodo6_id [shape=parallelogram, style=filled, label ="cadena _curso2_ = 'olc'"];
+nodo6_id ->nodo7_id;nodo7_id [shape=parallelogram, style=filled, label ="cadena _curso3_ = 'olc'"];
+nodo7_id ->nodo8_id;nodo8_id [shape=parallelogram, style=filled, label ="numero _pi1_ = 3"];
+nodo8_id ->nodo9_id;nodo9_id [shape=parallelogram, style=filled, label ="numero _pi2_ = 3.1"];
+nodo9_id ->nodo10_id;nodo10_id [shape=parallelogram, style=filled, label ="numero _pi3_ = 3.14"];
+nodo10_id ->nodo11_id;nodo11_id [shape=parallelogram, style=filled, label ="numero _pi4_ = 3.141"];
+nodo11_id ->nodo12_id;nodo12_id [shape=parallelogram, style=filled, label ="numero _anio1_ = 1"];
+nodo12_id ->nodo13_id;nodo13_id [shape=parallelogram, style=filled, label ="numero _anio2_ = 9"];
+nodo13_id ->nodo14_id;nodo14_id [shape=parallelogram, style=filled, label ="numero _anio3_ = 4"];
+nodo14_id ->nodo15_id;nodo15_id [shape=parallelogram, style=filled, label ="numero _anio4_ = 5"];
+nodo15_id ->nodo16_id;nodo16_id [shape=parallelogram, style=filled, label ="numero _variableAntesNeg_ = 5.0"];
+nodo16_id ->nodo17_id;nodo17_id [shape=parallelogram, style=filled, label ="cadena _encabezado1_ = 'Universidad San Carlos de Guatemala...;'"];
+nodo17_id ->nodo18_id;nodo18_id [shape=parallelogram, style=filled, label ="cadena _encabezado2_ = 'Escuela de Ciencias y Sistemas Segundo semestre '"];
+nodo18_id ->nodo19_id;nodo19_id [shape=parallelogram, style=filled, label ="boolean _flag1_ = verdadero"];
+nodo19_id ->nodo20_id;nodo20_id [shape=parallelogram, style=filled, label ="boolean _flag2_ = falso"];
+nodo20_id ->nodo21_id;nodo21_id [shape=parallelogram, style=filled, label ="caracter _name1_ = 'f'"];
+nodo21_id ->nodo22_id;nodo22_id [shape=parallelogram, style=filled, label ="caracter _name2_ = 'e'"];
+nodo22_id ->nodo23_id;nodo23_id [shape=parallelogram, style=filled, label ="caracter _name3_ = 'r'"];
+nodo23_id ->nodo24_id;nodo24_id [shape=parallelogram, style=filled, label ="caracter _name4_ = 'n'"];
+nodo24_id ->nodo25_id;nodo25_id [shape=parallelogram, style=filled, label ="caracter _name6_ = 'n'"];
+nodo25_id ->nodo26_id;nodo26_id [shape=parallelogram, style=filled, label ="caracter _name5_ = 'a'"];
+nodo26_id ->nodo27_id;nodo27_id [shape=parallelogram, style=filled, label ="caracter _name7_ = '${100}'"];
+nodo27_id ->nodo28_id;nodo28_id [shape=parallelogram, style=filled, label ="caracter _name8_ = '${111}'"];
+nodo28_id ->nodo29_id;nodo29_id [shape=parallelogram, style=filled, label ="numero _operaciones1Basica_ = 1 + (1)"];
+nodo29_id ->nodo4_com;nodo4_com [ label ="Comentario //2 el resultado
 "];
-nodo3_com ->nodo1_id;nodo1_id [shape=parallelogram, style=filled, label ="CadenA _v1_ = 'esta es una cadena'"];
-nodo1_id ->nodo2_id;nodo2_id [shape=parallelogram, style=filled, label ="CadenA _v2_ = 'esta es una cadena'"];
-nodo2_id ->nodo3_id;nodo3_id [shape=parallelogram, style=filled, label ="CadenA _v3_ = 'esta es una cadena'"];
-nodo3_id ->nodo4_id;nodo4_id [shape=parallelogram, style=filled, label ="cadena _curso1_ = 'olc'"];
-nodo4_id ->nodo5_id;nodo5_id [shape=parallelogram, style=filled, label ="cadena _curso2_ = 'olc'"];
-nodo5_id ->nodo6_id;nodo6_id [shape=parallelogram, style=filled, label ="cadena _curso3_ = 'olc'"];
-nodo6_id ->nodo7_id;nodo7_id [shape=parallelogram, style=filled, label ="numero _pi1_ = 3"];
-nodo7_id ->nodo8_id;nodo8_id [shape=parallelogram, style=filled, label ="numero _pi2_ = 3.1"];
-nodo8_id ->nodo9_id;nodo9_id [shape=parallelogram, style=filled, label ="numero _pi3_ = 3.14"];
-nodo9_id ->nodo10_id;nodo10_id [shape=parallelogram, style=filled, label ="numero _pi4_ = 3.141"];
-nodo10_id ->nodo11_id;nodo11_id [shape=parallelogram, style=filled, label ="numero _anio1_ = 1"];
-nodo11_id ->nodo12_id;nodo12_id [shape=parallelogram, style=filled, label ="numero _anio2_ = 9"];
-nodo12_id ->nodo13_id;nodo13_id [shape=parallelogram, style=filled, label ="numero _anio3_ = 4"];
-nodo13_id ->nodo14_id;nodo14_id [shape=parallelogram, style=filled, label ="numero _anio4_ = 5"];
-nodo14_id ->nodo15_id;nodo15_id [shape=parallelogram, style=filled, label ="numero _variableNeg_ = 5.0"];
-nodo15_id ->nodo16_id;nodo16_id [shape=parallelogram, style=filled, label ="cadena _encabezado1_ = 'Universidad San Carlos de Guatemala...;'"];
-nodo16_id ->nodo17_id;nodo17_id [shape=parallelogram, style=filled, label ="cadena _encabezado2_ = 'Escuela de Ciencias y Sistemas Segundo semestre '"];
-nodo17_id ->nodo18_id;nodo18_id [shape=parallelogram, style=filled, label ="boolean _flag1_ = verdadero"];
-nodo18_id ->nodo19_id;nodo19_id [shape=parallelogram, style=filled, label ="boolean _flag2_ = falso"];
-nodo19_id ->nodo20_id;nodo20_id [shape=parallelogram, style=filled, label ="caracter _name1_ = 'f'"];
-nodo20_id ->nodo21_id;nodo21_id [shape=parallelogram, style=filled, label ="caracter _name2_ = 'e'"];
-nodo21_id ->nodo22_id;nodo22_id [shape=parallelogram, style=filled, label ="caracter _name3_ = 'r'"];
-nodo22_id ->nodo23_id;nodo23_id [shape=parallelogram, style=filled, label ="caracter _name4_ = 'n'"];
-nodo23_id ->nodo24_id;nodo24_id [shape=parallelogram, style=filled, label ="caracter _name6_ = 'n'"];
-nodo24_id ->nodo25_id;nodo25_id [shape=parallelogram, style=filled, label ="caracter _name5_ = 'a'"];
-nodo25_id ->nodo26_id;nodo26_id [shape=parallelogram, style=filled, label ="caracter _name7_ = '${100}'"];
-nodo26_id ->nodo27_id;nodo27_id [shape=parallelogram, style=filled, label ="caracter _name8_ = '${111}'"];
-nodo27_id ->nodo28_id;nodo28_id [shape=parallelogram, style=filled, label ="numero _operaciones1Basica_ = 1 + (1)"];
-nodo28_id ->nodo4_com;nodo4_com [ label ="Comentario //2 el resultado
+nodo4_com ->nodo30_id;nodo30_id [shape=parallelogram, style=filled, label ="numero _operaciones1Basica2_ = _operaciones1Basica_ + _operaciones1Basica_"];
+nodo30_id ->nodo5_com;nodo5_com [ label ="Comentario // 4              
 "];
-nodo4_com ->nodo29_id;nodo29_id [shape=parallelogram, style=filled, label ="numero _operaciones1Basica2_ = _operaciones1Basica_ + _operaciones1Basica_"];
-nodo29_id ->nodo5_com;nodo5_com [ label ="Comentario //               
+nodo5_com ->nodo31_id;nodo31_id [shape=parallelogram, style=filled, label ="nUmero _operaciones1Intermedia_ = 15 + (9 * 8) + 200 / 8 * 3 + 9"];
+nodo31_id ->nodo6_com;nodo6_com [ label ="Comentario //171 el resultado
 "];
-nodo5_com ->nodo30_id;nodo30_id [shape=parallelogram, style=filled, label ="nUmero _operaciones1Intermedia_ = 15 + (9 * 8) + 200 / 8 * 3 + 9"];
-nodo30_id ->nodo6_com;nodo6_com [ label ="Comentario //171 el resultado
+nodo6_com ->nodo32_id;nodo32_id [shape=parallelogram, style=filled, label ="numeRo _operaciones1Avanzadas1_ = ((15 + 9) * 8 + 200 / 8 * 3 + 9)"];
+nodo32_id ->nodo7_com;nodo7_com [ label ="Comentario //276 el resultado
 "];
-nodo6_com ->nodo31_id;nodo31_id [shape=parallelogram, style=filled, label ="numeRo _operaciones1Avanzadas1_ = ((15 + 9) * 8 + 200 / 8 * 3 + 9)"];
-nodo31_id ->nodo7_com;nodo7_com [ label ="Comentario //291 el resultado
+nodo7_com ->nodo33_id;nodo33_id [shape=parallelogram, style=filled, label ="numero _operaciones1Avanzadas2_ = (1 ** [1] + 2) ** [22.2 - 2.2 - 15] + (2)"];
+nodo33_id ->nodo8_com;nodo8_com [ label ="Comentario //245
 "];
-nodo7_com ->nodo32_id;nodo32_id [shape=parallelogram, style=filled, label ="numero _operaciones1Avanzadas2_ = 30 ** [22.2 - 2.2] + (2)"];
-nodo32_id ->nodo33_id;nodo33_id [shape=parallelogram, style=filled, label ="nuMero _operaciones1Avanzadas3_ = (30 ** [2]) + (2)"];
-nodo33_id ->nodo34_id;nodo34_id [shape=parallelogram, style=filled, label ="numeRo _operaciones1Avanzadas4_ = (30 ** [10 - 8 + 9 - 4 * 2 - 1]) + (2)"];
-nodo34_id ->nodo35_id;nodo35_id [shape=parallelogram, style=filled, label ="numeRo _operaciones1Avanzadas6_ = (5 * 8) % (1 + 5 + 6)"];
-nodo35_id ->nodo8_com;nodo8_com [ label ="Comentario //4 es el resultado
+nodo8_com ->nodo34_id;nodo34_id [shape=parallelogram, style=filled, label ="nuMero _operaciones1Avanzadas3_ = (30 ** [2]) + (2)"];
+nodo34_id ->nodo9_com;nodo9_com [ label ="Comentario //902
 "];
-nodo8_com ->nodo36_id;nodo36_id [shape=parallelogram, style=filled, label ="boolean _operacionRela3_ =  _operaciones1Basica_>8"];
-nodo36_id ->nodo37_id;nodo37_id [shape=parallelogram, style=filled, label ="BooLean _operacionRela3_ = (_operaciones1Basica_ + 6)>=8"];
-nodo37_id ->nodo38_id;nodo38_id [shape=parallelogram, style=filled, label ="boolean _operacionRela3_ = (_operaciones1Basica_ + 6)<=8"];
-nodo38_id ->nodo39_id;nodo39_id [shape=parallelogram, style=filled, label ="booleAn _operacionRela4_ = _operaciones1Basica_==8"];
-nodo39_id ->nodo40_id;nodo40_id [shape=parallelogram, style=filled, label ="boolean _operacionRela5_ = _operaciones1Basica_==_operaciones1Basica_"];
-nodo40_id ->nodo41_id;nodo41_id [shape=parallelogram, style=filled, label ="Boolean _operacionRela6_ = _operaciones1Basica_==_operaciones1Basica_ + 1"];
-nodo41_id ->nodo42_id;nodo42_id [shape=parallelogram, style=filled, label ="boolEan _operacionRela7_ = _operaciones1Basica_==(_operaciones1Basica_) * (8 + 5)"];
-nodo42_id ->nodo1_com_m;nodo1_com_m [ label ="Comentario /*otro error lexico************/"];
-nodo1_com_m ->nodo9_com;nodo9_com [ label ="Comentario //seccion de asignaciones
+nodo9_com ->nodo35_id;nodo35_id [shape=parallelogram, style=filled, label ="numeRo _operaciones1Avanzadas4_ = (30 ** [10 - 8 + 9 - 4 * 2 - 1]) + (2)"];
+nodo35_id ->nodo10_com;nodo10_com [ label ="Comentario //902
 "];
-nodo9_com ->nodo0_id_as;nodo0_id_as [ label ="_v1_ -> 'esta es la cadena numero 1'"];
+nodo10_com ->nodo36_id;nodo36_id [shape=parallelogram, style=filled, label ="nUmero _operaciones1Avanzadas5_ = 30 ** [10 - 8 + 9 - 4 * 2 - 1] + (15 / (1 ** [1] + 2))"];
+nodo36_id ->nodo11_com;nodo11_com [ label ="Comentario //905
+"];
+nodo11_com ->nodo37_id;nodo37_id [shape=parallelogram, style=filled, label ="numeRo _operaciones1Avanzadas6_ = (5 * 8) % (1 + 5 + 6)"];
+nodo37_id ->nodo12_com;nodo12_com [ label ="Comentario //4 es el resultado
+"];
+nodo12_com ->nodo38_id;nodo38_id [shape=parallelogram, style=filled, label ="numeRo _operaciones1Avanzadas7_ = (5 * 8) % ((5 + 3) ** [8])"];
+nodo38_id ->nodo13_com;nodo13_com [ label ="Comentario //   40
+"];
+nodo13_com ->nodo39_id;nodo39_id [shape=parallelogram, style=filled, label ="numeRo _operaciones1Avanzadas8_ = (5 * 8) % ((5 + (2 ** [2 * 2])) ** [8])"];
+nodo39_id ->nodo40_id;nodo40_id [shape=parallelogram, style=filled, label ="BooleaN _operacionRela1_ = 5 +  5>5"];
+nodo40_id ->nodo14_com;nodo14_com [ label ="Comentario //verdadera
+"];
+nodo14_com ->nodo41_id;nodo41_id [shape=parallelogram, style=filled, label ="boolean _operacionRela31_ =  _operaciones1Basica_>8"];
+nodo41_id ->nodo15_com;nodo15_com [ label ="Comentario // falsa
+"];
+nodo15_com ->nodo42_id;nodo42_id [shape=parallelogram, style=filled, label ="BooLean _operacionRela32_ = (_operaciones1Basica_ + 6)>=8"];
+nodo42_id ->nodo16_com;nodo16_com [ label ="Comentario // verdadera
+"];
+nodo16_com ->nodo43_id;nodo43_id [shape=parallelogram, style=filled, label ="boolean _operacionRela33_ = (_operaciones1Basica_ + 6)<=8"];
+nodo43_id ->nodo17_com;nodo17_com [ label ="Comentario // verdadera
+"];
+nodo17_com ->nodo44_id;nodo44_id [shape=parallelogram, style=filled, label ="booleAn _operacionRela4_ = _operaciones1Basica_==8"];
+nodo44_id ->nodo18_com;nodo18_com [ label ="Comentario // falsa
+"];
+nodo18_com ->nodo45_id;nodo45_id [shape=parallelogram, style=filled, label ="boolean _operacionRela31_ = (_operaciones1Basica_ + 6)<8"];
+nodo45_id ->nodo19_com;nodo19_com [ label ="Comentario //falsa
+"];
+nodo19_com ->nodo46_id;nodo46_id [shape=parallelogram, style=filled, label ="boolean _operacionRela5_ = _operaciones1Basica_==_operaciones1Basica_"];
+nodo46_id ->nodo20_com;nodo20_com [ label ="Comentario //true
+"];
+nodo20_com ->nodo47_id;nodo47_id [shape=parallelogram, style=filled, label ="Boolean _operacionRela6_ = _operaciones1Basica_==_operaciones1Basica_ + 1"];
+nodo47_id ->nodo21_com;nodo21_com [ label ="Comentario //false
+"];
+nodo21_com ->nodo48_id;nodo48_id [shape=parallelogram, style=filled, label ="boolEan _operacionRela7_ = _operaciones1Basica_==(_operaciones1Basica_) * (8 + 5)"];
+nodo48_id ->nodo22_com;nodo22_com [ label ="Comentario //false
+"];
+nodo22_com ->nodo49_id;nodo49_id [shape=parallelogram, style=filled, label ="bOoleAn _operacionRela5_ = _operaciones1Basica_!=_operaciones1Basica_"];
+nodo49_id ->nodo23_com;nodo23_com [ label ="Comentario //false
+"];
+nodo23_com ->nodo3_com_m;nodo3_com_m [ label ="Comentario /*otro error lexico************/"];
+nodo3_com_m ->nodo24_com;nodo24_com [ label ="Comentario //seccion de asignaciones
+"];
+nodo24_com ->nodo0_id_as;nodo0_id_as [ label ="_v1_ -> 'esta es la cadena numero 1'"];
 nodo0_id_as ->nodo1_id_as;nodo1_id_as [ label ="_v2_ -> 'estas cadenas deben ser diferentes'"];
 nodo1_id_as ->nodo2_id_as;nodo2_id_as [ label ="_v3_ -> 'estas cadenas deben ser diferentes'"];
 nodo2_id_as ->nodo3_id_as;nodo3_id_as [ label ="_curso1_ -> 'Organizacion de lenguajes y compiladores 1'"];
 nodo3_id_as ->nodo4_id_as;nodo4_id_as [ label ="_curso2_ -> 'Organizacion de lenguajes y compiladores 1'"];
 nodo4_id_as ->nodo5_id_as;nodo5_id_as [ label ="_curso3_ -> 'Organizacion de lenguajes y compiladores 1'"];
-nodo5_id_as ->nodo2_com_m;nodo2_com_m [ label ="Comentario /******error sintactico, le falta la flecha*/"];
-nodo2_com_m ->nodo10_com;nodo10_com [ label ="Comentario //otro error lexico
+nodo5_id_as ->nodo25_com;nodo25_com [ label ="Comentario //31 Errores lexico
 "];
-nodo10_com ->nodo0_print;nodo0_print [shape=invhouse, style=filled,  label ="IMPRIMIR _encabezado1_"];
-nodo0_print ->nodo1_print;nodo1_print [shape=invhouse, style=filled,  label ="IMPRIMIR _encabezado2_"];
-nodo1_print ->nodo2_print;nodo2_print [shape=invhouse, style=filled,  label ="IMPRIMIR '...'"];
-nodo2_print ->nodo3_print;nodo3_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio1_"];
-nodo3_print ->nodo4_print;nodo4_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio2_"];
-nodo4_print ->nodo5_print;nodo5_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio3_"];
-nodo5_print ->nodo6_print;nodo6_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio4_"];
-nodo6_print ->nodo7_print;nodo7_print [shape=invhouse, style=filled,  label ="IMPRIMIR '.'"];
-nodo7_print ->nodo8_print;nodo8_print [shape=invhouse, style=filled,  label ="IMPRIMIR (_v3_)"];
-nodo8_print ->nodo0_si;nodo0_si [ label ="SI "];
-nodo0_si ->nodo0_cond_si;nodo0_cond_si [shape=diamond, style=filled, label ="_v1_==_v2_"];
-nodo0_cond_si ->nodo9_print;nodo9_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'Al parecer no funciona la asignacion'"];
-nodo9_print ->nodo0_mi;nodo0_mi [ label ="MIENTRAS "];
-nodo0_mi ->nodo0_cond_mi;nodo0_cond_mi [shape=diamond, style=filled, label =" not (_variable1_>=5 * 5 + 8 / 2)"];
-nodo0_cond_mi ->nodo10_print;nodo10_print [shape=invhouse, style=filled,  label ="IMPRIMIR _variable1_"];
-nodo10_print ->nodo6_id_as;nodo6_id_as [ label ="_variable1_ -> _variable1_ + 1"];
-nodo6_id_as ->nodo0_mi;nodo0_cond_mi ->nodo0_mi_f;nodo0_mi_f [ label ="Fin MIENTRAS "];
-nodo0_mi ->nodo0_si_f;nodo0_si_f [ label ="Fin SI "];
+nodo25_com ->nodo0_print;nodo0_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Basica_"];
+nodo0_print ->nodo1_print;nodo1_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Basica2_"];
+nodo1_print ->nodo2_print;nodo2_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Intermedia_"];
+nodo2_print ->nodo3_print;nodo3_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Avanzadas1_"];
+nodo3_print ->nodo4_print;nodo4_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Avanzadas2_"];
+nodo4_print ->nodo5_print;nodo5_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Avanzadas3_"];
+nodo5_print ->nodo6_print;nodo6_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Avanzadas4_"];
+nodo6_print ->nodo7_print;nodo7_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Avanzadas5_"];
+nodo7_print ->nodo8_print;nodo8_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Avanzadas6_"];
+nodo8_print ->nodo9_print;nodo9_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Avanzadas7_"];
+nodo9_print ->nodo10_print;nodo10_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operaciones1Avanzadas8_"];
+nodo10_print ->nodo11_print;nodo11_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela1_"];
+nodo11_print ->nodo12_print;nodo12_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela31_"];
+nodo12_print ->nodo13_print;nodo13_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela32_"];
+nodo13_print ->nodo14_print;nodo14_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela33_"];
+nodo14_print ->nodo15_print;nodo15_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela4_"];
+nodo15_print ->nodo16_print;nodo16_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela31_"];
+nodo16_print ->nodo17_print;nodo17_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela5_"];
+nodo17_print ->nodo18_print;nodo18_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela6_"];
+nodo18_print ->nodo19_print;nodo19_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela7_"];
+nodo19_print ->nodo20_print;nodo20_print [shape=invhouse, style=filled,  label ="IMPRIMIR _operacionRela5_"];
+nodo20_print ->nodo21_print;nodo21_print [shape=invhouse, style=filled,  label ="IMPRIMIR _encabezado1_"];
+nodo21_print ->nodo22_print;nodo22_print [shape=invhouse, style=filled,  label ="IMPRIMIR _encabezado2_"];
+nodo22_print ->nodo23_print;nodo23_print [shape=invhouse, style=filled,  label ="IMPRIMIR '...'"];
+nodo23_print ->nodo24_print;nodo24_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio1_"];
+nodo24_print ->nodo25_print;nodo25_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio2_"];
+nodo25_print ->nodo26_print;nodo26_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio3_"];
+nodo26_print ->nodo27_print;nodo27_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio4_"];
+nodo27_print ->nodo28_print;nodo28_print [shape=invhouse, style=filled,  label ="IMPRIMIR '.'"];
+nodo28_print ->nodo29_print;nodo29_print [shape=invhouse, style=filled,  label ="IMPRIMIR (_v3_)"];
+nodo29_print ->nodo30_print;nodo30_print [shape=invhouse, style=filled,  label ="IMPRIMIR _name1_"];
+nodo30_print ->nodo31_print;nodo31_print [shape=invhouse, style=filled,  label ="IMPRIMIR _name2_"];
+nodo31_print ->nodo32_print;nodo32_print [shape=invhouse, style=filled,  label ="IMPRIMIR _name3_"];
+nodo32_print ->nodo33_print;nodo33_print [shape=invhouse, style=filled,  label ="IMPRIMIR _name4_"];
+nodo33_print ->nodo34_print;nodo34_print [shape=invhouse, style=filled,  label ="IMPRIMIR _name5_"];
+nodo34_print ->nodo35_print;nodo35_print [shape=invhouse, style=filled,  label ="IMPRIMIR _name6_"];
+nodo35_print ->nodo36_print;nodo36_print [shape=invhouse, style=filled,  label ="IMPRIMIR _name7_"];
+nodo36_print ->nodo37_print;nodo37_print [shape=invhouse, style=filled,  label ="IMPRIMIR _name8_"];
+nodo37_print ->nodo38_print;nodo38_print [shape=invhouse, style=filled,  label ="IMPRIMIR '.'"];
+nodo38_print ->nodo39_print;nodo39_print [shape=invhouse, style=filled,  label ="IMPRIMIR _variable1_"];
+nodo39_print ->nodo40_print;nodo40_print [shape=invhouse, style=filled,  label ="IMPRIMIR _variable2_"];
+nodo40_print ->nodo41_print;nodo41_print [shape=invhouse, style=filled,  label ="IMPRIMIR _v1_"];
+nodo41_print ->nodo42_print;nodo42_print [shape=invhouse, style=filled,  label ="IMPRIMIR _v2_"];
+nodo42_print ->nodo43_print;nodo43_print [shape=invhouse, style=filled,  label ="IMPRIMIR _v3_"];
+nodo43_print ->nodo44_print;nodo44_print [shape=invhouse, style=filled,  label ="IMPRIMIR _curso1_"];
+nodo44_print ->nodo45_print;nodo45_print [shape=invhouse, style=filled,  label ="IMPRIMIR _curso2_"];
+nodo45_print ->nodo46_print;nodo46_print [shape=invhouse, style=filled,  label ="IMPRIMIR _curso3_"];
+nodo46_print ->nodo47_print;nodo47_print [shape=invhouse, style=filled,  label ="IMPRIMIR _pi1_"];
+nodo47_print ->nodo48_print;nodo48_print [shape=invhouse, style=filled,  label ="IMPRIMIR _pi2_"];
+nodo48_print ->nodo49_print;nodo49_print [shape=invhouse, style=filled,  label ="IMPRIMIR _pi3_"];
+nodo49_print ->nodo50_print;nodo50_print [shape=invhouse, style=filled,  label ="IMPRIMIR _pi4_"];
+nodo50_print ->nodo51_print;nodo51_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio1_"];
+nodo51_print ->nodo52_print;nodo52_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio2_"];
+nodo52_print ->nodo53_print;nodo53_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio3_"];
+nodo53_print ->nodo54_print;nodo54_print [shape=invhouse, style=filled,  label ="IMPRIMIR _anio4_"];
+nodo54_print ->nodo55_print;nodo55_print [shape=invhouse, style=filled,  label ="IMPRIMIR _variableAntesNeg_"];
+nodo55_print ->nodo56_print;nodo56_print [shape=invhouse, style=filled,  label ="IMPRIMIR _flag1_"];
+nodo56_print ->nodo57_print;nodo57_print [shape=invhouse, style=filled,  label ="IMPRIMIR _flag2_"];
+nodo57_print ->nodo0_si;nodo0_si [ label ="SI "];
+nodo0_si ->nodo0_cond_si;nodo0_cond_si [shape=diamond, style=filled, label ="verdadero==verdadero"];
+nodo0_cond_si ->nodo58_print;nodo58_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'El if esta correcto'"];
+nodo58_print ->nodo59_print;nodo59_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'no tiene que imprimir este mensaje, error en instruccion if'"];
+nodo59_print ->nodo0_si_f;nodo0_si_f [ label ="Fin SI "];
 nodo0_elsnodo0_els [ label ="ELSE "];
 nodo0_si ->nodo1_si;nodo1_si [ label ="SI "];
 nodo1_si ->nodo1_cond_si;nodo1_cond_si [shape=diamond, style=filled, label ="_v1_==_v2_"];
-nodo1_cond_si ->nodo11_print;nodo11_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'no tiene que imprimir este mensaje'"];
-nodo11_print ->nodo12_print;nodo12_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'este print es un ejemplo'"];
-nodo12_print ->nodo1_si_f;nodo1_si_f [ label ="Fin SI "];
+nodo1_cond_si ->nodo60_print;nodo60_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'Al parecer no funciona la asignacion, restame puntos en el if'"];
+nodo60_print ->nodo0_mi;nodo0_mi [ label ="MIENTRAS "];
+nodo0_mi ->nodo0_cond_mi;nodo0_cond_mi [shape=diamond, style=filled, label =" not (_variable1_>=5 * 5 + 8 / 2)"];
+nodo0_cond_mi ->nodo61_print;nodo61_print [shape=invhouse, style=filled,  label ="IMPRIMIR _variable1_"];
+nodo61_print ->nodo6_id_as;nodo6_id_as [ label ="_variable1_ -> _variable1_ + 1"];
+nodo6_id_as ->nodo0_mi;nodo0_cond_mi ->nodo0_mi_f;nodo0_mi_f [ label ="Fin MIENTRAS "];
+nodo0_mi ->nodo1_si_f;nodo1_si_f [ label ="Fin SI "];
 nodo1_elsnodo1_els [ label ="ELSE "];
 nodo1_si ->nodo2_si;nodo2_si [ label ="SI "];
 nodo2_si ->nodo2_cond_si;nodo2_cond_si [shape=diamond, style=filled, label ="_v1_==_v2_"];
-nodo2_cond_si ->nodo13_print;nodo13_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'no tiene que imprimir este mensaj_______________e'"];
-nodo13_print ->nodo2_si_f;nodo2_si_f [ label ="Fin SI "];
-nodo2_cond_si ->nodo0_osi;nodo0_osi [ label ="O SI "];
-nodo0_osi ->nodo0_cond_osi;nodo0_cond_osi [shape=diamond, style=filled, label ="_v1_==13"];
-nodo0_cond_osi ->nodo0_instru_osi [ label ="O SI"];nodo0_instru_osi [ label ="INSTRUCCIONES"];
-nodo0_instru_osi ->nodo14_print;nodo14_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'mensaje de prueba'"];
-nodo14_print ->nodo0_osi_f;nodo0_osi_f [ label ="Fin O SI "];
-nodo0_cond_osi ->nodo1_osi;nodo1_osi [ label ="O SI "];
-nodo1_osi ->nodo1_cond_osi;nodo1_cond_osi [shape=diamond, style=filled, label ="_v1_==14"];
-nodo1_cond_osi ->nodo1_instru_osi [ label ="O SI"];nodo1_instru_osi [ label ="INSTRUCCIONES"];
-nodo1_instru_osi ->nodo15_print;nodo15_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'mensaje de prueba'"];
-nodo15_print ->nodo1_osi_f;nodo1_osi_f [ label ="Fin O SI "];
-nodo1_cond_osi ->nodo2_elsnodo2_els [ label ="ELSE "];
-nodo2_elsnodo2_els ->nodo16_print;nodo16_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'este print es un ejemplo'"];
-nodo16_print ->nodo2_els_f;nodo2_els_f [ label ="Fin else "];
-nodo2_si ->nodo43_id;nodo43_id [shape=parallelogram, style=filled, label ="Boolean _varB_ = falso"];
-nodo43_id ->nodo17_print;nodo17_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'Estas definiendo bien los valores'"];
-nodo17_print ->nodo0_se;nodo0_se [ shape=diamond, style=filled, label ="SEGUN _varaux_"];
+nodo2_cond_si ->nodo62_print;nodo62_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'no tiene que imprimir este mensaje, error en instruccion if'"];
+nodo62_print ->nodo63_print;nodo63_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'INTRUCCION IF con Else esta correcta'"];
+nodo63_print ->nodo2_si_f;nodo2_si_f [ label ="Fin SI "];
+nodo2_elsnodo2_els [ label ="ELSE "];
+nodo2_si ->nodo3_si;nodo3_si [ label ="SI "];
+nodo3_si ->nodo3_cond_si;nodo3_cond_si [shape=diamond, style=filled, label ="_v1_==_v2_"];
+nodo3_cond_si ->nodo64_print;nodo64_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'no tiene que imprimir este mensaje,error en l aintruccion if'"];
+nodo64_print ->nodo65_print;nodo65_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'Instruccion if con else if esta correcta'"];
+nodo65_print ->nodo3_si_f;nodo3_si_f [ label ="Fin SI "];
+nodo3_elsnodo3_els [ label ="ELSE "];
+nodo3_si ->nodo50_id;nodo50_id [shape=parallelogram, style=filled, label ="Boolean _varB_ = falso"];
+nodo50_id ->nodo4_si;nodo4_si [ label ="SI "];
+nodo4_si ->nodo4_cond_si;nodo4_cond_si [shape=diamond, style=filled, label ="_varB_"];
+nodo4_cond_si ->nodo66_print;nodo66_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'Estas definiendo mal los valores'"];
+nodo66_print ->nodo51_id;nodo51_id [shape=parallelogram, style=filled, label ="Numero _varaux_ = _variable1_ % 2"];
+nodo51_id ->nodo0_se;nodo0_se [ shape=diamond, style=filled, label ="SEGUN _varaux_"];
 nodo0_se ->nodo0_caso;nodo0_caso [ shape=diamond, style=filled,  label ="CASO = 0"];
-nodo0_caso ->nodo18_print;nodo18_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'el valor es mayor a 2'"];
-nodo18_print ->nodo0_caso_f;nodo0_caso_f [ label ="Fin CASO "];
-nodo0_caso ->nodo0_se_f;nodo0_se_f [ label ="Fin SEGUN "];
-nodo0_se_f ->nodo3_com_m;nodo3_com_m [ label ="Comentario /*Ahora empezamos con las funciones y procedimientos*/"];
-nodo3_com_m ->nodo0met;nodo0met [ label ="Metodo _potenciaManual_ con parametros (_base_ Numero,_exponenete_ Numero)"];
+nodo0_caso ->nodo67_print;nodo67_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'el valor es mayor a 0 y menos a 2'"];
+nodo67_print ->nodo0_caso_f;nodo0_caso_f [ label ="Fin CASO "];
+nodo0_caso ->nodo1_caso;nodo1_caso [ shape=diamond, style=filled,  label ="CASO = 2"];
+nodo1_caso ->nodo68_print;nodo68_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'el valor es mayor a 2'"];
+nodo68_print ->nodo1_caso_f;nodo1_caso_f [ label ="Fin CASO "];
+nodo1_caso ->nodo0_se_f;nodo0_se_f [ label ="Fin SEGUN "];
+nodo0_se_f ->nodo69_print;nodo69_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'Estas definiendo bien los valores c:'"];
+nodo69_print ->nodo4_si_f;nodo4_si_f [ label ="Fin SI "];
+nodo4_elsnodo4_els [ label ="ELSE "];
+nodo4_si ->nodo4_com_m;nodo4_com_m [ label ="Comentario /*Ahora empezamos con las funciones y procedimientos*/"];
+nodo4_com_m ->nodo0met;nodo0met [ label ="Metodo _potenciaManual_ con parametros (_base_ Numero,_exponente_ Numero)"];
 nodo0met ->nodo0_instru_met;nodo0_instru_met [ label ="INSTRUCCIONES"];
-nodo0_instru_met ->nodo44_id;nodo44_id [shape=parallelogram, style=filled, label ="Numero _i_ = 0"];
-nodo44_id ->nodo45_id;nodo45_id [shape=parallelogram, style=filled, label ="Numero _acumulado_ = 0"];
-nodo45_id ->nodo0_for;nodo0_for [ label ="PARA _i_ 0"];
+nodo0_instru_met ->nodo52_id;nodo52_id [shape=parallelogram, style=filled, label ="Numero _i_ = 0"];
+nodo52_id ->nodo53_id;nodo53_id [shape=parallelogram, style=filled, label ="Numero _acumulado_ = 0"];
+nodo53_id ->nodo0_for;nodo0_for [ label ="PARA _i_ 0"];
 nodo0_for ->nodo0_cond_for;nodo0_cond_for [shape=diamond, style=filled, label ="_i_ < _exponente_ - 1"];
 nodo0_cond_for ->nodo7_id_as;nodo7_id_as [ label ="_acumulado_ -> _acumulado_ + _acumulado_"];
 nodo7_id_as ->nodo0_cond_for;nodo0_cond_for ->nodo0_for_f;nodo0_for_f [ label ="Fin FOR "];
-nodo0_for_f ->nodo19_print;nodo19_print [shape=invhouse, style=filled,  label ="IMPRIMIR _acumulado_"];
-nodo19_print ->nodo20_print;nodo20_print [shape=invhouse, style=filled,  label ="IMPRIMIR ' Esta es la potencia Manual'"];
-nodo20_print ->nodo0_met_f;nodo0_met_f [ label ="Fin Metodo "];
+nodo0_for_f ->nodo70_print;nodo70_print [shape=invhouse, style=filled,  label ="IMPRIMIR ' Esta es la potencia Manual'"];
+nodo70_print ->nodo71_print;nodo71_print [shape=invhouse, style=filled,  label ="IMPRIMIR _acumulado_"];
+nodo71_print ->nodo0_met_f;nodo0_met_f [ label ="Fin Metodo "];
 nodo0met ->nodo0_fun;nodo0_fun [ label ="FUNCION _potenciaFuncion_ con parametros (_base_ Numero,_exponente_ Numero)"];
 nodo0_fun ->nodo0_instru_fun;nodo0_instru_fun [ label ="INSTRUCCIONES"];
-nodo0_instru_fun ->nodo46_id;nodo46_id [shape=parallelogram, style=filled, label ="Numero _potencia_ = _base_ ** [_exponente_]"];
-nodo46_id ->nodo0_fun_f;nodo0_fun_f [ label ="Fin funcion _potencia_"];
+nodo0_instru_fun ->nodo54_id;nodo54_id [shape=parallelogram, style=filled, label ="Numero _potencia_ = _base_ ** [_exponente_]"];
+nodo54_id ->nodo72_print;nodo72_print [shape=invhouse, style=filled,  label ="IMPRIMIR ' Esta es la potencia Manual pero con una funcion'"];
+nodo72_print ->nodo73_print;nodo73_print [shape=invhouse, style=filled,  label ="IMPRIMIR _potencia_"];
+nodo73_print ->nodo0_fun_f;nodo0_fun_f [ label ="Fin funcion _potencia_"];
 nodo0_fun ->nodo1met;nodo1met [ label ="Metodo _metodo_ con parametros ()"];
 nodo1met ->nodo1_instru_met;nodo1_instru_met [ label ="INSTRUCCIONES"];
-nodo1_instru_met ->nodo21_print;nodo21_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'estamos entrando al metodo 1'"];
-nodo21_print ->nodo0_eje;nodo0_eje [ label ="Ejecutar _potenciaManual_ con parametros (3 * 1 + 4 / 2,3 + 2)"];
-nodo0_eje ->nodo1_met_f;nodo1_met_f [ label ="Fin Metodo "];
-nodo1met ->nodo0_eje;nodo0_eje [ label ="Ejecutar _metodo_ con parametros ()"];
-nodo0_eje ->fin;fin [  shape=circle, style=filled, label ="FIN"];
+nodo1_instru_met ->nodo74_print;nodo74_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'estamos entrando al metodo 1'"];
+nodo74_print ->nodo0_eje;nodo0_eje [ label ="Ejecutar _potenciaManual_ con parametros (3 * 1 + 4 / 2,3 + 2)"];
+nodo0_eje ->nodo75_print;nodo75_print [shape=invhouse, style=filled,  label ="IMPRIMIR nodo0_eje;nodo0_eje [ label ="Ejecutar _potenciaFuncion_ con parametros (3 * 1 + 4 / 2,3 + 2)"];
+nodo0_eje ->"];
+nodo75_print ->nodo26_com;nodo26_com [ label ="Comentario //3,125
+"];
+nodo26_com ->nodo76_print;nodo76_print [shape=invhouse, style=filled,  label ="IMPRIMIR ' Esta es la potencia Funcion'"];
+nodo76_print ->nodo77_print;nodo77_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'FIN del metodo1'"];
+nodo77_print ->nodo1_met_f;nodo1_met_f [ label ="Fin Metodo "];
+nodo1met ->nodo1_fun;nodo1_fun [ label ="FUNCION _fibonacci_ con parametros (_n_ Numero)"];
+nodo1_fun ->nodo1_instru_fun;nodo1_instru_fun [ label ="INSTRUCCIONES"];
+nodo1_instru_fun ->nodo55_id;nodo55_id [shape=parallelogram, style=filled, label ="numero _variablemia_ = 0"];
+nodo55_id ->nodo5_si;nodo5_si [ label ="SI "];
+nodo5_si ->nodo5_cond_si;nodo5_cond_si [shape=diamond, style=filled, label ="( _n_>1)"];
+nodo5_cond_si ->nodo78_print;nodo78_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'Debes ingresar un valor mayor o igual a 1'"];
+nodo78_print ->nodo5_si_f;nodo5_si_f [ label ="Fin SI "];
+nodo5_elsnodo5_els [ label ="ELSE "];
+nodo5_si ->nodo1_fun_f;nodo1_fun_f [ label ="Fin funcion _variablemia_"];
+nodo1_fun ->nodo79_print;nodo79_print [shape=invhouse, style=filled,  label ="IMPRIMIR 'El fibonacci de 5 es '"];
+nodo79_print ->nodo80_print;nodo80_print [shape=invhouse, style=filled,  label ="IMPRIMIR '.'"];
+nodo80_print ->fin;fin [  shape=circle, style=filled, label ="FIN"];
 
 
 }

@@ -1,756 +1,1274 @@
 digraph G {node[shape=box, style=filled, color=blanchedalmond]; edge[color=chocolate3];rankdir=UD 
 
 raiz [ label ="INICIO"];
+raiz ->nodo0_com_m;nodo0_com_m [ label ="Comentario "];
+nodo0_id_c_m [ label ="/*Archivo de calificacion Organizacion de lenguajes y compiladores 1*******/"];
+nodo0_com_m ->nodo0_id_c_m;
+raiz ->nodo1_com_m;nodo1_com_m [ label ="Comentario "];
+nodo1_id_c_m [ label ="/******** Usac */"];
+nodo1_com_m ->nodo1_id_c_m;
 raiz ->nodo0_com;nodo0_com [ label ="Comentario "];
-nodo0_id_c [ label ="/////inicio de la traduccion
+nodo0_id_c [ label ="//Segundo Semestre
 "];
 nodo0_com ->nodo0_id_c;
-raiz ->nodo0_com_m;nodo0_com_m [ label ="Comentario "];
-nodo0_id_c_m [ label ="/*
-        Primer archivo de entrada para proyecto organizacion de lenguajes y compiladores 1
-*/"];
-nodo0_com_m ->nodo0_id_c_m;
 raiz ->nodo1_com;nodo1_com [ label ="Comentario "];
-nodo1_id_c [ label ="//errores lexicos, se tienen que recuperar!
+nodo1_id_c [ label ="/////inicio de la traduccion
 "];
 nodo1_com ->nodo1_id_c;
+raiz ->nodo2_com_m;nodo2_com_m [ label ="Comentario "];
+nodo2_id_c_m [ label ="/*
+        Primer archivo de entrada para proyecto organizacion de lenguajes y compiladores 1
+*/"];
+nodo2_com_m ->nodo2_id_c_m;
 raiz ->nodo2_com;nodo2_com [ label ="Comentario "];
-nodo2_id_c [ label ="//seccion de declraciones de funciones de variables
+nodo2_id_c [ label ="//errores lexicos, se tienen que recuperar!
 "];
 nodo2_com ->nodo2_id_c;
+raiz ->nodo3_com;nodo3_com [ label ="Comentario "];
+nodo3_id_c [ label ="//seccion de declraciones de funciones de variables
+"];
+nodo3_com ->nodo3_id_c;
 raiz ->nodo0_de;nodo0_de [ label ="DECLARACION NumEro"];
 nodo1_id [ label ="_variable1_"];
 nodo0_de ->nodo1_id;nodo0_de ->nodo2_op;
 nodo2_op [ label ="5"];
-raiz ->nodo3_com;nodo3_com [ label ="Comentario "];
-nodo3_id_c [ label ="//ERROR sintactico, reportar que falta un punto y coma, recuperarse del error
-"];
-nodo3_com ->nodo3_id_c;
-raiz ->nodo1_de,nodo2_de,nodo3_de;nodo1_de [ label ="DECLARACION CadenA"];
-nodo2_id [ label ="_v1_"];
+raiz ->nodo1_de;nodo1_de [ label ="DECLARACION NumEro"];
+nodo2_id [ label ="_variable2_"];
 nodo1_de ->nodo2_id;nodo1_de ->nodo5_op;
-nodo5_op [ label ="'esta es una cadena'"];
-nodo2_de [ label ="DECLARACION CadenA"];
-nodo3_id [ label ="_v2_"];
+nodo5_op [ label ="50"];
+raiz ->nodo2_de,nodo3_de,nodo4_de;nodo2_de [ label ="DECLARACION CadenA"];
+nodo3_id [ label ="_v1_"];
 nodo2_de ->nodo3_id;nodo2_de ->nodo8_op;
 nodo8_op [ label ="'esta es una cadena'"];
 nodo3_de [ label ="DECLARACION CadenA"];
-nodo4_id [ label ="_v3_"];
+nodo4_id [ label ="_v2_"];
 nodo3_de ->nodo4_id;nodo3_de ->nodo11_op;
 nodo11_op [ label ="'esta es una cadena'"];
-raiz ->nodo4_de;nodo4_de [ label ="DECLARACION cadena"];
-nodo5_id [ label ="_curso1_"];
+nodo4_de [ label ="DECLARACION CadenA"];
+nodo5_id [ label ="_v3_"];
 nodo4_de ->nodo5_id;nodo4_de ->nodo14_op;
-nodo14_op [ label ="'olc'"];
+nodo14_op [ label ="'esta es una cadena'"];
 raiz ->nodo5_de;nodo5_de [ label ="DECLARACION cadena"];
-nodo6_id [ label ="_curso2_"];
+nodo6_id [ label ="_curso1_"];
 nodo5_de ->nodo6_id;nodo5_de ->nodo17_op;
 nodo17_op [ label ="'olc'"];
 raiz ->nodo6_de;nodo6_de [ label ="DECLARACION cadena"];
-nodo7_id [ label ="_curso3_"];
+nodo7_id [ label ="_curso2_"];
 nodo6_de ->nodo7_id;nodo6_de ->nodo20_op;
 nodo20_op [ label ="'olc'"];
-raiz ->nodo7_de;nodo7_de [ label ="DECLARACION numero"];
-nodo8_id [ label ="_pi1_"];
+raiz ->nodo7_de;nodo7_de [ label ="DECLARACION cadena"];
+nodo8_id [ label ="_curso3_"];
 nodo7_de ->nodo8_id;nodo7_de ->nodo23_op;
-nodo23_op [ label ="3"];
+nodo23_op [ label ="'olc'"];
 raiz ->nodo8_de;nodo8_de [ label ="DECLARACION numero"];
-nodo9_id [ label ="_pi2_"];
+nodo9_id [ label ="_pi1_"];
 nodo8_de ->nodo9_id;nodo8_de ->nodo26_op;
-nodo26_op [ label ="3.1"];
+nodo26_op [ label ="3"];
 raiz ->nodo9_de;nodo9_de [ label ="DECLARACION numero"];
-nodo10_id [ label ="_pi3_"];
+nodo10_id [ label ="_pi2_"];
 nodo9_de ->nodo10_id;nodo9_de ->nodo29_op;
-nodo29_op [ label ="3.14"];
+nodo29_op [ label ="3.1"];
 raiz ->nodo10_de;nodo10_de [ label ="DECLARACION numero"];
-nodo11_id [ label ="_pi4_"];
+nodo11_id [ label ="_pi3_"];
 nodo10_de ->nodo11_id;nodo10_de ->nodo32_op;
-nodo32_op [ label ="3.141"];
+nodo32_op [ label ="3.14"];
 raiz ->nodo11_de;nodo11_de [ label ="DECLARACION numero"];
-nodo12_id [ label ="_anio1_"];
+nodo12_id [ label ="_pi4_"];
 nodo11_de ->nodo12_id;nodo11_de ->nodo35_op;
-nodo35_op [ label ="1"];
+nodo35_op [ label ="3.141"];
 raiz ->nodo12_de;nodo12_de [ label ="DECLARACION numero"];
-nodo13_id [ label ="_anio2_"];
+nodo13_id [ label ="_anio1_"];
 nodo12_de ->nodo13_id;nodo12_de ->nodo38_op;
-nodo38_op [ label ="9"];
+nodo38_op [ label ="1"];
 raiz ->nodo13_de;nodo13_de [ label ="DECLARACION numero"];
-nodo14_id [ label ="_anio3_"];
+nodo14_id [ label ="_anio2_"];
 nodo13_de ->nodo14_id;nodo13_de ->nodo41_op;
-nodo41_op [ label ="4"];
+nodo41_op [ label ="9"];
 raiz ->nodo14_de;nodo14_de [ label ="DECLARACION numero"];
-nodo15_id [ label ="_anio4_"];
+nodo15_id [ label ="_anio3_"];
 nodo14_de ->nodo15_id;nodo14_de ->nodo44_op;
-nodo44_op [ label ="5"];
+nodo44_op [ label ="4"];
 raiz ->nodo15_de;nodo15_de [ label ="DECLARACION numero"];
-nodo16_id [ label ="_variableNeg_"];
+nodo16_id [ label ="_anio4_"];
 nodo15_de ->nodo16_id;nodo15_de ->nodo47_op;
-nodo47_op [ label ="5.0"];
-raiz ->nodo16_de;nodo16_de [ label ="DECLARACION cadena"];
-nodo17_id [ label ="_encabezado1_"];
+nodo47_op [ label ="5"];
+raiz ->nodo16_de;nodo16_de [ label ="DECLARACION numero"];
+nodo17_id [ label ="_variableAntesNeg_"];
 nodo16_de ->nodo17_id;nodo16_de ->nodo50_op;
-nodo50_op [ label ="'Universidad San Carlos de Guatemala...;'"];
+nodo50_op [ label ="5.0"];
 raiz ->nodo17_de;nodo17_de [ label ="DECLARACION cadena"];
-nodo18_id [ label ="_encabezado2_"];
+nodo18_id [ label ="_encabezado1_"];
 nodo17_de ->nodo18_id;nodo17_de ->nodo53_op;
-nodo53_op [ label ="'Escuela de Ciencias y Sistemas
+nodo53_op [ label ="'Universidad San Carlos de Guatemala...;'"];
+raiz ->nodo18_de;nodo18_de [ label ="DECLARACION cadena"];
+nodo19_id [ label ="_encabezado2_"];
+nodo18_de ->nodo19_id;nodo18_de ->nodo56_op;
+nodo56_op [ label ="'Escuela de Ciencias y Sistemas
 Segundo semestre
 '"];
-raiz ->nodo18_de;nodo18_de [ label ="DECLARACION boolean"];
-nodo19_id [ label ="_flag1_"];
-nodo18_de ->nodo19_id;nodo18_de ->nodo56_op;
-nodo56_op [ label ="verdadero"];
 raiz ->nodo19_de;nodo19_de [ label ="DECLARACION boolean"];
-nodo20_id [ label ="_flag2_"];
+nodo20_id [ label ="_flag1_"];
 nodo19_de ->nodo20_id;nodo19_de ->nodo59_op;
-nodo59_op [ label ="falso"];
-raiz ->nodo20_de;nodo20_de [ label ="DECLARACION caracter"];
-nodo21_id [ label ="_name1_"];
+nodo59_op [ label ="verdadero"];
+raiz ->nodo20_de;nodo20_de [ label ="DECLARACION boolean"];
+nodo21_id [ label ="_flag2_"];
 nodo20_de ->nodo21_id;nodo20_de ->nodo62_op;
-nodo62_op [ label ="'f'"];
+nodo62_op [ label ="falso"];
 raiz ->nodo21_de;nodo21_de [ label ="DECLARACION caracter"];
-nodo22_id [ label ="_name2_"];
+nodo22_id [ label ="_name1_"];
 nodo21_de ->nodo22_id;nodo21_de ->nodo65_op;
-nodo65_op [ label ="'e'"];
+nodo65_op [ label ="'f'"];
 raiz ->nodo22_de;nodo22_de [ label ="DECLARACION caracter"];
-nodo23_id [ label ="_name3_"];
+nodo23_id [ label ="_name2_"];
 nodo22_de ->nodo23_id;nodo22_de ->nodo68_op;
-nodo68_op [ label ="'r'"];
-raiz ->nodo23_de,nodo24_de;nodo23_de [ label ="DECLARACION caracter"];
-nodo24_id [ label ="_name4_"];
+nodo68_op [ label ="'e'"];
+raiz ->nodo23_de;nodo23_de [ label ="DECLARACION caracter"];
+nodo24_id [ label ="_name3_"];
 nodo23_de ->nodo24_id;nodo23_de ->nodo71_op;
-nodo71_op [ label ="'n'"];
-nodo24_de [ label ="DECLARACION caracter"];
-nodo25_id [ label ="_name6_"];
+nodo71_op [ label ="'r'"];
+raiz ->nodo24_de,nodo25_de;nodo24_de [ label ="DECLARACION caracter"];
+nodo25_id [ label ="_name4_"];
 nodo24_de ->nodo25_id;nodo24_de ->nodo74_op;
 nodo74_op [ label ="'n'"];
-raiz ->nodo25_de;nodo25_de [ label ="DECLARACION caracter"];
-nodo26_id [ label ="_name5_"];
+nodo25_de [ label ="DECLARACION caracter"];
+nodo26_id [ label ="_name6_"];
 nodo25_de ->nodo26_id;nodo25_de ->nodo77_op;
-nodo77_op [ label ="'a'"];
+nodo77_op [ label ="'n'"];
 raiz ->nodo26_de;nodo26_de [ label ="DECLARACION caracter"];
-nodo27_id [ label ="_name7_"];
+nodo27_id [ label ="_name5_"];
 nodo26_de ->nodo27_id;nodo26_de ->nodo80_op;
-nodo80_op [ label ="'${100}'"];
+nodo80_op [ label ="'a'"];
 raiz ->nodo27_de;nodo27_de [ label ="DECLARACION caracter"];
-nodo28_id [ label ="_name8_"];
+nodo28_id [ label ="_name7_"];
 nodo27_de ->nodo28_id;nodo27_de ->nodo83_op;
-nodo83_op [ label ="'${111}'"];
-raiz ->nodo28_de;nodo28_de [ label ="DECLARACION numero"];
-nodo29_id [ label ="_operaciones1Basica_"];
-nodo28_de ->nodo29_id;nodo28_de ->nodo85_op;
-nodo85_op [ label ="+"];
-nodo85_op ->nodo87_op;
-nodo87_op [ label ="1"];
+nodo83_op [ label ="'${100}'"];
+raiz ->nodo28_de;nodo28_de [ label ="DECLARACION caracter"];
+nodo29_id [ label ="_name8_"];
+nodo28_de ->nodo29_id;nodo28_de ->nodo86_op;
+nodo86_op [ label ="'${111}'"];
+raiz ->nodo29_de;nodo29_de [ label ="DECLARACION numero"];
+nodo30_id [ label ="_operaciones1Basica_"];
+nodo29_de ->nodo30_id;nodo29_de ->nodo88_op;
+nodo88_op [ label ="+"];
+nodo88_op ->nodo90_op;
+nodo90_op [ label ="1"];
 
-nodo85_op ->nodo89_op;
-nodo89_op [ label ="( )"];
-nodo89_op ->nodo91_op;
-nodo91_op [ label ="1"];
+nodo88_op ->nodo92_op;
+nodo92_op [ label ="( )"];
+nodo92_op ->nodo94_op;
+nodo94_op [ label ="1"];
 
 
 raiz ->nodo4_com;nodo4_com [ label ="Comentario "];
 nodo4_id_c [ label ="//2 el resultado
 "];
 nodo4_com ->nodo4_id_c;
-raiz ->nodo29_de;nodo29_de [ label ="DECLARACION numero"];
-nodo30_id [ label ="_operaciones1Basica2_"];
-nodo29_de ->nodo30_id;nodo29_de ->nodo93_op;
-nodo93_op [ label ="+"];
-nodo93_op ->nodo95_op;
-nodo95_op [ label ="_operaciones1Basica_"];
-
-nodo93_op ->nodo98_op;
+raiz ->nodo30_de;nodo30_de [ label ="DECLARACION numero"];
+nodo31_id [ label ="_operaciones1Basica2_"];
+nodo30_de ->nodo31_id;nodo30_de ->nodo96_op;
+nodo96_op [ label ="+"];
+nodo96_op ->nodo98_op;
 nodo98_op [ label ="_operaciones1Basica_"];
 
+nodo96_op ->nodo101_op;
+nodo101_op [ label ="_operaciones1Basica_"];
+
 raiz ->nodo5_com;nodo5_com [ label ="Comentario "];
-nodo5_id_c [ label ="//               
+nodo5_id_c [ label ="// 4              
 "];
 nodo5_com ->nodo5_id_c;
-raiz ->nodo30_de;nodo30_de [ label ="DECLARACION nUmero"];
-nodo31_id [ label ="_operaciones1Intermedia_"];
-nodo30_de ->nodo31_id;nodo30_de ->nodo100_op;
-nodo100_op [ label ="+"];
-nodo100_op ->nodo101_op;
-nodo101_op [ label ="+"];
-nodo101_op ->nodo102_op;
-nodo102_op [ label ="+"];
-nodo102_op ->nodo104_op;
-nodo104_op [ label ="15"];
+raiz ->nodo31_de;nodo31_de [ label ="DECLARACION nUmero"];
+nodo32_id [ label ="_operaciones1Intermedia_"];
+nodo31_de ->nodo32_id;nodo31_de ->nodo103_op;
+nodo103_op [ label ="+"];
+nodo103_op ->nodo104_op;
+nodo104_op [ label ="+"];
+nodo104_op ->nodo105_op;
+nodo105_op [ label ="+"];
+nodo105_op ->nodo107_op;
+nodo107_op [ label ="15"];
 
-nodo102_op ->nodo106_op;
-nodo106_op [ label ="( )"];
-nodo106_op ->nodo107_op;
-nodo107_op [ label ="*"];
-nodo107_op ->nodo109_op;
-nodo109_op [ label ="9"];
+nodo105_op ->nodo109_op;
+nodo109_op [ label ="( )"];
+nodo109_op ->nodo110_op;
+nodo110_op [ label ="*"];
+nodo110_op ->nodo112_op;
+nodo112_op [ label ="9"];
 
-nodo107_op ->nodo112_op;
-nodo112_op [ label ="8"];
-
-
-
-
-nodo101_op ->nodo114_op;
-nodo114_op [ label ="/"];
-nodo114_op ->nodo116_op;
-nodo116_op [ label ="200"];
-
-nodo114_op ->nodo118_op;
-nodo118_op [ label ="*"];
-nodo118_op ->nodo120_op;
-nodo120_op [ label ="8"];
-
-nodo118_op ->nodo123_op;
-nodo123_op [ label ="3"];
+nodo110_op ->nodo115_op;
+nodo115_op [ label ="8"];
 
 
 
 
-nodo100_op ->nodo126_op;
-nodo126_op [ label ="9"];
+nodo104_op ->nodo117_op;
+nodo117_op [ label ="/"];
+nodo117_op ->nodo119_op;
+nodo119_op [ label ="200"];
+
+nodo117_op ->nodo121_op;
+nodo121_op [ label ="*"];
+nodo121_op ->nodo123_op;
+nodo123_op [ label ="8"];
+
+nodo121_op ->nodo126_op;
+nodo126_op [ label ="3"];
+
+
+
+
+nodo103_op ->nodo129_op;
+nodo129_op [ label ="9"];
 
 raiz ->nodo6_com;nodo6_com [ label ="Comentario "];
 nodo6_id_c [ label ="//171 el resultado
 "];
 nodo6_com ->nodo6_id_c;
-raiz ->nodo31_de;nodo31_de [ label ="DECLARACION numeRo"];
-nodo32_id [ label ="_operaciones1Avanzadas1_"];
-nodo31_de ->nodo32_id;nodo31_de ->nodo128_op;
-nodo128_op [ label ="( )"];
-nodo128_op ->nodo129_op;
-nodo129_op [ label ="+"];
-nodo129_op ->nodo130_op;
-nodo130_op [ label ="+"];
-nodo130_op ->nodo131_op;
-nodo131_op [ label ="*"];
+raiz ->nodo32_de;nodo32_de [ label ="DECLARACION numeRo"];
+nodo33_id [ label ="_operaciones1Avanzadas1_"];
+nodo32_de ->nodo33_id;nodo32_de ->nodo131_op;
+nodo131_op [ label ="( )"];
 nodo131_op ->nodo132_op;
-nodo132_op [ label ="( )"];
+nodo132_op [ label ="+"];
 nodo132_op ->nodo133_op;
 nodo133_op [ label ="+"];
-nodo133_op ->nodo135_op;
-nodo135_op [ label ="15"];
+nodo133_op ->nodo134_op;
+nodo134_op [ label ="*"];
+nodo134_op ->nodo135_op;
+nodo135_op [ label ="( )"];
+nodo135_op ->nodo136_op;
+nodo136_op [ label ="+"];
+nodo136_op ->nodo138_op;
+nodo138_op [ label ="15"];
 
-nodo133_op ->nodo138_op;
-nodo138_op [ label ="9"];
-
-
-
-nodo131_op ->nodo141_op;
-nodo141_op [ label ="8"];
-
-
-nodo130_op ->nodo143_op;
-nodo143_op [ label ="/"];
-nodo143_op ->nodo145_op;
-nodo145_op [ label ="200"];
-
-nodo143_op ->nodo147_op;
-nodo147_op [ label ="*"];
-nodo147_op ->nodo149_op;
-nodo149_op [ label ="8"];
-
-nodo147_op ->nodo152_op;
-nodo152_op [ label ="3"];
+nodo136_op ->nodo141_op;
+nodo141_op [ label ="9"];
 
 
 
+nodo134_op ->nodo144_op;
+nodo144_op [ label ="8"];
 
-nodo129_op ->nodo155_op;
-nodo155_op [ label ="9"];
+
+nodo133_op ->nodo146_op;
+nodo146_op [ label ="/"];
+nodo146_op ->nodo148_op;
+nodo148_op [ label ="200"];
+
+nodo146_op ->nodo150_op;
+nodo150_op [ label ="*"];
+nodo150_op ->nodo152_op;
+nodo152_op [ label ="8"];
+
+nodo150_op ->nodo155_op;
+nodo155_op [ label ="3"];
+
+
+
+
+nodo132_op ->nodo158_op;
+nodo158_op [ label ="9"];
 
 
 raiz ->nodo7_com;nodo7_com [ label ="Comentario "];
-nodo7_id_c [ label ="//291 el resultado
+nodo7_id_c [ label ="//276 el resultado
 "];
 nodo7_com ->nodo7_id_c;
-raiz ->nodo32_de;nodo32_de [ label ="DECLARACION numero"];
-nodo33_id [ label ="_operaciones1Avanzadas2_"];
-nodo32_de ->nodo33_id;nodo32_de ->nodo157_op;
-nodo157_op [ label ="+"];
-nodo157_op ->nodo158_op;
-nodo158_op [ label ="potencia"];
-nodo158_op ->nodo160_op;
-nodo160_op [ label ="30"];
-
-nodo158_op ->nodo162_op;
+raiz ->nodo33_de;nodo33_de [ label ="DECLARACION numero"];
+nodo34_id [ label ="_operaciones1Avanzadas2_"];
+nodo33_de ->nodo34_id;nodo33_de ->nodo160_op;
+nodo160_op [ label ="+"];
+nodo160_op ->nodo161_op;
+nodo161_op [ label ="potencia"];
+nodo161_op ->nodo162_op;
 nodo162_op [ label ="( )"];
 nodo162_op ->nodo163_op;
-nodo163_op [ label ="-"];
-nodo163_op ->nodo165_op;
-nodo165_op [ label ="22.2"];
+nodo163_op [ label ="+"];
+nodo163_op ->nodo164_op;
+nodo164_op [ label ="potencia"];
+nodo164_op ->nodo166_op;
+nodo166_op [ label ="1"];
 
-nodo163_op ->nodo168_op;
-nodo168_op [ label ="2.2"];
-
-
-
-
-nodo157_op ->nodo170_op;
-nodo170_op [ label ="( )"];
-nodo170_op ->nodo172_op;
-nodo172_op [ label ="2"];
+nodo164_op ->nodo168_op;
+nodo168_op [ label ="( )"];
+nodo168_op ->nodo170_op;
+nodo170_op [ label ="1"];
 
 
-raiz ->nodo33_de;nodo33_de [ label ="DECLARACION nuMero"];
-nodo34_id [ label ="_operaciones1Avanzadas3_"];
-nodo33_de ->nodo34_id;nodo33_de ->nodo174_op;
-nodo174_op [ label ="+"];
-nodo174_op ->nodo175_op;
+
+nodo163_op ->nodo173_op;
+nodo173_op [ label ="2"];
+
+
+
+nodo161_op ->nodo175_op;
 nodo175_op [ label ="( )"];
 nodo175_op ->nodo176_op;
-nodo176_op [ label ="potencia"];
-nodo176_op ->nodo178_op;
-nodo178_op [ label ="30"];
+nodo176_op [ label ="-"];
+nodo176_op ->nodo177_op;
+nodo177_op [ label ="-"];
+nodo177_op ->nodo179_op;
+nodo179_op [ label ="22.2"];
 
-nodo176_op ->nodo180_op;
-nodo180_op [ label ="( )"];
-nodo180_op ->nodo182_op;
-nodo182_op [ label ="2"];
-
-
+nodo177_op ->nodo182_op;
+nodo182_op [ label ="2.2"];
 
 
-nodo174_op ->nodo184_op;
-nodo184_op [ label ="( )"];
-nodo184_op ->nodo186_op;
-nodo186_op [ label ="2"];
-
-
-raiz ->nodo34_de;nodo34_de [ label ="DECLARACION numeRo"];
-nodo35_id [ label ="_operaciones1Avanzadas4_"];
-nodo34_de ->nodo35_id;nodo34_de ->nodo188_op;
-nodo188_op [ label ="+"];
-nodo188_op ->nodo189_op;
-nodo189_op [ label ="( )"];
-nodo189_op ->nodo190_op;
-nodo190_op [ label ="potencia"];
-nodo190_op ->nodo192_op;
-nodo192_op [ label ="30"];
-
-nodo190_op ->nodo194_op;
-nodo194_op [ label ="( )"];
-nodo194_op ->nodo195_op;
-nodo195_op [ label ="+"];
-nodo195_op ->nodo196_op;
-nodo196_op [ label ="-"];
-nodo196_op ->nodo198_op;
-nodo198_op [ label ="10"];
-
-nodo196_op ->nodo201_op;
-nodo201_op [ label ="8"];
-
-
-nodo195_op ->nodo203_op;
-nodo203_op [ label ="-"];
-nodo203_op ->nodo204_op;
-nodo204_op [ label ="-"];
-nodo204_op ->nodo206_op;
-nodo206_op [ label ="9"];
-
-nodo204_op ->nodo208_op;
-nodo208_op [ label ="*"];
-nodo208_op ->nodo210_op;
-nodo210_op [ label ="4"];
-
-nodo208_op ->nodo213_op;
-nodo213_op [ label ="2"];
-
-
-
-nodo203_op ->nodo216_op;
-nodo216_op [ label ="1"];
+nodo176_op ->nodo185_op;
+nodo185_op [ label ="15"];
 
 
 
 
-
-
-nodo188_op ->nodo218_op;
-nodo218_op [ label ="( )"];
-nodo218_op ->nodo220_op;
-nodo220_op [ label ="2"];
-
-
-raiz ->nodo35_de;nodo35_de [ label ="DECLARACION numeRo"];
-nodo36_id [ label ="_operaciones1Avanzadas6_"];
-nodo35_de ->nodo36_id;nodo35_de ->nodo222_op;
-nodo222_op [ label ="mod"];
-nodo222_op ->nodo223_op;
-nodo223_op [ label ="( )"];
-nodo223_op ->nodo224_op;
-nodo224_op [ label ="*"];
-nodo224_op ->nodo226_op;
-nodo226_op [ label ="5"];
-
-nodo224_op ->nodo229_op;
-nodo229_op [ label ="8"];
-
-
-
-nodo222_op ->nodo231_op;
-nodo231_op [ label ="( )"];
-nodo231_op ->nodo232_op;
-nodo232_op [ label ="+"];
-nodo232_op ->nodo233_op;
-nodo233_op [ label ="+"];
-nodo233_op ->nodo235_op;
-nodo235_op [ label ="1"];
-
-nodo233_op ->nodo238_op;
-nodo238_op [ label ="5"];
-
-
-nodo232_op ->nodo241_op;
-nodo241_op [ label ="6"];
-
+nodo160_op ->nodo187_op;
+nodo187_op [ label ="( )"];
+nodo187_op ->nodo189_op;
+nodo189_op [ label ="2"];
 
 
 raiz ->nodo8_com;nodo8_com [ label ="Comentario "];
-nodo8_id_c [ label ="//4 es el resultado
+nodo8_id_c [ label ="//245
 "];
 nodo8_com ->nodo8_id_c;
-raiz ->nodo36_de;nodo36_de [ label ="DECLARACION boolean"];
-nodo37_id [ label ="_operacionRela3_"];
-nodo36_de ->nodo37_id;nodo36_de ->nodo243_op;
-nodo243_op [ label ="mayor"];
-nodo243_op ->nodo245_op;
-nodo245_op [ label ="_operaciones1Basica_"];
+raiz ->nodo34_de;nodo34_de [ label ="DECLARACION nuMero"];
+nodo35_id [ label ="_operaciones1Avanzadas3_"];
+nodo34_de ->nodo35_id;nodo34_de ->nodo191_op;
+nodo191_op [ label ="+"];
+nodo191_op ->nodo192_op;
+nodo192_op [ label ="( )"];
+nodo192_op ->nodo193_op;
+nodo193_op [ label ="potencia"];
+nodo193_op ->nodo195_op;
+nodo195_op [ label ="30"];
 
-nodo243_op ->nodo248_op;
-nodo248_op [ label ="8"];
-
-raiz ->nodo37_de;nodo37_de [ label ="DECLARACION BooLean"];
-nodo38_id [ label ="_operacionRela3_"];
-nodo37_de ->nodo38_id;nodo37_de ->nodo250_op;
-nodo250_op [ label ="mayor_o_igual"];
-nodo250_op ->nodo251_op;
-nodo251_op [ label ="( )"];
-nodo251_op ->nodo252_op;
-nodo252_op [ label ="+"];
-nodo252_op ->nodo254_op;
-nodo254_op [ label ="_operaciones1Basica_"];
-
-nodo252_op ->nodo257_op;
-nodo257_op [ label ="6"];
+nodo193_op ->nodo197_op;
+nodo197_op [ label ="( )"];
+nodo197_op ->nodo199_op;
+nodo199_op [ label ="2"];
 
 
 
-nodo250_op ->nodo260_op;
-nodo260_op [ label ="8"];
 
-raiz ->nodo38_de;nodo38_de [ label ="DECLARACION boolean"];
-nodo39_id [ label ="_operacionRela3_"];
-nodo38_de ->nodo39_id;nodo38_de ->nodo262_op;
-nodo262_op [ label ="menor_o_igual"];
-nodo262_op ->nodo263_op;
-nodo263_op [ label ="( )"];
-nodo263_op ->nodo264_op;
-nodo264_op [ label ="+"];
-nodo264_op ->nodo266_op;
-nodo266_op [ label ="_operaciones1Basica_"];
-
-nodo264_op ->nodo269_op;
-nodo269_op [ label ="6"];
+nodo191_op ->nodo201_op;
+nodo201_op [ label ="( )"];
+nodo201_op ->nodo203_op;
+nodo203_op [ label ="2"];
 
 
-
-nodo262_op ->nodo272_op;
-nodo272_op [ label ="8"];
-
-raiz ->nodo39_de;nodo39_de [ label ="DECLARACION booleAn"];
-nodo40_id [ label ="_operacionRela4_"];
-nodo39_de ->nodo40_id;nodo39_de ->nodo274_op;
-nodo274_op [ label ="es_diferente"];
-nodo274_op ->nodo276_op;
-nodo276_op [ label ="_operaciones1Basica_"];
-
-nodo274_op ->nodo279_op;
-nodo279_op [ label ="8"];
-
-raiz ->nodo40_de;nodo40_de [ label ="DECLARACION boolean"];
-nodo41_id [ label ="_operacionRela5_"];
-nodo40_de ->nodo41_id;nodo40_de ->nodo281_op;
-nodo281_op [ label ="es_diferente"];
-nodo281_op ->nodo283_op;
-nodo283_op [ label ="_operaciones1Basica_"];
-
-nodo281_op ->nodo286_op;
-nodo286_op [ label ="_operaciones1Basica_"];
-
-raiz ->nodo41_de;nodo41_de [ label ="DECLARACION Boolean"];
-nodo42_id [ label ="_operacionRela6_"];
-nodo41_de ->nodo42_id;nodo41_de ->nodo288_op;
-nodo288_op [ label ="+"];
-nodo288_op ->nodo289_op;
-nodo289_op [ label ="es_diferente"];
-nodo289_op ->nodo291_op;
-nodo291_op [ label ="_operaciones1Basica_"];
-
-nodo289_op ->nodo294_op;
-nodo294_op [ label ="_operaciones1Basica_"];
-
-
-nodo288_op ->nodo297_op;
-nodo297_op [ label ="1"];
-
-raiz ->nodo42_de;nodo42_de [ label ="DECLARACION boolEan"];
-nodo43_id [ label ="_operacionRela7_"];
-nodo42_de ->nodo43_id;nodo42_de ->nodo299_op;
-nodo299_op [ label ="*"];
-nodo299_op ->nodo300_op;
-nodo300_op [ label ="es_diferente"];
-nodo300_op ->nodo302_op;
-nodo302_op [ label ="_operaciones1Basica_"];
-
-nodo300_op ->nodo304_op;
-nodo304_op [ label ="( )"];
-nodo304_op ->nodo306_op;
-nodo306_op [ label ="_operaciones1Basica_"];
-
-
-
-nodo299_op ->nodo308_op;
-nodo308_op [ label ="( )"];
-nodo308_op ->nodo309_op;
-nodo309_op [ label ="+"];
-nodo309_op ->nodo311_op;
-nodo311_op [ label ="8"];
-
-nodo309_op ->nodo314_op;
-nodo314_op [ label ="5"];
-
-
-
-raiz ->nodo1_com_m;nodo1_com_m [ label ="Comentario "];
-nodo1_id_c_m [ label ="/*otro error lexico************/"];
-nodo1_com_m ->nodo1_id_c_m;
 raiz ->nodo9_com;nodo9_com [ label ="Comentario "];
-nodo9_id_c [ label ="//seccion de asignaciones
+nodo9_id_c [ label ="//902
 "];
 nodo9_com ->nodo9_id_c;
-raiz ->nodo0_as;nodo0_as [ label ="ASIGNACION"];
-nodo1_ida [ label ="_v1_"];
-nodo0_as ->nodo1_ida;nodo0_as ->nodo317_op;
-nodo317_op [ label ="'esta es la cadena numero 1'"];
-raiz ->nodo1_as,nodo2_as;nodo1_as [ label ="ASIGNACION"];
-nodo2_ida [ label ="_v2_"];
-nodo1_as ->nodo2_ida;nodo1_as ->nodo320_op;
-nodo320_op [ label ="'estas cadenas deben ser diferentes'"];
-nodo2_as [ label ="ASIGNACION"];
-nodo3_ida [ label ="_v3_"];
-nodo2_as ->nodo3_ida;nodo2_as ->nodo323_op;
-nodo323_op [ label ="'estas cadenas deben ser diferentes'"];
-raiz ->nodo3_as,nodo4_as,nodo5_as;nodo3_as [ label ="ASIGNACION"];
-nodo4_ida [ label ="_curso1_"];
-nodo3_as ->nodo4_ida;nodo3_as ->nodo326_op;
-nodo326_op [ label ="'Organizacion de lenguajes y compiladores 1'"];
-nodo4_as [ label ="ASIGNACION"];
-nodo5_ida [ label ="_curso2_"];
-nodo4_as ->nodo5_ida;nodo4_as ->nodo329_op;
-nodo329_op [ label ="'Organizacion de lenguajes y compiladores 1'"];
-nodo5_as [ label ="ASIGNACION"];
-nodo6_ida [ label ="_curso3_"];
-nodo5_as ->nodo6_ida;nodo5_as ->nodo332_op;
-nodo332_op [ label ="'Organizacion de lenguajes y compiladores 1'"];
-raiz ->nodo2_com_m;nodo2_com_m [ label ="Comentario "];
-nodo2_id_c_m [ label ="/******error sintactico, le falta la flecha*/"];
-nodo2_com_m ->nodo2_id_c_m;
+raiz ->nodo35_de;nodo35_de [ label ="DECLARACION numeRo"];
+nodo36_id [ label ="_operaciones1Avanzadas4_"];
+nodo35_de ->nodo36_id;nodo35_de ->nodo205_op;
+nodo205_op [ label ="+"];
+nodo205_op ->nodo206_op;
+nodo206_op [ label ="( )"];
+nodo206_op ->nodo207_op;
+nodo207_op [ label ="potencia"];
+nodo207_op ->nodo209_op;
+nodo209_op [ label ="30"];
+
+nodo207_op ->nodo211_op;
+nodo211_op [ label ="( )"];
+nodo211_op ->nodo212_op;
+nodo212_op [ label ="+"];
+nodo212_op ->nodo213_op;
+nodo213_op [ label ="-"];
+nodo213_op ->nodo215_op;
+nodo215_op [ label ="10"];
+
+nodo213_op ->nodo218_op;
+nodo218_op [ label ="8"];
+
+
+nodo212_op ->nodo220_op;
+nodo220_op [ label ="-"];
+nodo220_op ->nodo221_op;
+nodo221_op [ label ="-"];
+nodo221_op ->nodo223_op;
+nodo223_op [ label ="9"];
+
+nodo221_op ->nodo225_op;
+nodo225_op [ label ="*"];
+nodo225_op ->nodo227_op;
+nodo227_op [ label ="4"];
+
+nodo225_op ->nodo230_op;
+nodo230_op [ label ="2"];
+
+
+
+nodo220_op ->nodo233_op;
+nodo233_op [ label ="1"];
+
+
+
+
+
+
+nodo205_op ->nodo235_op;
+nodo235_op [ label ="( )"];
+nodo235_op ->nodo237_op;
+nodo237_op [ label ="2"];
+
+
 raiz ->nodo10_com;nodo10_com [ label ="Comentario "];
-nodo10_id_c [ label ="//otro error lexico
+nodo10_id_c [ label ="//902
 "];
 nodo10_com ->nodo10_id_c;
+raiz ->nodo36_de;nodo36_de [ label ="DECLARACION nUmero"];
+nodo37_id [ label ="_operaciones1Avanzadas5_"];
+nodo36_de ->nodo37_id;nodo36_de ->nodo239_op;
+nodo239_op [ label ="+"];
+nodo239_op ->nodo240_op;
+nodo240_op [ label ="potencia"];
+nodo240_op ->nodo242_op;
+nodo242_op [ label ="30"];
+
+nodo240_op ->nodo244_op;
+nodo244_op [ label ="( )"];
+nodo244_op ->nodo245_op;
+nodo245_op [ label ="+"];
+nodo245_op ->nodo246_op;
+nodo246_op [ label ="-"];
+nodo246_op ->nodo248_op;
+nodo248_op [ label ="10"];
+
+nodo246_op ->nodo251_op;
+nodo251_op [ label ="8"];
+
+
+nodo245_op ->nodo253_op;
+nodo253_op [ label ="-"];
+nodo253_op ->nodo254_op;
+nodo254_op [ label ="-"];
+nodo254_op ->nodo256_op;
+nodo256_op [ label ="9"];
+
+nodo254_op ->nodo258_op;
+nodo258_op [ label ="*"];
+nodo258_op ->nodo260_op;
+nodo260_op [ label ="4"];
+
+nodo258_op ->nodo263_op;
+nodo263_op [ label ="2"];
+
+
+
+nodo253_op ->nodo266_op;
+nodo266_op [ label ="1"];
+
+
+
+
+
+nodo239_op ->nodo268_op;
+nodo268_op [ label ="( )"];
+nodo268_op ->nodo269_op;
+nodo269_op [ label ="/"];
+nodo269_op ->nodo271_op;
+nodo271_op [ label ="15"];
+
+nodo269_op ->nodo273_op;
+nodo273_op [ label ="( )"];
+nodo273_op ->nodo274_op;
+nodo274_op [ label ="+"];
+nodo274_op ->nodo275_op;
+nodo275_op [ label ="potencia"];
+nodo275_op ->nodo277_op;
+nodo277_op [ label ="1"];
+
+nodo275_op ->nodo279_op;
+nodo279_op [ label ="( )"];
+nodo279_op ->nodo281_op;
+nodo281_op [ label ="1"];
+
+
+
+nodo274_op ->nodo284_op;
+nodo284_op [ label ="2"];
+
+
+
+
+
+raiz ->nodo11_com;nodo11_com [ label ="Comentario "];
+nodo11_id_c [ label ="//905
+"];
+nodo11_com ->nodo11_id_c;
+raiz ->nodo37_de;nodo37_de [ label ="DECLARACION numeRo"];
+nodo38_id [ label ="_operaciones1Avanzadas6_"];
+nodo37_de ->nodo38_id;nodo37_de ->nodo286_op;
+nodo286_op [ label ="mod"];
+nodo286_op ->nodo287_op;
+nodo287_op [ label ="( )"];
+nodo287_op ->nodo288_op;
+nodo288_op [ label ="*"];
+nodo288_op ->nodo290_op;
+nodo290_op [ label ="5"];
+
+nodo288_op ->nodo293_op;
+nodo293_op [ label ="8"];
+
+
+
+nodo286_op ->nodo295_op;
+nodo295_op [ label ="( )"];
+nodo295_op ->nodo296_op;
+nodo296_op [ label ="+"];
+nodo296_op ->nodo297_op;
+nodo297_op [ label ="+"];
+nodo297_op ->nodo299_op;
+nodo299_op [ label ="1"];
+
+nodo297_op ->nodo302_op;
+nodo302_op [ label ="5"];
+
+
+nodo296_op ->nodo305_op;
+nodo305_op [ label ="6"];
+
+
+
+raiz ->nodo12_com;nodo12_com [ label ="Comentario "];
+nodo12_id_c [ label ="//4 es el resultado
+"];
+nodo12_com ->nodo12_id_c;
+raiz ->nodo38_de;nodo38_de [ label ="DECLARACION numeRo"];
+nodo39_id [ label ="_operaciones1Avanzadas7_"];
+nodo38_de ->nodo39_id;nodo38_de ->nodo307_op;
+nodo307_op [ label ="mod"];
+nodo307_op ->nodo308_op;
+nodo308_op [ label ="( )"];
+nodo308_op ->nodo309_op;
+nodo309_op [ label ="*"];
+nodo309_op ->nodo311_op;
+nodo311_op [ label ="5"];
+
+nodo309_op ->nodo314_op;
+nodo314_op [ label ="8"];
+
+
+
+nodo307_op ->nodo316_op;
+nodo316_op [ label ="( )"];
+nodo316_op ->nodo317_op;
+nodo317_op [ label ="potencia"];
+nodo317_op ->nodo318_op;
+nodo318_op [ label ="( )"];
+nodo318_op ->nodo319_op;
+nodo319_op [ label ="+"];
+nodo319_op ->nodo321_op;
+nodo321_op [ label ="5"];
+
+nodo319_op ->nodo324_op;
+nodo324_op [ label ="3"];
+
+
+
+nodo317_op ->nodo326_op;
+nodo326_op [ label ="( )"];
+nodo326_op ->nodo328_op;
+nodo328_op [ label ="8"];
+
+
+
+
+raiz ->nodo13_com;nodo13_com [ label ="Comentario "];
+nodo13_id_c [ label ="//   40
+"];
+nodo13_com ->nodo13_id_c;
+raiz ->nodo39_de;nodo39_de [ label ="DECLARACION numeRo"];
+nodo40_id [ label ="_operaciones1Avanzadas8_"];
+nodo39_de ->nodo40_id;nodo39_de ->nodo330_op;
+nodo330_op [ label ="mod"];
+nodo330_op ->nodo331_op;
+nodo331_op [ label ="( )"];
+nodo331_op ->nodo332_op;
+nodo332_op [ label ="*"];
+nodo332_op ->nodo334_op;
+nodo334_op [ label ="5"];
+
+nodo332_op ->nodo337_op;
+nodo337_op [ label ="8"];
+
+
+
+nodo330_op ->nodo339_op;
+nodo339_op [ label ="( )"];
+nodo339_op ->nodo340_op;
+nodo340_op [ label ="potencia"];
+nodo340_op ->nodo341_op;
+nodo341_op [ label ="( )"];
+nodo341_op ->nodo342_op;
+nodo342_op [ label ="+"];
+nodo342_op ->nodo344_op;
+nodo344_op [ label ="5"];
+
+nodo342_op ->nodo346_op;
+nodo346_op [ label ="( )"];
+nodo346_op ->nodo347_op;
+nodo347_op [ label ="potencia"];
+nodo347_op ->nodo349_op;
+nodo349_op [ label ="2"];
+
+nodo347_op ->nodo351_op;
+nodo351_op [ label ="( )"];
+nodo351_op ->nodo352_op;
+nodo352_op [ label ="*"];
+nodo352_op ->nodo354_op;
+nodo354_op [ label ="2"];
+
+nodo352_op ->nodo357_op;
+nodo357_op [ label ="2"];
+
+
+
+
+
+
+
+nodo340_op ->nodo359_op;
+nodo359_op [ label ="( )"];
+nodo359_op ->nodo361_op;
+nodo361_op [ label ="8"];
+
+
+
+
+raiz ->nodo40_de;nodo40_de [ label ="DECLARACION BooleaN"];
+nodo41_id [ label ="_operacionRela1_"];
+nodo40_de ->nodo41_id;nodo40_de ->nodo363_op;
+nodo363_op [ label ="+"];
+nodo363_op ->nodo365_op;
+nodo365_op [ label ="5"];
+
+nodo363_op ->nodo367_op;
+nodo367_op [ label ="mayor"];
+nodo367_op ->nodo369_op;
+nodo369_op [ label ="5"];
+
+nodo367_op ->nodo372_op;
+nodo372_op [ label ="5"];
+
+
+raiz ->nodo14_com;nodo14_com [ label ="Comentario "];
+nodo14_id_c [ label ="//verdadera
+"];
+nodo14_com ->nodo14_id_c;
+raiz ->nodo41_de;nodo41_de [ label ="DECLARACION boolean"];
+nodo42_id [ label ="_operacionRela31_"];
+nodo41_de ->nodo42_id;nodo41_de ->nodo374_op;
+nodo374_op [ label ="mayor"];
+nodo374_op ->nodo376_op;
+nodo376_op [ label ="_operaciones1Basica_"];
+
+nodo374_op ->nodo379_op;
+nodo379_op [ label ="8"];
+
+raiz ->nodo15_com;nodo15_com [ label ="Comentario "];
+nodo15_id_c [ label ="// falsa
+"];
+nodo15_com ->nodo15_id_c;
+raiz ->nodo42_de;nodo42_de [ label ="DECLARACION BooLean"];
+nodo43_id [ label ="_operacionRela32_"];
+nodo42_de ->nodo43_id;nodo42_de ->nodo381_op;
+nodo381_op [ label ="mayor_o_igual"];
+nodo381_op ->nodo382_op;
+nodo382_op [ label ="( )"];
+nodo382_op ->nodo383_op;
+nodo383_op [ label ="+"];
+nodo383_op ->nodo385_op;
+nodo385_op [ label ="_operaciones1Basica_"];
+
+nodo383_op ->nodo388_op;
+nodo388_op [ label ="6"];
+
+
+
+nodo381_op ->nodo391_op;
+nodo391_op [ label ="8"];
+
+raiz ->nodo16_com;nodo16_com [ label ="Comentario "];
+nodo16_id_c [ label ="// verdadera
+"];
+nodo16_com ->nodo16_id_c;
+raiz ->nodo43_de;nodo43_de [ label ="DECLARACION boolean"];
+nodo44_id [ label ="_operacionRela33_"];
+nodo43_de ->nodo44_id;nodo43_de ->nodo393_op;
+nodo393_op [ label ="menor_o_igual"];
+nodo393_op ->nodo394_op;
+nodo394_op [ label ="( )"];
+nodo394_op ->nodo395_op;
+nodo395_op [ label ="+"];
+nodo395_op ->nodo397_op;
+nodo397_op [ label ="_operaciones1Basica_"];
+
+nodo395_op ->nodo400_op;
+nodo400_op [ label ="6"];
+
+
+
+nodo393_op ->nodo403_op;
+nodo403_op [ label ="8"];
+
+raiz ->nodo17_com;nodo17_com [ label ="Comentario "];
+nodo17_id_c [ label ="// verdadera
+"];
+nodo17_com ->nodo17_id_c;
+raiz ->nodo44_de;nodo44_de [ label ="DECLARACION booleAn"];
+nodo45_id [ label ="_operacionRela4_"];
+nodo44_de ->nodo45_id;nodo44_de ->nodo405_op;
+nodo405_op [ label ="es_diferente"];
+nodo405_op ->nodo407_op;
+nodo407_op [ label ="_operaciones1Basica_"];
+
+nodo405_op ->nodo410_op;
+nodo410_op [ label ="8"];
+
+raiz ->nodo18_com;nodo18_com [ label ="Comentario "];
+nodo18_id_c [ label ="// falsa
+"];
+nodo18_com ->nodo18_id_c;
+raiz ->nodo45_de;nodo45_de [ label ="DECLARACION boolean"];
+nodo46_id [ label ="_operacionRela31_"];
+nodo45_de ->nodo46_id;nodo45_de ->nodo412_op;
+nodo412_op [ label ="menor"];
+nodo412_op ->nodo413_op;
+nodo413_op [ label ="( )"];
+nodo413_op ->nodo414_op;
+nodo414_op [ label ="+"];
+nodo414_op ->nodo416_op;
+nodo416_op [ label ="_operaciones1Basica_"];
+
+nodo414_op ->nodo419_op;
+nodo419_op [ label ="6"];
+
+
+
+nodo412_op ->nodo422_op;
+nodo422_op [ label ="8"];
+
+raiz ->nodo19_com;nodo19_com [ label ="Comentario "];
+nodo19_id_c [ label ="//falsa
+"];
+nodo19_com ->nodo19_id_c;
+raiz ->nodo46_de;nodo46_de [ label ="DECLARACION boolean"];
+nodo47_id [ label ="_operacionRela5_"];
+nodo46_de ->nodo47_id;nodo46_de ->nodo424_op;
+nodo424_op [ label ="es_diferente"];
+nodo424_op ->nodo426_op;
+nodo426_op [ label ="_operaciones1Basica_"];
+
+nodo424_op ->nodo429_op;
+nodo429_op [ label ="_operaciones1Basica_"];
+
+raiz ->nodo20_com;nodo20_com [ label ="Comentario "];
+nodo20_id_c [ label ="//true
+"];
+nodo20_com ->nodo20_id_c;
+raiz ->nodo47_de;nodo47_de [ label ="DECLARACION Boolean"];
+nodo48_id [ label ="_operacionRela6_"];
+nodo47_de ->nodo48_id;nodo47_de ->nodo431_op;
+nodo431_op [ label ="+"];
+nodo431_op ->nodo432_op;
+nodo432_op [ label ="es_diferente"];
+nodo432_op ->nodo434_op;
+nodo434_op [ label ="_operaciones1Basica_"];
+
+nodo432_op ->nodo437_op;
+nodo437_op [ label ="_operaciones1Basica_"];
+
+
+nodo431_op ->nodo440_op;
+nodo440_op [ label ="1"];
+
+raiz ->nodo21_com;nodo21_com [ label ="Comentario "];
+nodo21_id_c [ label ="//false
+"];
+nodo21_com ->nodo21_id_c;
+raiz ->nodo48_de;nodo48_de [ label ="DECLARACION boolEan"];
+nodo49_id [ label ="_operacionRela7_"];
+nodo48_de ->nodo49_id;nodo48_de ->nodo442_op;
+nodo442_op [ label ="*"];
+nodo442_op ->nodo443_op;
+nodo443_op [ label ="es_diferente"];
+nodo443_op ->nodo445_op;
+nodo445_op [ label ="_operaciones1Basica_"];
+
+nodo443_op ->nodo447_op;
+nodo447_op [ label ="( )"];
+nodo447_op ->nodo449_op;
+nodo449_op [ label ="_operaciones1Basica_"];
+
+
+
+nodo442_op ->nodo451_op;
+nodo451_op [ label ="( )"];
+nodo451_op ->nodo452_op;
+nodo452_op [ label ="+"];
+nodo452_op ->nodo454_op;
+nodo454_op [ label ="8"];
+
+nodo452_op ->nodo457_op;
+nodo457_op [ label ="5"];
+
+
+
+raiz ->nodo22_com;nodo22_com [ label ="Comentario "];
+nodo22_id_c [ label ="//false
+"];
+nodo22_com ->nodo22_id_c;
+raiz ->nodo49_de;nodo49_de [ label ="DECLARACION bOoleAn"];
+nodo50_id [ label ="_operacionRela5_"];
+nodo49_de ->nodo50_id;nodo49_de ->nodo459_op;
+nodo459_op [ label ="es_igual"];
+nodo459_op ->nodo461_op;
+nodo461_op [ label ="_operaciones1Basica_"];
+
+nodo459_op ->nodo464_op;
+nodo464_op [ label ="_operaciones1Basica_"];
+
+raiz ->nodo23_com;nodo23_com [ label ="Comentario "];
+nodo23_id_c [ label ="//false
+"];
+nodo23_com ->nodo23_id_c;
+raiz ->nodo3_com_m;nodo3_com_m [ label ="Comentario "];
+nodo3_id_c_m [ label ="/*otro error lexico************/"];
+nodo3_com_m ->nodo3_id_c_m;
+raiz ->nodo24_com;nodo24_com [ label ="Comentario "];
+nodo24_id_c [ label ="//seccion de asignaciones
+"];
+nodo24_com ->nodo24_id_c;
+raiz ->nodo0_as;nodo0_as [ label ="ASIGNACION"];
+nodo1_ida [ label ="_v1_"];
+nodo0_as ->nodo1_ida;nodo0_as ->nodo467_op;
+nodo467_op [ label ="'esta es la cadena numero 1'"];
+raiz ->nodo1_as,nodo2_as;nodo1_as [ label ="ASIGNACION"];
+nodo2_ida [ label ="_v2_"];
+nodo1_as ->nodo2_ida;nodo1_as ->nodo470_op;
+nodo470_op [ label ="'estas cadenas deben ser diferentes'"];
+nodo2_as [ label ="ASIGNACION"];
+nodo3_ida [ label ="_v3_"];
+nodo2_as ->nodo3_ida;nodo2_as ->nodo473_op;
+nodo473_op [ label ="'estas cadenas deben ser diferentes'"];
+raiz ->nodo3_as,nodo4_as,nodo5_as;nodo3_as [ label ="ASIGNACION"];
+nodo4_ida [ label ="_curso1_"];
+nodo3_as ->nodo4_ida;nodo3_as ->nodo476_op;
+nodo476_op [ label ="'Organizacion de lenguajes y compiladores 1'"];
+nodo4_as [ label ="ASIGNACION"];
+nodo5_ida [ label ="_curso2_"];
+nodo4_as ->nodo5_ida;nodo4_as ->nodo479_op;
+nodo479_op [ label ="'Organizacion de lenguajes y compiladores 1'"];
+nodo5_as [ label ="ASIGNACION"];
+nodo6_ida [ label ="_curso3_"];
+nodo5_as ->nodo6_ida;nodo5_as ->nodo482_op;
+nodo482_op [ label ="'Organizacion de lenguajes y compiladores 1'"];
+raiz ->nodo25_com;nodo25_com [ label ="Comentario "];
+nodo25_id_c [ label ="//31 Errores lexico
+"];
+nodo25_com ->nodo25_id_c;
 raiz ->nodo0_print;nodo0_print [ label ="IMPRIMIR "];
-nodo0_print ->nodo335_op;
-nodo335_op [ label ="_encabezado1_"];
+nodo0_print ->nodo485_op;
+nodo485_op [ label ="_operaciones1Basica_"];
 
 raiz ->nodo1_print;nodo1_print [ label ="IMPRIMIR "];
-nodo1_print ->nodo338_op;
-nodo338_op [ label ="_encabezado2_"];
+nodo1_print ->nodo488_op;
+nodo488_op [ label ="_operaciones1Basica2_"];
 
 raiz ->nodo2_print;nodo2_print [ label ="IMPRIMIR "];
-nodo2_print ->nodo341_op;
-nodo341_op [ label ="'...'"];
+nodo2_print ->nodo491_op;
+nodo491_op [ label ="_operaciones1Intermedia_"];
 
 raiz ->nodo3_print;nodo3_print [ label ="IMPRIMIR "];
-nodo3_print ->nodo344_op;
-nodo344_op [ label ="_anio1_"];
+nodo3_print ->nodo494_op;
+nodo494_op [ label ="_operaciones1Avanzadas1_"];
 
 raiz ->nodo4_print;nodo4_print [ label ="IMPRIMIR "];
-nodo4_print ->nodo347_op;
-nodo347_op [ label ="_anio2_"];
+nodo4_print ->nodo497_op;
+nodo497_op [ label ="_operaciones1Avanzadas2_"];
 
 raiz ->nodo5_print;nodo5_print [ label ="IMPRIMIR "];
-nodo5_print ->nodo350_op;
-nodo350_op [ label ="_anio3_"];
+nodo5_print ->nodo500_op;
+nodo500_op [ label ="_operaciones1Avanzadas3_"];
 
 raiz ->nodo6_print;nodo6_print [ label ="IMPRIMIR "];
-nodo6_print ->nodo353_op;
-nodo353_op [ label ="_anio4_"];
+nodo6_print ->nodo503_op;
+nodo503_op [ label ="_operaciones1Avanzadas4_"];
 
 raiz ->nodo7_print;nodo7_print [ label ="IMPRIMIR "];
-nodo7_print ->nodo356_op;
-nodo356_op [ label ="'.'"];
+nodo7_print ->nodo506_op;
+nodo506_op [ label ="_operaciones1Avanzadas5_"];
 
 raiz ->nodo8_print;nodo8_print [ label ="IMPRIMIR "];
-nodo8_print ->nodo358_op;
-nodo358_op [ label ="( )"];
-nodo358_op ->nodo360_op;
-nodo360_op [ label ="_v3_"];
+nodo8_print ->nodo509_op;
+nodo509_op [ label ="_operaciones1Avanzadas6_"];
 
+raiz ->nodo9_print;nodo9_print [ label ="IMPRIMIR "];
+nodo9_print ->nodo512_op;
+nodo512_op [ label ="_operaciones1Avanzadas7_"];
+
+raiz ->nodo10_print;nodo10_print [ label ="IMPRIMIR "];
+nodo10_print ->nodo515_op;
+nodo515_op [ label ="_operaciones1Avanzadas8_"];
+
+raiz ->nodo11_print;nodo11_print [ label ="IMPRIMIR "];
+nodo11_print ->nodo518_op;
+nodo518_op [ label ="_operacionRela1_"];
+
+raiz ->nodo12_print;nodo12_print [ label ="IMPRIMIR "];
+nodo12_print ->nodo521_op;
+nodo521_op [ label ="_operacionRela31_"];
+
+raiz ->nodo13_print;nodo13_print [ label ="IMPRIMIR "];
+nodo13_print ->nodo524_op;
+nodo524_op [ label ="_operacionRela32_"];
+
+raiz ->nodo14_print;nodo14_print [ label ="IMPRIMIR "];
+nodo14_print ->nodo527_op;
+nodo527_op [ label ="_operacionRela33_"];
+
+raiz ->nodo15_print;nodo15_print [ label ="IMPRIMIR "];
+nodo15_print ->nodo530_op;
+nodo530_op [ label ="_operacionRela4_"];
+
+raiz ->nodo16_print;nodo16_print [ label ="IMPRIMIR "];
+nodo16_print ->nodo533_op;
+nodo533_op [ label ="_operacionRela31_"];
+
+raiz ->nodo17_print;nodo17_print [ label ="IMPRIMIR "];
+nodo17_print ->nodo536_op;
+nodo536_op [ label ="_operacionRela5_"];
+
+raiz ->nodo18_print;nodo18_print [ label ="IMPRIMIR "];
+nodo18_print ->nodo539_op;
+nodo539_op [ label ="_operacionRela6_"];
+
+raiz ->nodo19_print;nodo19_print [ label ="IMPRIMIR "];
+nodo19_print ->nodo542_op;
+nodo542_op [ label ="_operacionRela7_"];
+
+raiz ->nodo20_print;nodo20_print [ label ="IMPRIMIR "];
+nodo20_print ->nodo545_op;
+nodo545_op [ label ="_operacionRela5_"];
+
+raiz ->nodo21_print;nodo21_print [ label ="IMPRIMIR "];
+nodo21_print ->nodo548_op;
+nodo548_op [ label ="_encabezado1_"];
+
+raiz ->nodo22_print;nodo22_print [ label ="IMPRIMIR "];
+nodo22_print ->nodo551_op;
+nodo551_op [ label ="_encabezado2_"];
+
+raiz ->nodo23_print;nodo23_print [ label ="IMPRIMIR "];
+nodo23_print ->nodo554_op;
+nodo554_op [ label ="'...'"];
+
+raiz ->nodo24_print;nodo24_print [ label ="IMPRIMIR "];
+nodo24_print ->nodo557_op;
+nodo557_op [ label ="_anio1_"];
+
+raiz ->nodo25_print;nodo25_print [ label ="IMPRIMIR "];
+nodo25_print ->nodo560_op;
+nodo560_op [ label ="_anio2_"];
+
+raiz ->nodo26_print;nodo26_print [ label ="IMPRIMIR "];
+nodo26_print ->nodo563_op;
+nodo563_op [ label ="_anio3_"];
+
+raiz ->nodo27_print;nodo27_print [ label ="IMPRIMIR "];
+nodo27_print ->nodo566_op;
+nodo566_op [ label ="_anio4_"];
+
+raiz ->nodo28_print;nodo28_print [ label ="IMPRIMIR "];
+nodo28_print ->nodo569_op;
+nodo569_op [ label ="'.'"];
+
+raiz ->nodo29_print;nodo29_print [ label ="IMPRIMIR "];
+nodo29_print ->nodo571_op;
+nodo571_op [ label ="( )"];
+nodo571_op ->nodo573_op;
+nodo573_op [ label ="_v3_"];
+
+
+raiz ->nodo30_print;nodo30_print [ label ="IMPRIMIR "];
+nodo30_print ->nodo576_op;
+nodo576_op [ label ="_name1_"];
+
+raiz ->nodo31_print;nodo31_print [ label ="IMPRIMIR "];
+nodo31_print ->nodo579_op;
+nodo579_op [ label ="_name2_"];
+
+raiz ->nodo32_print;nodo32_print [ label ="IMPRIMIR "];
+nodo32_print ->nodo582_op;
+nodo582_op [ label ="_name3_"];
+
+raiz ->nodo33_print;nodo33_print [ label ="IMPRIMIR "];
+nodo33_print ->nodo585_op;
+nodo585_op [ label ="_name4_"];
+
+raiz ->nodo34_print;nodo34_print [ label ="IMPRIMIR "];
+nodo34_print ->nodo588_op;
+nodo588_op [ label ="_name5_"];
+
+raiz ->nodo35_print;nodo35_print [ label ="IMPRIMIR "];
+nodo35_print ->nodo591_op;
+nodo591_op [ label ="_name6_"];
+
+raiz ->nodo36_print;nodo36_print [ label ="IMPRIMIR "];
+nodo36_print ->nodo594_op;
+nodo594_op [ label ="_name7_"];
+
+raiz ->nodo37_print;nodo37_print [ label ="IMPRIMIR "];
+nodo37_print ->nodo597_op;
+nodo597_op [ label ="_name8_"];
+
+raiz ->nodo38_print;nodo38_print [ label ="IMPRIMIR "];
+nodo38_print ->nodo600_op;
+nodo600_op [ label ="'.'"];
+
+raiz ->nodo39_print;nodo39_print [ label ="IMPRIMIR "];
+nodo39_print ->nodo603_op;
+nodo603_op [ label ="_variable1_"];
+
+raiz ->nodo40_print;nodo40_print [ label ="IMPRIMIR "];
+nodo40_print ->nodo606_op;
+nodo606_op [ label ="_variable2_"];
+
+raiz ->nodo41_print;nodo41_print [ label ="IMPRIMIR "];
+nodo41_print ->nodo609_op;
+nodo609_op [ label ="_v1_"];
+
+raiz ->nodo42_print;nodo42_print [ label ="IMPRIMIR "];
+nodo42_print ->nodo612_op;
+nodo612_op [ label ="_v2_"];
+
+raiz ->nodo43_print;nodo43_print [ label ="IMPRIMIR "];
+nodo43_print ->nodo615_op;
+nodo615_op [ label ="_v3_"];
+
+raiz ->nodo44_print;nodo44_print [ label ="IMPRIMIR "];
+nodo44_print ->nodo618_op;
+nodo618_op [ label ="_curso1_"];
+
+raiz ->nodo45_print;nodo45_print [ label ="IMPRIMIR "];
+nodo45_print ->nodo621_op;
+nodo621_op [ label ="_curso2_"];
+
+raiz ->nodo46_print;nodo46_print [ label ="IMPRIMIR "];
+nodo46_print ->nodo624_op;
+nodo624_op [ label ="_curso3_"];
+
+raiz ->nodo47_print;nodo47_print [ label ="IMPRIMIR "];
+nodo47_print ->nodo627_op;
+nodo627_op [ label ="_pi1_"];
+
+raiz ->nodo48_print;nodo48_print [ label ="IMPRIMIR "];
+nodo48_print ->nodo630_op;
+nodo630_op [ label ="_pi2_"];
+
+raiz ->nodo49_print;nodo49_print [ label ="IMPRIMIR "];
+nodo49_print ->nodo633_op;
+nodo633_op [ label ="_pi3_"];
+
+raiz ->nodo50_print;nodo50_print [ label ="IMPRIMIR "];
+nodo50_print ->nodo636_op;
+nodo636_op [ label ="_pi4_"];
+
+raiz ->nodo51_print;nodo51_print [ label ="IMPRIMIR "];
+nodo51_print ->nodo639_op;
+nodo639_op [ label ="_anio1_"];
+
+raiz ->nodo52_print;nodo52_print [ label ="IMPRIMIR "];
+nodo52_print ->nodo642_op;
+nodo642_op [ label ="_anio2_"];
+
+raiz ->nodo53_print;nodo53_print [ label ="IMPRIMIR "];
+nodo53_print ->nodo645_op;
+nodo645_op [ label ="_anio3_"];
+
+raiz ->nodo54_print;nodo54_print [ label ="IMPRIMIR "];
+nodo54_print ->nodo648_op;
+nodo648_op [ label ="_anio4_"];
+
+raiz ->nodo55_print;nodo55_print [ label ="IMPRIMIR "];
+nodo55_print ->nodo651_op;
+nodo651_op [ label ="_variableAntesNeg_"];
+
+raiz ->nodo56_print;nodo56_print [ label ="IMPRIMIR "];
+nodo56_print ->nodo654_op;
+nodo654_op [ label ="_flag1_"];
+
+raiz ->nodo57_print;nodo57_print [ label ="IMPRIMIR "];
+nodo57_print ->nodo657_op;
+nodo657_op [ label ="_flag2_"];
 
 raiz ->nodo0_si;nodo0_si [ label ="SI "];
-nodo0_si ->nodo362_op;
-nodo362_op [ label ="es_diferente"];
-nodo362_op ->nodo364_op;
-nodo364_op [ label ="_v1_"];
+nodo0_si ->nodo659_op;
+nodo659_op [ label ="es_diferente"];
+nodo659_op ->nodo661_op;
+nodo661_op [ label ="verdadero"];
 
-nodo362_op ->nodo367_op;
-nodo367_op [ label ="_v2_"];
+nodo659_op ->nodo664_op;
+nodo664_op [ label ="verdadero"];
 
 nodo0_instru_si [ label ="INSTRUCCIONES"];
-nodo0_si ->nodo0_instru_si;nodo0_instru_si ->nodo9_print;nodo9_print [ label ="IMPRIMIR "];
-nodo9_print ->nodo370_op;
-nodo370_op [ label ="'Al parecer no funciona la asignacion'"];
+nodo0_si ->nodo0_instru_si;nodo0_instru_si ->nodo58_print;nodo58_print [ label ="IMPRIMIR "];
+nodo58_print ->nodo667_op;
+nodo667_op [ label ="'El if esta correcto'"];
 
-nodo0_instru_si ->nodo0_mi;nodo0_mi [ label ="MIENTRAS "];
-nodo0_mi ->nodo372_op;
-nodo372_op [ label ="not"];
-nodo372_op ->nodo373_op;
-nodo373_op [ label ="( )"];
-nodo373_op ->nodo374_op;
-nodo374_op [ label ="+"];
-nodo374_op ->nodo375_op;
-nodo375_op [ label ="*"];
-nodo375_op ->nodo376_op;
-nodo376_op [ label ="mayor_o_igual"];
-nodo376_op ->nodo378_op;
-nodo378_op [ label ="_variable1_"];
+nodo0_instru_si ->nodo59_print;nodo59_print [ label ="IMPRIMIR "];
+nodo59_print ->nodo670_op;
+nodo670_op [ label ="'no tiene que imprimir este mensaje, error en instruccion if'"];
 
-nodo376_op ->nodo381_op;
-nodo381_op [ label ="5"];
+raiz ->nodo4_si;nodo4_si [ label ="SI "];
+nodo4_si ->nodo672_op;
+nodo672_op [ label ="es_diferente"];
+nodo672_op ->nodo674_op;
+nodo674_op [ label ="_v1_"];
+
+nodo672_op ->nodo677_op;
+nodo677_op [ label ="_v2_"];
+
+nodo4_instru_si [ label ="INSTRUCCIONES"];
+nodo4_si ->nodo4_instru_si;nodo4_instru_si ->nodo60_print;nodo60_print [ label ="IMPRIMIR "];
+nodo60_print ->nodo680_op;
+nodo680_op [ label ="'Al parecer no funciona la asignacion, restame puntos en el if'"];
+
+nodo4_instru_si ->nodo0_mi;nodo0_mi [ label ="MIENTRAS "];
+nodo0_mi ->nodo682_op;
+nodo682_op [ label ="not"];
+nodo682_op ->nodo683_op;
+nodo683_op [ label ="( )"];
+nodo683_op ->nodo684_op;
+nodo684_op [ label ="+"];
+nodo684_op ->nodo685_op;
+nodo685_op [ label ="*"];
+nodo685_op ->nodo686_op;
+nodo686_op [ label ="mayor_o_igual"];
+nodo686_op ->nodo688_op;
+nodo688_op [ label ="_variable1_"];
+
+nodo686_op ->nodo691_op;
+nodo691_op [ label ="5"];
 
 
-nodo375_op ->nodo384_op;
-nodo384_op [ label ="5"];
+nodo685_op ->nodo694_op;
+nodo694_op [ label ="5"];
 
 
-nodo374_op ->nodo386_op;
-nodo386_op [ label ="/"];
-nodo386_op ->nodo388_op;
-nodo388_op [ label ="8"];
+nodo684_op ->nodo696_op;
+nodo696_op [ label ="/"];
+nodo696_op ->nodo698_op;
+nodo698_op [ label ="8"];
 
-nodo386_op ->nodo391_op;
-nodo391_op [ label ="2"];
+nodo696_op ->nodo701_op;
+nodo701_op [ label ="2"];
 
 
 
 
 nodo0_instru [ label ="INSTRUCCIONES"];
-nodo0_mi ->nodo0_instru;nodo0_instru ->nodo10_print;nodo10_print [ label ="IMPRIMIR "];
-nodo10_print ->nodo394_op;
-nodo394_op [ label ="_variable1_"];
+nodo0_mi ->nodo0_instru;nodo0_instru ->nodo61_print;nodo61_print [ label ="IMPRIMIR "];
+nodo61_print ->nodo704_op;
+nodo704_op [ label ="_variable1_"];
 
 nodo0_instru ->nodo6_as;nodo6_as [ label ="ASIGNACION"];
 nodo7_ida [ label ="_variable1_"];
-nodo6_as ->nodo7_ida;nodo6_as ->nodo396_op;
-nodo396_op [ label ="+"];
-nodo396_op ->nodo398_op;
-nodo398_op [ label ="_variable1_"];
+nodo6_as ->nodo7_ida;nodo6_as ->nodo706_op;
+nodo706_op [ label ="+"];
+nodo706_op ->nodo708_op;
+nodo708_op [ label ="_variable1_"];
 
-nodo396_op ->nodo401_op;
-nodo401_op [ label ="1"];
-
-raiz ->nodo3_si;nodo3_si [ label ="SI "];
-nodo3_si ->nodo403_op;
-nodo403_op [ label ="es_diferente"];
-nodo403_op ->nodo405_op;
-nodo405_op [ label ="_v1_"];
-
-nodo403_op ->nodo408_op;
-nodo408_op [ label ="_v2_"];
-
-nodo3_instru_si [ label ="INSTRUCCIONES"];
-nodo3_si ->nodo3_instru_si;nodo3_instru_si ->nodo11_print;nodo11_print [ label ="IMPRIMIR "];
-nodo11_print ->nodo411_op;
-nodo411_op [ label ="'no tiene que imprimir este mensaje'"];
-
-nodo3_instru_si ->nodo12_print;nodo12_print [ label ="IMPRIMIR "];
-nodo12_print ->nodo414_op;
-nodo414_op [ label ="'este print es un ejemplo'"];
+nodo706_op ->nodo711_op;
+nodo711_op [ label ="1"];
 
 raiz ->nodo7_si;nodo7_si [ label ="SI "];
-nodo7_si ->nodo416_op;
-nodo416_op [ label ="es_diferente"];
-nodo416_op ->nodo418_op;
-nodo418_op [ label ="_v1_"];
+nodo7_si ->nodo713_op;
+nodo713_op [ label ="es_diferente"];
+nodo713_op ->nodo715_op;
+nodo715_op [ label ="_v1_"];
 
-nodo416_op ->nodo421_op;
-nodo421_op [ label ="_v2_"];
+nodo713_op ->nodo718_op;
+nodo718_op [ label ="_v2_"];
 
 nodo7_instru_si [ label ="INSTRUCCIONES"];
-nodo7_si ->nodo7_instru_si;nodo7_instru_si ->nodo13_print;nodo13_print [ label ="IMPRIMIR "];
-nodo13_print ->nodo424_op;
-nodo424_op [ label ="'no tiene que imprimir este mensaj_______________e'"];
+nodo7_si ->nodo7_instru_si;nodo7_instru_si ->nodo62_print;nodo62_print [ label ="IMPRIMIR "];
+nodo62_print ->nodo721_op;
+nodo721_op [ label ="'no tiene que imprimir este mensaje, error en instruccion if'"];
 
-nodo7_instru_si ->nodo0_osi;
-nodo0_osi [ label ="O_SI "];
-nodo0_osi ->nodo426_op;
-nodo426_op [ label ="es_diferente"];
-nodo426_op ->nodo428_op;
-nodo428_op [ label ="_v1_"];
+nodo7_instru_si ->nodo63_print;nodo63_print [ label ="IMPRIMIR "];
+nodo63_print ->nodo724_op;
+nodo724_op [ label ="'INTRUCCION IF con Else esta correcta'"];
 
-nodo426_op ->nodo431_op;
-nodo431_op [ label ="13"];
+raiz ->nodo11_si;nodo11_si [ label ="SI "];
+nodo11_si ->nodo726_op;
+nodo726_op [ label ="es_diferente"];
+nodo726_op ->nodo728_op;
+nodo728_op [ label ="_v1_"];
 
-nodo0_instru_osi [ label ="INSTRUCCIONES"];
-nodo0_osi ->nodo0_instru_osi;nodo0_instru_osi ->nodo14_print;nodo14_print [ label ="IMPRIMIR "];
-nodo14_print ->nodo434_op;
-nodo434_op [ label ="'mensaje de prueba'"];
+nodo726_op ->nodo731_op;
+nodo731_op [ label ="_v2_"];
 
-nodo7_instru_si ->nodo1_osi;
-nodo1_osi [ label ="O_SI "];
-nodo1_osi ->nodo436_op;
-nodo436_op [ label ="es_diferente"];
-nodo436_op ->nodo438_op;
-nodo438_op [ label ="_v1_"];
+nodo11_instru_si [ label ="INSTRUCCIONES"];
+nodo11_si ->nodo11_instru_si;nodo11_instru_si ->nodo64_print;nodo64_print [ label ="IMPRIMIR "];
+nodo64_print ->nodo734_op;
+nodo734_op [ label ="'no tiene que imprimir este mensaje,error en l aintruccion if'"];
 
-nodo436_op ->nodo441_op;
-nodo441_op [ label ="14"];
+nodo11_instru_si ->nodo65_print;nodo65_print [ label ="IMPRIMIR "];
+nodo65_print ->nodo737_op;
+nodo737_op [ label ="'Instruccion if con else if esta correcta'"];
 
-nodo1_instru_osi [ label ="INSTRUCCIONES"];
-nodo1_osi ->nodo1_instru_osi;nodo1_instru_osi ->nodo15_print;nodo15_print [ label ="IMPRIMIR "];
-nodo15_print ->nodo444_op;
-nodo444_op [ label ="'mensaje de prueba'"];
+raiz ->nodo50_de;nodo50_de [ label ="DECLARACION Boolean"];
+nodo51_id [ label ="_varB_"];
+nodo50_de ->nodo51_id;nodo50_de ->nodo740_op;
+nodo740_op [ label ="falso"];
+raiz ->nodo15_si;nodo15_si [ label ="SI "];
+nodo15_si ->nodo743_op;
+nodo743_op [ label ="_varB_"];
+nodo15_instru_si [ label ="INSTRUCCIONES"];
+nodo15_si ->nodo15_instru_si;nodo15_instru_si ->nodo66_print;nodo66_print [ label ="IMPRIMIR "];
+nodo66_print ->nodo746_op;
+nodo746_op [ label ="'Estas definiendo mal los valores'"];
 
-nodo7_instru_si ->nodo7_els;nodo7_els [ label ="de_lo_contrario "];
-nodo7_instru_els [ label ="INSTRUCCIONES"];
-nodo7_els ->nodo7_instru_els;nodo7_instru_els ->nodo16_print;nodo16_print [ label ="IMPRIMIR "];
-nodo16_print ->nodo447_op;
-nodo447_op [ label ="'este print es un ejemplo'"];
+nodo15_instru_si ->nodo51_de;nodo51_de [ label ="DECLARACION Numero"];
+nodo52_id [ label ="_varaux_"];
+nodo51_de ->nodo52_id;nodo51_de ->nodo748_op;
+nodo748_op [ label ="mod"];
+nodo748_op ->nodo750_op;
+nodo750_op [ label ="_variable1_"];
 
-raiz ->nodo43_de;nodo43_de [ label ="DECLARACION Boolean"];
-nodo44_id [ label ="_varB_"];
-nodo43_de ->nodo44_id;nodo43_de ->nodo450_op;
-nodo450_op [ label ="falso"];
-raiz ->nodo17_print;nodo17_print [ label ="IMPRIMIR "];
-nodo17_print ->nodo453_op;
-nodo453_op [ label ="'Estas definiendo bien los valores'"];
+nodo748_op ->nodo753_op;
+nodo753_op [ label ="2"];
 
-raiz ->nodo0_seg;nodo0_seg [ label ="SEGUN "];
-nodo0_seg ->nodo456_op;
-nodo456_op [ label ="_varaux_"];
+nodo15_instru_si ->nodo0_seg;nodo0_seg [ label ="SEGUN "];
+nodo0_seg ->nodo756_op;
+nodo756_op [ label ="_varaux_"];
 nodo0_seg ->nodo0_cas;
 nodo0_cas [ label ="CASO "];
-nodo0_cas ->nodo459_op;
-nodo459_op [ label ="0"];
-nodo0_cas ->nodo18_print;nodo18_print [ label ="IMPRIMIR "];
-nodo18_print ->nodo462_op;
-nodo462_op [ label ="'el valor es mayor a 2'"];
+nodo0_cas ->nodo759_op;
+nodo759_op [ label ="0"];
+nodo0_cas ->nodo67_print;nodo67_print [ label ="IMPRIMIR "];
+nodo67_print ->nodo762_op;
+nodo762_op [ label ="'el valor es mayor a 0 y menos a 2'"];
 
-raiz ->nodo3_com_m;nodo3_com_m [ label ="Comentario "];
-nodo3_id_c_m [ label ="/*Ahora empezamos con las funciones y procedimientos*/"];
-nodo3_com_m ->nodo3_id_c_m;
+nodo0_seg ->nodo1_cas;
+nodo1_cas [ label ="CASO "];
+nodo1_cas ->nodo765_op;
+nodo765_op [ label ="2"];
+nodo1_cas ->nodo68_print;nodo68_print [ label ="IMPRIMIR "];
+nodo68_print ->nodo768_op;
+nodo768_op [ label ="'el valor es mayor a 2'"];
+
+nodo15_instru_si ->nodo69_print;nodo69_print [ label ="IMPRIMIR "];
+nodo69_print ->nodo771_op;
+nodo771_op [ label ="'Estas definiendo bien los valores c:'"];
+
+raiz ->nodo4_com_m;nodo4_com_m [ label ="Comentario "];
+nodo4_id_c_m [ label ="/*Ahora empezamos con las funciones y procedimientos*/"];
+nodo4_com_m ->nodo4_id_c_m;
 raiz ->nodo0_met;nodo0_met [ label ="METODO "];
 nodo1_id_met [ label ="_potenciaManual_"];
 nodo0_met ->nodo1_id_met;nodo0_param_m [ label ="PARAMETROS"];
@@ -763,51 +1281,51 @@ nodo0_para_tip_d [ label ="Numero"];
 nodo0_param_m ->nodo1_para;
 nodo1_para [ label ="PARAMETRO"];
 nodo1_para ->nodo1_para_id
-nodo1_para_id [ label ="_exponenete_"];
+nodo1_para_id [ label ="_exponente_"];
 nodo1_para ->nodo1_para_tip_d
 nodo1_para_tip_d [ label ="Numero"];
 nodo0_instru_met [ label ="INSTRUCCIONES"];
-nodo0_met ->nodo0_instru_met;nodo0_instru_met ->nodo44_de;nodo44_de [ label ="DECLARACION Numero"];
-nodo45_id [ label ="_i_"];
-nodo44_de ->nodo45_id;nodo44_de ->nodo465_op;
-nodo465_op [ label ="0"];
-nodo0_instru_met ->nodo45_de;nodo45_de [ label ="DECLARACION Numero"];
-nodo46_id [ label ="_acumulado_"];
-nodo45_de ->nodo46_id;nodo45_de ->nodo468_op;
-nodo468_op [ label ="0"];
+nodo0_met ->nodo0_instru_met;nodo0_instru_met ->nodo52_de;nodo52_de [ label ="DECLARACION Numero"];
+nodo53_id [ label ="_i_"];
+nodo52_de ->nodo53_id;nodo52_de ->nodo774_op;
+nodo774_op [ label ="0"];
+nodo0_instru_met ->nodo53_de;nodo53_de [ label ="DECLARACION Numero"];
+nodo54_id [ label ="_acumulado_"];
+nodo53_de ->nodo54_id;nodo53_de ->nodo777_op;
+nodo777_op [ label ="0"];
 nodo0_instru_met ->nodo0_for;
 nodo0_for [ label ="PARA "];
 nodo0_cfor [ label ="Para "];
 nodo0_for ->nodo0_cfor;nodo0_id_for [ label ="_i_"];
-nodo0_cfor ->nodo0_id_for;nodo0_cfor ->nodo471_op;
-nodo471_op [ label ="0"];
-nodo0_cfor ->nodo473_op;
-nodo473_op [ label ="-"];
-nodo473_op ->nodo475_op;
-nodo475_op [ label ="_exponente_"];
+nodo0_cfor ->nodo0_id_for;nodo0_cfor ->nodo780_op;
+nodo780_op [ label ="0"];
+nodo0_cfor ->nodo782_op;
+nodo782_op [ label ="-"];
+nodo782_op ->nodo784_op;
+nodo784_op [ label ="_exponente_"];
 
-nodo473_op ->nodo478_op;
-nodo478_op [ label ="1"];
+nodo782_op ->nodo787_op;
+nodo787_op [ label ="1"];
 
 nodo0_instru_for [ label ="INSTRUCCIONES"];
 nodo0_for ->nodo0_instru_for;nodo0_inc_for [ label ="1"];
 nodo0_cfor ->nodo0_inc_for;nodo0_instru_for ->nodo7_as;nodo7_as [ label ="ASIGNACION"];
 nodo8_ida [ label ="_acumulado_"];
-nodo7_as ->nodo8_ida;nodo7_as ->nodo480_op;
-nodo480_op [ label ="+"];
-nodo480_op ->nodo482_op;
-nodo482_op [ label ="_acumulado_"];
+nodo7_as ->nodo8_ida;nodo7_as ->nodo789_op;
+nodo789_op [ label ="+"];
+nodo789_op ->nodo791_op;
+nodo791_op [ label ="_acumulado_"];
 
-nodo480_op ->nodo485_op;
-nodo485_op [ label ="_acumulado_"];
+nodo789_op ->nodo794_op;
+nodo794_op [ label ="_acumulado_"];
 
-nodo0_instru_met ->nodo19_print;nodo19_print [ label ="IMPRIMIR "];
-nodo19_print ->nodo488_op;
-nodo488_op [ label ="_acumulado_"];
+nodo0_instru_met ->nodo70_print;nodo70_print [ label ="IMPRIMIR "];
+nodo70_print ->nodo797_op;
+nodo797_op [ label ="' Esta es la potencia Manual'"];
 
-nodo0_instru_met ->nodo20_print;nodo20_print [ label ="IMPRIMIR "];
-nodo20_print ->nodo491_op;
-nodo491_op [ label ="' Esta es la potencia Manual'"];
+nodo0_instru_met ->nodo71_print;nodo71_print [ label ="IMPRIMIR "];
+nodo71_print ->nodo800_op;
+nodo800_op [ label ="_acumulado_"];
 
 raiz ->nodo0_fun;nodo0_fun [ label ="FUNCION "];
 nodo1_id_fun [ label ="_potenciaFuncion_"];
@@ -825,67 +1343,162 @@ nodo3_para_id [ label ="_exponente_"];
 nodo3_para ->nodo3_para_tip_d
 nodo3_para_tip_d [ label ="Numero"];
 nodo0_instru_fun [ label ="INSTRUCCIONES"];
-nodo0_fun ->nodo0_instru_fun;nodo0_instru_fun ->nodo46_de;nodo46_de [ label ="DECLARACION Numero"];
-nodo47_id [ label ="_potencia_"];
-nodo46_de ->nodo47_id;nodo46_de ->nodo493_op;
-nodo493_op [ label ="potencia"];
-nodo493_op ->nodo495_op;
-nodo495_op [ label ="_base_"];
+nodo0_fun ->nodo0_instru_fun;nodo0_instru_fun ->nodo54_de;nodo54_de [ label ="DECLARACION Numero"];
+nodo55_id [ label ="_potencia_"];
+nodo54_de ->nodo55_id;nodo54_de ->nodo802_op;
+nodo802_op [ label ="potencia"];
+nodo802_op ->nodo804_op;
+nodo804_op [ label ="_base_"];
 
-nodo493_op ->nodo497_op;
-nodo497_op [ label ="( )"];
-nodo497_op ->nodo499_op;
-nodo499_op [ label ="_exponente_"];
+nodo802_op ->nodo806_op;
+nodo806_op [ label ="( )"];
+nodo806_op ->nodo808_op;
+nodo808_op [ label ="_exponente_"];
 
+
+nodo0_instru_fun ->nodo72_print;nodo72_print [ label ="IMPRIMIR "];
+nodo72_print ->nodo811_op;
+nodo811_op [ label ="' Esta es la potencia Manual pero con una funcion'"];
+
+nodo0_instru_fun ->nodo73_print;nodo73_print [ label ="IMPRIMIR "];
+nodo73_print ->nodo814_op;
+nodo814_op [ label ="_potencia_"];
 
 raiz ->nodo2_met;nodo2_met [ label ="METODO "];
 nodo3_id_met [ label ="_metodo_"];
 nodo2_met ->nodo3_id_met;nodo2_param_m [ label ="PARAMETROS"];
 nodo2_met ->nodo2_param_m;nodo2_instru_met [ label ="INSTRUCCIONES"];
-nodo2_met ->nodo2_instru_met;nodo2_instru_met ->nodo21_print;nodo21_print [ label ="IMPRIMIR "];
-nodo21_print ->nodo502_op;
-nodo502_op [ label ="'estamos entrando al metodo 1'"];
+nodo2_met ->nodo2_instru_met;nodo2_instru_met ->nodo74_print;nodo74_print [ label ="IMPRIMIR "];
+nodo74_print ->nodo817_op;
+nodo817_op [ label ="'estamos entrando al metodo 1'"];
 
 nodo2_instru_met ->nodo0_eje;nodo0_eje [ label ="Ejecutar "];
 nodo1_id_ej [ label ="_potenciaManual_"];
 nodo0_eje ->nodo1_id_ej;nodo0_param_ej [ label ="PARAMETROS"];
 nodo0_eje ->nodo0_param_ej;nodo0_param_ej ->nodo0_par;
 nodo0_par [ label ="PARAMETRO"];
-nodo0_par ->nodo504_op;
-nodo504_op [ label ="+"];
-nodo504_op ->nodo505_op;
-nodo505_op [ label ="*"];
-nodo505_op ->nodo507_op;
-nodo507_op [ label ="3"];
+nodo0_par ->nodo819_op;
+nodo819_op [ label ="+"];
+nodo819_op ->nodo820_op;
+nodo820_op [ label ="*"];
+nodo820_op ->nodo822_op;
+nodo822_op [ label ="3"];
 
-nodo505_op ->nodo510_op;
-nodo510_op [ label ="1"];
+nodo820_op ->nodo825_op;
+nodo825_op [ label ="1"];
 
 
-nodo504_op ->nodo512_op;
-nodo512_op [ label ="/"];
-nodo512_op ->nodo514_op;
-nodo514_op [ label ="4"];
+nodo819_op ->nodo827_op;
+nodo827_op [ label ="/"];
+nodo827_op ->nodo829_op;
+nodo829_op [ label ="4"];
 
-nodo512_op ->nodo517_op;
-nodo517_op [ label ="2"];
+nodo827_op ->nodo832_op;
+nodo832_op [ label ="2"];
 
 
 
 nodo0_param_ej ->nodo1_par;
 nodo1_par [ label ="PARAMETRO"];
-nodo1_par ->nodo519_op;
-nodo519_op [ label ="+"];
-nodo519_op ->nodo521_op;
-nodo521_op [ label ="3"];
+nodo1_par ->nodo834_op;
+nodo834_op [ label ="+"];
+nodo834_op ->nodo836_op;
+nodo836_op [ label ="3"];
 
-nodo519_op ->nodo524_op;
-nodo524_op [ label ="2"];
+nodo834_op ->nodo839_op;
+nodo839_op [ label ="2"];
 
 
-raiz ->nodo2_eje;nodo2_eje [ label ="Ejecutar "];
-nodo3_id_ej [ label ="_metodo_"];
+nodo2_instru_met ->nodo75_print;nodo75_print [ label ="IMPRIMIR "];
+nodo75_print ->nodo2_eje;nodo2_eje [ label ="Ejecutar "];
+nodo3_id_ej [ label ="_potenciaFuncion_"];
 nodo2_eje ->nodo3_id_ej;nodo2_param_ej [ label ="PARAMETROS"];
-nodo2_eje ->nodo2_param_ej;
+nodo2_eje ->nodo2_param_ej;nodo2_param_ej ->nodo2_par;
+nodo2_par [ label ="PARAMETRO"];
+nodo2_par ->nodo842_op;
+nodo842_op [ label ="+"];
+nodo842_op ->nodo843_op;
+nodo843_op [ label ="*"];
+nodo843_op ->nodo845_op;
+nodo845_op [ label ="3"];
+
+nodo843_op ->nodo848_op;
+nodo848_op [ label ="1"];
+
+
+nodo842_op ->nodo850_op;
+nodo850_op [ label ="/"];
+nodo850_op ->nodo852_op;
+nodo852_op [ label ="4"];
+
+nodo850_op ->nodo855_op;
+nodo855_op [ label ="2"];
+
+
+
+nodo2_param_ej ->nodo3_par;
+nodo3_par [ label ="PARAMETRO"];
+nodo3_par ->nodo857_op;
+nodo857_op [ label ="+"];
+nodo857_op ->nodo859_op;
+nodo859_op [ label ="3"];
+
+nodo857_op ->nodo862_op;
+nodo862_op [ label ="2"];
+
+
+
+nodo2_instru_met ->nodo26_com;nodo26_com [ label ="Comentario "];
+nodo26_id_c [ label ="//3,125
+"];
+nodo26_com ->nodo26_id_c;
+nodo2_instru_met ->nodo76_print;nodo76_print [ label ="IMPRIMIR "];
+nodo76_print ->nodo865_op;
+nodo865_op [ label ="' Esta es la potencia Funcion'"];
+
+nodo2_instru_met ->nodo77_print;nodo77_print [ label ="IMPRIMIR "];
+nodo77_print ->nodo868_op;
+nodo868_op [ label ="'FIN del metodo1'"];
+
+raiz ->nodo2_fun;nodo2_fun [ label ="FUNCION "];
+nodo3_id_fun [ label ="_fibonacci_"];
+nodo2_fun ->nodo3_id_fun;nodo2_param [ label ="PARAMETROS"];
+nodo2_fun ->nodo2_param;nodo2_param ->nodo4_para;
+nodo4_para [ label ="PARAMETRO"];
+nodo4_para ->nodo4_para_id
+nodo4_para_id [ label ="_n_"];
+nodo4_para ->nodo4_para_tip_d
+nodo4_para_tip_d [ label ="Numero"];
+nodo2_instru_fun [ label ="INSTRUCCIONES"];
+nodo2_fun ->nodo2_instru_fun;nodo2_instru_fun ->nodo55_de;nodo55_de [ label ="DECLARACION numero"];
+nodo56_id [ label ="_variablemia_"];
+nodo55_de ->nodo56_id;nodo55_de ->nodo871_op;
+nodo871_op [ label ="0"];
+nodo2_instru_fun ->nodo21_si;nodo21_si [ label ="SI "];
+nodo21_si ->nodo873_op;
+nodo873_op [ label ="( )"];
+nodo873_op ->nodo874_op;
+nodo874_op [ label ="mayor"];
+nodo874_op ->nodo876_op;
+nodo876_op [ label ="_n_"];
+
+nodo874_op ->nodo879_op;
+nodo879_op [ label ="1"];
+
+
+nodo21_instru_si [ label ="INSTRUCCIONES"];
+nodo21_si ->nodo21_instru_si;nodo21_instru_si ->nodo78_print;nodo78_print [ label ="IMPRIMIR "];
+nodo78_print ->nodo882_op;
+nodo882_op [ label ="'Debes ingresar un valor mayor o igual a 1'"];
+
+raiz ->nodo79_print;nodo79_print [ label ="IMPRIMIR "];
+nodo79_print ->nodo885_op;
+nodo885_op [ label ="'El fibonacci de 5 es '"];
+
+raiz ->nodo80_print;nodo80_print [ label ="IMPRIMIR "];
+nodo80_print ->nodo888_op;
+nodo888_op [ label ="'.'"];
+
+
 
 }
