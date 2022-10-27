@@ -1,0 +1,13 @@
+//import { Type } from "../Abstract/Retorno";
+
+export class Simbolo {
+  
+    constructor(
+        public valor: any,
+        public identificador: string,
+        public tipo: Tipe,
+        public edit: boolean
+    ) {
+
+    }
+}
