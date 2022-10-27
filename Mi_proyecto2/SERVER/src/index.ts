@@ -40,13 +40,6 @@ class Server {
                 console.log(error);
                 
             }
-
-
-
-
-
-
-
             
         });
     }
