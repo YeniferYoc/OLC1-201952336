@@ -1,0 +1,138 @@
+%{
+
+
+}%
+
+
+
+%lex 
+
+
+%options case-insensitive
+
+decimal {numero}"."{numero}
+numero  [0-9]+
+letra [a-zA-ZñÑáéíóú]+ 
+COMENTUNILINEA      =   ("//".*\r\n)|("//".*\n)|("//".*\r)
+COMENTMULTILINEA    =   "/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"
+espacio=[ \r\t\n]+
+comentario_linea = ("//".*)
+cad = ("\""[^"\""]+"\"")
+asc_ = "\'\$""\{"[0-9]+"\}\'"|'{L}'
+%s  string 
+%%
+
+<INITIAL>["]   {this.begin('string');/*console.log("+entre en el estado string");*/ tmp="";}
+
+<string>[^"\\]      { /*console.log("dentro del estado string: "+yytext);*/  tmp= tmp+yytext;   this.begin('string'); }
+<string>[\\][n]     { tmp= tmp+yytext;   this.begin('string'); }
+<string>[\\][t]     { tmp= tmp+yytext;   this.begin('string'); }
+<string>[\\][r]     { tmp= tmp+yytext;   this.begin('string'); }
+<string>[\\]["]     { tmp= tmp+yytext;   this.begin('string'); }
+<string>[\\][\\]    { tmp= tmp+yytext;   this.begin('string'); }
+<string>[\"]        {
+                    //console.log("-saliendo del estado string->" +tmp);
+                    this.begin('INITIAL');
+                    yytext= tmp;
+                    return 'STRING'
+                    }
+
+
+
+
+\s+                   /* skip whitespace */
+"//".*                              // comentario simple línea
+[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/] // comentario multiple líneas
+
+//tipos de datos 
+"int"              return 'int'
+"double"              return 'double'
+"boolean"              return 'boolean'
+"char"              return 'char'
+"string"              return 'string'
+"true"              return 'true'
+"false"              return 'false'
+
+//signos de escape
+"\n"              return 'salto de linea'
+"\\"              return 'doble_b'
+"\""              return 'com_barra'
+"\t"              return 'tab'
+"\'"              return 'simple_barra'
+
+//aritmeticos
+"+"              return 'suma'
+"++"              return 'incre'
+"-"              return 'resta'
+"--"              return 'decre'
+"*"              return 'mult'
+"/"              return 'div'
+"^"              return 'pot'
+"%"              return 'mod'
+
+//relacionales
+"="             return 'igual'
+">"             return 'mayor'
+"<"             return 'menor'
+">="             return 'mayor_igual'
+"<="             return 'menor_igual'
+"=="             return 'igual_igual'
+"!="             return 'no_igual'
+"?"             return 'interrogacion_cierra'
+
+//logicos
+"||"             return 'or'
+"&&"             return 'and'
+"!"             return 'not'
+
+//agrupacion
+";"             return 'punto_c'
+":"             return 'dos_puntos'
+"{"             return 'llave_abre'
+"}"             return 'llave_cierra'
+"("             return 'par_abre'
+")"             return 'par_cierra'
+"["             return 'cor_abre'
+"]"             return 'cor_cierra'
+
+([a-zA-Z_])[a-zA-Z0-9_ñÑ]*	return 'identificador';
+
+//palabras reservadas
+"if"          return 'if'
+"else"          return 'else'
+"elif"          return 'elif'
+"print"          return 'imprimir'
+"println"          return 'imprimir_ln'
+"switch"          return 'switch'
+"case"          return 'case'
+"break"          return 'break'
+"while"          return 'while'
+"for"          return 'for'
+"do"          return 'do'
+"until"          return 'until'
+"return"          return 'retorno'
+"tolower"             return 'minuscula'
+"toupper"             return 'mayuscula'
+"round"             return 'redondear'
+"length"            return 'longi'
+"typeof"            return 'tipo'
+"tostring"            return 'a_cadena'
+"tochararray"            return 'arreglo'
+"push"            return 'push'
+"pop"               return 'pop'
+"run"               return 'run'
+<<EOF>>		            return 'EOF'
+.      { 
+            let s= Singleton.getInstance()
+            s.add_error(new error("Lexico","No se reconoce el caracter "+yytext,yylineno+1,yylloc.first_column+1));
+    }
+
+
+
+
+
+
+
+
+
+

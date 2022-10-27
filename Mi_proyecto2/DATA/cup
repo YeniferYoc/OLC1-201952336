@@ -1,0 +1,135 @@
+
+%start ini
+
+%% /* Definición de la gramática */
+
+ini
+	: instrucciones EOF {
+		return $1;
+	}
+;
+
+instrucciones
+	: instrucciones instruccion 	{ $1.push($2); $$ = $1; }
+	| instruccion					{ $$ = [$1]; }
+;
+
+instruccion
+	: 
+        pr_int lista_identificadores igual expresion punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.NUMERO,$4 ); }
+        |pr_string lista_identificadores igual expresion punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.CADENA,$4 ); }
+        |pr_double lista_identificadores igual expresion punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.DECIMAL,$4 ); }
+        |pr_char lista_identificadores igual expresion punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.CARACTER,$4 ); }
+        |pr_boolean lista_identificadores igual expresion punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.BOOLEAN_,$4 ); }
+        
+        |pr_int lista_identificadores punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.NUMERO ); }
+        |pr_string lista_identificadores punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.CADENA ); }
+        |pr_double lista_identificadores punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.DECIMAL); }
+        |pr_char lista_identificadores  punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.CARACTER ); }
+        |pr_boolean lista_identificadores punto_c { $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.BOOLEAN_ ); }
+        
+        |lista_identificadores igual expresion punto_c { $$ = instruccionesAPI.Asignacion($1, $3 ); }
+        |par_abre pr_int par_cierra expresion punto_c { $$ = instruccionesAPI.Parseo($1, $3 ); }
+
+        
+        |pr_int cor_abre cor_cierra identificador  igual pr_new pr_int cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.NUMERO,$9 ); }
+        |pr_string cor_abre cor_cierra identificador  igual pr_new pr_string cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.CADENA,$9 ); }
+        |pr_char cor_abre cor_cierra identificador  igual pr_new pr_char cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.CARACTER,$9 ); }
+        |pr_double cor_abre cor_cierra identificador  igual pr_new pr_double cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.DECIMAL,$9 ); }
+        |pr_boolean cor_abre cor_cierra identificador  igual pr_new pr_boolean cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.BOOLEAN_,$9 ); }
+        |pr_int cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_int cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.NUMERO,$12, $14 ); }
+        |pr_string cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_string cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.CADENA,$12, $14 ); }
+        |pr_char cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_char cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.CARACTER,$12, $14 ); }
+        |pr_double cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_double cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.DECIMAL,$12, $14 ); }
+        |pr_boolean cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_boolean cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.BOOLEAN_,$12, $14 ); }
+        |pr_int cor_abre cor_cierra identificador  igual pr_new pr_int llave_abre lista_valores llave_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.NUMERO,$9 ); }
+        |pr_string cor_abre cor_cierra identificador  igual pr_new pr_string llave_abre lista_valores llave_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.CADENA,$9 ); }
+        |pr_char cor_abre cor_cierra identificador  igual pr_new pr_char llave_abre lista_valores llave_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.CARACTER,$9 ); }
+        |pr_double cor_abre cor_cierra identificador  igual pr_new pr_double llave_abre lista_valores llave_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.DECIMAL,$9 ); }
+        |pr_boolean cor_abre cor_cierra identificador  igual pr_new pr_boolean llave_abre lista_valores llave_cierra punto_c { $$ = instruccionesAPI.Vector($4, TIPO_DATO.BOOLEAN_,$9 ); }
+        |pr_int cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_int cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.NUMERO,$12, $14 ); }
+        |pr_string cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_string cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.CADENA,$12, $14 ); }
+        |pr_char cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_char cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.CARACTER,$12, $14 ); }
+        |pr_double cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_double cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.DECIMAL,$12, $14 ); }
+        |pr_boolean cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new pr_boolean cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = instruccionesAPI.Matriz($6, TIPO_DATO.BOOLEAN_,$12, $14 ); }
+        
+
+
+
+        RIMPRIMIR PARIZQ expresion_cadena PARDER PTCOMA	{ $$ = instruccionesAPI.nuevoImprimir($3); }
+	| RMIENTRAS PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER
+														{ $$ = instruccionesAPI.nuevoMientras($3, $6); }
+	| RPARA PARIZQ IDENTIFICADOR IGUAL expresion_numerica PTCOMA expresion_logica PTCOMA IDENTIFICADOR MAS MAS PARDER LLAVIZQ instrucciones LLAVDER
+														{ $$ = instruccionesAPI.nuevoPara($3,$5,$7,$9,$14) }
+	| RNUMERO IDENTIFICADOR PTCOMA						{ $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.NUMERO); }
+	| RSTRING IDENTIFICADOR PTCOMA						{ $$ = instruccionesAPI.nuevoDeclaracion($2, TIPO_DATO.STRING); }
+	| IDENTIFICADOR IGUAL expresion_cadena PTCOMA		{ $$ = instruccionesAPI.nuevoAsignacion($1, $3); } //esto soporta expresiones_cadena y expresion_numerica
+
+	| RIF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER
+														{ $$ = instruccionesAPI.nuevoIf($3, $6); }
+	| RIF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER RELSE LLAVIZQ instrucciones LLAVDER
+														{ $$ = instruccionesAPI.nuevoIf($3, $6, $10); }
+
+	| RSWITCH PARIZQ expresion_numerica PARDER LLAVIZQ casos LLAVDER
+		{ $$ = instruccionesAPI.nuevoSwitch($3,$6);}
+	| IDENTIFICADOR operadores expresion_numerica PTCOMA	
+	                                                    { $$ = instruccionesAPI.nuevoAsignacionSimplificada($1, $2, $3); }
+	| error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
+;
+
+casos : casos caso_evaluar
+    {
+      $1.push($2);
+	  $$ = $1;
+    }
+  | caso_evaluar
+  	{ $$ = instruccionesAPI.nuevoListaCasos($1);}
+;
+
+caso_evaluar : RCASE expresion_numerica DOSPTS instrucciones
+    { $$ = instruccionesAPI.nuevoCaso($2,$4); }
+  | RDEFAULT DOSPTS instrucciones
+    { $$ = instruccionesAPI.nuevoCasoDef($3); }
+;
+
+operadores
+    : O_MAS      { $$ = instruccionesAPI.nuevoOperador(TIPO_OPERACION.SUMA); }
+	| O_MENOS    { $$ = instruccionesAPI.nuevoOperador(TIPO_OPERACION.RESTA); }
+    | O_POR      { $$ = instruccionesAPI.nuevoOperador(TIPO_OPERACION.MULTIPLICACION); }
+	| O_DIVIDIDO { $$ = instruccionesAPI.nuevoOperador(TIPO_OPERACION.DIVISION); }
+;
+
+
+expresion_numerica
+	: MENOS expresion_numerica %prec UMENOS				{ $$ = instruccionesAPI.nuevoOperacionUnaria($2, TIPO_OPERACION.NEGATIVO); }
+	| expresion_numerica MAS expresion_numerica			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.SUMA); }
+	| expresion_numerica MENOS expresion_numerica		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.RESTA); }
+	| expresion_numerica POR expresion_numerica			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MULTIPLICACION); }
+	| expresion_numerica DIVIDIDO expresion_numerica	{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.DIVISION); }
+	| PARIZQ expresion_numerica PARDER					{ $$ = $2; }
+	| ENTERO											{ $$ = instruccionesAPI.nuevoValor(Number($1), TIPO_VALOR.NUMERO); }
+	| DECIMAL											{ $$ = instruccionesAPI.nuevoValor(Number($1), TIPO_VALOR.NUMERO); }
+	| IDENTIFICADOR										{ $$ = instruccionesAPI.nuevoValor($1, TIPO_VALOR.IDENTIFICADOR); }
+;
+
+expresion_cadena
+	: expresion_cadena CONCAT expresion_cadena			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.CONCATENACION); }
+	| CADENA											{ $$ = instruccionesAPI.nuevoValor($1, TIPO_VALOR.CADENA); }
+	| expresion_numerica								{ $$ = $1; }
+;
+
+expresion_relacional
+	: expresion_numerica MAYQUE expresion_numerica		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MAYOR_QUE); }
+	| expresion_numerica MENQUE expresion_numerica		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MENOR_QUE); }
+	| expresion_numerica MAYIGQUE expresion_numerica	{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MAYOR_IGUAL); }
+	| expresion_numerica MENIGQUE expresion_numerica	{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MENOR_IGUAL); }
+	| expresion_cadena DOBLEIG expresion_cadena			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.DOBLE_IGUAL); }
+	| expresion_cadena NOIG expresion_cadena			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.NO_IGUAL); }
+;
+
+expresion_logica
+	: expresion_relacional AND expresion_relacional     { $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.AND); }
+	| expresion_relacional OR expresion_relacional 		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.OR); }
+	| NOT expresion_relacional							{ $$ = instruccionesAPI.nuevoOperacionUnaria($2, TIPO_OPERACION.NOT); }
+	| expresion_relacional								{ $$ = $1; }
+;
