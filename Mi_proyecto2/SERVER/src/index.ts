@@ -22,24 +22,20 @@ class Server {
     }
     start():void{
         this.app.listen(this.app.get('port'), ()=>{
-            console.log('server mio', this.app.get('port'));
-            
+            console.log('server yoooooo', this.app.get('port'));
+            let variable:string = "hola"
+            console.log(variable.length)
+            let nu = 2;
+            let potencia = nu**6;
+            console.log(potencia+"potencia")
+            let varible_:string = nu.toString()+" hola";
+            console.log(varible_)
+        for(let a of variable){
+            console.log(a);
+        }
             let var1 = 1;
             console.log(var1)
 
-            const parser = require("./Grammar/Grammar");
-            const fs = require("fs");
-            
-            try {
-                const entrada = fs.readFileSync("src/entrada.txt");
-                const ast = parser.parse(entrada.toString());
-            
-                
-                
-            } catch (error) {
-                console.log(error);
-                
-            }
             
         });
     }

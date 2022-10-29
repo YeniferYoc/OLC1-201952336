@@ -4,7 +4,7 @@ export class Error_det {
         public tipo: string,
         public err: string,
         public linea: number,
-        public columna: number
+        public columna_mia: number
     ) { }
 }
 

@@ -374,15 +374,15 @@ expresion
     | expresion '/'  expresion { $$ = new Operacion($1, $3, Tipo.DIV            , @2.first_line, @2.first_column); }
     | expresion '%'  expresion { $$ = new Operacion($1, $3, Tipo.MODULO         , @2.first_line, @2.first_column); }
     | expresion '^' expresion { $$ = new Operacion($1, $3, Tipo.POT            , @2.first_line, @2.first_column); }
-    | expresion '<'  expresion { $$ = new Operacion($1, $3, Tipo.MENOR          , @2.first_line, @2.first_column); }
-    | expresion '<=' expresion { $$ = new Operacion($1, $3, Tipo.MENORIGUAL     , @2.first_line, @2.first_column); }
-    | expresion '>'  expresion { $$ = new Operacion($1, $3, Tipo.MAYOR          , @2.first_line, @2.first_column); }
-    | expresion '>=' expresion { $$ = new Operacion($1, $3, Tipo.MAYORIGUAL     , @2.first_line, @2.first_column); }
-    | expresion '==' expresion { $$ = new Operacion($1, $3, Tipo.IGUAL          , @2.first_line, @2.first_column); }
-    | expresion '!=' expresion { $$ = new Operacion($1, $3, Tipo.DIFERENCIACION , @2.first_line, @2.first_column); }
-    | expresion '&&' expresion { $$ = new Operacion($1, $3,Tipo.AND  , @2.first_line, @2.first_column); }
-    | expresion '||' expresion { $$ = new Operacion($1, $3,Tipo.OR   , @2.first_line, @2.first_column); }
-    | '!' expresion       { $$ = new Operacion($2, $2,Tipo.NOT  , @1.first_line, @1.first_column); }
+    | expresion '<'  expresion { $$ = new Relacional($1, $3, Tipo.MENOR          , @2.first_line, @2.first_column); }
+    | expresion '<=' expresion { $$ = new Relacional($1, $3, Tipo.MENORIGUAL     , @2.first_line, @2.first_column); }
+    | expresion '>'  expresion { $$ = new Relacional($1, $3, Tipo.MAYOR          , @2.first_line, @2.first_column); }
+    | expresion '>=' expresion { $$ = new Relacional($1, $3, Tipo.MAYORIGUAL     , @2.first_line, @2.first_column); }
+    | expresion '==' expresion { $$ = new Relacinal($1, $3, Tipo.IGUAL          , @2.first_line, @2.first_column); }
+    | expresion '!=' expresion { $$ = new Relacional($1, $3, Tipo.DIFERENCIACION , @2.first_line, @2.first_column); }
+    | expresion '&&' expresion { $$ = new Logica($1, $3,Tipo.AND  , @2.first_line, @2.first_column); }
+    | expresion '||' expresion { $$ = new Logica($1, $3,Tipo.OR   , @2.first_line, @2.first_column); }
+    | '!' expresion       { $$ = new Logica($2, $2,Tipo.NOT  , @1.first_line, @1.first_column); }
     | tip  {  $$ = $1; }
     | identificador '['  expresion ']'           { $$= new Acceso_arr($1,true ,true ,$3  ,@1.first_line, @1.first_column); }
 ;
@@ -393,7 +393,7 @@ tip
     | decimal         {  $$ = new Variable($1,                   Type.NUMBER , @1.first_line, @1.first_column); }
     | cadena        {  $$ = new Variable($1.replace(/\"/g,""), Type.STRING , @1.first_line, @1.first_column); }
     | caracter       {  $$ = new Variable($1.replace(/\'/g,""), Type.CHAR , @1.first_line, @1.first_column); }
-    | true          {  $$ = new Variable($1,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
-    | false         {  $$ = new Variable($1,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
+    | true          {  $$ = new Variable(true,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
+    | false         {  $$ = new Variable(false,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
     | identificador            {  $$ = new Acceso($1,@1.first_line, @1.first_column);  }
 ;
