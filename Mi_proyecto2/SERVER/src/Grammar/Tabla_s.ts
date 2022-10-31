@@ -1,18 +1,19 @@
 import { Simbolo } from "./simbolo"
 import { Type } from "./Ret"
-//import { InsFuncion } from "../Instruction/InsFuncion"
-//import { Arreglo } from "../Instruction/Arreglo"
+import { Vector } from "./Vector";
+import { Funcion } from "./Funcion";
+
 
 export class Tabla_s {
 
     private variables: Map<string, Simbolo>
-    //public funciones: Map<string, InsFuncion>
-    //public arreglos: Map<string, Arreglo>
+    public funciones: Map<string, Funcion>
+    public arreglos: Map<string, Vector>
 
     constructor(public anterior: Tabla_s | null) {
         this.variables = new Map();
-      //  this.funciones = new Map();
-        //this.arreglos = new Map();
+        this.funciones = new Map();
+        this.arreglos = new Map();
     }
 
     /**
@@ -23,13 +24,13 @@ export class Tabla_s {
      * @param condicion si es editable
      * @returns boolan si se efectuo el almacenamiento de la variable
      */
-    public guardar_variable(nombre: string, valor: any, type: Type, condicion: boolean): boolean {
+    public guardar_variable(nombre: string, valor: any, type: Type): boolean {
 
         //revisar que el nombre de la nueva variable se encuentre disponible
         if (this.Repetido(nombre)) return false
 
         //agrega la variable al MAP 
-        this.variables.set(nombre, new Simbolo(valor, nombre, type, condicion))
+        this.variables.set(nombre, new Simbolo(valor, nombre, type))
         return true
     }
 
@@ -77,17 +78,17 @@ export class Tabla_s {
     public Repetido(nombre: string): boolean {
 
         //revisar en los arreglos almacenados
-        //for (let actual of Array.from(this.arreglos.entries())) {
-          //  if (entry[0] == nombre) return true;
-       // }
+        for (let actual of Array.from(this.arreglos.entries())) {
+           if (actual[0] == nombre) return true;
+        }
         //revisar en las variables almacenadas
         for (let actual of Array.from(this.variables.entries())) {
             if (actual[0] == nombre) return true;
         }
         //revisar en las funciones almacenadas
-        //for (let entry of Array.from(this.funciones.entries())) {
-          //  if (entry[0] == nombre) return true;
-        //}
+        for (let entry of Array.from(this.funciones.entries())) {
+            if (entry[0] == nombre) return true;
+        }
         //no encontro el nombre , osea que esta disponible para usar
         return false
     }
@@ -97,22 +98,22 @@ export class Tabla_s {
      * @param id Nombre de la funcion con la que se guardara
      * @param funcion clase tipo "InsFunccion"
      */
-    //public guardar_funcion(id: string, funcion: InsFuncion) {
-      //  this.funciones.set(id, funcion)
-    //}
+    public guardar_funcion(id: string, funcion: Funcion) {
+        this.funciones.set(id, funcion)
+    }
 
     /**
      * Retorna la clase INSFUNCION para ejecutarla
      * @param id nombre de la funcion con la qu ese guardo en la tabla de simbolos
      * @returns Clase INSFUNCION
      */
-    /*public get_funcion(id: string): InsFuncion | undefined | null {
-        let env: Environment | null = this
-        while (env != null) {
-            if (env.funciones.has(id)) return env.funciones.get(id)
-            env = env.anterior
+    public get_funcion(id: string): Funcion | undefined | null {
+        let tabla: Tabla_s | null = this
+        while (tabla != null) {
+            if (tabla.funciones.has(id)) return tabla.funciones.get(id)
+            tabla = tabla.anterior
         }
-        return env
+        return tabla
     }
 
     /**
@@ -120,10 +121,10 @@ export class Tabla_s {
      * @param id nombre con el que se quiere guardar
      * @param tmp objeto
      * @returns boolean si se pudo guardar en la tabla de simbolos
-     *//*
-    public guardar_arreglo(id: string, tmp: Arreglo): boolean {
+     */
+    public guardar_arreglo(id: string, tmp: Vector): boolean {
 
-        if (this.revisarRepetido(id)) return false
+        if (this.Repetido(id)) return false
         this.arreglos.set(id, tmp)
         return true
     }
@@ -133,11 +134,11 @@ export class Tabla_s {
       * @param nombre Nombre del array que se esta buscando
       * @returns 
       */
-   /* public get_array(nombre: string): Arreglo | undefined {
-        let env: Environment | null = this
-        while (env != null) {
-            if (env.arreglos.has(nombre)) return env.arreglos.get(nombre)
-            env = env.anterior
+    public get_array(nombre: string): Vector | undefined {
+        let tabla: Tabla_s | null = this
+        while (tabla != null) {
+            if (tabla.arreglos.has(nombre)) return tabla.arreglos.get(nombre)
+            tabla = tabla.anterior
         }
         return undefined
     }
@@ -146,19 +147,19 @@ export class Tabla_s {
      * Actualizar el array en la tabla de simbolos
      * @param id Nombre del array con el que se guardara en la tabla de simbolos
      * @param arreglo Objeto el cual se guardara
-     *//*
+     */
     public update_array(id: string, arreglo: Array<any>) {
-        let env: Environment | null = this;
-        while (env != null) {
-            if (env.arreglos.has(id)) {
-                for (let entry of Array.from(env.arreglos.entries())) {
+        let tabla: Tabla_s | null = this;
+        while (tabla != null) {
+            if (tabla.arreglos.has(id)) {
+                for (let entry of Array.from(tabla.arreglos.entries())) {
                     if (entry[0] == id) {
                         entry[1].contenido = arreglo
                         return
                     }
                 }
             }
-            env = env.anterior;
+            tabla = tabla.anterior;
         }
     }
     /**
@@ -212,11 +213,15 @@ export class Tabla_s {
 export function getTipo(id: number): String {
     switch (id) {
         case 0:
-            return "Numero"
+            return "int"
         case 1:
-            return "String"
+            return "double"
         case 2:
-            return "Boolean"
+            return "string"
+        case 3:
+            return "char"
+        case 4:
+            return "boolean"
         default:
             return "void";
     }

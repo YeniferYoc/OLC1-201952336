@@ -1,8 +1,10 @@
 export enum Type {
-    /*0*/NUMBER,
+    /*0*/INT,
     /*1*/STRING,
     /*2*/BOOLEAN,
-    /*3*/error
+    /*3*/CHAR,
+    /*4*/DOUBLE,
+        error
 }
 /**
  * 
@@ -12,11 +14,15 @@ export enum Type {
 export function get(objeto: Type): string {
     switch (objeto) {
         case 0:
-            return "number"
+            return "int"
         case 1:
             return "string"
         case 2:
             return "boolean"
+        case 3:
+            return "char"
+        case 4:
+            return "double"
         default:
             return ""
     }

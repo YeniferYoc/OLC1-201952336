@@ -7,8 +7,7 @@ export class Simbolo {
     constructor(
         public valor: any,
         public id: string,
-        public tipo: Type,
-        public edit: boolean
+        public tipo: Type
     ) {
 
     }

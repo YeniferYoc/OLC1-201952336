@@ -35,7 +35,7 @@ class Server {
         }
             let var1 = 1;
             console.log(var1)
-
+            
             
         });
     }

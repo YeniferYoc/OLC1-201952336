@@ -1,4 +1,38 @@
-
+ 
+%{
+    const {Operacion} = require('./Arithmetic');
+    const {Relacional} = require('./Relacional');
+    const {Relational_op} = require ('./Simbolo_rel')
+    const {Access} = require('../Expression/Access');
+    const {Literal} = require('../Expression/Literal');
+    const {If} = require('../Instruction/If');
+    const {Print} = require('../Instruction/Print');
+    const {Statement} = require('../Instruction/Statement');
+    const {While} = require('../Instruction/While');
+    const {Declaration} = require('../Instruction/Declaration');
+    const {Let} = require('../Instruction/let');
+    const {Asignacion} = require('../Instruction/Asignacion');
+    const {OperadorTernario} = require('../Instruction/OperadorTernario');
+    const {DoWhile} = require('../Instruction/Dowhile');
+    const {InstFor} = require('../Instruction/InstFor');
+    const {Incre} = require('../Instruction/Incre');
+    const {InsFuncion} = require('../Instruction/InsFuncion');
+    const {Call} = require('../Instruction/Call');
+    const {GraficarTablaSimbolos} = require('../Instruction/Gr');
+    const {Arreglo} = require('../Instruction/Arreglo');
+    const {ArregloAsignacion} = require('../Instruction/ArregloAsignacion');
+    const {ExpreArray} = require('../Expression/ExpreArray');
+    const {ArithmeticOption} = require('../Expression/ArithmeticOption');
+    const {IncreDecre} = require('../Expression/IncreDecre')
+    const {IncreDecreOption} = require('../Expression/IncreDecreOption')
+    const {Type} = require('../Abstract/Retorno')
+    const {Logical} = require('../Expression/Logical')
+    const {LogicalOption} = require('../Expression/LogicalOption')
+    const {ArregloAcciones} = require('../Instruction/ArregloAcciones')
+    
+    const { Singleton}=  require("../Singleton/Singleton")
+    const { error } =require("../tool/error")
+%}
 
 %lex 
 
@@ -20,6 +54,7 @@
 "println"          return 'pr_imprimir_ln'
 "switch"          return 'pr_switch'
 "case"          return 'pr_case'
+"default"          return 'pr_default'
 "break"          return 'pr_break'
 "while"          return 'pr_while'
 "for"          return 'pr_for'
@@ -103,19 +138,13 @@
 
 "\'\$""\{"[0-9]+"\}\'"|'{L}' return 'caracter'
 <<EOF>>				return 'EOF';
-.					{ console.error('Este es un error léxico: ' + yytext + ', en la linea: ' + yylloc.first_line + ', en la columna: ' + yylloc.first_column); }
+.					{ 
+      let s= Unica.getInstance()
+            s.add_error(new error("Lexico","No se reconoce "+yytext,yylineno+1,yylloc.first_column+1));
+    
+    console.error('Este es un error léxico: ' + yytext + ', en la linea: ' + yylloc.first_line + ', en la columna: ' + yylloc.first_column); }
 
 /lex
-
-
-
-%{
-	const TIPO_OPERACION	= require('./instrucciones').TIPO_OPERACION;
-	const TIPO_VALOR 		= require('./instrucciones').TIPO_VALOR;
-	const TIPO_DATO			= require('./tabla_simbolos').TIPO_DATO; //para jalar el tipo de dato
-	const instruccionesAPI	= require('./instrucciones').instruccionesAPI;
-%}
-
 
 
 
@@ -153,7 +182,6 @@ INSTRUCCION
     | ASIGNACION        ';' {  $$ = $1;  }
     | INCREDECRE        ';' {  $$ = $1;  }
     | PRINT          ';' {  $$ = $1;  }
-    | PARSEO          ';' {  $$ = $1;  }
     | ARRAY          ';' {  $$ = $1;  }
     | MATRIZ          ';' {  $$ = $1;  }
     | ACCESO_ARRAY          ';' {  $$ = $1;  }
@@ -187,9 +215,13 @@ INSTRUCCION
 
 
 //DECLARACION --------------------------------------------------------------------------------------------------
+OP_TERNARIO
+    : '(' Expr  ')' '?' OP_TERNARIO_ST ':' OP_TERNARIO_ST { $$=new OperadorTernario($2, $5, $7 ,@4.first_line, @4.first_column ); } 
+;
 
 DECLARACION
     : TIPOS LISTAIDS igual expresion punto_c { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
+    |TIPOS LISTAIDS igual par_abre TIPO_VALOR par_cierra expresion punto_c { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
     | TIPOS LISTAIDS punto_c { $$ = new Declaracion($2, $1, null , @1.first_line, @1.first_column); }
 ;        
     
@@ -226,17 +258,36 @@ ACCESO_MATRIZ
 ;
 
 //IF----------------------------------------------------------------------------------------------------
-IF
-        :pr_si par_abre expresion par_cierra  BLOQUE  {$$ = new Si($3, $5, null, false, null, false) ;}
-	|pr_si par_abre expresion par_cierra  BLOQUE  pr_contrario  BLOQUE   {$$ = new Si($3, $5,null, false, $7, true) ;}
-	|pr_si par_abre expresion par_cierra  BLOQUE  O_SIS pr_contrario  BLOQUE  {$$ = new Si($3, $5,$6, true, $8, true) ;}
-	|pr_si  par_abre expresion par_cierra BLOQUE   O_SIS   {$$ = new Si($3, $5,$6, true, null, false) ;}
+/*IF
+        :pr_si par_abre expresion par_cierra  BLOQUE  {$$ = new Si($3, $5, null, false, null, null, false) ;}
+	|pr_si par_abre expresion par_cierra  BLOQUE  pr_contrario  BLOQUE   {$$ = new Si($3, $5,null, false,null, $7, true) ;}
+	|pr_si par_abre expresion par_cierra  BLOQUE  pr_contrario IF pr_contrario  BLOQUE  {$$ = new Si($3, $5,$6, true, $8, true) ;}
+	|pr_si  par_abre expresion par_cierra BLOQUE   pr_contrario IF   {$$ = new Si($3, $5,$6, true, null, false) ;}
+;*/
+IF : 
+    't_if' '(' Expr ')' BLOQUE ELSE_ST { $$ = new Si($3, $5, $6, @1.first_line, @1.first_column);  }
+;
+
+ELSE_ST
+    : 't_else' BLOQUE { $$ = $2;   }
+    | 't_else' IF  { $$ = $2;   }
+    |                 { $$ = null; }
 ;
 //segun---------------------------------------------------------------------------------------------------------------------
 SEGUN
-	:pr_segun par_abre expresion par_cierra llave_abre  default dos_puntos BLOQUE llave_cierra {$$ = new Segun($3, null, false, $7, true) ;}
-	|pr_segun par_abre expresion par_cierra  llave_abre CASOS default dos_puntos BLOQUE llave_cierra {$$ = new Segun($3, $6, true, $9, true) ;}
-        |pr_segun par_abre expresion par_cierra llave_abre  CASOS llave_cierra {$$ = new Segun($3, $6, true, null, false) ;}
+	:pr_segun par_abre expresion par_cierra llave_abre  Cases llave_cierra {$$ = new Segun($3, $6) ;}
+	
+;
+Cases:
+    CASE DEFAULT {$$=$1;}
+    |CASE {$$=$1;}
+    |DEFAULT   {$$=$1;}
+    ;
+CASE:
+    pr_case expresion dos_puntos BLOQUE punto_c 
+;
+DEFAULT :
+pr_default dos_puntos BLOQUE
 ;
 //MIENTRAS---------------------------------------------------------------------------------------------------------------------
 MIENTRAS	
@@ -245,7 +296,7 @@ MIENTRAS
 
 //FOR-------------------------------------------------------------------------------------------------------------------------
 PARA
-    : pr_for par_abre DECLARACION_PARA punto_c expresion punto_c ITERADOR par_cierra BLOQUE { $$=new InstFor($3, $5, $7 , $9, @1.first_line, @1.first_column );   }
+    : pr_for par_abre DECLARACION_PARA punto_c expresion punto_c ITERADOR par_cierra BLOQUE { $$=new Para($3, $5, $7 , $9, @1.first_line, @1.first_column );   }
 ;
 
 DECLARACION_PARA 
@@ -364,10 +415,10 @@ BLOQUE
 
 expresion 
     : '-'  expresion %prec UMENOS { $$ = new Operacion($2, $2, Tipo.NEGACION,        @1.first_line, @1.first_column); }       
-    | identificador  '++'               { $$ = new IncreDecre(I_derecha.INCREMENTO1, $1, @1.first_line, @1.first_column); } 
-    | '++' identificador                { $$ = new IncreDecre(I_izquierda.INCREMENTO2, $2, @2.first_line, @2.first_column); } 
-    | identificador  '--'               { $$ = new IncreDecre(I_dd.DECREMENTO1, $1, @1.first_line, @1.first_column); } 
-    | '--' identificador                { $$ = new IncreDecre(I_di.DECREMENTO2, $2, @2.first_line, @2.first_column); } 
+    | identificador  '++'               { $$ = new IncreDecre(Incremento_op.INCREMENTO1, $1, @1.first_line, @1.first_column); } 
+    | '++' identificador                { $$ = new IncreDecre(Incremento_op.INCREMENTO2, $2, @2.first_line, @2.first_column); } 
+    | identificador  '--'               { $$ = new IncreDecre(Incremento_op.DECREMENTO1, $1, @1.first_line, @1.first_column); } 
+    | '--' identificador                { $$ = new IncreDecre(Incremento_op.DECREMENTO2, $2, @2.first_line, @2.first_column); } 
     | expresion '+'  expresion { $$ = new Operacion($1, $3, Tipo.MAS            , @2.first_line, @2.first_column); }       
     | expresion '-' expresion { $$ = new Operacion($1, $3, Tipo.MENOS          , @2.first_line, @2.first_column); }
     | expresion '*'  expresion { $$ = new Operacion($1, $3, Tipo.MULTIPLICACION , @2.first_line, @2.first_column); }       
@@ -385,12 +436,13 @@ expresion
     | '!' expresion       { $$ = new Logica($2, $2,Tipo.NOT  , @1.first_line, @1.first_column); }
     | tip  {  $$ = $1; }
     | identificador '['  expresion ']'           { $$= new Acceso_arr($1,true ,true ,$3  ,@1.first_line, @1.first_column); }
+    |PARSEO { $$= new Parseo($$ = $1 }
 ;
 
 tip   
     : '(' expresion ')'  {  $$ = $2; } 
     | entero      {  $$ = new Variable($1,                   Type.NUMBER , @1.first_line, @1.first_column); }
-    | decimal         {  $$ = new Variable($1,                   Type.NUMBER , @1.first_line, @1.first_column); }
+    | decimal         {  $$ = new Variable($1,                   Type.DOUBLE , @1.first_line, @1.first_column); }
     | cadena        {  $$ = new Variable($1.replace(/\"/g,""), Type.STRING , @1.first_line, @1.first_column); }
     | caracter       {  $$ = new Variable($1.replace(/\'/g,""), Type.CHAR , @1.first_line, @1.first_column); }
     | true          {  $$ = new Variable(true,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
