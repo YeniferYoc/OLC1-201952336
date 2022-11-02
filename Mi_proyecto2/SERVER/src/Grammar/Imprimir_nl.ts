@@ -2,7 +2,7 @@ import { Expresion } from "./Expresion";
 import { Instruccion } from "./instruccion";
 import { Tabla_s } from "./Tabla_s";
 
-export class Imprimir extends Instruccion {
+export class Imprimir_nl extends Instruccion {
 
     constructor(
         public value: Expresion,

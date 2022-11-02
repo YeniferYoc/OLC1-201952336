@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DoWhile = void 0;
+exports.DoUntil = void 0;
 const Error_det_1 = require("./Error_det");
 const instruccion_1 = require("./instruccion");
 const Ret_1 = require("./Ret");
-class DoWhile extends instruccion_1.Instruccion {
+class DoUntil extends instruccion_1.Instruccion {
     constructor(condicion, instru, linea, columna) {
         super(linea, columna);
         this.condicion = condicion;
@@ -25,4 +25,4 @@ class DoWhile extends instruccion_1.Instruccion {
     ast() {
     }
 }
-exports.DoWhile = DoWhile;
+exports.DoUntil = DoUntil;

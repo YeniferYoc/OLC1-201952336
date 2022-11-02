@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Imprimir = void 0;
+exports.Imprimir_nl = void 0;
 const instruccion_1 = require("./instruccion");
-class Imprimir extends instruccion_1.Instruccion {
+class Imprimir_nl extends instruccion_1.Instruccion {
     constructor(value, line, column) {
         super(line, column);
         this.value = value;
@@ -19,4 +19,4 @@ class Imprimir extends instruccion_1.Instruccion {
     ast() {
     }
 }
-exports.Imprimir = Imprimir;
+exports.Imprimir_nl = Imprimir_nl;

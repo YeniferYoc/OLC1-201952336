@@ -4,7 +4,7 @@ import { Instruccion } from "./instruccion"
 import { get, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
 
-export class DoWhile extends Instruccion {
+export class DoUntil extends Instruccion {
 
     constructor(
         private condicion: Expresion,

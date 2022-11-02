@@ -33,6 +33,7 @@
     Char [ ][ ] vectorDosd = new Char [(Int) "4"] [4] ; // se crea un vector de dos dimensiones de 4x4
     //Ejemplo de declaración tipo 2
     String [ ] vector2 = {"hola", "Mundo"}; //vector de 2 posiciones, con "Hola" y "Mundo"
+    Char [ ][ ] vectordosd2 = {{ 0 ,0},{0 , 0}}; // vector de dos dimensiones con valores de 0 en cada posición
     if (x<50){
             Double doubleInt = (Double) 16; //16.0 40
             Double doubleString = (Double) "16.0"; //16.0 Cadenas numericas

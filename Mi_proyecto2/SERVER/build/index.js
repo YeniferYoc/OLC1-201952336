@@ -46,11 +46,13 @@ class Server {
                     throw err;
                 //si no hay errores
                 //gramatica.parse
-                console.log("hola \\\' tu");
+                console.log("hola \\\' td  u");
                 console.log(data.toString());
-                console.log("ahora toca anal       izarrrdD");
+                console.log("ahora toca analizar              izarrrdD");
                 mygramatica.parse(data.toString());
+                console.log("termine ");
             });
+            console.log("ola");
         });
     }
 }
