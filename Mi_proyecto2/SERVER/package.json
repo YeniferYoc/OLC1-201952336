@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -w",
     "dev": "nodemon build/index.js",
-    "jison": "jison ./src/Grammar/Gramatica.jison && move Gramatica.js ./src/Grammar/"
+    "jison": "jison ./src/Grammar/Gramatica.jison && move Gramatica.js ./build/Grammar/"
   },
   "keywords": [],
   "author": "",

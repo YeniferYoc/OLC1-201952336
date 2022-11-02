@@ -1,37 +1,48 @@
  
 %{
-    const {Operacion} = require('./Arithmetic');
+    const {Operacion} = require('./Operacion');
     const {Relacional} = require('./Relacional');
     const {Relational_op} = require ('./Simbolo_rel')
-    const {Access} = require('../Expression/Access');
-    const {Literal} = require('../Expression/Literal');
-    const {If} = require('../Instruction/If');
-    const {Print} = require('../Instruction/Print');
-    const {Statement} = require('../Instruction/Statement');
-    const {While} = require('../Instruction/While');
-    const {Declaration} = require('../Instruction/Declaration');
-    const {Let} = require('../Instruction/let');
-    const {Asignacion} = require('../Instruction/Asignacion');
-    const {OperadorTernario} = require('../Instruction/OperadorTernario');
-    const {DoWhile} = require('../Instruction/Dowhile');
-    const {InstFor} = require('../Instruction/InstFor');
-    const {Incre} = require('../Instruction/Incre');
-    const {InsFuncion} = require('../Instruction/InsFuncion');
-    const {Call} = require('../Instruction/Call');
-    const {GraficarTablaSimbolos} = require('../Instruction/Gr');
-    const {Arreglo} = require('../Instruction/Arreglo');
-    const {ArregloAsignacion} = require('../Instruction/ArregloAsignacion');
-    const {ExpreArray} = require('../Expression/ExpreArray');
-    const {ArithmeticOption} = require('../Expression/ArithmeticOption');
-    const {IncreDecre} = require('../Expression/IncreDecre')
-    const {IncreDecreOption} = require('../Expression/IncreDecreOption')
-    const {Type} = require('../Abstract/Retorno')
-    const {Logical} = require('../Expression/Logical')
-    const {LogicalOption} = require('../Expression/LogicalOption')
-    const {ArregloAcciones} = require('../Instruction/ArregloAcciones')
+    const {Acceso_arr} = require('./Acceso_arr');
+    const {Variable} = require('./Variable');
+    const {Si} = require('./Si');
+    const {Segun} = require('./Segun');
+    const {Imprimir} = require('./Imprimir');
+    const {Imprimir_nl} = require('./Imprimir_nl');    
+    const {Instrucciones} = require('./Instrucciones');
+    const {Mientras} = require('./Mientras');
+    const {Declaracion} = require('./Declaracion');
+    const {DoUntil} = require('./DoUntil');
+    const {Asignacion} = require('./Asignacion');
+    const {OperadorTernario} = require('./OperadorTernario');
+    const {DoWhile} = require('./Dowhile');
+    const {Para} = require('./Para');
+    const {Incremento} = require('./Incremento');
+    const {Funcion} = require('./Funcion');
+    const {LLAMADA} = require('./LLAMADA');
+    const {Break_} = require('./Break');
+    const {Continue_} = require('./Continue');
+    const {Run} = require('./Run');
+    const {Tipo} = require('./Tipo');
+    const {To_arr} = require('./To_arr');
+    const {To_lower} = require('./To_lower');
+    const {To_string} = require('./To_string');
+    const {To_upper} = require('./To_upper');
+    const {Redondear} = require('./Redondear');
+    const {Parseo} = require('./Parseo');
+    const {Vector} = require('./Vector');
+    const {Arreglo_mod} = require('./Arreglo_mod');
+    const {Acceso} = require('./Acceso');
+    const {Aritmetic_s} = require('./Aritmetic_s');
+    const {Incre} = require('./Incre')
+    const {Incremento_op} = require('./Incremento_op')
+    const {Type} = require('./Ret')
+    const {Logica} = require('./Logica')
+    const {Logico_op} = require('./Logico_op')
+    const {Asignar_arreglo} = require('./Asignar_arreglo')
     
-    const { Singleton}=  require("../Singleton/Singleton")
-    const { error } =require("../tool/error")
+    const { Union}=  require("./Union")
+    const { Error_det } =require("./Error_det")
 %}
 
 %lex 
@@ -43,104 +54,111 @@
 %%
 
 \s+											// se ignoran espacios en blanco
-"//".*										// comentario simple línea
-[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]			// comentario multiple líneas
+"//".*										{console.log("reconoci comentario linea"); }
+[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]			{console.log("reconoci comentario multilinea"); }
 
 //palabras reservadas
-"if"          return 'pr_si'
-"else"          return 'pr_contrario'
-"elif"          return 'pr_elif'
-"print"          return 'pr_imprimir'
-"println"          return 'pr_imprimir_ln'
-"switch"          return 'pr_switch'
-"case"          return 'pr_case'
-"default"          return 'pr_default'
-"break"          return 'pr_break'
-"while"          return 'pr_while'
-"for"          return 'pr_for'
-"do"          return 'pr_do'
-"until"          return 'pr_until'
-"return"          return 'pr_retorno'
-"tolower"             return 'pr_minuscula'
-"toupper"             return 'pr_mayuscula'
-"round"             return 'pr_redondear'
-"void"              return 'pr_void'
-"length"            return 'pr_longi'
-"typeof"            return 'pr_tipo'
-"tostring"            return 'pr_a_cadena'
-"tochararray"            return 'pr_arreglo'
-"push"            return 'pr_push'
-"pop"               return 'pr_pop'
-"run"               return 'pr_run'
+"if"          {console.log("reconoci pr_si "); return 'pr_si'} 
+"else"          {console.log("reconoci pr_contrario"); return 'pr_contrario'}
+"elif"          {console.log("reconoci pr_elif"); return 'pr_elif'}
+"print"          {console.log("reconoci pr_imprimir"); return 'pr_imprimir'}
+"println"          {console.log("reconoci pr_imprimir_ln"); return 'pr_imprimir_ln'}
+"switch"          {console.log("reconoci pr_segun"); return 'pr_segun'}
+"case"          {console.log("reconoci pr_case"); return 'pr_case'}
+"default"          {console.log("reconoci pr_default"); return 'pr_default'}
+"break"          {console.log("reconoci pr_break"); return 'pr_break'}
+"while"          {console.log("reconoci pr_while"); return 'pr_while'}
+"for"          {console.log("reconoci pr_for"); return 'pr_for'}
+"do"          {console.log("reconoci pr_do"); return 'pr_do'}
+"until"          {console.log("reconoci pr_until"); return 'pr_until'}
+"return"         {console.log("reconoci pr_retorno"); return 'pr_retorno'}
+"continue"          {console.log("reconoci pr_continue"); return 'pr_continue'}
+"tolower"             {console.log("reconoci pr_minuscula"); return 'pr_minuscula'}
+"toupper"             {console.log("reconoci pr_mayuscula"); return 'pr_mayuscula'}
+"round"             {console.log("reconoci pr_redondear"); return 'pr_redondear'}
+"void"              {console.log("reconoci pr_void"); return 'pr_void'}
+"length"            {console.log("reconoci pr_longi"); return 'pr_longi'}
+"typeof"            {console.log("reconoci pr_tipo"); return 'pr_tipo'}
+"tostring"            {console.log("reconoci pr_a_cadena"); return 'pr_a_cadena'}
+"tochararray"            {console.log("reconoci pr_arreglo"); return 'pr_arreglo'}
+"push"            {console.log("reconoci pr_push"); return 'pr_push'}
+"pop"              {console.log("reconoci pr_pop"); return 'pr_pop'}
+"run"               {console.log("reconoci pr_run"); return 'pr_run'}
 
 
 //tipos de datos 
-"int"              return 'pr_int'
-"double"              return 'pr_double'
-"boolean"              return 'pr_boolean'
-"char"              return 'pr_char'
-"string"              return 'pr_string'
-"true"              return 'pr_true'
-"false"              return 'pr_false'
-"new"              return 'pr_new'
+"int"              {console.log("reconoci pr_int"); return 'pr_int'}
+"double"             {console.log("reconoci pr_double"); return 'pr_double'}
+"boolean"             {console.log("reconoci pr_boolean"); return 'pr_boolean'}
+"char"             {console.log("reconoci pr_char"); return 'pr_char'}
+"string"             {console.log("reconoci pr_string"); return 'pr_string'}
+"true"             {console.log("reconoci pr_true"); return 'pr_true'}
+"false"              {console.log("reconoci pr_false"); return 'pr_false'}
+"new"              {console.log("reconoci pr_new"); return 'pr_new'}
 
 //signos de escape
-"\n"              return 'salto de linea'
-"\\"              return 'doble_b'
-"\""              return 'com_barra'
-"\t"              return 'tab'
-"\'"              return 'simple_barra'
+"\\n"             {console.log("reconoci salto_de_linea"); return 'salto_de_linea'}
+"\\\\"              {console.log("reconoci doble_b"); return 'doble_b'}
+"\\\""           {console.log("reconoci com_doble"); return 'com_doble'}
+"\\t"              {console.log("reconoci tab"); return 'tab'}
+"\\\'"              {console.log("reconoci simple_barra"); return 'simple_barra'}
 
 //aritmeticos
-"+"              return 'suma'
-"++"              return 'incre'
-"-"              return 'resta'
-"--"              return 'decre'
-"*"              return 'mult'
-"/"              return 'div'
-"^"              return 'pot'
-"%"              return 'mod'
 
-//relacionales
-"="             return 'igual'
-">"             return 'mayor'
-"<"             return 'menor'
-">="             return 'mayor_igual'
-"<="             return 'menor_igual'
-"=="             return 'igual_igual'
-"!="             return 'no_igual'
-"?"             return 'interrogacion_cierra'
+"++"             {console.log("reconoci  ++"); return '++'}
+
+"--"             {console.log("reconoci  --"); return '--'}
+"*"             {console.log("reconoci * "); return '*'}
+"/"             {console.log("reconoci / "); return '/'}
+"^"             {console.log("reconoci ^ "); return '^'}
+"%"             {console.log("reconoci % "); return '%'}
+"+"             {console.log("reconoci + "); return '+'}
+"-"              {console.log("reconoci - "); return '-'}
+//relacionales {console.log("reconoci  ");
+">="             {console.log("reconoci >=  "); return '>='}
+"<="            {console.log("reconoci  <= ");  return '<='}
+"=="            {console.log("reconoci  == ");  return '=='}
+
+">"             {console.log("reconoci > "); return '>'}
+"<"             {console.log("reconoci < "); return '<'}
+
+
+"!="             {console.log("reconoci !=  "); return '!='}
+"?"             {console.log("reconoci interrogacion_cierra "); return 'interrogacion_cierra'}
+"="             {console.log("reconoci igual "); return 'igual' }
 
 //logicos
-"||"             return 'or'
-"&&"             return 'and'
-"!"             return 'not'
+"||"           {console.log("reconoci || ");  return '||'}
+"&&"           {console.log("reconoci && ");  return '&&'}
+"!"            {console.log("reconoci  ! "); return '!'}
 
 //agrupacion
-";"             return 'punto_c'
-":"             return 'dos_puntos'
-"{"             return 'llave_abre'
-"}"             return 'llave_cierra'
-"("             return 'par_abre'
-")"             return 'par_cierra'
-"["             return 'cor_abre'
-"]"             return 'cor_cierra'
-"+="				return 'O_MAS';
-"-="				return 'O_MENOS';
-"*="				return 'O_POR';
-"/="				return 'O_DIVIDIDO';
+";"            {console.log("reconoci punto_c "); return 'punto_c'}
+","            {console.log("reconoci coma "); return 'coma'}
+"."            {console.log("reconoci punto "); return 'punto'}
+":"            {console.log("reconoci dos_puntos "); return 'dos_puntos'}
+"{"            {console.log("reconoci llave_abre "); return 'llave_abre'}
+"}"            {console.log("reconoci llave_cierra "); return 'llave_cierra'}
+"("            {console.log("reconoci par_abre "); return 'par_abre'}
+")"            {console.log("reconoci par_cierra "); return 'par_cierra'}
+"["            {console.log("reconoci cor_abre "); return 'cor_abre'}
+"]"            {console.log("reconoci cor_cierra "); return 'cor_cierra'}
+"+="			{console.log("reconoci O_MAS ");	return 'O_MAS';}
+"-="			{console.log("reconoci O_MENOS ");	return 'O_MENOS';}
+"*="			{console.log("reconoci O_POR ");	return 'O_POR';}
+"/="			{console.log("reconoci O_DIVIDIDO ");	return 'O_DIVIDIDO';}
 
 
-\"[^\"]*\"				{ yytext = yytext.substr(1,yyleng-2); return 'cadena'; }
-[0-9]+("."[0-9]+)?\b  	return 'decimal';
-[0-9]+\b				return 'entero';
-([a-zA-Z])[a-zA-Z0-9_]*	return 'identificador';
+\"[^\"]*\"				{ yytext = yytext.substr(1,yyleng-2);console.log("reconoci cadena "); return 'cadena'; }
+[0-9]+("."[0-9]+)  	{console.log("reconoci decimal "); return 'decimal';}
+[0-9]+         			{console.log("reconoci entero"); return 'entero'}
+([a-zA-Z])[a-zA-Z0-9_]*	{console.log("reconoci identificador "); return 'identificador';}
 
-"\'\$""\{"[0-9]+"\}\'"|'{L}' return 'caracter'
+\'[^\']*\' {console.log("reconoci caracter "); return 'caracter'}
 <<EOF>>				return 'EOF';
 .					{ 
-      let s= Unica.getInstance()
-            s.add_error(new error("Lexico","No se reconoce "+yytext,yylineno+1,yylloc.first_column+1));
+      let lexicos= Union.getInstance()
+            lexicos.add_error(new Error_det("Lexico","No se reconoce "+yytext,yylloc.first_line, yylloc.first_column));
     
     console.error('Este es un error léxico: ' + yytext + ', en la linea: ' + yylloc.first_line + ', en la columna: ' + yylloc.first_column); }
 
@@ -168,7 +186,8 @@
 %%
 
 Init    
-    : INSTRUCCIONES EOF  {  return $1;  }
+    : INSTRUCCIONES EOF  {  console.log("termine de analizar"); return $1; }
+    |error EOF {console.log("error sintactico " +$1)}
 ;
 
 INSTRUCCIONES
@@ -178,84 +197,84 @@ INSTRUCCIONES
 
 INSTRUCCION
     : BLOQUE                {  $$ = $1;  }
-    | DECLARACION             ';' {  $$ = $1;  }¿
-    | ASIGNACION        ';' {  $$ = $1;  }
-    | INCREDECRE        ';' {  $$ = $1;  }
-    | PRINT          ';' {  $$ = $1;  }
-    | ARRAY          ';' {  $$ = $1;  }
-    | MATRIZ          ';' {  $$ = $1;  }
-    | ACCESO_ARRAY          ';' {  $$ = $1;  }
-    | ACCESO_MATRIZ          ';' {  $$ = $1;  }
+    | DECLARACION             punto_c {  $$ = $1;  }¿
+    | ASIGNACION        punto_c {  $$ = $1;  }
+    | INCREDECRE        punto_c {  $$ = $1;  }
+    | PRINT punto_c {  $$ = $1;  }
+    | ARRAY          punto_c {  $$ = $1;  }
+    | MATRIZ          punto_c {  $$ = $1;  }
+    | Asignar_arr          punto_c {  $$ = $1;  }
     | IF                 {  $$ = $1;  }
-    | SEGUN          ';' {  $$ = $1;  }
+    | SEGUN           {  $$ = $1;  }
     | MIENTRAS              {  $$ = $1;  }
     | PARA                   {  $$ = $1;  }
-    | DOWHILE           ';' {  $$ = $1;  }
-    | DOUNTIL          ';' {  $$ = $1;  }
-    | OP_TERNARIO       ';' {  $$ = $1;  }
+    | DOWHILE           {  $$ = $1;  }
+    | DOUNTIL           {  $$ = $1;  }
+    | OP_TERNARIO       punto_c {  $$ = $1;  }
     | FUNCION               {  $$ = $1;  }
-    | LLAMADA       ';' {  $$ = $1;  }
-    | TOCHAR ';' {  $$ = $1;  }
-    | TOLOWER          ';' {  $$ = $1;  }
-    | TOUPPER          ';' {  $$ = $1;  }
-    | TOSTRING          ';' {  $$ = $1;  }
-    | ROUND          ';' {  $$ = $1;  }
-    | LENGTH          ';' {  $$ = $1;  }
-    | TYPEOF          ';' {  $$ = $1;  }
-    | ARRAY_PQ      ';' {  $$ = $1;  }
-    | RUN          ';' {  $$ = $1;  }
-    | error            ';'  {  
+    | LLAMADA       punto_c {  $$ = $1;  }
+    | ARRAY_PQ      punto_c {  $$ = $1;  }
+    | RUN          punto_c {  $$ = $1;  }
+    | pr_continue          punto_c {  $$ = new Continue_( @1.first_line, @1.first_column);  }
+    | pr_break          punto_c {  $$ = new Break_( @1.first_line, @1.first_column);  }
+    /*| error             {  
                                 console.log("error sintactico en linea " + (yylineno+1) );
                                 //colocar el siguiente codigo en el archivo grammar.js en el= if(!recovering) como penultima instruccion
-                                //let s=Singleton.getInstance();
+                                //let s=Union.getInstance();
                                 //s.add_error(new error("Sintactico", `El caracter ${(this.terminals_[symbol] || symbol)} no se esperaba en esta posicion`, yyloc.last_line, yyloc.last_column+1))                  
-                            } 
+                            } */
 ;
 
 
 
 //DECLARACION --------------------------------------------------------------------------------------------------
 OP_TERNARIO
-    : '(' Expr  ')' '?' OP_TERNARIO_ST ':' OP_TERNARIO_ST { $$=new OperadorTernario($2, $5, $7 ,@4.first_line, @4.first_column ); } 
+    : par_abre expresion  par_cierra interrogacion_cierra OP_TERNARIO_ST dos_puntos OP_TERNARIO_ST { $$=new OperadorTernario($2, $5, $7 ,@4.first_line, @4.first_column ); }
+;
+OP_TERNARIO_ST
+    : expresion   { $$=$1; }
+    
 ;
 
 DECLARACION
-    : TIPOS LISTAIDS igual expresion punto_c { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
-    |TIPOS LISTAIDS igual par_abre TIPO_VALOR par_cierra expresion punto_c { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
-    | TIPOS LISTAIDS punto_c { $$ = new Declaracion($2, $1, null , @1.first_line, @1.first_column); }
+    : TIPOS LISTAIDS igual expresion  { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
+    |TIPOS LISTAIDS igual par_abre TIPO_VALOR par_cierra expresion  { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
+    | TIPOS LISTAIDS  { $$ = new Declaracion($2, $1, null , @1.first_line, @1.first_column); }
 ;        
     
 //ASIGANACION --------------------------------------------------------------------------------------------------
 
 ASIGNACION
-    : LISTAIDS '=' expresion { $$ = new Asignacion($1, $3, @1.first_line, @1.first_column);  }
+    : LISTAIDS igual expresion { $$ = new Asignacion($1, $3, @1.first_line, @1.first_column);  }
 ;
 
 //PARSEO --------------------------------------------------------------------------------------------------
 
-PARSEO
-    : par_abre TIPO par_cierra expresion punto_c { $$ = new Parseo($2, $4 ); }
+CASTEO
+    : TIPOS LISTAIDS igual par_abre TIPOS par_cierra expresion  { $$ = new Parseo($1, $2, $4 ); }
 ;
 //ARRAY --------------------------------------------------------------------------------------------------
 
 ARRAY
-    : TIPOS cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra punto_c { $$ = new Vector($4, $1,$7 ,$9, @1.first_line, @1.first_column  ); }
-    |TIPOS cor_abre cor_cierra identificador  igual pr_new TIPOS llave_abre lista_valores llave_cierra punto_c { $$ = new Vector($4, $1, $7,$9, @1.first_line, @1.first_column  ); }
+    : TIPOS cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra  { $$ = new Vector($4, [],$1 ,[],$9, @1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra identificador  igual pr_new TIPOS llave_abre PARAMETROS_LLAMADA llave_cierra  { $$ = new Vector($4, $9, $1,[],0, @1.first_line, @1.first_column  ); }
 ;  
 //ARRAY --------------------------------------------------------------------------------------------------
 
 MATRIZ
-    : TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra cor_abre expresion cor_cierra punto_c { $$ = new Matriz($6, $1, $10,$12, $14 ); }
-    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS llave_abre expresion llave_cierra punto_c { $$ = new Matriz($6, $1,$10 ,$12, null ); }
-; 
+    : TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra cor_abre expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],$11, $14,@1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS llave_abre Llenar_mat llave_cierra  { $$ = new Matriz($6, $11, $1,[],0,0, @1.first_line, @1.first_column  ); }
+;  
+LLenar_mat 
+    : Llenar_mat coma llave_abre PARAMETROS_LLAMADA llave_cierra{  $1.push($3);    $$ = $1;   }
+    |llave_abre PARAMETROS_LLAMADA llave_cierra  {    $$ = [$1];                 }
+   ;
 
+Asignar_arr
+    : identificador cor_abre expresion cor_cierra  igual expresion  { $$=new Asignar_arreglo($1, $3  , $6,@1.first_line, @1.first_column); }
+    
+;
 
-ACCESO_ARRAY
-    : identificador cor_abre expresion cor_cierra  igual expresion  { $$=new Acceso_arr($1, $3  , $6, true, @1.first_line, @1.first_column); }
-;
-ACCESO_MATRIZ
-    : identificador cor_abre expresion cor_cierra cor_abre expresion cor_cierra  igual expresion  { $$=new Acceso_arr($1, $3  , $6,$9, true, @1.first_line, @1.first_column); }
-;
 
 //IF----------------------------------------------------------------------------------------------------
 /*IF
@@ -265,23 +284,21 @@ ACCESO_MATRIZ
 	|pr_si  par_abre expresion par_cierra BLOQUE   pr_contrario IF   {$$ = new Si($3, $5,$6, true, null, false) ;}
 ;*/
 IF : 
-    't_if' '(' Expr ')' BLOQUE ELSE_ST { $$ = new Si($3, $5, $6, @1.first_line, @1.first_column);  }
+    pr_si par_abre expresion par_cierra BLOQUE ELSE_ST { $$ = new Si($3, $5, $6, @1.first_line, @1.first_column);  }
 ;
 
 ELSE_ST
-    : 't_else' BLOQUE { $$ = $2;   }
-    | 't_else' IF  { $$ = $2;   }
+    : pr_contrario BLOQUE { $$ = $2;   }
+    | pr_contrario IF  { $$ = $2;   }
     |                 { $$ = null; }
 ;
 //segun---------------------------------------------------------------------------------------------------------------------
 SEGUN
-	:pr_segun par_abre expresion par_cierra llave_abre  Cases llave_cierra {$$ = new Segun($3, $6) ;}
+	:pr_segun par_abre expresion par_cierra llave_abre  Cases llave_cierra //{$$ = new Segun($3, $6) ;}
 	
 ;
 Cases:
-    CASE DEFAULT {$$=$1;}
-    |CASE {$$=$1;}
-    |DEFAULT   {$$=$1;}
+    CASE //{$$=$1;}
     ;
 CASE:
     pr_case expresion dos_puntos BLOQUE punto_c 
@@ -309,6 +326,13 @@ ITERADOR
     | INCREDECRE  { $$=$1; }
    ;
 
+INCREDECRE
+    :   '++' identificador   { $$= new Incre($1,$2,@2.first_line,@2.first_column); }
+    |   identificador  '++'  { $$= new Incre($2,$1,@1.first_line,@1.first_column); }
+    |   identificador  '--'  { $$= new Incre($2,$1,@1.first_line,@1.first_column); }
+    |   '--' identificador   { $$= new Incre($1,$2,@2.first_line,@2.first_column); }
+;
+
 
 DOWHILE
     : pr_do BLOQUE pr_while par_abre expresion par_cierra  {  $$ = new DoWhile($5, $2, @1.first_line, @1.first_column);    }
@@ -318,11 +342,11 @@ DOUNTIL
 ;
 
 
-IMPRIMIR 
-    : pr_imprimir '(' expresion ')'  { $$ = new Imprimir($3  , @1.first_line, @1.first_column); }
-    | pr_imprimir '('      ')'  { $$ = new Imprimir(null, @1.first_line, @1.first_column); }
-    |pr_imprimir_ln '(' expresion ')'  { $$ = new Imprimir_nl($3  , @1.first_line, @1.first_column); }
-    | pr_imprimir_ln '('      ')'  { $$ = new Imprimir_nl(null, @1.first_line, @1.first_column); }
+PRINT 
+    : pr_imprimir par_abre expresion par_cierra  { $$ = new Imprimir($3  , @1.first_line, @1.first_column); }
+    | pr_imprimir par_abre par_cierra  { $$ = new Imprimir(null, @1.first_line, @1.first_column); }
+    |pr_imprimir_ln par_abre expresion par_cierra  { $$ = new Imprimir_nl($3  , @1.first_line, @1.first_column); }
+    | pr_imprimir_ln par_abre      par_cierra  { $$ = new Imprimir_nl(null, @1.first_line, @1.first_column); }
 ;
 
 
@@ -332,18 +356,23 @@ IMPRIMIR
 /* --------------------------------------- funcion   -------------------------------------  */
 
 FUNCION
-    : identificador '('            ')'      dos_puntos  TIPOS      BLOQUE { $$ = new Funcion($1, $6, [], $5, @1.first_line, @1.first_column); }
-    | identificador '(' PARAMETROS ')'     dos_puntos TIPOS         BLOQUE { $$ = new Funcion($1, $6, $3, $5, @1.first_line, @1.first_column); }
-    | identificador '('            ')' ':' pr_void BLOQUE { $$ = new Funcion($1, $7, [], "void", @1.first_line, @1.first_column); }
-    | identificador '(' PARAMETROS ')' ':' pr_void BLOQUE { $$ = new Funcion($1, $7, $3, "void", @1.first_line, @1.first_column); }
+    : identificador par_abre            par_cierra      dos_puntos  TIPOS      BLOQUE  { $$ = new Funcion($1, $6, [], $5,$7, @1.first_line, @1.first_column); }
+    | identificador par_abre PARAMETROS par_cierra     dos_puntos TIPOS         BLOQUE  { $$ = new Funcion($1, $6, $3, $5, $8, @1.first_line, @1.first_column); }
+    | identificador par_abre            par_cierra dos_puntos pr_void BLOQUE { $$ = new Funcion($1, $7, [], "void",null, @1.first_line, @1.first_column); }
+    | identificador par_abre PARAMETROS par_cierra dos_puntos pr_void BLOQUE { $$ = new Funcion($1, $7, $3, "void",null, @1.first_line, @1.first_column); }
+;
+RETORNO
+    : pr_retorno expresion {$$ = $2}
+    |pr_retorno{$$ = "ret"}
+
 ;
 LISTAIDS
-    : LISTAIDS ',' identificador   { $1.push($3); $$ = $1;  }
+    : LISTAIDS coma identificador   { $1.push($3); $$ = $1;  }
     |                identificador { $$ = [$1];             }
 ;
 PARAMETROS
-    : PARAMETROS ',' identificador ':' TIPOS  { $1.push($3+","+$5); $$ = $1;  }
-    |                identificador ':' TIPOS  { $$ = [$1+","+$3];             }
+    : PARAMETROS coma identificador dos_puntos TIPOS  { $1.push($3+","+$5); $$ = $1;  }
+    |                identificador dos_puntos TIPOS  { $$ = [$1+","+$3];             }
 ;
 
 TIPOS
@@ -355,55 +384,53 @@ TIPOS
 ;
 
 LLAMADA
-    : identificador '('                        ')' { $$ = new LLAMADA($1, [], @1.first_line, @1.first_column);  }
-    | identificador '(' PARAMETROS_LLAMADA ')' { $$ = new LLAMADA($1, $3, @1.first_line, @1.first_column);  }
+    : identificador par_abre                        par_cierra { $$ = new LLAMADA($1, [], @1.first_line, @1.first_column);  }
+    | identificador par_abre PARAMETROS_LLAMADA par_cierra { $$ = new LLAMADA($1, $3, @1.first_line, @1.first_column);  }
 ;
 
 PARAMETROS_LLAMADA 
-    : PARAMETROS_LLAMADA ',' expresion  {    $1.push($3);    $$ = $1;   }
+    : PARAMETROS_LLAMADA coma expresion  {    $1.push($3);    $$ = $1;   }
     |                            expresion  {    $$ = [$1];                 }
 ;    
 
 TOLOWER
-    : pr_minuscula '('       expresion   ')' { $$ = new To_lower($3, @1.first_line, @1.first_column);  }
+    : pr_minuscula par_abre       expresion   par_cierra { $$ = new To_lower($3, @1.first_line, @1.first_column);  }
    ;
 TOUPPER
-    : pr_mayuscula '('       expresion   ')' { $$ = new To_upper($3, @1.first_line, @1.first_column);  }
+    : pr_mayuscula par_abre       expresion   par_cierra { $$ = new To_upper($3, @1.first_line, @1.first_column);  }
    ;
 
 ROUND
-    : pr_redondear '('       expresion   ')' { $$ = new Redondear($3,  @1.first_line, @1.first_column);  }
+    : pr_redondear par_abre       expresion   par_cierra { $$ = new Redondear($3,  @1.first_line, @1.first_column);  }
    ;
 LENGTH
-    : pr_longi '('       expresion   ')' { $$ = new Longitud($3,  @1.first_line, @1.first_column);  }
+    : pr_longi par_abre       expresion   par_cierra { $$ = new Longitud($3,  @1.first_line, @1.first_column);  }
    ;
 TYPEOF
-    : pr_tipo '('       expresion   ')' { $$ = new Tipo($3, @1.first_line, @1.first_column);  }
+    : pr_tipo par_abre       expresion   par_cierra { $$ = new Tipo($3, @1.first_line, @1.first_column);  }
    ;
 
 TOSTRING
-    : pr_a_cadena '('       expresion   ')' { $$ = new To_string($3,@1.first_line, @1.first_column);  }
+    : pr_a_cadena par_abre       expresion   par_cierra { $$ = new To_string($3,@1.first_line, @1.first_column);  }
    ;
 
 TOCHAR
-    : pr_arreglo '('       expresion   ')' punto_c { $$ = new To_arr($3,  @1.first_line, @1.first_column);  }
+    : pr_arreglo par_abre       expresion   par_cierra punto_c { $$ = new To_arr($3,  @1.first_line, @1.first_column);  }
    ;
 ARRAY_PQ
-    : identificador '.' pr_push '(' Expresion ')'                        { $$=new Arreglo_mod($1 , $5  , true ,false, @1.first_line, @1.first_column); }
-    | identificador '.' pr_pop  '(' ')'                             { $$=new Arreglo_mod($1, null, false,true , @1.first_line, @1.first_column); }
-    | ID              '=' '[' CALLFUNCION_PARAMETROS ']'  { $$=new ArregloAsignacion($1, $4  , null, null, @1.first_line, @1.first_column); }
-    | ID '[' Expresion ']' '='  Expresion                           { $$=new ArregloAsignacion($1, null, $3  , $6  , @1.first_line, @1.first_column); }
+    : identificador punto pr_push par_abre Expresion par_cierra                        { $$=new Arreglo_mod($1 , $5  , true ,false, @1.first_line, @1.first_column); }
+    | identificador punto pr_pop  par_abre par_cierra                             { $$=new Arreglo_mod($1, null, false,true , @1.first_line, @1.first_column); }
 ;
 
 RUN
     : pr_run identificador par_abre par_cierra punto_c { $$=new Run($1, [], @1.first_line, @1.first_column); }
-    | pr_run identificador '(' PARAMETROS_LLAMADA ')' { $$ = new RUN($1, $3, @1.first_line, @1.first_column);  }
+    | pr_run identificador par_abre PARAMETROS_LLAMADA par_cierra { $$ = new RUN($1, $3, @1.first_line, @1.first_column);  }
 ;
 //bloque------------------------------------------------------------
 
 BLOQUE
-    : '{' INSTRUCCIONES '}' { $$ = new Instruccion($2         , @1.first_line, @1.first_column); }
-    | '{'              '}' { $$ = new Instruccion(new Array(), @1.first_line, @1.first_column); }
+    : llave_abre INSTRUCCIONES  llave_cierra { $$ = new Instrucciones($2 ,$3        , @1.first_line, @1.first_column); }
+     | llave_abre              llave_cierra { $$ = new Instrucciones(new Array(),null, @1.first_line, @1.first_column); }
 ;
 
 
@@ -415,10 +442,10 @@ BLOQUE
 
 expresion 
     : '-'  expresion %prec UMENOS { $$ = new Operacion($2, $2, Tipo.NEGACION,        @1.first_line, @1.first_column); }       
-    | identificador  '++'               { $$ = new IncreDecre(Incremento_op.INCREMENTO1, $1, @1.first_line, @1.first_column); } 
-    | '++' identificador                { $$ = new IncreDecre(Incremento_op.INCREMENTO2, $2, @2.first_line, @2.first_column); } 
-    | identificador  '--'               { $$ = new IncreDecre(Incremento_op.DECREMENTO1, $1, @1.first_line, @1.first_column); } 
-    | '--' identificador                { $$ = new IncreDecre(Incremento_op.DECREMENTO2, $2, @2.first_line, @2.first_column); } 
+    | identificador  '++'               { $$ = new Incremento(Incremento_op.INCREMENTO1, $1, @1.first_line, @1.first_column); } 
+    | '++' identificador                { $$ = new Incremento(Incremento_op.INCREMENTO2, $2, @2.first_line, @2.first_column); } 
+    | identificador  '--'               { $$ = new Incremento(Incremento_op.DECREMENTO1, $1, @1.first_line, @1.first_column); } 
+    | '--' identificador                { $$ = new Incremento(Incremento_op.DECREMENTO2, $2, @2.first_line, @2.first_column); } 
     | expresion '+'  expresion { $$ = new Operacion($1, $3, Tipo.MAS            , @2.first_line, @2.first_column); }       
     | expresion '-' expresion { $$ = new Operacion($1, $3, Tipo.MENOS          , @2.first_line, @2.first_column); }
     | expresion '*'  expresion { $$ = new Operacion($1, $3, Tipo.MULTIPLICACION , @2.first_line, @2.first_column); }       
@@ -429,23 +456,32 @@ expresion
     | expresion '<=' expresion { $$ = new Relacional($1, $3, Tipo.MENORIGUAL     , @2.first_line, @2.first_column); }
     | expresion '>'  expresion { $$ = new Relacional($1, $3, Tipo.MAYOR          , @2.first_line, @2.first_column); }
     | expresion '>=' expresion { $$ = new Relacional($1, $3, Tipo.MAYORIGUAL     , @2.first_line, @2.first_column); }
-    | expresion '==' expresion { $$ = new Relacinal($1, $3, Tipo.IGUAL          , @2.first_line, @2.first_column); }
+    | expresion '==' expresion { $$ = new Relacional($1, $3, Tipo.IGUAL          , @2.first_line, @2.first_column); }
     | expresion '!=' expresion { $$ = new Relacional($1, $3, Tipo.DIFERENCIACION , @2.first_line, @2.first_column); }
     | expresion '&&' expresion { $$ = new Logica($1, $3,Tipo.AND  , @2.first_line, @2.first_column); }
     | expresion '||' expresion { $$ = new Logica($1, $3,Tipo.OR   , @2.first_line, @2.first_column); }
     | '!' expresion       { $$ = new Logica($2, $2,Tipo.NOT  , @1.first_line, @1.first_column); }
-    | tip  {  $$ = $1; }
-    | identificador '['  expresion ']'           { $$= new Acceso_arr($1,true ,true ,$3  ,@1.first_line, @1.first_column); }
-    |PARSEO { $$= new Parseo($$ = $1 }
+    | TOCHAR punto_c {  $$ = $1;  }
+    | TOLOWER          punto_c {  $$ = $1;  }
+    | TOUPPER          punto_c {  $$ = $1;  }
+    | TOSTRING          punto_c {  $$ = $1;  }
+    | ROUND          punto_c {  $$ = $1;  }
+    | OP_TERNARIO       punto_c {  $$ = $1;  }
+    | LENGTH          punto_c {  $$ = $1;  }
+    | TYPEOF          punto_c {  $$ = $1;  }| tip  {  $$ = $1; }
+    | identificador punto pr_longi          { $$= new Acceso_arr($1,false,false,null,@1.first_line, @1.first_column); }
+    | identificador cor_abre  expresion cor_cierra           { $$= new Acceso_arr($1,true ,true ,$3  ,@1.first_line, @1.first_column); }
+    
 ;
 
 tip   
-    : '(' expresion ')'  {  $$ = $2; } 
-    | entero      {  $$ = new Variable($1,                   Type.NUMBER , @1.first_line, @1.first_column); }
+    : par_abre expresion par_cierra  {  $$ = $2; } 
+    |PARSEO    {$$ = $1;}
+    | entero      {  $$ = new Variable($1,                   Type.INT , @1.first_line, @1.first_column); }
     | decimal         {  $$ = new Variable($1,                   Type.DOUBLE , @1.first_line, @1.first_column); }
     | cadena        {  $$ = new Variable($1.replace(/\"/g,""), Type.STRING , @1.first_line, @1.first_column); }
     | caracter       {  $$ = new Variable($1.replace(/\'/g,""), Type.CHAR , @1.first_line, @1.first_column); }
-    | true          {  $$ = new Variable(true,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
-    | false         {  $$ = new Variable(false,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
+    | pr_true          {  $$ = new Variable(true,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
+    | pr_false         {  $$ = new Variable(false,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
     | identificador            {  $$ = new Acceso($1,@1.first_line, @1.first_column);  }
 ;

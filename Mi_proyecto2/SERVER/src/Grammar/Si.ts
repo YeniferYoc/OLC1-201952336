@@ -3,7 +3,7 @@ import { Expresion } from "./Expresion"
 import { Instruccion } from "./instruccion"
 import { get, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-export class If extends Instruccion {
+export class Si extends Instruccion {
 
     constructor(
         private condition: Expresion,

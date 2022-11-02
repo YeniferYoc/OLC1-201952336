@@ -3,6 +3,7 @@ import express, {Application} from 'express';
 import ndexroutes from './routes/indexroutes';
 import morgan from 'morgan';
 import cors from 'cors';
+import { Tabla_s } from './Grammar/Tabla_s';
 class Server {
     public app: Application;
     constructor(){
@@ -27,7 +28,7 @@ class Server {
             console.log(variable.length)
             let nu = 2;
             let potencia = nu**6;
-            console.log(potencia+"potencia")
+            console.log(potencia+"pot")
             let varible_:string = nu.toString()+" hola";
             console.log(varible_)
         for(let a of variable){
@@ -35,10 +36,62 @@ class Server {
         }
             let var1 = 1;
             console.log(var1)
+           
             
+            var fs= require('fs') ;
+
+            var mygramatica = require('./Grammar/Gramatica.js')
+            
+            
+            
+            fs.readFile('./src/entrada.txt',(err:any,data:any)=>{
+                //si hay un error
+                if (err) throw err;
+            
+            
+                //si no hay errores
+                //gramatica.parse
+                console.log("hola \\\' tu");
+                console.log(data.toString());
+                console.log("ahora toca anal       izarrrdD")
+                mygramatica.parse(data.toString())
+            
+            })
+
+
             
         });
     }
 }
 const server = new Server();
 server.start();
+/*
+
+
+            const parser = require("./Grammar/Gramatica");
+            const fs = require("fs");
+            
+            try {
+                console.log("entoncere")
+                const entrada = fs.readFileSync("./src/entrada.txt");
+                const ast = parser.parse(entrada.toString());
+                const env= new Tabla_s(null);
+            
+                for (const instruccion of ast) {
+                    try {
+                        instruccion.ejecutar(env);
+                    } catch (error) {
+                        console.log(error);
+                        
+                    }
+                }
+            
+                
+                
+            } catch (error) {
+                console.log(error);
+                
+            }
+
+s
+*/

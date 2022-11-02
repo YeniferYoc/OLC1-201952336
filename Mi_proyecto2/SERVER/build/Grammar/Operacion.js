@@ -13,10 +13,28 @@ class Operacion extends Expresion_1.Expresion {
         this.type = type;
     }
     Convertir(caracter) {
-        return 0;
+        let alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let minuscula = "abcdefghijklmnopqrstuvwxyz";
+        let contador = 0;
+        let retor = 0;
+        for (let letra of alfabeto) {
+            if (letra == caracter) {
+                retor = contador;
+            }
+            contador++;
+        }
+        contador = 0;
+        for (let letra of minuscula) {
+            if (letra == caracter) {
+                retor = contador;
+            }
+            contador++;
+        }
+        return contador;
     }
-    execute(tabla) {
+    ejecutar(tabla) {
         let resultado;
+        resultado = resultado = { value: ("error de operacion"), type: Ret_1.Type.STRING };
         const izquierdo = this.iz.ejecutar(tabla);
         const derecho = this.der.ejecutar(tabla);
         /**
@@ -24,47 +42,89 @@ class Operacion extends Expresion_1.Expresion {
          */
         if (this.type == Aritmetic_s_1.Aritmetic_s.MAS) {
             //NUMERO NUMERO---------------------------------------------
-            if (derecho.type == Ret_1.Type.NUMBER && izquierdo.type == Ret_1.Type.NUMBER) {
-                resultado = { value: (izquierdo.value + derecho.value), type: Ret_1.Type.NUMBER };
+            if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.INT) {
+                resultado = { value: (izquierdo.value + derecho.value), type: Ret_1.Type.INT };
+            }
+            if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.DOUBLE) {
+                resultado = { value: (izquierdo.value + derecho.value), type: Ret_1.Type.DOUBLE };
             }
             //NUMERO BOOLEAN---------------------------------------------
-            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.NUMBER) {
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.INT) {
                 if (izquierdo.value == "verdadero") {
-                    resultado = { value: (1 + derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (1 + derecho.value), type: Ret_1.Type.INT };
                 }
                 else {
-                    resultado = { value: (derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (derecho.value), type: Ret_1.Type.INT };
                 }
             }
-            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.NUMBER) {
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.INT) {
                 if (derecho.value == "verdadero") {
-                    resultado = { value: (1 + izquierdo.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (1 + izquierdo.value), type: Ret_1.Type.INT };
                 }
                 else {
-                    resultado = { value: (izquierdo.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value), type: Ret_1.Type.INT };
                 }
-            } //NUMERO CHAR ---------------------------------------------
-            else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.NUMBER) {
+            }
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.DOUBLE) {
+                if (izquierdo.value == "verdadero") {
+                    resultado = { value: (1 + derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    resultado = { value: (derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+            }
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.DOUBLE) {
+                if (derecho.value == "verdadero") {
+                    resultado = { value: (1 + izquierdo.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    resultado = { value: (izquierdo.value), type: Ret_1.Type.DOUBLE };
+                }
+            }
+            //NUMERO CHAR ---------------------------------------------
+            else if (izquierdo.type == Ret_1.Type.CHAR && derecho.type == Ret_1.Type.INT) {
                 let comprobar_longi = izquierdo.value.length;
                 if (comprobar_longi == 1) {
                     let ascci_ = this.Convertir(izquierdo.value);
-                    resultado = { value: (ascci_ + derecho.value), type: Ret_1.Type.NUMBER };
-                }
-                else {
-                    let suma_cad = izquierdo.value + derecho.value.toString();
-                    resultado = { value: (suma_cad), type: Ret_1.Type.STRING };
+                    resultado = { value: (ascci_ + derecho.value), type: Ret_1.Type.INT };
                 }
             }
-            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.NUMBER) {
+            else if (derecho.type == Ret_1.Type.CHAR && izquierdo.type == Ret_1.Type.INT) {
                 let comprobar_longi = derecho.value.length;
                 if (comprobar_longi == 1) {
                     let ascci_ = this.Convertir(derecho.value);
-                    resultado = { value: (ascci_ + izquierdo.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (ascci_ + izquierdo.value), type: Ret_1.Type.INT };
                 }
-                else {
-                    let suma_cad = derecho.value + izquierdo.value.toString();
-                    resultado = { value: (suma_cad), type: Ret_1.Type.STRING };
+            }
+            else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.INT) {
+                let suma_cad = izquierdo.value + derecho.value.toString();
+                resultado = { value: (suma_cad), type: Ret_1.Type.STRING };
+            }
+            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.INT) {
+                let suma_cad = derecho.value + izquierdo.value.toString();
+                resultado = { value: (suma_cad), type: Ret_1.Type.STRING };
+            }
+            else if (izquierdo.type == Ret_1.Type.CHAR && derecho.type == Ret_1.Type.DOUBLE) {
+                let comprobar_longi = izquierdo.value.length;
+                if (comprobar_longi == 1) {
+                    let ascci_ = this.Convertir(izquierdo.value);
+                    resultado = { value: (ascci_ + derecho.value), type: Ret_1.Type.DOUBLE };
                 }
+            }
+            else if (derecho.type == Ret_1.Type.CHAR && izquierdo.type == Ret_1.Type.DOUBLE) {
+                let comprobar_longi = derecho.value.length;
+                if (comprobar_longi == 1) {
+                    let ascci_ = this.Convertir(derecho.value);
+                    resultado = { value: (ascci_ + izquierdo.value), type: Ret_1.Type.DOUBLE };
+                }
+            }
+            else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.DOUBLE) {
+                let suma_cad = izquierdo.value + derecho.value.toString();
+                resultado = { value: (suma_cad), type: Ret_1.Type.STRING };
+            }
+            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.DOUBLE) {
+                let suma_cad = derecho.value + izquierdo.value.toString();
+                resultado = { value: (suma_cad), type: Ret_1.Type.STRING };
             }
             //BOOLEAN CON CADENA---------------------------------------------
             else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.BOOLEAN) {
@@ -101,62 +161,92 @@ class Operacion extends Expresion_1.Expresion {
         */
         else if (this.type == Aritmetic_s_1.Aritmetic_s.MENOS) {
             //NUMERO NUMERO---------------------------------------------
-            if (derecho.type == Ret_1.Type.NUMBER && izquierdo.type == Ret_1.Type.NUMBER) {
-                resultado = { value: (izquierdo.value - derecho.value), type: Ret_1.Type.NUMBER };
+            if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.INT) {
+                resultado = { value: (izquierdo.value - derecho.value), type: Ret_1.Type.INT };
+            }
+            else if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.DOUBLE) {
+                resultado = { value: (izquierdo.value - derecho.value), type: Ret_1.Type.DOUBLE };
+            }
+            else if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.INT) {
+                resultado = { value: (izquierdo.value - derecho.value), type: Ret_1.Type.DOUBLE };
+            }
+            else if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.DOUBLE) {
+                resultado = { value: (izquierdo.value - derecho.value), type: Ret_1.Type.DOUBLE };
             }
             //NUMERO BOOLEAN---------------------------------------------
-            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.NUMBER) {
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.INT) {
                 if (izquierdo.value == "verdadero") {
-                    resultado = { value: (1 - derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (1 - derecho.value), type: Ret_1.Type.INT };
                 }
                 else {
-                    resultado = { value: (derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (derecho.value), type: Ret_1.Type.INT };
                 }
             }
-            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.NUMBER) {
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.INT) {
                 if (derecho.value == "verdadero") {
-                    resultado = { value: (izquierdo.value - 1), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value - 1), type: Ret_1.Type.INT };
                 }
                 else {
-                    resultado = { value: (izquierdo.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value), type: Ret_1.Type.INT };
                 }
-            } //NUMERO CHAR ---------------------------------------------
-            else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.NUMBER) {
+            }
+            //NUMERO CHAR ---------------------------------------------
+            else if (izquierdo.type == Ret_1.Type.CHAR && derecho.type == Ret_1.Type.INT) {
                 let comprobar_longi = izquierdo.value.length;
                 if (comprobar_longi == 1) {
                     let ascci_ = this.Convertir(izquierdo.value);
-                    resultado = { value: (ascci_ - derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (ascci_ - derecho.value), type: Ret_1.Type.INT };
                 }
                 else {
-                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando rresa, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
                 }
             }
-            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.NUMBER) {
+            else if (derecho.type == Ret_1.Type.CHAR && izquierdo.type == Ret_1.Type.INT) {
                 let comprobar_longi = derecho.value.length;
                 if (comprobar_longi == 1) {
                     let ascci_ = this.Convertir(derecho.value);
-                    resultado = { value: (izquierdo.value - ascci_), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value - ascci_), type: Ret_1.Type.INT };
                 }
                 else {
-                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando resta, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                }
+            }
+            else if (izquierdo.type == Ret_1.Type.CHAR && derecho.type == Ret_1.Type.DOUBLE) {
+                let comprobar_longi = izquierdo.value.length;
+                if (comprobar_longi == 1) {
+                    let ascci_ = this.Convertir(izquierdo.value);
+                    resultado = { value: (ascci_ - derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando resta, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                }
+            }
+            else if (derecho.type == Ret_1.Type.CHAR && izquierdo.type == Ret_1.Type.DOUBLE) {
+                let comprobar_longi = derecho.value.length;
+                if (comprobar_longi == 1) {
+                    let ascci_ = this.Convertir(derecho.value);
+                    resultado = { value: (izquierdo.value - ascci_), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando resta, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
                 }
             }
             //CARACTER CARACTER -------------------------------------------------------------
-            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.STRING) {
+            else if (derecho.type == Ret_1.Type.CHAR && izquierdo.type == Ret_1.Type.CHAR) {
                 let comprobar_longi = derecho.value.length;
                 let comprobar_longi2 = izquierdo.value.length;
                 if (comprobar_longi == 1 && comprobar_longi2 == 1) {
                     let ascci_ = this.Convertir(derecho.value);
                     let ascci_2 = this.Convertir(izquierdo.value);
-                    resultado = { value: (ascci_2 - ascci_), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (ascci_2 - ascci_), type: Ret_1.Type.INT };
                 }
                 else {
-                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando resta, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
                 }
             }
             //CUALQUIER OTRO TIPO -------------------------------------------------------
             else {
-                throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando resta, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
             }
         }
         /**
@@ -164,41 +254,87 @@ class Operacion extends Expresion_1.Expresion {
         */
         else if (this.type == Aritmetic_s_1.Aritmetic_s.MULTIPLICACION) {
             //NUMERO NUMERO---------------------------------------------
-            if (derecho.type == Ret_1.Type.NUMBER && izquierdo.type == Ret_1.Type.NUMBER) {
-                resultado = { value: (izquierdo.value * derecho.value), type: Ret_1.Type.NUMBER };
+            if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.INT) {
+                resultado = { value: (izquierdo.value * derecho.value), type: Ret_1.Type.INT };
+            }
+            if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.DOUBLE) {
+                resultado = { value: (izquierdo.value * derecho.value), type: Ret_1.Type.DOUBLE };
+            }
+            if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.INT) {
+                resultado = { value: (izquierdo.value * derecho.value), type: Ret_1.Type.DOUBLE };
+            }
+            if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.DOUBLE) {
+                resultado = { value: (izquierdo.value * derecho.value), type: Ret_1.Type.DOUBLE };
             }
             //NUMERO BOOLEAN---------------------------------------------
-            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.NUMBER) {
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.INT) {
                 if (izquierdo.value == "verdadero") {
-                    resultado = { value: (1 * derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (1 * derecho.value), type: Ret_1.Type.INT };
                 }
                 else {
-                    resultado = { value: (0 * derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (0 * derecho.value), type: Ret_1.Type.INT };
                 }
             }
-            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.NUMBER) {
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.INT) {
                 if (derecho.value == "verdadero") {
-                    resultado = { value: (izquierdo.value * 1), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value * 1), type: Ret_1.Type.INT };
                 }
                 else {
-                    resultado = { value: (izquierdo.value * 0), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value * 0), type: Ret_1.Type.INT };
                 }
-            } //NUMERO CHAR ---------------------------------------------
-            else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.NUMBER) {
+            }
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.DOUBLE) {
+                if (izquierdo.value == "verdadero") {
+                    resultado = { value: (1 * derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    resultado = { value: (0 * derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+            }
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.DOUBLE) {
+                if (derecho.value == "verdadero") {
+                    resultado = { value: (izquierdo.value * 1), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    resultado = { value: (izquierdo.value * 0), type: Ret_1.Type.DOUBLE };
+                }
+            }
+            //NUMERO CHAR ---------------------------------------------
+            else if (izquierdo.type == Ret_1.Type.CHAR && derecho.type == Ret_1.Type.INT) {
                 let comprobar_longi = izquierdo.value.length;
                 if (comprobar_longi == 1) {
                     let ascci_ = this.Convertir(izquierdo.value);
-                    resultado = { value: (ascci_ * derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (ascci_ * derecho.value), type: Ret_1.Type.INT };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando MULT, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                }
+            }
+            else if (derecho.type == Ret_1.Type.CHAR && izquierdo.type == Ret_1.Type.INT) {
+                let comprobar_longi = derecho.value.length;
+                if (comprobar_longi == 1) {
+                    let ascci_ = this.Convertir(derecho.value);
+                    resultado = { value: (izquierdo.value * ascci_), type: Ret_1.Type.INT };
                 }
                 else {
                     throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
                 }
             }
-            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.NUMBER) {
+            else if (izquierdo.type == Ret_1.Type.CHAR && derecho.type == Ret_1.Type.DOUBLE) {
+                let comprobar_longi = izquierdo.value.length;
+                if (comprobar_longi == 1) {
+                    let ascci_ = this.Convertir(izquierdo.value);
+                    resultado = { value: (ascci_ * derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando MULT, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                }
+            }
+            else if (derecho.type == Ret_1.Type.CHAR && izquierdo.type == Ret_1.Type.DOUBLE) {
                 let comprobar_longi = derecho.value.length;
                 if (comprobar_longi == 1) {
                     let ascci_ = this.Convertir(derecho.value);
-                    resultado = { value: (izquierdo.value * ascci_), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value * ascci_), type: Ret_1.Type.DOUBLE };
                 }
                 else {
                     throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
@@ -211,55 +347,104 @@ class Operacion extends Expresion_1.Expresion {
                 if (comprobar_longi == 1 && comprobar_longi2 == 1) {
                     let ascci_ = this.Convertir(derecho.value);
                     let ascci_2 = this.Convertir(izquierdo.value);
-                    resultado = { value: (ascci_2 * ascci_), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (ascci_2 * ascci_), type: Ret_1.Type.INT };
                 }
                 else {
-                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando MULT, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
                 }
             }
             //CUALQUIER OTRO TIPO -------------------------------------------------------
             else {
-                throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando MULT, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
             }
         }
+        /**
+       * division---------------------------------------------------------------------------------
+       */
         else if (this.type == Aritmetic_s_1.Aritmetic_s.DIV) {
             //NUMERO NUMERO---------------------------------------------
-            if (derecho.type == Ret_1.Type.NUMBER && izquierdo.type == Ret_1.Type.NUMBER) {
+            if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.INT) {
                 if (derecho.value != 0) {
-                    resultado = { value: (izquierdo.value / derecho.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value / derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
+                }
+            }
+            if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.DOUBLE) {
+                if (derecho.value != 0) {
+                    resultado = { value: (izquierdo.value / derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
+                }
+            }
+            if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.DOUBLE) {
+                if (derecho.value != 0) {
+                    resultado = { value: (izquierdo.value / derecho.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
+                }
+            }
+            if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.INT) {
+                if (derecho.value != 0) {
+                    resultado = { value: (izquierdo.value / derecho.value), type: Ret_1.Type.DOUBLE };
                 }
                 else {
                     throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
                 }
             }
             //NUMERO BOOLEAN---------------------------------------------
-            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.NUMBER) {
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.INT) {
                 if (derecho.value != 0) {
                     if (izquierdo.value == "verdadero") {
-                        resultado = { value: (1 / derecho.value), type: Ret_1.Type.NUMBER };
+                        resultado = { value: (1 / derecho.value), type: Ret_1.Type.INT };
                     }
                     else {
-                        resultado = { value: (0 / derecho.value), type: Ret_1.Type.NUMBER };
+                        resultado = { value: (0 / derecho.value), type: Ret_1.Type.INT };
                     }
                 }
                 else {
                     throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
                 }
             }
-            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.NUMBER) {
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.INT) {
                 if (derecho.value == "verdadero") {
-                    resultado = { value: (izquierdo.value), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value), type: Ret_1.Type.INT };
                 }
                 else {
                     throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
                 }
-            } //NUMERO CHAR ---------------------------------------------
-            else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.NUMBER) {
+            }
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.DOUBLE) {
+                if (derecho.value != 0) {
+                    if (izquierdo.value == "verdadero") {
+                        resultado = { value: (1 / derecho.value), type: Ret_1.Type.DOUBLE };
+                    }
+                    else {
+                        resultado = { value: (0 / derecho.value), type: Ret_1.Type.DOUBLE };
+                    }
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
+                }
+            }
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.DOUBLE) {
+                if (derecho.value == "verdadero") {
+                    resultado = { value: (izquierdo.value), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
+                }
+            }
+            //NUMERO CHAR ---------------------------------------------
+            else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.INT) {
                 let comprobar_longi = izquierdo.value.length;
                 if (derecho.value != 0) {
                     if (comprobar_longi == 1) {
                         let ascci_ = this.Convertir(izquierdo.value);
-                        resultado = { value: (ascci_ / derecho.value), type: Ret_1.Type.NUMBER };
+                        resultado = { value: (ascci_ / derecho.value), type: Ret_1.Type.DOUBLE };
                     }
                     else {
                         throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
@@ -269,24 +454,49 @@ class Operacion extends Expresion_1.Expresion {
                     throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
                 }
             }
-            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.NUMBER) {
+            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.INT) {
                 let comprobar_longi = derecho.value.length;
                 if (comprobar_longi == 1) {
                     let ascci_ = this.Convertir(derecho.value);
-                    resultado = { value: (izquierdo.value / ascci_), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (izquierdo.value / ascci_), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                }
+            }
+            else if (izquierdo.type == Ret_1.Type.STRING && derecho.type == Ret_1.Type.DOUBLE) {
+                let comprobar_longi = izquierdo.value.length;
+                if (derecho.value != 0) {
+                    if (comprobar_longi == 1) {
+                        let ascci_ = this.Convertir(izquierdo.value);
+                        resultado = { value: (ascci_ / derecho.value), type: Ret_1.Type.DOUBLE };
+                    }
+                    else {
+                        throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+                    }
+                }
+                else {
+                    throw new Error_det_1.Error_det("Semantico", "No se puede realizar una division entre 0", this.linea, this.columna);
+                }
+            }
+            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.DOUBLE) {
+                let comprobar_longi = derecho.value.length;
+                if (comprobar_longi == 1) {
+                    let ascci_ = this.Convertir(derecho.value);
+                    resultado = { value: (izquierdo.value / ascci_), type: Ret_1.Type.DOUBLE };
                 }
                 else {
                     throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
                 }
             }
             //CARACTER CARACTER -------------------------------------------------------------
-            else if (derecho.type == Ret_1.Type.STRING && izquierdo.type == Ret_1.Type.STRING) {
+            else if (derecho.type == Ret_1.Type.CHAR && izquierdo.type == Ret_1.Type.CHAR) {
                 let comprobar_longi = derecho.value.length;
                 let comprobar_longi2 = izquierdo.value.length;
                 if (comprobar_longi == 1 && comprobar_longi2 == 1) {
                     let ascci_ = this.Convertir(derecho.value);
                     let ascci_2 = this.Convertir(izquierdo.value);
-                    resultado = { value: (ascci_2 / ascci_), type: Ret_1.Type.NUMBER };
+                    resultado = { value: (ascci_2 / ascci_), type: Ret_1.Type.DOUBLE };
                 }
                 else {
                     throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando suma, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
@@ -298,11 +508,66 @@ class Operacion extends Expresion_1.Expresion {
             }
         }
         /**
+                * potencia---------------------------------------------------------------------------------
+                */
+        else if (this.type == Aritmetic_s_1.Aritmetic_s.POT) {
+            //NUMERO NUMERO---------------------------------------------
+            if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.INT) {
+                resultado = { value: (Math.pow(izquierdo.value, derecho.value)), type: Ret_1.Type.INT };
+            }
+            if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.DOUBLE) {
+                resultado = { value: (Math.pow(izquierdo.value, derecho.value)), type: Ret_1.Type.DOUBLE };
+            }
+            if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.DOUBLE) {
+                resultado = { value: (Math.pow(izquierdo.value, derecho.value)), type: Ret_1.Type.DOUBLE };
+            }
+            if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.INT) {
+                resultado = { value: (Math.pow(izquierdo.value, derecho.value)), type: Ret_1.Type.DOUBLE };
+            }
+            //NUMERO BOOLEAN---------------------------------------------
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.INT) {
+                if (izquierdo.value == "verdadero") {
+                    resultado = { value: (Math.pow(1, derecho.value)), type: Ret_1.Type.INT };
+                }
+                else {
+                    resultado = { value: (Math.pow(0, derecho.value)), type: Ret_1.Type.INT };
+                }
+            }
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.INT) {
+                if (derecho.value == "verdadero") {
+                    resultado = { value: (Math.pow(izquierdo.value, 1)), type: Ret_1.Type.INT };
+                }
+                else {
+                    resultado = { value: (Math.pow(izquierdo.value, 0)), type: Ret_1.Type.INT };
+                }
+            }
+            else if (izquierdo.type == Ret_1.Type.BOOLEAN && derecho.type == Ret_1.Type.DOUBLE) {
+                if (izquierdo.value == "verdadero") {
+                    resultado = { value: (Math.pow(1, derecho.value)), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    resultado = { value: (Math.pow(0, derecho.value)), type: Ret_1.Type.DOUBLE };
+                }
+            }
+            else if (derecho.type == Ret_1.Type.BOOLEAN && izquierdo.type == Ret_1.Type.DOUBLE) {
+                if (derecho.value == "verdadero") {
+                    resultado = { value: (Math.pow(izquierdo.value, 1)), type: Ret_1.Type.DOUBLE };
+                }
+                else {
+                    resultado = { value: (Math.pow(izquierdo.value, 0)), type: Ret_1.Type.DOUBLE };
+                }
+            }
+            //CUALQUIER OTRO TIPO -------------------------------------------------------
+            else {
+                throw new Error_det_1.Error_det("Semantico", "Error de tipos en el operando POT, tipo [" + (0, Ret_1.get)(izquierdo.type) + "] con tipo [" + (0, Ret_1.get)(derecho.type) + "] ", this.linea, this.columna);
+            }
+        }
+        /**
         * Negacion
         */
         else if (this.type == Aritmetic_s_1.Aritmetic_s.NEGACION) {
-            if (derecho.type == Ret_1.Type.NUMBER)
-                resultado = { value: izquierdo.value * -1, type: Ret_1.Type.NUMBER };
+            if (derecho.type == (Ret_1.Type.INT || Ret_1.Type.DOUBLE))
+                resultado = { value: izquierdo.value * -1, type: Ret_1.Type.INT };
             else
                 throw new Error_det_1.Error_det("Semantico", "Error de tipos con operando resta , no se puede negar un tipo [" + (0, Ret_1.get)(derecho.type) + "]", this.linea, this.columna);
         }
@@ -310,38 +575,31 @@ class Operacion extends Expresion_1.Expresion {
          * Potencia, modulo, multiplicacion, resta, division
          */
         else {
-            if (derecho.type == Ret_1.Type.NUMBER && izquierdo.type == Ret_1.Type.NUMBER) {
-                if (this.type == ArithmeticOption.POT) {
-                    result = { value: Math.pow(nodoIzq.value, nodoDer.value), type: Ret_1.Type.NUMBER };
+            if (this.type == Aritmetic_s_1.Aritmetic_s.MODULO) {
+                if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.INT) {
+                    resultado = { value: (izquierdo.value % derecho.value), type: Ret_1.Type.DOUBLE };
                 }
-                else if (this.type == ArithmeticOption.MODULO) {
-                    result = { value: (nodoIzq.value % nodoDer.value), type: Ret_1.Type.NUMBER };
+                else if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.DOUBLE) {
+                    resultado = { value: (izquierdo.value % derecho.value), type: Ret_1.Type.DOUBLE };
                 }
-                else if (this.type == ArithmeticOption.MULTIPLICACION) {
-                    result = { value: (nodoIzq.value * nodoDer.value), type: Ret_1.Type.NUMBER };
+                else if (derecho.type == Ret_1.Type.INT && izquierdo.type == Ret_1.Type.DOUBLE) {
+                    resultado = { value: (izquierdo.value % derecho.value), type: Ret_1.Type.DOUBLE };
                 }
-                else if (this.type == ArithmeticOption.DIV) {
-                    if (nodoDer.value == 0) {
-                        throw new error("Semantico", "No se puede realizar una division entre 0", this.line, this.column);
-                    }
-                    result = { value: (nodoIzq.value / nodoDer.value), type: Ret_1.Type.NUMBER };
+                else if (derecho.type == Ret_1.Type.DOUBLE && izquierdo.type == Ret_1.Type.INT) {
+                    resultado = { value: (izquierdo.value % derecho.value), type: Ret_1.Type.DOUBLE };
                 }
-                else /*(this.type == ArithmeticOption.RESTA)*/ {
-                    result = { value: (nodoIzq.value - nodoDer.value), type: Ret_1.Type.NUMBER };
+                else {
+                    resultado = { value: ("error de operacion"), type: Ret_1.Type.STRING };
                 }
             }
             else
-                throw new error("Semantico", `Error de tipos en el operando ${getName(this.type)}, tipo [${(0, Ret_1.get)(nodoIzq.type)}] con tipo [${(0, Ret_1.get)(nodoDer.type)}]`, this.line, this.column);
+                throw new Error_det_1.Error_det("Semantico", `Error de tipos en el operando ${(0, Aritmetic_s_1.getNombre_op)(this.type)}, tipo [${(0, Ret_1.get)(izquierdo.type)}] con tipo [${(0, Ret_1.get)(derecho.type)}]`, this.linea, this.columna);
         }
-        return result;
+        return resultado;
     }
     ast() {
-        const name_nodo = `node_${this.line}_${this.column}_`;
         return `
-        ${name_nodo};
-        ${name_nodo}[label="${get_simbolo(this.type)}"];
-        ${name_nodo}->${this.left.ast()}
-        ${name_nodo}->${this.right.ast()}
+        
         `;
     }
 }

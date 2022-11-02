@@ -9,7 +9,7 @@ class Union {
         this.consola = "";
         this.arr = [];
     }
-    static getOb() {
+    static getInstance() {
         if (!Union.objeto) {
             Union.objeto = new Union();
         }
@@ -23,13 +23,17 @@ class Union {
    *
    */
     add_error(err_) {
+        //let temporal:string = err_.titulo+" "+err_.descripcion
+        //console.log(temporal)
         this.error +=
             "<tr>" +
-                "<td>" + err_.titulo + "</td>" +
-                "<td>" + err_.descripcion + "</td>" +
+                "<td>" + err_.tipo + "</td>" +
+                "<td>" + err_.err + "</td>" +
                 "<td>" + err_.linea + "</td>" +
-                "<td>" + err_.columna + "</td>" +
+                "<td>" + err_.columna_mia + "</td>" +
                 "</tr>";
+        err_.obtener_error();
+        console.log("\n");
     }
     /**
      *

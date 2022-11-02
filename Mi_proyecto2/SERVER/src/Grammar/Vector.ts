@@ -8,10 +8,12 @@ export class Vector extends Instruccion {
     public tam: number
 
     constructor(
+        
         public id: string,
         public arrayExpresiones: Array<Expresion>,
         public tipo: string,
-        public contenido: Array<any>,   //EL OBJETO que guarda los elementos del array
+        public contenido: Array<any>, 
+        public tamaño:Expresion,  //EL OBJETO que guarda los elementos del array
         linea: number,
         columna: number
     ) {
@@ -20,14 +22,21 @@ export class Vector extends Instruccion {
 
     }
     public ejecutar(tabla: Tabla_s) {
+        let tama = this.tamaño.ejecutar(tabla);
+        if(tama.value <= 0){
+            this.arrayExpresiones.forEach(element => {
+                const expre = element.ejecutar(tabla);
+                if (expre.type != get_num(this.tipo.toLowerCase())) throw new Error_det("Semantico", `Tipo no valido, el contenido de este array tiene que ser tipo [${this.tipo}] `, this.linea, this.columna)
+                this.contenido.push(expre.value)
+            })
+            if (!tabla.guardar_arreglo(this.id, this)) throw new Error_det("Semantico", `Este nombre {${this.id}} ya existe en este ambito`, this.linea, this.columna)
+            this.tam = this.arrayExpresiones.length
+        }else{
+            if (!tabla.guardar_arreglo(this.id, this)) throw new Error_det("Semantico", `Este nombre {${this.id}} ya existe en este ambito`, this.linea, this.columna)
+            this.tam = tama.value
 
-        this.arrayExpresiones.forEach(element => {
-            const expre = element.ejecutar(tabla);
-            if (expre.type != get_num(this.tipo.toLowerCase())) throw new Error_det("Semantico", `Tipo no valido, el contenido de este array tiene que ser tipo [${this.tipo}] `, this.linea, this.columna)
-            this.contenido.push(expre.value)
-        })
-        if (!tabla.guardar_arreglo(this.id, this)) throw new Error_det("Semantico", `Este nombre {${this.id}} ya existe en este ambito`, this.linea, this.columna)
-        this.tam = this.arrayExpresiones.length
+        }
+        
     }
 
     public ast() {

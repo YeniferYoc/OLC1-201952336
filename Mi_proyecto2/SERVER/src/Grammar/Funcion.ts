@@ -1,4 +1,5 @@
 import { Error_det } from "./Error_det";
+import { Expresion } from "./Expresion";
 import { Instruccion } from "./instruccion";
 import { Tabla_s } from "./Tabla_s";
 
@@ -9,6 +10,7 @@ export class Funcion extends Instruccion {
         public bloque: Instruccion,
         public parametros: Array<string>,
         public tipo: string,
+        public retorno: Expresion,
         linea: number,
         columna: number
     ) {

@@ -8,6 +8,7 @@ export class Parseo extends Instruccion {
 
     constructor(
         public tipo: string,
+        identificadores: Array<string>,
         public value: Expresion,
         linea: number,
         columna: number
