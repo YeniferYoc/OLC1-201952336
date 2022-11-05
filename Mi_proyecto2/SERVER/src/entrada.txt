@@ -11,7 +11,7 @@
     char var_111 = 'a';
     celular = true;
     int var1, var2, var3 = -125-263;
-    var1++;
+     var1++;
     var2--;
     boolean flag_1, flag2_, flag33 = true;
     char ch_1, ch_2, ch3, qwert123 = 'M';
@@ -33,7 +33,8 @@
     Char [ ][ ] vectorDosd = new Char [(Int) "4"] [4] ; // se crea un vector de dos dimensiones de 4x4
     //Ejemplo de declaración tipo 2
     String [ ] vector2 = {"hola", "Mundo"}; //vector de 2 posiciones, con "Hola" y "Mundo"
-    if (x<50){
+    //Char [ ][ ] vectordosd2 = {{ 0 ,0},{0 , 0}}; // vector de dos dimensiones con valores de 0 en cada posición
+      if (x<50){
             Double doubleInt = (Double) 16; //16.0 40
             Double doubleString = (Double) "16.0"; //16.0 Cadenas numericas
             Boolean boolInt = (Boolean) 0; //false
@@ -62,7 +63,7 @@
             Boolean boolString = (Boolean) "0"; //false 
             String [ ] vector2 = {"hola", "Mundo"}; //creamos un vector de 2 posiciones de tipo string
             String valorPosicion = vector2[1]; //posición 1, valorPosicion = “hola” 70
-            Char [ ][ ] vectorDosd = new char [4] [4] ; // creamos vector de 4x4
+           // Char [ ][ ] vectorDosd = new char [4] [4] ; // creamos vector de 4x4
             Char valor = vectorDosd[1][1];
             valor3 = vectorDosd[1][1]; 
             valor3 = vectorDosd[(int) '1'][1];
@@ -73,7 +74,8 @@
             Int [ ] vectorNumero = {2020,2021,2022};
             vector2[1] = "OLC1"; //80
         //Más sentencias
-    } else{
+    }
+    else{
         Double doubleInt = (Double) 16; //16.0 40
             Double doubleString = (Double) "16.0"; //16.0 Cadenas numericas
             Boolean boolInt = (Boolean) 0; //false
@@ -197,7 +199,7 @@
         }
         continue;
        }
-    conversion (double pies, string tipo): void {
+        conversion (double pies, string tipo): void {
         if (tipo == "metro"){
             return pies/3.281;
         }else{ //210
@@ -243,8 +245,7 @@
     Double valor = round(5.8); //valor = 6
     Double valor2 = round(5.4); //valor2 = 5
     string [ ] vector2 = {"hola", "Mundo"};
-    
-    int tam_vector = length(vector2); // tam_vector = 2
+     int tam_vector = length(vector2); // tam_vector = 2
     int tam_hola = length(tam_vector[0]); // tam_hola = 4
     
     Int[] lista2 =new int [1];
@@ -266,10 +267,3 @@
         Print(mensaje);
     }
     Run funcion2("hola soy un mensaje");
-        
-    
-
-
-
-
-
