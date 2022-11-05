@@ -9,6 +9,8 @@ var Relational_op;
     /*3*/ Relational_op[Relational_op["MENORIGUAL"] = 3] = "MENORIGUAL";
     /*4*/ Relational_op[Relational_op["MAYOR"] = 4] = "MAYOR";
     /*5*/ Relational_op[Relational_op["MAYORIGUAL"] = 5] = "MAYORIGUAL";
+    Relational_op[Relational_op["PARENTESIS"] = 6] = "PARENTESIS";
+    Relational_op[Relational_op["CORCHETES"] = 7] = "CORCHETES";
 })(Relational_op = exports.Relational_op || (exports.Relational_op = {}));
 /**
  *
@@ -29,6 +31,10 @@ function get_simbolo(objeto) {
             return "\\>";
         case 5:
             return "\\>=";
+        case 6:
+            return "()";
+        case 7:
+            return "[]";
         default:
             return "";
     }

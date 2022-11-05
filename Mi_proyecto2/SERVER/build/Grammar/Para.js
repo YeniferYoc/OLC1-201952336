@@ -5,6 +5,7 @@ const Error_det_1 = require("./Error_det");
 const instruccion_1 = require("./instruccion");
 const Ret_1 = require("./Ret");
 const Tabla_s_1 = require("./Tabla_s");
+let contador = 0;
 class Para extends instruccion_1.Instruccion {
     constructor(desde, hasta, iterador, instr, linea, columna) {
         super(linea, columna);
@@ -30,19 +31,34 @@ class Para extends instruccion_1.Instruccion {
         }
     }
     ast() {
-        /*
-                const s = Singleton.getInstance()
-                const name_node = `node_${this.line}_${this.column}_`
-                s.add_ast(`
-                ${name_node}[label="\\<Instruccion\\>\\nFor"];
-                ${name_node}->node_${this.declaracion.line}_${this.declaracion.column}_;
-                ${name_node}->node_${this.iterador.line}_${this.iterador.column}_;
-                ${name_node}->node_${this.code.line}_${this.code.column}_;
-                ${name_node}->${this.condicion_seguir.ast()}
-                `)
-                this.declaracion.ast();
-                this.iterador.ast();
-                this.code.ast()*/
+        let dot = "";
+        console.log("entro for777777777777777777777777777777777777777777777");
+        let for_ = contador;
+        dot += "nodo" + (for_) + "_for;\n";
+        dot += "nodo" + (for_) + "_for" + " [ label =\"FOR " + "\"];\n";
+        dot += "nodo" + (for_) + "_cfor" + " [ label =\"DECLARACION FOR " + "\"];\n";
+        dot += "nodo" + for_ + "_for" + " ->" + "nodo" + (for_) + "_cfor;";
+        dot += "nodo" + (for_) + "_cfor" + " ->" + this.desde.ast();
+        //console.log(dot)
+        //dot+="nodo"+(for_)+"_cfor"+" ->"+desde.CodigoDot();
+        dot += "nodo" + (for_) + "_cfor" + " ->" + this.hasta.ast();
+        //console.log(dot)
+        dot += "nodo" + (for_) + "_cfor" + " ->" + this.iterador.ast();
+        //console.log(dot)
+        dot += "nodo" + (for_) + "_for" + " ->";
+        if (this.instr != null) {
+            dot += this.instr.ast();
+            console.log(dot);
+        }
+        else {
+            dot += "nodo" + for_ + "_for" + " ->" + "nodo" + for_ + "_null_for;";
+            dot += "nodo" + (for_) + "_null_for" + " [ label =\"NULL " + "\"];\n";
+            contador++;
+        }
+        contador++;
+        console.log("jdsjddddd ddddddakjdk");
+        console.log(dot);
+        return dot;
     }
 }
 exports.Para = Para;

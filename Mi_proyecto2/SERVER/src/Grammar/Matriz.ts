@@ -2,7 +2,8 @@ import { Error_det } from "./Error_det";
 import { Expresion } from "./Expresion";
 import { Instruccion } from "./instruccion";
 import { Tabla_s } from "./Tabla_s";
-
+import { Union } from "./Union";
+let contador : number = 0;
 export class Matriz extends Instruccion {
 
     public filass: number
@@ -14,6 +15,8 @@ export class Matriz extends Instruccion {
         public arrayExpresiones: Array<Array<Expresion>>,
         public tipo: string,
         public contenido: Array<Array<any>>, 
+        public cast:Instruccion,
+        public cast2: Instruccion,
         public filas:Expresion,  //EL OBJETO que guarda los elementos del array
         public cols:Expresion,
         linea: number,
@@ -48,22 +51,57 @@ export class Matriz extends Instruccion {
     }
 
     public ast() {
-       /* const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="\\<Instruccion\\>\\nArray Declaracion"];
-        ${name_node}1[label="\\<Nombre\\>\\n{${this.id}}"];
-        ${name_node}2[label="\\<Tipo\\>\\n${this.tipo}"];
-        ${name_node}3[label="\\<Contenido\\>"];
-        ${name_node}->${name_node}1;
-        ${name_node}->${name_node}2;
-        ${name_node}->${name_node}3;
-        `)
-        this.arrayExpresiones.forEach(element => {
-            s.add_ast(`
-            ${name_node}3->${element.ast()}
-            `)
-        })*/
+
+        
+        //console.log("entro ast declara  cion ")
+        const u = Union.getInstance()
+
+		// TODO Auto-generated method stub
+		//System.out.println("entro");
+		let  dot:string = "";
+		
+		let  declaracion :number= contador;
+		let ides :boolean = false;
+        dot+="nodo"+(declaracion)+"_matriz;";
+        dot+="nodo"+(declaracion)+"_matriz"+" [ label =\"MATRIZ "+this.tipo.toString()+"\"];\n";
+				
+				dot+="nodo"+(declaracion)+"_matriz_id"+" [ label =\""+this.id.toString()+"\"];\n";
+				dot+="nodo"+(declaracion)+"_matriz"+" ->nodo"+(declaracion)+"_matriz_id;";
+        if(this.arrayExpresiones == null && this.cast == null && this.cast2 == null){
+            dot+="nodo"+(declaracion)+"_matriz"+" ->"+this.filas.ast();
+            dot+="nodo"+(declaracion)+"_matriz"+" ->"+this.cols.ast();
+        }
+
+        else if(this.arrayExpresiones == null && this.cast != null && this.cast2 == null){
+            //console.log("aeisjejk")
+            dot+="nodo"+(declaracion)+"_matriz"+" ->"+this.cast.ast();
+            dot+=this.filas.ast();
+            dot+="nodo"+(declaracion)+"_matriz"+" ->"+this.cols.ast();
+        }else if(this.arrayExpresiones == null && this.cast == null && this.cast2 != null){
+            //console.log("aeisjejk")
+            dot+="nodo"+(declaracion)+"_matriz"+" ->"+this.cast2.ast();
+            dot+=this.cols.ast();
+            dot+="nodo"+(declaracion)+"_matriz"+" ->"+this.filas.ast();
+        }
+        
+        else{
+            this.arrayExpresiones.forEach(element => {
+                element.forEach(ele => {
+                    dot+="nodo"+(declaracion)+"_ele"+" ->"+ele.ast();
+                })
+                
+            })
+        }
+
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		contador++;
+		
+			
+		//console.log(dot)
+		u.add_ast(dot)
+		return dot; 
+	
     }
 
 }

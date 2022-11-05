@@ -2,7 +2,7 @@ import { Error_det } from "./Error_det"
 import { Instruccion } from "./instruccion"
 import { get, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-
+let contador:number = 0;
 export class Incre extends Instruccion {
 
     constructor(
@@ -29,6 +29,26 @@ export class Incre extends Instruccion {
     }
 
     public ast() {
+
+
+        let  dot:string = "";
+		//contador += 1;
+       //esta en length
+            dot+="nodo"+(contador)+"_incre;\n";
+            if(this.tipo == "++"){
+                dot+="nodo"+(contador)+"_incre"+" [ label =\"++\"];\n";
+            }else{
+                dot+="nodo"+(contador)+"_incre"+" [ label =\"--\"];\n";
+            }
+            
+            dot+="nodo"+(contador)+"_id_incre"+" [ label =\""+this.id.toString()+"\"];\n";
+				
+            dot+="nodo"+(contador)+"_incre"+" ->"+"nodo"+(contador)+"_id_incre"+"\n";
+               
+        
+        contador++;
+
+        return dot;
 /*
         const s = Singleton.getInstance()
         const name_node = `node_${this.line}_${this.column}_`

@@ -1,8 +1,8 @@
 import { Expresion } from "./Expresion"
 import { Retorno, Type } from "./Ret"
-
+let contador : number = 0;
 export class Variable extends Expresion {
-
+    //public contador:number = 0
     constructor(
         private value: any,
         private type: Type,
@@ -34,15 +34,15 @@ export class Variable extends Expresion {
 
     }
     public ast() {
+        let dot:string=""
+        console.log("entro var")
+        contador = contador+1;
+				dot+="nodo"+(contador)+"_var;\n";
+				dot+="nodo"+(contador)+"_var"+" [ label =\""+this.value.toString()+"\"];\n";
+				contador = contador+1;
 
-        const nombre = `node_${this.linea}_${this.columna}_`
-        if(this.type==Type.STRING) return `
-        ${nombre};
-        ${nombre}[label="\\"${this.value.toString()}\\""];`
- 
-        else return `
-        ${nombre};
-        ${nombre}[label="${this.value.toString()}"];`
+
+        return dot;
 
     }
 }

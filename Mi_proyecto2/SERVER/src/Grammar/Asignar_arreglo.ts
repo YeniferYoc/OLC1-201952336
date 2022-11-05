@@ -3,8 +3,9 @@ import { Expresion } from "./Expresion"
 import { Instruccion } from "./instruccion"
 import { get, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
+import { Union } from "./Union"
 import { get_num } from "./Vector"
-
+let contador : number = 0;
 export class Asignar_arreglo extends Instruccion {
 
     constructor(
@@ -33,29 +34,24 @@ export class Asignar_arreglo extends Instruccion {
         tabla.update_array(this.nombre, array)
     }
 
-    public ast() {/*
-        const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        if (this.array == null) {
-            s.add_ast(`
-            ${name_node}[label="\\<Instruccion\\>\\nArray asignacion"];
-            ${name_node}1[label="\\<Index\\>"];
-            ${name_node}2[label="\\<Asignar\\>"];
-            ${name_node}->${name_node}1;
-            ${name_node}->${name_node}2;
-            ${name_node}1->${this.expresionIndex.ast()}
-            ${name_node}2->${this.expresionAsignar.ast()}
-            `)
-        } else {
-            s.add_ast(`
-            ${name_node}[label="\\<Instruccion\\>\\nArray asignacion"];
-            `)
-            this.array.forEach(element => {
-                s.add_ast(`
-                ${name_node}->${element.ast()}
-                `)
-            });
-        }*/
-
+    public ast() { const s = Union.getInstance()
+        let  dot:string = "";
+		//contador += 1;
+    
+            //esta en length
+            dot+="nodo"+(contador)+"_as_arr;\n";
+            dot+="nodo"+(contador)+"_as_arr"+" [ label =\"ASIGNAR ARRAY\"];\n";
+            dot+="nodo"+(contador)+"_id_arr"+" [ label =\""+this.nombre.toString()+"\"];\n";
+				
+            dot+="nodo"+(contador)+"_as_arr"+" ->"+"nodo"+(contador)+"_id_arr"+"\n";
+         
+            dot+="nodo"+(contador)+"_as_arr"+" ->"+this.indice.ast()+"\n";
+            
+            dot+="nodo"+(contador)+"_as_arr"+" ->"+(this.asig.ast())+"\n";     
+        
+        contador++;
+        s.add_ast(dot)
+        
+        return dot; 
     }
 }

@@ -3,14 +3,15 @@ import { Expresion } from "./Expresion"
 import { Instruccion } from "./instruccion"
 import { get, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-import { get_num } from "./Vector"
-
+import { Union } from "./Union"
+import { get_num }  from "./Vector"
+let contador : number = 0;
 export class Asignar_mat extends Instruccion {
 
     constructor(
         public nombre: string,
-        public fila: Expresion,
-        public col: Expresion,
+        public indice: Expresion,
+        public indice2: Expresion,
         public asig: Expresion,
         linea: number,
         columna: number
@@ -18,7 +19,7 @@ export class Asignar_mat extends Instruccion {
         super(linea, columna)
     }
     public ejecutar(tabla: Tabla_s) {
-/*
+
         let objeto = tabla.get_array(this.nombre)
         if (objeto == undefined) throw new Error_det("Semantico", `Este array '${this.nombre}' no existe`, this.linea, this.columna)
         var array = objeto.contenido as Array<any>
@@ -31,32 +32,29 @@ export class Asignar_mat extends Instruccion {
             array[expre_index.value] = expre_asig.value
 
         
-        tabla.update_array(this.nombre, array)*/
+        tabla.update_array(this.nombre, array)
     }
 
-    public ast() {/*
-        const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        if (this.array == null) {
-            s.add_ast(`
-            ${name_node}[label="\\<Instruccion\\>\\nArray asignacion"];
-            ${name_node}1[label="\\<Index\\>"];
-            ${name_node}2[label="\\<Asignar\\>"];
-            ${name_node}->${name_node}1;
-            ${name_node}->${name_node}2;
-            ${name_node}1->${this.expresionIndex.ast()}
-            ${name_node}2->${this.expresionAsignar.ast()}
-            `)
-        } else {
-            s.add_ast(`
-            ${name_node}[label="\\<Instruccion\\>\\nArray asignacion"];
-            `)
-            this.array.forEach(element => {
-                s.add_ast(`
-                ${name_node}->${element.ast()}
-                `)
-            });
-        }*/
-
+    public ast() { const s = Union.getInstance()
+        let  dot:string = "";
+		//contador += 1;
+    
+            //esta en length
+            dot+="nodo"+(contador)+"_as_MAT;\n";
+            dot+="nodo"+(contador)+"_as_MAT"+" [ label =\"ASIGNAR MATRIZ\"];\n";
+            dot+="nodo"+(contador)+"_id_MAT"+" [ label =\""+this.nombre.toString()+"\"];\n";
+				
+            dot+="nodo"+(contador)+"_as_MAT"+" ->"+"nodo"+(contador)+"_id_MAT"+"\n";
+         
+            dot+="nodo"+(contador)+"_id_MAT"+" ->"+this.indice.ast()+"\n";
+            dot+="nodo"+(contador)+"_id_MAT"+" ->"+this.indice2.ast()+"\n";
+            
+            
+            dot+="nodo"+(contador)+"_id_MAT"+" ->"+(this.asig.ast())+"\n";     
+        
+        contador++;
+        s.add_ast(dot)
+        
+        return dot; 
     }
 }

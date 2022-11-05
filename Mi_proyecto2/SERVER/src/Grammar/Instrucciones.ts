@@ -2,7 +2,8 @@ import { Expresion } from "./Expresion"
 import { Funcion } from "./Funcion"
 import { Instruccion } from "./instruccion"
 import { Tabla_s } from "./Tabla_s"
-
+import { Union } from "./Union"
+let contador:number = 0;
 export class Instrucciones extends Instruccion {
 
     constructor(
@@ -34,17 +35,19 @@ export class Instrucciones extends Instruccion {
 
     }
     
-    public ast() {/*
-
-        const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="Lista Instrucciones"];        
-        `)
-        this.code.forEach(x => {
-            s.add_ast(`${name_node}->node_${x.line}_${x.column}_;`)
-            x.ast()
-        })*/
+    public ast() {  
+        console.log("entro");
+        const s = Union.getInstance()
+        let  dot:string = "";
+		dot+="nodo"+(contador)+"_ins_;"
+		dot+="nodo"+(contador)+"_ins_"+" [ label =\"INSTRUCCIONES \"];\n";
+        this.instrucciones.forEach(x => {
+           dot+="nodo"+(contador)+"_ins_ ->"+x.ast()
+        })
+        console.log(dot);
+        contador++;
+        return dot; 
+        
 
     }
 }

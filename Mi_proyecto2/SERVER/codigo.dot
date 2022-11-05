@@ -1,0 +1,7 @@
+digraph G {node[shape=box, style=filled, color=blanchedalmond]; edge[color=chocolate3];rankdir=UD 
+raiz [ label ="INICIO"];
+raiz->nodo0_de;nodo0_de [ label ="DECLARACION int"];
+nodo1_id [ label ="hola"];
+nodo0_de ->nodo1_id;nodo0_de ->nodo1_var;
+nodo1_var [ label ="10"];
+hola}

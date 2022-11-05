@@ -3,7 +3,7 @@ import { Expresion } from "./Expresion"
 import { Incremento_op } from "./Incremento_op"
 import { Retorno, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-
+let contador:number = 0;
 export class Incremento extends Expresion {
 
     constructor(
@@ -52,9 +52,45 @@ export class Incremento extends Expresion {
 
     public ast() {
         
-        return `
-       
-        `
+
+        let  dot:string = "";
+		//contador += 1;
+       //esta en length
+            //dot+="nodo"+(contador)+"_incre;\n";
+            if(this.type ==Incremento_op.DECREMENTO1){
+                dot+="nodo"+(contador)+"_id_dncre;\n";
+                dot+="nodo"+(contador)+"_id_dncre"+" [ label =\""+this.nombre.toString()+"\"];\n";
+                dot+="nodo"+(contador)+"_dncre"+" [ label =\"--\"];\n";
+                dot+="nodo"+(contador)+"_id_dncre"+" ->"+"nodo"+(contador)+"_dncre"+"\n";
+             
+
+            }else if(this.type ==Incremento_op.DECREMENTO2){
+                dot+="nodo"+(contador)+"_dncre2;\n";
+                dot+="nodo"+(contador)+"_dncre2"+" [ label =\"--\"];\n";
+                dot+="nodo"+(contador)+"_id_dncre2"+" [ label =\""+this.nombre.toString()+"\"];\n";
+                dot+="nodo"+(contador)+"_dncre2"+" ->"+"nodo"+(contador)+"_id_dncre2"+"\n";
+             
+
+            }
+            else if(this.type ==Incremento_op.INCREMENTO1){
+                dot+="nodo"+(contador)+"_id_incre;\n";
+                dot+="nodo"+(contador)+"_id_incre"+" [ label =\""+this.nombre.toString()+"\"];\n";
+                dot+="nodo"+(contador)+"_incre"+" [ label =\"++\"];\n";
+                dot+="nodo"+(contador)+"_id_incre"+" ->"+"nodo"+(contador)+"_incre"+"\n";
+               
+            }else{
+                dot+="nodo"+(contador)+"_incre2;\n";
+                dot+="nodo"+(contador)+"_incre2"+" [ label =\"++\"];\n";
+                dot+="nodo"+(contador)+"_id_incre2"+" [ label =\""+this.nombre.toString()+"\"];\n";
+                dot+="nodo"+(contador)+"_incre2"+" ->"+"nodo"+(contador)+"_id_incre2"+"\n";
+             
+            }
+            
+              
+        
+        contador++;
+
+        return dot;
     }
 
 }

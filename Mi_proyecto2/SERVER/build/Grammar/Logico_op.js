@@ -6,6 +6,8 @@ var Logico_op;
     /*0*/ Logico_op[Logico_op["AND"] = 0] = "AND";
     /*1*/ Logico_op[Logico_op["OR"] = 1] = "OR";
     /*2*/ Logico_op[Logico_op["NOT"] = 2] = "NOT";
+    Logico_op[Logico_op["PARENTESIS"] = 3] = "PARENTESIS";
+    Logico_op[Logico_op["CORCHETES"] = 4] = "CORCHETES";
 })(Logico_op = exports.Logico_op || (exports.Logico_op = {}));
 /**
  *
@@ -20,6 +22,10 @@ function getSimbol(objeto) {
             return "\\|\\|";
         case 2:
             return "!";
+        case 3:
+            return "()";
+        case 4:
+            return "[]";
     }
     return "";
 }

@@ -2,7 +2,7 @@ import { Error_det } from "./Error_det"
 import { Expresion } from "./Expresion"
 import { Instruccion } from "./instruccion"
 import { Tabla_s } from "./Tabla_s"
-
+let contador :number = 0;
 export class Run extends Instruccion {
 
     constructor(
@@ -58,20 +58,34 @@ export class Run extends Instruccion {
 
     }
 
-    public ast() {/*
-        const s= Singleton.getInstance()
-        const nombre_nodo=`node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${nombre_nodo} [label="\\<Instruccion\\>\\nLlamada funcion"];
-        ${nombre_nodo}1 [label="{${this.id}}"];
-        ${nombre_nodo}2 [label="<\\Parametros\\>"];
-        ${nombre_nodo}->${nombre_nodo}2;
-        ${nombre_nodo}->${nombre_nodo}1;
-        `)
-        this.expresiones.forEach(element => {
-            s.add_ast(`
-            ${nombre_nodo}2->${element.ast()}
-            `)
-        })*/
+    public ast() {
+        let dot:string = "" ;
+		
+    let eje:number = contador;
+    dot+="nodo"+(eje)+"_run;";
+    dot+="nodo"+(eje)+"_run"+" [ label =\"RUN "+"\"];\n";
+    dot+="nodo"+(eje+1)+"_idrun"+" [ label =\""+this.id.toString()+"\"];\n";
+    dot+="nodo"+(eje)+"_eje"+" ->nodo"+(eje+1)+"_id_ej;";
+    
+    
+    if(this.expresiones != null){
+        dot+="nodo"+(eje)+"_paramrun"+" [ label =\"PARAMETROS\"];\n";
+    dot+="nodo"+(eje)+"_run"+" ->nodo"+(eje)+"_paramrun;";
+        this.expresiones.forEach(x => {
+            
+            dot+="nodo"+eje+"_paramrun"+" ->";
+            dot+= x.ast();
+        })
+    }else{
+        dot+="nodo"+eje+"_run"+" ->"+"nodo"+eje+"_null_run;";
+        dot+="nodo"+(eje)+"_null_run"+" [ label =\"NULL "+"\"];\n";
+         
+    }
+    
+    contador++;
+    
+    //dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+    
+    return dot;
     }
 }

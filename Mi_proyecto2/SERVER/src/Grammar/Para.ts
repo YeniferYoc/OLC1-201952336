@@ -3,7 +3,8 @@ import { Expresion } from "./Expresion"
 import { Instruccion } from "./instruccion"
 import { get, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-
+import { Union } from "./Union"
+let contador:number = 0;
 export class Para extends Instruccion {
 
     constructor(
@@ -35,19 +36,39 @@ export class Para extends Instruccion {
     }
 
     public ast() {
-/*
-        const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="\\<Instruccion\\>\\nFor"];
-        ${name_node}->node_${this.declaracion.line}_${this.declaracion.column}_;
-        ${name_node}->node_${this.iterador.line}_${this.iterador.column}_;
-        ${name_node}->node_${this.code.line}_${this.code.column}_;
-        ${name_node}->${this.condicion_seguir.ast()}
-        `)
-        this.declaracion.ast();
-        this.iterador.ast();
-        this.code.ast()*/
-
+        let dot :string= "";
+		console.log("entro for777777777777777777777777777777777777777777777")
+		let for_:number = contador;
+		dot+="nodo"+(for_)+"_for;\n";
+		dot+="nodo"+(for_)+"_for"+" [ label =\"FOR "+"\"];\n";
+		dot+="nodo"+(for_)+"_cfor"+" [ label =\"DECLARACION FOR "+"\"];\n";
+		dot+="nodo"+for_+"_for"+" ->"+"nodo"+(for_)+"_cfor;";
+		dot+="nodo"+(for_)+"_cfor"+" ->" +this.desde.ast();
+		//console.log(dot)
+		//dot+="nodo"+(for_)+"_cfor"+" ->"+desde.CodigoDot();
+		dot+="nodo"+(for_)+"_cfor"+" ->"+this.hasta.ast();
+        //console.log(dot)
+        dot+="nodo"+(for_)+"_cfor"+" ->"+this.iterador.ast();
+        //console.log(dot)
+		
+		dot+="nodo"+(for_)+"_for"+" ->";
+		
+		
+		
+		if(this.instr != null) {
+			dot+=this.instr.ast();
+            console.log(dot);
+		}
+		else {
+			dot+="nodo"+for_+"_for"+" ->"+"nodo"+for_+"_null_for;";
+			dot+="nodo"+(for_)+"_null_for"+" [ label =\"NULL "+"\"];\n";
+			contador++; 
+		}
+			contador++;
+		console.log("jdsjddddd ddddddakjdk")
+		console.log(dot)
+	
+       
+        return dot;
     }
 }

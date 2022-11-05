@@ -3,6 +3,7 @@ import { Expresion } from "./Expresion"
 import { Instruccion } from "./instruccion"
 import { get, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
+let contador:number = 0;
 export class Segun extends Instruccion {
 
     constructor(
@@ -21,19 +22,12 @@ export class Segun extends Instruccion {
     }
 
     public ast() {
-        /*const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="\\<Instruccion\\>\\nif"];
-        ${name_node}1[label="\\<True\\>"];
-        ${name_node}2[label="\\<Else\\>"];
-        ${name_node}->${name_node}1;
-        ${name_node}->${name_node}2;
-        ${name_node}1->node_${this.code.line}_${this.code.column}_;`)
-        this.code.ast()
-        if (this.elsSt != null) {
-            s.add_ast(`${name_node}2->node_${this.elsSt.line}_${this.elsSt.column}_`)
-            this.elsSt.ast()
-        }*/
+        let dot:string = "";
+		
+		let mi_ :number = contador;
+		dot+="nodo"+(mi_)+"_SW;";
+		dot+="nodo"+(mi_)+"_SW"+" [ label =\"SWITCH \"];\n";
+        dot+="nodo"+mi_+"_SW"+" ->"+this.condition.ast();
+return dot; 
     }
 }

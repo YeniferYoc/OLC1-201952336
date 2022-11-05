@@ -2,7 +2,7 @@ import { Error_det } from "./Error_det"
 import { Expresion } from "./Expresion"
 import { Retorno, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-
+let contador:number = 0;
 export class Acceso extends Expresion {
 
     constructor(
@@ -29,8 +29,13 @@ export class Acceso extends Expresion {
     }
     public ast() {
         
-        return `
-      
-        `
+        let  dot:string = "";
+		contador += 1;
+        dot+="nodo"+(contador)+"_identi;\n";
+        dot+="nodo"+(contador)+"_identi"+" [ label =\""+(this.id)+" \"];\n";
+        
+			
+            contador++;
+            return dot;
     }
 }

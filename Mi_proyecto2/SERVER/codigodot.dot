@@ -1,0 +1,6 @@
+raiz [ label ="INICIO"];
+raiz->nodo0_de;nodo0_de [ label ="DECLARACION int"];
+nodo1_id [ label ="ndd"];
+nodo0_de ->nodo1_id;nodo0_de ->nodo1_var;
+nodo1_var [ label ="28"];
+hola

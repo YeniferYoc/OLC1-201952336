@@ -1,8 +1,9 @@
+import { Error_det } from "./Error_det"
 import { Instruccion } from "./instruccion"
-
+let errores: Error_det[] =[]
 export class Union {
     private static objeto: Union
-    private error: string = ""
+    private error: Error_det[] =[] 
     private ast: string = ""
     private entorno: string = ""
     private consola: string = ""
@@ -27,23 +28,30 @@ export class Union {
     public add_error(err_: any) {
         //let temporal:string = err_.titulo+" "+err_.descripcion
         //console.log(temporal)
-        this.error +=
+        console.log("inserto errror")
+        console.log(this.error.length)
+        this.error.push(err_);
+        errores.push(err_)
+       /* this.error +=
             "<tr>" +
             "<td>" + err_.tipo + "</td>" +
             "<td>" + err_.err + "</td>" +
             "<td>" + err_.linea + "</td>" +
             "<td>" + err_.columna_mia + "</td>" +
-            "</tr>"
-            err_.obtener_error()
-            console.log("\n")
+            "</tr>"*/
+            
     }
 
     /**
-     * 
+     * err_.obtener_error()
+            console.log("\n")
      * @returns un string con el codigo con el formato html para reportar
      */
     public get_error() {
-        return `
+        console.log(this.error.length +"si retorno")
+        console.log(errores.length)
+        return errores;
+        /* `
         <table border=1 style="width: 75%;margin: 0 auto;" cellpadding ="5">
             <tr>
                 <th>Tipo error</th>
@@ -51,7 +59,7 @@ export class Union {
                 <th>Linea</th>
                 <th>Columna</th>
             </tr>${this.error}
-        </table>`
+        </table>`*/
     }
 
     public add_ast(data: string) {
@@ -77,5 +85,18 @@ export class Union {
     }
     public get_entorno():string{
         return this.entorno
+    }
+    public clear_error() {
+        this.error = []
+        errores = [];
+    }
+    public clear_ast() {
+        this.ast = "";
+    }
+    public clear_consola() {
+        this.consola = ""
+    }
+    public clear_entorno() {
+        this.entorno = ""
     }
 }

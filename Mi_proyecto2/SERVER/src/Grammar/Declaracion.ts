@@ -3,14 +3,16 @@ import { Instruccion } from "./instruccion"
 import { Tabla_s } from "./Tabla_s"
 import { get, Type } from "./Ret"
 import { Error_det } from "./Error_det"
-
+import { Union } from "./Union"
+let contador : number = 0;
 export class Declaracion extends Instruccion {
-
+    
     constructor(
         public identificadores: Array<string>,
-        public valor: Expresion, 
-        public parse: string,
         public tipo: string, 
+        
+        public valor: Expresion, 
+        public parse: Instruccion,
         linea: number,
         columna: number
     ) {
@@ -18,8 +20,10 @@ export class Declaracion extends Instruccion {
     }
 
     public ejecutar(tabla: Tabla_s) {
+        console.log("aqui esta en declaracion")
         if(this.valor == null){     
-                                                                             
+                                   
+            console.log("dice que valor es null")
             if (Type.INT && this.tipo.toLowerCase() == "int"){
                 if(this.identificadores != null){
                     this.identificadores.forEach(x => {
@@ -74,8 +78,11 @@ export class Declaracion extends Instruccion {
                 
            
         }else{
-            if(this.parse == "0"){
-                const ex = this.valor.ejecutar(tabla)
+            console.log("entro primir else")
+            if(this.parse == null){
+                console.log("entro ejecutar declaracion");
+                const ex = this.valor.ejecutar(tabla);
+                console.log("entro ejecutar declaracion");
                 //cuando la declaracion si tiene un tipo de dato definido
                 if (ex.type == Type.INT && this.tipo.toLowerCase() == "int" ||
                     ex.type == Type.DOUBLE && this.tipo.toLowerCase() == "double" ||
@@ -93,8 +100,24 @@ export class Declaracion extends Instruccion {
                     
                 } else throw new Error_det("Semantico", `El tipo de dato de la expresion [${get(ex.type)}] no es compatible con [${this.tipo}]`, this.linea, this.columna)
     
-            }else{
-
+            }
+            
+            else{
+                console.log("entro segundo else")
+                const ex = this.valor.ejecutar(tabla)
+                console.log(ex.value)
+                console.log("entro ejecutar declaracion")
+                //cuando la declaracion si tiene un tipo de dato definido
+               
+                    if(this.identificadores != null){
+                        this.identificadores.forEach(x => {
+                            const c = tabla.guardar_variable(x, ex.value, ex.type)
+                            if (!c) throw new Error_det("Semantico", `La variable '${x}' ya existe`, this.linea, this.columna)
+               
+                        });
+                    }
+                 
+    
             }
            
         }
@@ -103,15 +126,81 @@ export class Declaracion extends Instruccion {
     }
 
     public ast() {
-       /* const s = Singleton.getInstance()
-        const nombreNodo = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${nombreNodo}[label="\\<Instruccion\\>\\nDeclaracion const"];
-        ${nombreNodo}1[label="\\<Nombre\\>\\n${this.nombre}"];
-        ${nombreNodo}2[label="\\<Tipo\\>\\n${this.tipo}"];
-        ${nombreNodo}->${nombreNodo}1
-        ${nombreNodo}->${nombreNodo}2
-        ${nombreNodo}->${this.value.ast()}`)*/
+        //console.log("entro ast declaracion ")
+        const u = Union.getInstance()
+
+		// TODO Auto-generated method stub
+		//System.out.println("entro");
+		let  dot:string = "";
+		
+		let  declaracion :number= contador;
+		let ides :boolean = false;
+        
+		if(this.identificadores != null) {
+           // console.log("no es null")
+            this.identificadores.forEach(id => {
+                declaracion = contador
+                if(ides ==false) {
+                    let cont:number = contador
+                    for(let i :number= 0; i<this.identificadores.length; i++) {
+						dot+="nodo"+(cont)+"_de";
+						ides = true;
+						cont++;
+                        //console.log(dot)
+                        //console.log(this.identificadores.length)
+						if(i != this.identificadores.length-1){
+							dot += ",";
+						}
+						
+					}
+                    //console.log(dot)
+                    dot+=";";
+
+                }else{
+
+                }
+               // console.log(this.tipo+" tipo")
+                dot+="nodo"+(declaracion)+"_de"+" [ label =\"DECLARACION "+this.tipo.toString()+"\"];\n";
+				
+				dot+="nodo"+(declaracion+1)+"_id"+" [ label =\""+id.toString()+"\"];\n";
+				dot+="nodo"+(declaracion)+"_de"+" ->nodo"+(declaracion+1)+"_id;";
+				if(this.parse == null){
+                    if(this.valor == null){
+
+                    }else{
+                        dot+="nodo"+declaracion+"_de"+" ->"+this.valor.ast();
+                    
+                    }
+                }else{
+                    dot+="nodo"+declaracion+"_de"+" ->"+this.parse.ast();
+                    dot+=this.valor.ast();
+                }
+                
+               
+                
+              //console.log(dot)
+             //   console.log("fin dot decla")
+				
+				contador++;
+                        
+                
+            }
+            
+            );
+			
+		}else {
+            //console.log("i es null")
+			
+		}
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		contador++;
+		
+			
+		//console.log(dot)
+		u.add_ast(dot)
+		return dot; 
+	
         
     }
 }

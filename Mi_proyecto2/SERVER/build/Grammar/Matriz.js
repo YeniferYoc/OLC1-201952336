@@ -2,14 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.get_num = exports.Matriz = void 0;
 const instruccion_1 = require("./instruccion");
+const Union_1 = require("./Union");
+let contador = 0;
 class Matriz extends instruccion_1.Instruccion {
-    constructor(id, arrayExpresiones, tipo, contenido, filas, //EL OBJETO que guarda los elementos del array
+    constructor(id, arrayExpresiones, tipo, contenido, cast, cast2, filas, //EL OBJETO que guarda los elementos del array
     cols, linea, columna) {
         super(linea, columna);
         this.id = id;
         this.arrayExpresiones = arrayExpresiones;
         this.tipo = tipo;
         this.contenido = contenido;
+        this.cast = cast;
+        this.cast2 = cast2;
         this.filas = filas;
         this.cols = cols;
         this.filass = -1;
@@ -37,22 +41,45 @@ class Matriz extends instruccion_1.Instruccion {
         }*/
     }
     ast() {
-        /* const s = Singleton.getInstance()
-         const name_node = `node_${this.line}_${this.column}_`
-         s.add_ast(`
-         ${name_node}[label="\\<Instruccion\\>\\nArray Declaracion"];
-         ${name_node}1[label="\\<Nombre\\>\\n{${this.id}}"];
-         ${name_node}2[label="\\<Tipo\\>\\n${this.tipo}"];
-         ${name_node}3[label="\\<Contenido\\>"];
-         ${name_node}->${name_node}1;
-         ${name_node}->${name_node}2;
-         ${name_node}->${name_node}3;
-         `)
-         this.arrayExpresiones.forEach(element => {
-             s.add_ast(`
-             ${name_node}3->${element.ast()}
-             `)
-         })*/
+        //console.log("entro ast declara  cion ")
+        const u = Union_1.Union.getInstance();
+        // TODO Auto-generated method stub
+        //System.out.println("entro");
+        let dot = "";
+        let declaracion = contador;
+        let ides = false;
+        dot += "nodo" + (declaracion) + "_matriz;";
+        dot += "nodo" + (declaracion) + "_matriz" + " [ label =\"MATRIZ " + this.tipo.toString() + "\"];\n";
+        dot += "nodo" + (declaracion) + "_matriz_id" + " [ label =\"" + this.id.toString() + "\"];\n";
+        dot += "nodo" + (declaracion) + "_matriz" + " ->nodo" + (declaracion) + "_matriz_id;";
+        if (this.arrayExpresiones == null && this.cast == null && this.cast2 == null) {
+            dot += "nodo" + (declaracion) + "_matriz" + " ->" + this.filas.ast();
+            dot += "nodo" + (declaracion) + "_matriz" + " ->" + this.cols.ast();
+        }
+        else if (this.arrayExpresiones == null && this.cast != null && this.cast2 == null) {
+            //console.log("aeisjejk")
+            dot += "nodo" + (declaracion) + "_matriz" + " ->" + this.cast.ast();
+            dot += this.filas.ast();
+            dot += "nodo" + (declaracion) + "_matriz" + " ->" + this.cols.ast();
+        }
+        else if (this.arrayExpresiones == null && this.cast == null && this.cast2 != null) {
+            //console.log("aeisjejk")
+            dot += "nodo" + (declaracion) + "_matriz" + " ->" + this.cast2.ast();
+            dot += this.cols.ast();
+            dot += "nodo" + (declaracion) + "_matriz" + " ->" + this.filas.ast();
+        }
+        else {
+            this.arrayExpresiones.forEach(element => {
+                element.forEach(ele => {
+                    dot += "nodo" + (declaracion) + "_ele" + " ->" + ele.ast();
+                });
+            });
+        }
+        //dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+        contador++;
+        //console.log(dot)
+        u.add_ast(dot);
+        return dot;
     }
 }
 exports.Matriz = Matriz;

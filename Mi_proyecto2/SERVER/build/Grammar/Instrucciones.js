@@ -4,6 +4,8 @@ exports.Instrucciones = void 0;
 const Funcion_1 = require("./Funcion");
 const instruccion_1 = require("./instruccion");
 const Tabla_s_1 = require("./Tabla_s");
+const Union_1 = require("./Union");
+let contador = 0;
 class Instrucciones extends instruccion_1.Instruccion {
     constructor(instrucciones, linea, columna) {
         super(linea, columna);
@@ -26,6 +28,17 @@ class Instrucciones extends instruccion_1.Instruccion {
         }
     }
     ast() {
+        console.log("entro");
+        const s = Union_1.Union.getInstance();
+        let dot = "";
+        dot += "nodo" + (contador) + "_ins_;";
+        dot += "nodo" + (contador) + "_ins_" + " [ label =\"INSTRUCCIONES \"];\n";
+        this.instrucciones.forEach(x => {
+            dot += "nodo" + (contador) + "_ins_ ->" + x.ast();
+        });
+        console.log(dot);
+        contador++;
+        return dot;
     }
 }
 exports.Instrucciones = Instrucciones;

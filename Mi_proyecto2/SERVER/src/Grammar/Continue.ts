@@ -2,7 +2,8 @@ import { Expresion } from "./Expresion"
 import { Funcion } from "./Funcion"
 import { Instruccion } from "./instruccion"
 import { Tabla_s } from "./Tabla_s"
-
+import { Union } from "./Union"
+let contador :number = 0;
 export class Continue_ extends Instruccion {
 
     constructor(
@@ -16,17 +17,16 @@ export class Continue_ extends Instruccion {
     public ejecutar(tabla: Tabla_s) {
     }
     
-    public ast() {/*
+    public ast() {
 
-        const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="Lista Instrucciones"];        
-        `)
-        this.code.forEach(x => {
-            s.add_ast(`${name_node}->node_${x.line}_${x.column}_;`)
-            x.ast()
-        })*/
+        const u = Union.getInstance()
 
+        let  dot:string = "";
+		//contador += 1;
+        
+            dot+="nodo"+(contador)+"_con;\n";
+            dot+="nodo"+(contador)+"_con"+" [ label =\"CONTINUE\"];\n";
+             u.add_ast(dot);  
+             return dot; 
     }
 }

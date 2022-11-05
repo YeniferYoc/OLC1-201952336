@@ -4,8 +4,10 @@
     const {Relacional} = require('./Relacional');
     const {Relational_op} = require ('./Simbolo_rel')
     const {Acceso_arr} = require('./Acceso_arr');
+    const {Acceso_mat} = require('./Acceso_mat');
     const {Variable} = require('./Variable');
     const {Si} = require('./Si');
+    const {Retornando} = require('./Retornando');
     const {Segun} = require('./Segun');
     const {Imprimir} = require('./Imprimir');
     const {Imprimir_nl} = require('./Imprimir_nl');    
@@ -41,6 +43,7 @@
     const {Logica} = require('./Logica')
     const {Logico_op} = require('./Logico_op')
     const {Asignar_arreglo} = require('./Asignar_arreglo')
+    const {Asignar_mat} = require('./Asignar_mat')
     const { Longitud}=  require("./Longitud")
     const { Union}=  require("./Union")
     const { Error_det } =require("./Error_det")
@@ -188,8 +191,9 @@
 
 Init    
     : INSTRUCCIONES EOF  {  console.log("termine de analizar"); return $1; }
-    |error EOF {console.log("ERROR SINTACTICO, NO SE ESPERABA: "+yytext +" en la linea "+yylineno  );}
-    |error punto_c {console.log("ERROR SINTACTICO, NO SE ESPERABA: "+yytext +" en la linea "+yylineno  );}
+    |error EOF {console.log("ERROR SINTACTICO "+yytext +" en la linea "+yylineno  );}
+  //  |error EOF {console.log("ERROR SINTACTICO, NO SE ESPERABA: "+yytext +" en la linea "+yylineno  );}
+    //|error punto_c {console.log("ERROR SINTACTICO, NO SE ESPERABA: "+yytext +" en la linea "+yylineno  );}
 ;
 
 INSTRUCCIONES
@@ -241,42 +245,42 @@ OP_TERNARIO_ST
 ;
 
 DECLARACION
-    : TIPOS LISTAIDS igual expresion  { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
-    |TIPOS LISTAIDS igual  OP_TERNARIO    { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
-    |TIPOS LISTAIDS igual  CASTEO  expresion  { $$ = new Declaracion($2, $1, $4, @1.first_line, @1.first_column ); }
-    | TIPOS LISTAIDS  { $$ = new Declaracion($2, $1, null , @1.first_line, @1.first_column); }
+    : TIPOS LISTAIDS igual expresion  { $$ = new Declaracion($2, $1, $4,null, @1.first_line, @1.first_column ); }
+    |TIPOS LISTAIDS igual  OP_TERNARIO    { $$ = new Declaracion($2, $1, $4,null, @1.first_line, @1.first_column ); }
+    |TIPOS LISTAIDS igual  CASTEO  expresion  { $$ = new Declaracion($2, $1, $5,$4, @1.first_line, @1.first_column ); }
+    | TIPOS LISTAIDS  { $$ = new Declaracion($2, $1, null,null , @1.first_line, @1.first_column); }
 ;        
     
 //ASIGANACION --------------------------------------------------------------------------------------------------
 
 ASIGNACION
-    : LISTAIDS igual expresion { $$ = new Asignacion($1, $3, @1.first_line, @1.first_column);  }
-    | LISTAIDS igual OP_TERNARIO { $$ = new Asignacion($1, $3, @1.first_line, @1.first_column);  }
-    | LISTAIDS igual CASTEO expresion { $$ = new Asignacion($1, $3, @1.first_line, @1.first_column);  }
+    : LISTAIDS igual expresion { $$ = new Asignacion($1, $3,null, @1.first_line, @1.first_column);  }
+    | LISTAIDS igual OP_TERNARIO { $$ = new Asignacion($1, $3,null, @1.first_line, @1.first_column);  }
+    | LISTAIDS igual CASTEO expresion { $$ = new Asignacion($1, $4,$3, @1.first_line, @1.first_column);  }
 ;
 
 //PARSEO --------------------------------------------------------------------------------------------------
 
 CASTEO
-    : par_abre TIPOS par_cierra  { $$ = $1; }
+    : par_abre TIPOS par_cierra  { $$ = new Parseo($2, @1.first_line, @1.first_column ); }
 ;
 
 //ARRAY --------------------------------------------------------------------------------------------------
 
 ARRAY
-    : TIPOS cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra  { $$ = new Vector($4, [],$1 ,[],$9, @1.first_line, @1.first_column  ); }
-    |TIPOS cor_abre cor_cierra identificador  igual  llave_abre PARAMETROS_LLAMADA llave_cierra  { $$ = new Vector($4, $7, $1,[],0, @1.first_line, @1.first_column  ); }
-    |TIPOS cor_abre cor_cierra identificador  igual  TOCHAR  { $$ = new Vector($4, $6, $1,[],0, @1.first_line, @1.first_column  ); }
-    |TIPOS cor_abre cor_cierra identificador  igual  pr_new TIPOS cor_abre CASTEO expresion cor_cierra  { $$ = new Vector($4, [],$1 ,[],$9, @1.first_line, @1.first_column  ); }
+    : TIPOS cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra  { $$ = new Vector($4, null,$1 ,[],null,$9, @1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra identificador  igual  llave_abre PARAMETROS_LLAMADA llave_cierra  { $$ = new Vector($4, $7, $1,[],null,0, @1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra identificador  igual  TOCHAR  { $$ = new Vector($4, $6, $1,[],null,0, @1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra identificador  igual  pr_new TIPOS cor_abre CASTEO expresion cor_cierra  { $$ = new Vector($4, null,$1 ,[],$9,$10, @1.first_line, @1.first_column  ); }
 ;  
 //ARRAY --------------------------------------------------------------------------------------------------
 
 MATRIZ
-    : TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra cor_abre expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],$11, $14,@1.first_line, @1.first_column  ); }
-    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual llave_abre Llenar_mat llave_cierra  { $$ = new Matriz($6, $9, $1,[],0,0, @1.first_line, @1.first_column  ); }
-    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre CASTEO expresion cor_cierra cor_abre CASTEO expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],$11, $14,@1.first_line, @1.first_column  ); }
-    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra cor_abre CASTEO expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],$11, $14,@1.first_line, @1.first_column  ); }
-    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre CASTEO expresion cor_cierra cor_abre expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],$11, $14,@1.first_line, @1.first_column  ); }
+    : TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra cor_abre expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],null, $11,null, $14, @1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual llave_abre Llenar_mat llave_cierra  { $$ = new Matriz($6, $9, $1,[],null, 0,null ,0, @1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre CASTEO expresion cor_cierra cor_abre CASTEO expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],$11, $12, $15, $16,@1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre expresion cor_cierra cor_abre CASTEO expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],null, $11, $14, $15,@1.first_line, @1.first_column  ); }
+    |TIPOS cor_abre cor_cierra cor_abre cor_cierra identificador  igual pr_new TIPOS cor_abre CASTEO expresion cor_cierra cor_abre expresion cor_cierra  { $$ = new Matriz($6,[], $1,[],$11,$12,null, $15,@1.first_line, @1.first_column  ); }
 ;  
 LLenar_mat 
     : Llenar_mat coma llave_abre PARAMETROS_LLAMADA llave_cierra{  $1.push($3);    $$ = $1;   }
@@ -285,6 +289,10 @@ LLenar_mat
 
 Asignar_arr
     : identificador cor_abre expresion cor_cierra  igual expresion  { $$=new Asignar_arreglo($1, $3  , $6,@1.first_line, @1.first_column); }
+    
+;
+Asignar_mat_
+    : identificador cor_abre expresion cor_cierra cor_abre expresion cor_cierra  igual expresion  { $$=new Asignar_mat($1, $3  , $6, $9,@1.first_line, @1.first_column); }
     
 ;
 
@@ -380,8 +388,8 @@ FUNCION
 ;
 
 RETORNO
-    : pr_retorno expresion {$$ = $2}
-    |pr_retorno{$$ = "ret"}
+    : pr_retorno expresion {$$ = new Retornando($2);}
+    |pr_retorno{$$ = new Retornando("ret");}
 
 ;
 LISTAIDS
@@ -441,14 +449,14 @@ ARRAY_PQ
 ;
 
 RUN
-    : pr_run identificador par_abre par_cierra  { $$=new Run($1, [], @1.first_line, @1.first_column); }
-    | pr_run identificador par_abre PARAMETROS_LLAMADA par_cierra { $$ = new Run($1, $3, @1.first_line, @1.first_column);  }
+    : pr_run identificador par_abre par_cierra  { $$=new Run($2, null, @1.first_line, @1.first_column); }
+    | pr_run identificador par_abre PARAMETROS_LLAMADA par_cierra { $$ = new Run($2, $4, @1.first_line, @1.first_column);  }
 ;
 //bloque------------------------------------------------------------
 
 BLOQUE
-    : llave_abre INSTRUCCIONES  llave_cierra { $$ = new Instrucciones($2 ,$3        , @1.first_line, @1.first_column); }
-     | llave_abre              llave_cierra { $$ = new Instrucciones(new Array(),null, @1.first_line, @1.first_column); }
+    : llave_abre INSTRUCCIONES  llave_cierra { $$ = new Instrucciones($2     , @1.first_line, @1.first_column); }
+     | llave_abre              llave_cierra { $$ = new Instrucciones(new Array(), @1.first_line, @1.first_column); }
 ;
 
 
@@ -459,26 +467,26 @@ BLOQUE
 /*--------------------------------   Expresion -------------------------------------------*/
 
 expresion 
-    : '-'  expresion %prec UMENOS { $$ = new Operacion($2, $2, Tipo.NEGACION,        @1.first_line, @1.first_column); }       
+    : '-'  expresion %prec UMENOS { $$ = new Operacion($2, $2, Aritmetic_s.NEGACION,        @1.first_line, @1.first_column); }       
     | identificador  '++'               { $$ = new Incremento(Incremento_op.INCREMENTO1, $1, @1.first_line, @1.first_column); } 
     | '++' identificador                { $$ = new Incremento(Incremento_op.INCREMENTO2, $2, @2.first_line, @2.first_column); } 
     | identificador  '--'               { $$ = new Incremento(Incremento_op.DECREMENTO1, $1, @1.first_line, @1.first_column); } 
     | '--' identificador                { $$ = new Incremento(Incremento_op.DECREMENTO2, $2, @2.first_line, @2.first_column); } 
-    | expresion '+'  expresion { $$ = new Operacion($1, $3, Tipo.MAS            , @2.first_line, @2.first_column); }       
-    | expresion '-' expresion { $$ = new Operacion($1, $3, Tipo.MENOS          , @2.first_line, @2.first_column); }
-    | expresion '*'  expresion { $$ = new Operacion($1, $3, Tipo.MULTIPLICACION , @2.first_line, @2.first_column); }       
-    | expresion '/'  expresion { $$ = new Operacion($1, $3, Tipo.DIV            , @2.first_line, @2.first_column); }
-    | expresion '%'  expresion { $$ = new Operacion($1, $3, Tipo.MODULO         , @2.first_line, @2.first_column); }
-    | expresion '^' expresion { $$ = new Operacion($1, $3, Tipo.POT            , @2.first_line, @2.first_column); }
-    | expresion '<'  expresion { $$ = new Relacional($1, $3, Tipo.MENOR          , @2.first_line, @2.first_column); }
-    | expresion '<=' expresion { $$ = new Relacional($1, $3, Tipo.MENORIGUAL     , @2.first_line, @2.first_column); }
-    | expresion '>'  expresion { $$ = new Relacional($1, $3, Tipo.MAYOR          , @2.first_line, @2.first_column); }
-    | expresion '>=' expresion { $$ = new Relacional($1, $3, Tipo.MAYORIGUAL     , @2.first_line, @2.first_column); }
-    | expresion '==' expresion { $$ = new Relacional($1, $3, Tipo.IGUAL          , @2.first_line, @2.first_column); }
-    | expresion '!=' expresion { $$ = new Relacional($1, $3, Tipo.DIFERENCIACION , @2.first_line, @2.first_column); }
-    | expresion '&&' expresion { $$ = new Logica($1, $3,Tipo.AND  , @2.first_line, @2.first_column); }
-    | expresion '||' expresion { $$ = new Logica($1, $3,Tipo.OR   , @2.first_line, @2.first_column); }
-    | '!' expresion       { $$ = new Logica($2, $2,Tipo.NOT  , @1.first_line, @1.first_column); }
+    | expresion '+'  expresion { $$ = new Operacion($1, $3, Aritmetic_s.MAS            , @2.first_line, @2.first_column); }       
+    | expresion '-' expresion { $$ = new Operacion($1, $3, Aritmetic_s.MENOS          , @2.first_line, @2.first_column); }
+    | expresion '*'  expresion { $$ = new Operacion($1, $3, Aritmetic_s.MULTIPLICACION , @2.first_line, @2.first_column); }       
+    | expresion '/'  expresion { $$ = new Operacion($1, $3, Aritmetic_s.DIV            , @2.first_line, @2.first_column); }
+    | expresion '%'  expresion { $$ = new Operacion($1, $3, Aritmetic_s.MODULO         , @2.first_line, @2.first_column); }
+    | expresion '^' expresion { $$ = new Operacion($1, $3, Aritmetic_s.POT            , @2.first_line, @2.first_column); }
+    | expresion '<'  expresion { $$ = new Relacional($1, $3, Relational_op.MENOR          , @2.first_line, @2.first_column); }
+    | expresion '<=' expresion { $$ = new Relacional($1, $3, Relational_op.MENORIGUAL     , @2.first_line, @2.first_column); }
+    | expresion '>'  expresion { $$ = new Relacional($1, $3, Relational_op.MAYOR          , @2.first_line, @2.first_column); }
+    | expresion '>=' expresion { $$ = new Relacional($1, $3, Relational_op.MAYORIGUAL     , @2.first_line, @2.first_column); }
+    | expresion '==' expresion { $$ = new Relacional($1, $3, Relational_op.IGUAL          , @2.first_line, @2.first_column); }
+    | expresion '!=' expresion { $$ = new Relacional($1, $3, Relational_op.DIFERENCIACION , @2.first_line, @2.first_column); }
+    | expresion '&&' expresion { $$ = new Logica($1, $3,Logico_op.AND  , @2.first_line, @2.first_column); }
+    | expresion '||' expresion { $$ = new Logica($1, $3,Logico_op.OR   , @2.first_line, @2.first_column); }
+    | '!' expresion       { $$ = new Logica($2, $2,Logico_op.NOT  , @1.first_line, @1.first_column); }
     | TOCHAR  {  $$ = $1;  }
     | TOLOWER           {  $$ = $1;  }
     | TOUPPER           {  $$ = $1;  }
@@ -488,18 +496,19 @@ expresion
     //| OP_TERNARIO        {  $$ = $1;  }
     | LENGTH           {  $$ = $1;  }
     | TYPEOF           {  $$ = $1;  }| tip  {  $$ = $1; }
-    | identificador punto pr_longi          { $$= new Acceso_arr($1,false,false,null,@1.first_line, @1.first_column); }
-    | identificador cor_abre CASTEO expresion cor_cierra           { $$= $1; }
-    | identificador cor_abre CASTEO expresion cor_cierra cor_abre CASTEO expresion cor_cierra           { $$= $1}
-    | identificador cor_abre  expresion cor_cierra cor_abre CASTEO expresion cor_cierra           { $$= $1}
-    | identificador cor_abre CASTEO expresion cor_cierra cor_abre  expresion cor_cierra           { $$= $1}
+    | identificador punto pr_longi          { $$= new Acceso_arr($1,false,false,null,null,@1.first_line, @1.first_column); }
+    | identificador cor_abre CASTEO expresion cor_cierra           { $$= new Acceso_arr($1,false,false,$3,$4,@1.first_line, @1.first_column); }
+    | identificador cor_abre CASTEO expresion cor_cierra cor_abre CASTEO expresion cor_cierra   { $$= new Acceso_mat($1,false,false,$3,$4,$7, $8, @1.first_line, @1.first_column); }
+    | identificador cor_abre  expresion cor_cierra cor_abre CASTEO expresion cor_cierra     { $$= new Acceso_mat($1,false,false,null,$3,$6, $7, @1.first_line, @1.first_column); }
+    | identificador cor_abre CASTEO expresion cor_cierra cor_abre  expresion cor_cierra           { $$= new Acceso_mat($1,false,false,$3,$4,null, $7, @1.first_line, @1.first_column); }
     | identificador cor_abre  expresion cor_cierra           { $$= new Acceso_arr($1,true ,true ,$3  ,@1.first_line, @1.first_column); }
-    | identificador cor_abre  expresion cor_cierra cor_abre  expresion cor_cierra           { $$= $1}
+    | identificador cor_abre  expresion cor_cierra cor_abre  expresion cor_cierra          { $$= new Acceso_mat($1,false,false,null,$3,null, $6, @1.first_line, @1.first_column); }
     
 ;
 
 tip   
     : par_abre expresion par_cierra  {  $$ = $2; } 
+    |cor_abre expresion cor_cierra  {  $$ = $2; } 
    // |CASTEO    {$$ = $1;}
     | entero      {  $$ = new Variable($1,                   Type.INT , @1.first_line, @1.first_column); }
     | decimal         {  $$ = new Variable($1,                   Type.DOUBLE , @1.first_line, @1.first_column); }

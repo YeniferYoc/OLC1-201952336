@@ -4,6 +4,7 @@ exports.Acceso = void 0;
 const Error_det_1 = require("./Error_det");
 const Expresion_1 = require("./Expresion");
 const Ret_1 = require("./Ret");
+let contador = 0;
 class Acceso extends Expresion_1.Expresion {
     constructor(id, linea, columna) {
         super(linea, columna);
@@ -22,9 +23,12 @@ class Acceso extends Expresion_1.Expresion {
         return { value: value.valor, type: value.tipo };
     }
     ast() {
-        return `
-      
-        `;
+        let dot = "";
+        contador += 1;
+        dot += "nodo" + (contador) + "_identi;\n";
+        dot += "nodo" + (contador) + "_identi" + " [ label =\"" + (this.id) + " \"];\n";
+        contador++;
+        return dot;
     }
 }
 exports.Acceso = Acceso;

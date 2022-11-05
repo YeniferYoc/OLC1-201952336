@@ -5,6 +5,7 @@ const Error_det_1 = require("./Error_det");
 const Expresion_1 = require("./Expresion");
 const Incremento_op_1 = require("./Incremento_op");
 const Ret_1 = require("./Ret");
+let contador = 0;
 class Incremento extends Expresion_1.Expresion {
     constructor(type, nombre, linea, columna) {
         super(linea, columna);
@@ -44,9 +45,36 @@ class Incremento extends Expresion_1.Expresion {
         return resultado;
     }
     ast() {
-        return `
-       
-        `;
+        let dot = "";
+        //contador += 1;
+        //esta en length
+        //dot+="nodo"+(contador)+"_incre;\n";
+        if (this.type == Incremento_op_1.Incremento_op.DECREMENTO1) {
+            dot += "nodo" + (contador) + "_id_dncre;\n";
+            dot += "nodo" + (contador) + "_id_dncre" + " [ label =\"" + this.nombre.toString() + "\"];\n";
+            dot += "nodo" + (contador) + "_dncre" + " [ label =\"--\"];\n";
+            dot += "nodo" + (contador) + "_id_dncre" + " ->" + "nodo" + (contador) + "_dncre" + "\n";
+        }
+        else if (this.type == Incremento_op_1.Incremento_op.DECREMENTO2) {
+            dot += "nodo" + (contador) + "_dncre2;\n";
+            dot += "nodo" + (contador) + "_dncre2" + " [ label =\"--\"];\n";
+            dot += "nodo" + (contador) + "_id_dncre2" + " [ label =\"" + this.nombre.toString() + "\"];\n";
+            dot += "nodo" + (contador) + "_dncre2" + " ->" + "nodo" + (contador) + "_id_dncre2" + "\n";
+        }
+        else if (this.type == Incremento_op_1.Incremento_op.INCREMENTO1) {
+            dot += "nodo" + (contador) + "_id_incre;\n";
+            dot += "nodo" + (contador) + "_id_incre" + " [ label =\"" + this.nombre.toString() + "\"];\n";
+            dot += "nodo" + (contador) + "_incre" + " [ label =\"++\"];\n";
+            dot += "nodo" + (contador) + "_id_incre" + " ->" + "nodo" + (contador) + "_incre" + "\n";
+        }
+        else {
+            dot += "nodo" + (contador) + "_incre2;\n";
+            dot += "nodo" + (contador) + "_incre2" + " [ label =\"++\"];\n";
+            dot += "nodo" + (contador) + "_id_incre2" + " [ label =\"" + this.nombre.toString() + "\"];\n";
+            dot += "nodo" + (contador) + "_incre2" + " ->" + "nodo" + (contador) + "_id_incre2" + "\n";
+        }
+        contador++;
+        return dot;
     }
 }
 exports.Incremento = Incremento;

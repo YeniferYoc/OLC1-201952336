@@ -1,0 +1,9 @@
+digraph G {node[shape=box, style=filled, color=blanchedalmond]; edge[color=chocolate3];rankdir=UD 
+raiz [ label ="INICIO"];
+raiz->nodo0_imprimir;
+nodo0_imprimir [ label ="IMPRIMIR: "];
+nodo0_imprimir ->nodo1_var;
+nodo1_var [ label ="ddddd"];
+
+hola
+}

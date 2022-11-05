@@ -1,0 +1,195 @@
+<main id="main">
+    
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          
+          <h3>Cargar <span>Entrada</span></h3>
+          <p>El curso de Organización de Lenguajes y Compiladores 1, ha puesto en marcha un nuevo 
+            proyecto, requerido por la Escuela de Ciencias y Sistemas de la Facultad de Ingeniería, que 
+            consiste en crear un lenguaje de programación para los estudiantes, del curso de 
+            Introducción a la Programación y Computación 1</p>
+        </div>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CARGA</h5>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label" id="pruebajs">Selecciona un archivo en
+                            formato OLC</label>
+                        <input class="form-control" type="file" id="user_input_archive"/>
+                    </div>
+                    <button type="button" class="btn btn-primary" id = "user">Cargar</button>
+                </div>
+            </div>
+        </div>
+        <form>        
+            <div class="row content">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                    <textarea name="entrada" [(ngModel)]="entrada.entrada" rows="15" cols="100" class="form-control" placeholder="Code Here!"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0">
+                    <div class="input-group mb-3">
+                    <textarea name="salida" rows="15" cols="100" class="form-control" placeholder="Console">{{consola}}</textarea>
+                    </div>
+                </div>
+                
+        </div>
+        <button type="button" class="btn btn-success" onclick="Limpiar()" >Reset</button>
+          <button class="btn btn-success btn-block"  (click)="enviar_d()" >Enviar</button>
+        </form>
+      </div>
+      
+   
+
+    </section><!-- End About Section -->
+
+
+  <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container">
+
+        <div class="text-center">
+          <h3>Objetivo</h3>
+          <p>Aplicar los conocimientos sobre la fase de análisis léxico, sintáctico y semántico de un 
+            compilador para la realización de un intérprete sencillo, con las funcionalidades principales 
+            para que sea funcional..</p>
+          <a class="cta-btn" href="#team">Continual</a>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+    <section id="team" class="team">
+        <div class="container">
+          <div class="section-title">
+          <h2>ARBOL SINTACTICO</h2>
+          
+    <h3>ARBOL <span>SINTACTICO</span></h3>
+        </div>
+        <div id="top_gra"> 
+           
+      </div>
+      <div id="top_vista">
+        
+      </div></div>
+      </section>
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-title">
+          <h3>Reporte <span> ERRORES</span></h3>
+          
+        </div>
+        <table style="width: 75%;margin: 0 auto;" cellpadding ="5">
+            <tr>
+                <th>Tipo error</th>
+                <th>Descripcion</th>
+                <th>Linea</th>
+                <th>Columna</th>
+            </tr>
+        </table>
+        <div id = "hola" *ngFor="let error of errores" >
+            <table style="width: 75%;margin: 0 auto;" cellpadding ="5">
+               
+                <tr >
+                    <td>{{error.tipo}} </td>
+                    <td>{{error.err}} </td>
+                    <td>{{error.linea}} </td>
+                    <td> {{error.columna_mia}} </td>
+                    </tr>
+           
+            </table>
+        
+
+            </div>
+            
+
+      </div>
+    </section><!-- End Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+          <div class="section-title">
+            <h3>Tabla <span> Simbolos</span></h3>
+            
+          </div>
+          <table style="width: 75%;margin: 0 auto;" cellpadding ="5">
+              <tr>
+                  <th>Nombre</th>
+                  <th>Tipo</th>
+                  <th>Valor</th>
+              </tr>
+          </table>
+       
+              <div id = "hola2" *ngFor="let variable of variables" >
+                  <table style="width: 75%;margin: 0 auto;" cellpadding ="5">
+                     
+                      <tr >
+                          <td>{{variable.nombre}} </td>
+                          <td>{{variable.tipo}} </td>
+                          <td>{{variable.valor}} </td>
+                          </tr>
+                 
+                  </table>
+              
+      
+                  </div>
+  
+        </div>
+      </section><!-- End Features Section -->
+
+  
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>DOCUMENTACION</h2>
+          <h3>Yenifer Ester Yoc Larios <span>201952336</span></h3>
+          <p>Estudiante de IPC 2</p>
+        </div>
+
+        <div class="row" >
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" >
+            <div class="member">
+              <div class="member-img">
+                
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Yenifer Yoc</h4>
+                <span>201952336</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 d-flex align-items-stretch" >
+            <form action="">
+                <p>Profesora de Enseñanza Media en Pediagogía y tecnica en Administración Educativa egresada de la Universidad de San carlos de Guatemala, estudiante de las carreras: </p>
+                
+                  <ul>
+                  <li><i class="ri-check-double-line"></i> Facultad de Ingeniería ------ Ingeniería en Ciencias y Sistemas</li>
+                  <li><i class="ri-check-double-line"></i> Facultad de Humanidades ----- Licenciatura en Pedagogía y Administración educativa</li>
+                 </ul>
+                 
+              </form>
+            
+          </div>
+          
+
+
+        </div>
+
+              
+
+      </div>
+    </section><!-- End Team Section -->

@@ -10,7 +10,7 @@ export class Error_det {
 
     }
     public obtener_error(){
-        console.log("tipo: "+this.tipo+" descripcion: "+this.err+" linea: "+this.linea+" col: "+this.columna_mia)
+        console.log("tipo : "+this.tipo+" descripcion: "+this.err+" linea: "+this.linea+" col: "+this.columna_mia)
     }
 }
 

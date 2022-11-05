@@ -5,7 +5,9 @@ export enum Aritmetic_s {
     /*3*/  DIV,
     /*4*/  MODULO,
     /*5*/  POT,
-    /*6*/  NEGACION
+    /*6*/  NEGACION,
+    PARENTESIS,
+    CORCHETES
 }
 /**
  * 
@@ -13,11 +15,12 @@ export enum Aritmetic_s {
  * @return simbolo como string 
  */
 export function get_simbolo_op(objeto: Aritmetic_s): string {
+    //console.log("esta en op simpo")
+    
     switch (objeto) {
         case 0:
             return "+"
         case 1:
-        case 6:
             return "-"
         case 2:
             return "*"
@@ -26,7 +29,13 @@ export function get_simbolo_op(objeto: Aritmetic_s): string {
         case 4:
             return "%"
         case 5:
-            return "**"
+            return "^"
+        case 6:
+            return "-"
+            case 7:
+                return "()"
+            case 8:
+                return "[]"
         default:
             return ""
     }

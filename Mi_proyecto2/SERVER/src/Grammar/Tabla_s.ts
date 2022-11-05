@@ -2,8 +2,10 @@ import { Simbolo } from "./simbolo"
 import { Type } from "./Ret"
 import { Vector } from "./Vector";
 import { Funcion } from "./Funcion";
+import { Union } from "./Union";
+import { Mi_var } from "./Mi_var";
 
-
+let vars : Mi_var[] = []
 export class Tabla_s {
 
     private variables: Map<string, Simbolo>
@@ -31,6 +33,9 @@ export class Tabla_s {
 
         //agrega la variable al MAP 
         this.variables.set(nombre, new Simbolo(valor, nombre, type))
+        
+
+        vars.push(new Mi_var(nombre,getTipo(type), valor));
         return true
     }
 
@@ -39,6 +44,9 @@ export class Tabla_s {
      * @param nombre Nombre de la variable que se quiere actualizar
      * @param valor Valor con el que se actualizara
      */
+     public clear_entorno() {
+        vars = []
+    }
     public actualizar_variable(nombre: string, valor: any) {
 
         let tab: Tabla_s | null = this;
@@ -100,6 +108,7 @@ export class Tabla_s {
      */
     public guardar_funcion(id: string, funcion: Funcion) {
         this.funciones.set(id, funcion)
+        vars.push(new Mi_var(id,funcion.tipo, funcion.parametros));
     }
 
     /**
@@ -126,6 +135,7 @@ export class Tabla_s {
 
         if (this.Repetido(id)) return false
         this.arreglos.set(id, tmp)
+        vars.push(new Mi_var(id,tmp.tipo, tmp.arrayExpresiones));
         return true
     }
 
@@ -165,10 +175,10 @@ export class Tabla_s {
     /**
      * Crear el reporte para la tabla de simbolos
      * @returns string que contiene una tabla html de los entornos en ese momento
-     *//*
-    public getEntorno(): string {
-        var tmp = "";
-        let env: Environment | null = this;
+     */
+    public getEntorno(): any {
+        /*var tmp = "";
+        let env: Tabla_s | null = this;
         tmp += "<table border=1 style=\"width: 75%;margin: 0 auto;\" cellpadding =\"5\"><td>"
         while (env != null) {
             tmp += "<table border=1 style=\"width: 75%;margin: 0 auto;\" cellpadding =\"5\"><tr><th>Nombre</th><th>Tipo</th><th>Valor</th></tr>"
@@ -177,8 +187,8 @@ export class Tabla_s {
                 let key = entry[0];
                 tmp += "<td>" + key + "</td>";
                 let value = entry[1];
-                tmp += "<td>" + getTipo(value.type) + "</td>"
-                tmp += "<td>" + value.value + "</td>"
+                tmp += "<td>" + getTipo(value.tipo) + "</td>"
+                tmp += "<td>" + value.valor + "</td>"
                 tmp += "</tr>"
             }
             for (let entry of Array.from(env.arreglos.entries())) {
@@ -203,10 +213,11 @@ export class Tabla_s {
             env = env.anterior;
         }
         tmp += "</td></table><br>"
-        return tmp;
+        return tmp;*/
+        return vars;
     }
 
-*/
+
 }
 
 

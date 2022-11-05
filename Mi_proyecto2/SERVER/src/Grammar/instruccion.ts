@@ -8,6 +8,6 @@ export abstract class Instruccion {
     }
 
     public abstract ejecutar(tabla_sim: Tabla_s): any
-    public abstract ast(): void
+    public abstract ast(): string
 
 }

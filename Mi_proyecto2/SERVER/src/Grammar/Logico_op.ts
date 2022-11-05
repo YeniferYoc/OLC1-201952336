@@ -1,7 +1,9 @@
 export enum Logico_op {
     /*0*/AND,
     /*1*/OR,
-    /*2*/NOT
+    /*2*/NOT,
+    PARENTESIS,
+    CORCHETES
 }
 
 /**
@@ -17,6 +19,10 @@ export function getSimbol(objeto: Logico_op): string {
             return "\\|\\|"
         case 2:
             return "!"
+            case 3:
+                return "()"
+            case 4:
+                return "[]"
     }
     return ""
 }

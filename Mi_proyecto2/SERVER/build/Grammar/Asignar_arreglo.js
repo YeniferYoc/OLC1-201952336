@@ -4,7 +4,9 @@ exports.Asignar_arreglo = void 0;
 const Error_det_1 = require("./Error_det");
 const instruccion_1 = require("./instruccion");
 const Ret_1 = require("./Ret");
+const Union_1 = require("./Union");
 const Vector_1 = require("./Vector");
+let contador = 0;
 class Asignar_arreglo extends instruccion_1.Instruccion {
     constructor(nombre, indice, asig, linea, columna) {
         super(linea, columna);
@@ -28,6 +30,19 @@ class Asignar_arreglo extends instruccion_1.Instruccion {
         tabla.update_array(this.nombre, array);
     }
     ast() {
+        const s = Union_1.Union.getInstance();
+        let dot = "";
+        //contador += 1;
+        //esta en length
+        dot += "nodo" + (contador) + "_as_arr;\n";
+        dot += "nodo" + (contador) + "_as_arr" + " [ label =\"ASIGNAR ARRAY\"];\n";
+        dot += "nodo" + (contador) + "_id_arr" + " [ label =\"" + this.nombre.toString() + "\"];\n";
+        dot += "nodo" + (contador) + "_as_arr" + " ->" + "nodo" + (contador) + "_id_arr" + "\n";
+        dot += "nodo" + (contador) + "_as_arr" + " ->" + this.indice.ast() + "\n";
+        dot += "nodo" + (contador) + "_as_arr" + " ->" + (this.asig.ast()) + "\n";
+        contador++;
+        s.add_ast(dot);
+        return dot;
     }
 }
 exports.Asignar_arreglo = Asignar_arreglo;

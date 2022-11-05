@@ -2,7 +2,7 @@ import { Expresion } from "./Expresion"
 import { Funcion } from "./Funcion"
 import { Instruccion } from "./instruccion"
 import { Tabla_s } from "./Tabla_s"
-
+let contador:number = 0;
 export class Longitud extends Instruccion {
 
     constructor(
@@ -16,17 +16,17 @@ export class Longitud extends Instruccion {
     public ejecutar(tabla: Tabla_s) {
     }
     
-    public ast() {/*
+    public ast() {let  dot:string = "";
+    //contador += 1;
+    dot+="nodo"+(contador)+"_len_i;\n";
+        dot+="nodo"+(contador)+"_len_i"+" [ label =\"LENGTH \"];\n";
+        
+        dot+="nodo"+(contador)+"_len_i"+" ->"+this.expre.ast()+"\n";
+           
+    
+    contador++;
 
-        const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="Lista Instrucciones"];        
-        `)
-        this.code.forEach(x => {
-            s.add_ast(`${name_node}->node_${x.line}_${x.column}_;`)
-            x.ast()
-        })*/
+    return dot;
 
     }
 }

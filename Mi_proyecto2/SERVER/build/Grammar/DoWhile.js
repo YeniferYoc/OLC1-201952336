@@ -4,6 +4,8 @@ exports.DoWhile = void 0;
 const Error_det_1 = require("./Error_det");
 const instruccion_1 = require("./instruccion");
 const Ret_1 = require("./Ret");
+const Union_1 = require("./Union");
+let contador = 0;
 class DoWhile extends instruccion_1.Instruccion {
     constructor(condicion, instru, linea, columna) {
         super(linea, columna);
@@ -23,6 +25,25 @@ class DoWhile extends instruccion_1.Instruccion {
         }
     }
     ast() {
+        const s = Union_1.Union.getInstance();
+        let dot = "";
+        let mi_ = contador;
+        dot += "nodo" + (mi_) + "_dow;";
+        dot += "nodo" + (mi_) + "_dow" + " [ label =\"DO WHILE " + "\"];\n";
+        dot += "nodo" + mi_ + "_dow" + " ->" + this.condicion.ast();
+        dot += "nodo" + (mi_) + "_dow" + " ->";
+        if (this.instru != null) {
+            dot += this.instru.ast();
+        }
+        else {
+            dot += "nodo" + mi_ + "_dow" + " ->" + "nodo" + mi_ + "_null_dow;";
+            dot += "nodo" + (mi_) + "_null_dow" + " [ label =\"NULL " + "\"];\n";
+            contador++;
+        }
+        contador++;
+        //dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+        s.add_ast(dot);
+        return dot;
     }
 }
 exports.DoWhile = DoWhile;

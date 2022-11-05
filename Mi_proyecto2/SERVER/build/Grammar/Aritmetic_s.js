@@ -10,6 +10,8 @@ var Aritmetic_s;
     /*4*/ Aritmetic_s[Aritmetic_s["MODULO"] = 4] = "MODULO";
     /*5*/ Aritmetic_s[Aritmetic_s["POT"] = 5] = "POT";
     /*6*/ Aritmetic_s[Aritmetic_s["NEGACION"] = 6] = "NEGACION";
+    Aritmetic_s[Aritmetic_s["PARENTESIS"] = 7] = "PARENTESIS";
+    Aritmetic_s[Aritmetic_s["CORCHETES"] = 8] = "CORCHETES";
 })(Aritmetic_s = exports.Aritmetic_s || (exports.Aritmetic_s = {}));
 /**
  *
@@ -17,11 +19,11 @@ var Aritmetic_s;
  * @return simbolo como string
  */
 function get_simbolo_op(objeto) {
+    //console.log("esta en op simpo")
     switch (objeto) {
         case 0:
             return "+";
         case 1:
-        case 6:
             return "-";
         case 2:
             return "*";
@@ -30,7 +32,13 @@ function get_simbolo_op(objeto) {
         case 4:
             return "%";
         case 5:
-            return "**";
+            return "^";
+        case 6:
+            return "-";
+        case 7:
+            return "()";
+        case 8:
+            return "[]";
         default:
             return "";
     }

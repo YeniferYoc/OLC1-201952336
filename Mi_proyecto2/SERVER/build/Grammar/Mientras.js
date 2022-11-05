@@ -4,6 +4,8 @@ exports.Mientras = void 0;
 const Error_det_1 = require("./Error_det");
 const instruccion_1 = require("./instruccion");
 const Ret_1 = require("./Ret");
+const Union_1 = require("./Union");
+let contador = 0;
 class Mientras extends instruccion_1.Instruccion {
     constructor(condicion, instru, linea, columna) {
         super(linea, columna);
@@ -22,17 +24,25 @@ class Mientras extends instruccion_1.Instruccion {
         }
     }
     ast() {
-        /* const s = Singleton.getInstance()
-         const name_node = `node_${this.line}_${this.column}_`
-         s.add_ast(`
-         ${name_node}[label="\\<Instruccion\\>\\nwhile"];
-         ${name_node}1[label="\\<Condicion\\>"];
-         ${name_node}->${name_node}1;
-         ${name_node}1->${this.condicion.ast()}
-         ${name_node}->node_${this.code.line}_${this.code.column}_;
-         `)
-         this.code.ast()
- */
+        const s = Union_1.Union.getInstance();
+        let dot = "";
+        let mi_ = contador;
+        dot += "nodo" + (mi_) + "_mi;";
+        dot += "nodo" + (mi_) + "_mi" + " [ label =\"WHILE " + "\"];\n";
+        dot += "nodo" + mi_ + "_mi" + " ->" + this.condicion.ast();
+        dot += "nodo" + (mi_) + "_mi" + " ->";
+        if (this.instru != null) {
+            dot += this.instru.ast();
+        }
+        else {
+            dot += "nodo" + mi_ + "_mi" + " ->" + "nodo" + mi_ + "_null_mi;";
+            dot += "nodo" + (mi_) + "_null_mi" + " [ label =\"NULL " + "\"];\n";
+            contador++;
+        }
+        contador++;
+        //dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+        s.add_ast(dot);
+        return dot;
     }
 }
 exports.Mientras = Mientras;

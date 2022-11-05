@@ -4,7 +4,9 @@ export enum Relational_op {
     /*2*/MENOR,
     /*3*/MENORIGUAL,
     /*4*/MAYOR,
-    /*5*/MAYORIGUAL
+    /*5*/MAYORIGUAL,
+        PARENTESIS,
+        CORCHETES
 }
 
 /**
@@ -26,6 +28,10 @@ export function get_simbolo(objeto: Relational_op): string {
             return "\\>"
         case 5:
             return "\\>="
+            case 6:
+                return "()"
+            case 7:
+                return "[]"
         default:
             return ""
     }

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Run = void 0;
 const instruccion_1 = require("./instruccion");
+let contador = 0;
 class Run extends instruccion_1.Instruccion {
     constructor(id, expresiones, linea, columna) {
         super(linea, columna);
@@ -51,6 +52,27 @@ class Run extends instruccion_1.Instruccion {
                 func.bloque.execute(newEnv)*/
     }
     ast() {
+        let dot = "";
+        let eje = contador;
+        dot += "nodo" + (eje) + "_run;";
+        dot += "nodo" + (eje) + "_run" + " [ label =\"RUN " + "\"];\n";
+        dot += "nodo" + (eje + 1) + "_idrun" + " [ label =\"" + this.id.toString() + "\"];\n";
+        dot += "nodo" + (eje) + "_eje" + " ->nodo" + (eje + 1) + "_id_ej;";
+        if (this.expresiones != null) {
+            dot += "nodo" + (eje) + "_paramrun" + " [ label =\"PARAMETROS\"];\n";
+            dot += "nodo" + (eje) + "_run" + " ->nodo" + (eje) + "_paramrun;";
+            this.expresiones.forEach(x => {
+                dot += "nodo" + eje + "_paramrun" + " ->";
+                dot += x.ast();
+            });
+        }
+        else {
+            dot += "nodo" + eje + "_run" + " ->" + "nodo" + eje + "_null_run;";
+            dot += "nodo" + (eje) + "_null_run" + " [ label =\"NULL " + "\"];\n";
+        }
+        contador++;
+        //dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+        return dot;
     }
 }
 exports.Run = Run;

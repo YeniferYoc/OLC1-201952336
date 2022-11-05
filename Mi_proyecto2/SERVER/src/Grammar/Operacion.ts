@@ -1,9 +1,9 @@
-import { Aritmetic_s, getNombre_op } from "./Aritmetic_s"
+import { Aritmetic_s, getNombre_op, get_simbolo_op } from "./Aritmetic_s"
 import { Error_det } from "./Error_det"
 import { Expresion } from "./Expresion"
 import { Retorno , Type, get} from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-
+let contador:number = 0;
 export class Operacion extends Expresion {
 
     constructor(
@@ -46,11 +46,13 @@ export class Operacion extends Expresion {
          * suma---------------------------------------------------------------------------------
          */
         if (this.type == Aritmetic_s.MAS) {
+            console.log("entro a suma");
             //NUMERO NUMERO---------------------------------------------
             if (derecho.type == Type.INT && izquierdo.type == Type.INT ) {
                 resultado = { value: (izquierdo.value + derecho.value), type: Type.INT }
+                console.log("son dos numeros"+resultado.value);
             }
-            if ( derecho.type == Type.DOUBLE && izquierdo.type == Type.DOUBLE ) {
+            else if ( derecho.type == Type.DOUBLE && izquierdo.type == Type.DOUBLE ) {
                 resultado = { value: (izquierdo.value + derecho.value), type: Type.DOUBLE }
             }
             //NUMERO BOOLEAN---------------------------------------------
@@ -290,13 +292,13 @@ export class Operacion extends Expresion {
             if (derecho.type == Type.INT && izquierdo.type == Type.INT) {
              resultado = { value: (izquierdo.value *  derecho.value), type: Type.INT }
          }
-         if (derecho.type == Type.DOUBLE && izquierdo.type == Type.DOUBLE) {
+         else if (derecho.type == Type.DOUBLE && izquierdo.type == Type.DOUBLE) {
             resultado = { value: (izquierdo.value *  derecho.value), type: Type.DOUBLE }
         }
-        if (derecho.type == Type.DOUBLE && izquierdo.type == Type.INT ) {
+        else if (derecho.type == Type.DOUBLE && izquierdo.type == Type.INT ) {
             resultado = { value: (izquierdo.value *  derecho.value), type: Type.DOUBLE }
         }
-        if (derecho.type == Type.INT && izquierdo.type == Type.DOUBLE ) {
+        else if (derecho.type == Type.INT && izquierdo.type == Type.DOUBLE ) {
             resultado = { value: (izquierdo.value *  derecho.value), type: Type.DOUBLE }
         }
          //NUMERO BOOLEAN---------------------------------------------
@@ -583,12 +585,12 @@ export class Operacion extends Expresion {
             if (derecho.type == Type.INT && izquierdo.type == Type.INT) {
              resultado = { value: (Math.pow(izquierdo.value, derecho.value)), type: Type.INT }
          }
-         if (derecho.type == Type.DOUBLE && izquierdo.type == Type.DOUBLE) {
+         else if (derecho.type == Type.DOUBLE && izquierdo.type == Type.DOUBLE) {
             resultado = { value: (Math.pow(izquierdo.value, derecho.value)), type: Type.DOUBLE }
         }
-        if (derecho.type == Type.INT && izquierdo.type == Type.DOUBLE) {
+       else if (derecho.type == Type.INT && izquierdo.type == Type.DOUBLE) {
             resultado = { value: (Math.pow(izquierdo.value, derecho.value)), type: Type.DOUBLE }
-        }if (derecho.type == Type.DOUBLE && izquierdo.type == Type.INT) {
+        }else if (derecho.type == Type.DOUBLE && izquierdo.type == Type.INT) {
             resultado = { value: (Math.pow(izquierdo.value, derecho.value)), type: Type.DOUBLE }
         }
          //NUMERO BOOLEAN---------------------------------------------
@@ -669,11 +671,80 @@ export class Operacion extends Expresion {
     }
 
     public ast() {
+        contador++;
+        let  dot:string = "";
+		contador += 1;
+        dot+="nodo"+(contador)+"_op;\n";
+        dot+="nodo"+(contador)+"_op"+" [ label =\""+get_simbolo_op(this.type)+"\"];\n";
+        if(this.type == Aritmetic_s.NEGACION){
+            //console.log("es negacion  ")
+            dot+="nodo"+(contador)+"_op ->"+(this.der.ast())+"\n";
+            
+            return dot; 
+        }else{
+            dot+="nodo"+(contador)+"_op"+" ->"+(this.iz.ast())+"\n";	
+			dot+="nodo"+(contador)+"_op ->"+(this.der.ast())+"\n";
+            
+            return dot;
+        }
+			
+            
+      /*  return `
+        ${name_nodo};
+        ${name_nodo}[label="${get_simbolo_op(this.type)}"];
+        ${name_nodo}->${this.iz.ast()}
+        ${name_nodo}->${this.der.ast()}
+        `*/
 
+/*
         
-        return `
-        
-        `
+        if(this.type == Aritmetic_s.MAS){
+            console.log("entro a suma")
+            let suma:number = contador;
+            dot+="nodo"+(suma)+"_op;\n";
+			dot+="nodo"+(suma)+"_op"+" [ label =\"+\"];\n";
+			dot+="nodo"+(suma)+"_op"+" ->"+(this.iz.ast())+"\n";	
+			dot+="nodo"+(suma)+"_op ->"+(this.der.ast())+"\n";
+        }
+        else if(this.type == Aritmetic_s.MENOS){
+            let suma:number = contador;
+            dot+="nodo"+(suma)+"_op;\n";
+			dot+="nodo"+(suma)+"_op"+" [ label =\"-\"];\n";
+			dot+="nodo"+(suma)+"_op"+" ->"+(this.iz.ast())+"\n";	
+			dot+="nodo"+(suma)+"_op ->"+(this.der.ast())+"\n";
+        }else if(this.type == Aritmetic_s.MULTIPLICACION){
+            let suma:number = contador;
+            dot+="nodo"+(suma)+"_op;\n";
+			dot+="nodo"+(suma)+"_op"+" [ label =\"*\"];\n";
+			dot+="nodo"+(suma)+"_op"+" ->"+(this.iz.ast())+"\n";	
+			dot+="nodo"+(suma)+"_op ->"+(this.der.ast())+"\n";
+        }else if(this.type == Aritmetic_s.DIV){
+            let suma:number = contador;
+            dot+="nodo"+(suma)+"_op;\n";
+			dot+="nodo"+(suma)+"_op"+" [ label =\"/\"];\n";
+			dot+="nodo"+(suma)+"_op"+" ->"+(this.iz.ast())+"\n";	
+			dot+="nodo"+(suma)+"_op ->"+(this.der.ast())+"\n";
+        }else if(this.type == Aritmetic_s.MODULO){
+            let suma:number = contador;
+            dot+="nodo"+(suma)+"_op;\n";
+			dot+="nodo"+(suma)+"_op"+" [ label =\"%\"];\n";
+			dot+="nodo"+(suma)+"_op"+" ->"+(this.iz.ast())+"\n";	
+			dot+="nodo"+(suma)+"_op ->"+(this.der.ast())+"\n";
+        }else if(this.type == Aritmetic_s.POT){
+            let suma:number = contador;
+            dot+="nodo"+(suma)+"_op;\n";
+			dot+="nodo"+(suma)+"_op"+" [ label =\"^\"];\n";
+			dot+="nodo"+(suma)+"_op"+" ->"+(this.iz.ast())+"\n";	
+			dot+="nodo"+(suma)+"_op ->"+(this.der.ast())+"\n";
+        }else if(this.type == Aritmetic_s.NEGACION){
+            let suma:number = contador;
+            dot+="nodo"+(suma)+"_op;\n";
+			dot+="nodo"+(suma)+"_op"+" [ label =\"!\"];\n";	
+			dot+="nodo"+(suma)+"_op ->"+(this.der.ast())+"\n";
+        }
+		
+		
+		return dot;*/
     }
     
 }

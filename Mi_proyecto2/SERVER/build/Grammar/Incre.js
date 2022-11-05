@@ -4,6 +4,7 @@ exports.Incre = void 0;
 const Error_det_1 = require("./Error_det");
 const instruccion_1 = require("./instruccion");
 const Ret_1 = require("./Ret");
+let contador = 0;
 class Incre extends instruccion_1.Instruccion {
     constructor(tipo, id, linea, columna) {
         super(linea, columna);
@@ -22,6 +23,20 @@ class Incre extends instruccion_1.Instruccion {
         tabla.actualizar_variable(this.id, variable.valor);
     }
     ast() {
+        let dot = "";
+        //contador += 1;
+        //esta en length
+        dot += "nodo" + (contador) + "_incre;\n";
+        if (this.tipo == "++") {
+            dot += "nodo" + (contador) + "_incre" + " [ label =\"++\"];\n";
+        }
+        else {
+            dot += "nodo" + (contador) + "_incre" + " [ label =\"--\"];\n";
+        }
+        dot += "nodo" + (contador) + "_id_incre" + " [ label =\"" + this.id.toString() + "\"];\n";
+        dot += "nodo" + (contador) + "_incre" + " ->" + "nodo" + (contador) + "_id_incre" + "\n";
+        contador++;
+        return dot;
         /*
                 const s = Singleton.getInstance()
                 const name_node = `node_${this.line}_${this.column}_`

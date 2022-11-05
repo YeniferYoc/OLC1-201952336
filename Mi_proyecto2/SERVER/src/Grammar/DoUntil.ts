@@ -3,7 +3,8 @@ import { Expresion } from "./Expresion"
 import { Instruccion } from "./instruccion"
 import { get, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-
+import { Union } from "./Union"
+let contador:number = 0;
 export class DoUntil extends Instruccion {
 
     constructor(
@@ -27,17 +28,34 @@ export class DoUntil extends Instruccion {
             if (cond.type != Type.BOOLEAN) throw new Error_det("Semantico", `La condicion es invalida porque es de tipo [${get(cond.type)}]`, this.linea, this.columna)
         }
     }
-    public ast() {/*
-        const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="\\<Instruccion\\>\\ndo while"];
-        ${name_node}1[label="\\<Condicion\\>"];
-        ${name_node}->${name_node}1;
-        ${name_node}1->${this.condicion.ast()}
-        ${name_node}->node_${this.code.line}_${this.code.column}_;        
-        `)
-        this.code.ast()*/
+    public ast() {
+        
+        
+      
+        const s = Union.getInstance()
+        let dot:string = "";
+		
+		let mi_ :number = contador;
+		dot+="nodo"+(mi_)+"_doUNTIL;";
+		dot+="nodo"+(mi_)+"_doUNTIL"+" [ label =\"DO UNTIL "+"\"];\n";
+		dot+="nodo"+mi_+"_doUNTIL"+" ->"+this.condicion.ast();
+		dot+="nodo"+(mi_)+"_doUNTIL"+" ->";
+        
+	
+		if(this.instru != null) {
+			dot+=this.instru.ast();
+		}
+		else {
+			dot+="nodo"+mi_+"_doUNTIL"+" ->"+"nodo"+mi_+"_null_doUNTIL;";
+			dot+="nodo"+(mi_)+"_null_doUNTIL"+" [ label =\"NULL "+"\"];\n";
+			contador++;
+		}
+		
+		contador++;
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		s.add_ast(dot);
+        return dot; 
 
     }
 }

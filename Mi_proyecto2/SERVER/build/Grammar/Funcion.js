@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Funcion = void 0;
 const Error_det_1 = require("./Error_det");
 const instruccion_1 = require("./instruccion");
+const Union_1 = require("./Union");
+let contador = 0;
 class Funcion extends instruccion_1.Instruccion {
     constructor(name, bloque, parametros, tipo, retorno, linea, columna) {
         super(linea, columna);
@@ -34,27 +36,63 @@ class Funcion extends instruccion_1.Instruccion {
         tabla.guardar_funcion(this.name, this);
     }
     ast() {
-        /*
-        const s= Singleton.getInstance()
-        const nombre_nodo=`node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${nombre_nodo} [label="\\<Instruccion\\>\\nFuncion"];
-        ${nombre_nodo}1[label="\\<Nombre\\>\\n${this.name}"];
-        ${nombre_nodo}2[label="\\<Parametros\\>"];
-        ${nombre_nodo}->${nombre_nodo}1;
-        ${nombre_nodo}->${nombre_nodo}2;
-        ${nombre_nodo}->node_${this.bloque.line}_${this.bloque.column}_;
-        `)
-        this.bloque.ast();
-        
-        let tmp = 5 //empiezo desde 5 porque ya esta ocupado 1 y 2
-        this.parametros.forEach(x => {
-            s.add_ast(`
-            ${nombre_nodo}${tmp}[label="\\<Nombre,Tipo\\>\\n${x}"];
-            ${nombre_nodo}2->${nombre_nodo}${tmp};
-            `)
-            tmp++
-        })*/
+        const s = Union_1.Union.getInstance();
+        let dot = "";
+        let mi_ = contador;
+        dot += "nodo" + (mi_) + "_FU;";
+        dot += "nodo" + (mi_) + "_FU" + " [ label =\"FUNCION " + this.name.toString() + "\"];\n";
+        let ides = false;
+        let declaracion = contador;
+        if (this.parametros != null) {
+            // console.log("no es null")
+            this.parametros.forEach(id => {
+                declaracion = contador;
+                if (ides == false) {
+                    let cont = contador;
+                    for (let i = 0; i < this.parametros.length; i++) {
+                        dot += "nodo" + (cont) + "_par";
+                        ides = true;
+                        cont++;
+                        //console.log(dot)
+                        //console.log(this.identificadores.length)
+                        if (i != this.parametros.length - 1) {
+                            dot += ",";
+                        }
+                    }
+                    //console.log(dot)
+                    dot += ";";
+                }
+                else {
+                }
+                // console.log(this.tipo+" tipo")
+                dot += "nodo" + (declaracion) + "_par" + " [ label =\"PARAMETRO " + this.tipo.toString() + "\"];\n";
+                dot += "nodo" + (mi_) + "_FU -> " + "nodo" + (declaracion) + "_par;";
+                dot += "nodo" + (declaracion + 1) + "_par_id" + " [ label =\"" + id.toString() + "\"];\n";
+                dot += "nodo" + (declaracion) + "_par" + " ->nodo" + (declaracion + 1) + "_par_id;";
+                //dot+="nodo"+declaracion+"_de"+" ->"+this..ast();
+                //console.log(dot)
+                //console.log("fin dot decla")
+                contador++;
+            });
+        }
+        else {
+            //console.log("i es null")
+        }
+        dot += "nodo" + (mi_) + "_tipo_fu" + " [ label =\"TIPO: " + this.tipo.toString() + "\"];\n";
+        dot += "nodo" + mi_ + "_FU" + " ->" + "nodo" + (mi_) + "_tipo_fu;";
+        dot += "nodo" + (mi_) + "_FU" + " ->";
+        if (this.bloque != null) {
+            dot += this.bloque.ast();
+        }
+        else {
+            dot += "nodo" + mi_ + "_FU" + " ->" + "nodo" + mi_ + "_null_FU;";
+            dot += "nodo" + (mi_) + "_null_FU" + " [ label =\"NULL " + "\"];\n";
+            contador++;
+        }
+        contador++;
+        //dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+        s.add_ast(dot);
+        return dot;
     }
 }
 exports.Funcion = Funcion;

@@ -3,7 +3,8 @@ import { Retorno, Type, get } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
 import { Error_det } from "./Error_det"
 import { Logico_op, getName, getSimbol } from "./Logico_op"
-
+import { Relational_op } from "./Simbolo_rel"
+let contador:number = 0;
 export class Logica extends Expresion {
 
     constructor(
@@ -50,9 +51,29 @@ export class Logica extends Expresion {
     }
 
     public ast() {
-    
-        return `
-       `
+        let  dot:string = "";
+		contador++;
+        dot+="nodo"+(contador)+"_lo;\n";
+        dot+="nodo"+(contador)+"_lo"+" [ label =\""+getSimbol(this.tipo)+" \"];\n";
+        
+			//dot+="nodo"+(contador)+"_lo"+" ->"+(this.iz.ast())+"\n";	
+			//dot+="nodo"+(contador)+"_lo ->"+(this.der.ast())+"\n";
+            
+           // return dot;
+
+
+            if(this.tipo == Logico_op.NOT){
+                //console.log("es negacion  ")
+                dot+="nodo"+(contador)+"_lo ->"+(this.der.ast())+"\n";
+                
+                return dot; 
+            }else{
+                dot+="nodo"+(contador)+"_lo"+" ->"+(this.iz.ast())+"\n";	
+                dot+="nodo"+(contador)+"_lo ->"+(this.der.ast())+"\n";
+                
+                return dot;
+            
+            }
     }
 
 }

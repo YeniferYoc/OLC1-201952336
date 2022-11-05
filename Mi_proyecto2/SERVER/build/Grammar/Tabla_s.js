@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTipo = exports.Tabla_s = void 0;
 const simbolo_1 = require("./simbolo");
+const Mi_var_1 = require("./Mi_var");
+let vars = [];
 class Tabla_s {
     constructor(anterior) {
         this.anterior = anterior;
@@ -23,6 +25,7 @@ class Tabla_s {
             return false;
         //agrega la variable al MAP 
         this.variables.set(nombre, new simbolo_1.Simbolo(valor, nombre, type));
+        vars.push(new Mi_var_1.Mi_var(nombre, getTipo(type), valor));
         return true;
     }
     /**
@@ -30,6 +33,9 @@ class Tabla_s {
      * @param nombre Nombre de la variable que se quiere actualizar
      * @param valor Valor con el que se actualizara
      */
+    clear_entorno() {
+        vars = [];
+    }
     actualizar_variable(nombre, valor) {
         let tab = this;
         while (tab != null) {
@@ -89,6 +95,7 @@ class Tabla_s {
      */
     guardar_funcion(id, funcion) {
         this.funciones.set(id, funcion);
+        vars.push(new Mi_var_1.Mi_var(id, funcion.tipo, funcion.parametros));
     }
     /**
      * Retorna la clase INSFUNCION para ejecutarla
@@ -114,6 +121,7 @@ class Tabla_s {
         if (this.Repetido(id))
             return false;
         this.arreglos.set(id, tmp);
+        vars.push(new Mi_var_1.Mi_var(id, tmp.tipo, tmp.arrayExpresiones));
         return true;
     }
     /**
@@ -148,6 +156,50 @@ class Tabla_s {
             }
             tabla = tabla.anterior;
         }
+    }
+    /**
+     * Crear el reporte para la tabla de simbolos
+     * @returns string que contiene una tabla html de los entornos en ese momento
+     */
+    getEntorno() {
+        /*var tmp = "";
+        let env: Tabla_s | null = this;
+        tmp += "<table border=1 style=\"width: 75%;margin: 0 auto;\" cellpadding =\"5\"><td>"
+        while (env != null) {
+            tmp += "<table border=1 style=\"width: 75%;margin: 0 auto;\" cellpadding =\"5\"><tr><th>Nombre</th><th>Tipo</th><th>Valor</th></tr>"
+            for (let entry of Array.from(env.variables.entries())) {
+                tmp += "<tr>"
+                let key = entry[0];
+                tmp += "<td>" + key + "</td>";
+                let value = entry[1];
+                tmp += "<td>" + getTipo(value.tipo) + "</td>"
+                tmp += "<td>" + value.valor + "</td>"
+                tmp += "</tr>"
+            }
+            for (let entry of Array.from(env.arreglos.entries())) {
+                tmp += "<tr>"
+                let key = entry[0];
+                tmp += "<td>" + key + "</td>";
+                let value = entry[1];
+                tmp += "<td>" + value.tipo + "</td>"
+                tmp += "<td>[" + value.contenido + "]</td>"
+                tmp += "</tr>"
+            }
+            for (let entry of Array.from(env.funciones.entries())) {
+                tmp += "<tr>"
+                let key = entry[0];
+                tmp += "<td>" + key + "</td>";
+                let value = entry[1];
+                tmp += "<td>" + getTipo(4) + "</td>"
+                tmp += "<td>" + value.parametros + "</td>"
+                tmp += "</tr>"
+            }
+            tmp += "</table><br>"
+            env = env.anterior;
+        }
+        tmp += "</td></table><br>"
+        return tmp;*/
+        return vars;
     }
 }
 exports.Tabla_s = Tabla_s;

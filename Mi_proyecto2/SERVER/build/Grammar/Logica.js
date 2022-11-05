@@ -5,6 +5,7 @@ const Expresion_1 = require("./Expresion");
 const Ret_1 = require("./Ret");
 const Error_det_1 = require("./Error_det");
 const Logico_op_1 = require("./Logico_op");
+let contador = 0;
 class Logica extends Expresion_1.Expresion {
     constructor(iz, der, tipo, linea, columna) {
         super(linea, columna);
@@ -42,8 +43,23 @@ class Logica extends Expresion_1.Expresion {
         }
     }
     ast() {
-        return `
-       `;
+        let dot = "";
+        contador++;
+        dot += "nodo" + (contador) + "_lo;\n";
+        dot += "nodo" + (contador) + "_lo" + " [ label =\"" + (0, Logico_op_1.getSimbol)(this.tipo) + " \"];\n";
+        //dot+="nodo"+(contador)+"_lo"+" ->"+(this.iz.ast())+"\n";	
+        //dot+="nodo"+(contador)+"_lo ->"+(this.der.ast())+"\n";
+        // return dot;
+        if (this.tipo == Logico_op_1.Logico_op.NOT) {
+            //console.log("es negacion  ")
+            dot += "nodo" + (contador) + "_lo ->" + (this.der.ast()) + "\n";
+            return dot;
+        }
+        else {
+            dot += "nodo" + (contador) + "_lo" + " ->" + (this.iz.ast()) + "\n";
+            dot += "nodo" + (contador) + "_lo ->" + (this.der.ast()) + "\n";
+            return dot;
+        }
     }
 }
 exports.Logica = Logica;

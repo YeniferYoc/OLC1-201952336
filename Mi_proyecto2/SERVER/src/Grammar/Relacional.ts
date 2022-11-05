@@ -3,7 +3,7 @@ import { get, Retorno, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
 import { Error_det } from "./Error_det"
 import { Relational_op, get_simbolo, getName } from "./Simbolo_rel"
-
+let contador:number = 0;
 export class Relacional extends Expresion {
 
     constructor(
@@ -116,8 +116,14 @@ export class Relacional extends Expresion {
 
     }
     public ast() {
-        return `
+        let  dot:string = "";
+		contador += 1;
+        dot+="nodo"+(contador)+"_re;\n";
+        dot+="nodo"+(contador)+"_re"+" [ label = \""+get_simbolo(this.type)+" \"];\n";
         
-        `
+			dot+="nodo"+(contador)+"_re"+" ->"+(this.left.ast())+"\n";	
+			dot+="nodo"+(contador)+"_re ->"+(this.right.ast())+"\n";
+            contador++;
+            return dot;
     }
 }

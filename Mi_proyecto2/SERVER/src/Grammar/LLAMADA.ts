@@ -2,7 +2,7 @@ import { Error_det } from "./Error_det"
 import { Expresion } from "./Expresion"
 import { Instruccion } from "./instruccion"
 import { Tabla_s } from "./Tabla_s"
-
+let contador : number = 0;
 export class LLAMADA extends Instruccion {
 
     constructor(
@@ -58,20 +58,34 @@ export class LLAMADA extends Instruccion {
 
     }
 
-    public ast() {/*
-        const s= Singleton.getInstance()
-        const nombre_nodo=`node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${nombre_nodo} [label="\\<Instruccion\\>\\nLlamada funcion"];
-        ${nombre_nodo}1 [label="{${this.id}}"];
-        ${nombre_nodo}2 [label="<\\Parametros\\>"];
-        ${nombre_nodo}->${nombre_nodo}2;
-        ${nombre_nodo}->${nombre_nodo}1;
-        `)
-        this.expresiones.forEach(element => {
-            s.add_ast(`
-            ${nombre_nodo}2->${element.ast()}
-            `)
-        })*/
+    public ast() {
+        let dot:string = "";
+		
+		let eje:number = contador;
+		dot+="nodo"+(eje)+"_eje;";
+		dot+="nodo"+(eje)+"_eje"+" [ label =\"LLAMADA "+"\"];\n";
+		dot+="nodo"+(eje+1)+"_id_ej"+" [ label =\""+this.id.toString()+"\"];\n";
+		dot+="nodo"+(eje)+"_eje"+" ->nodo"+(eje+1)+"_id_ej;";
+		
+		
+        if(this.expresiones != null){
+            dot+="nodo"+(eje)+"_param_ej"+" [ label =\"PARAMETROS\"];\n";
+		dot+="nodo"+(eje)+"_eje"+" ->nodo"+(eje)+"_param_ej;";
+            this.expresiones.forEach(x => {
+                
+                dot+="nodo"+eje+"_param_ej"+" ->";
+                dot+= x.ast();
+            })
+        }else{
+            dot+="nodo"+eje+"_eje"+" ->"+"nodo"+eje+"_null_eje;";
+			dot+="nodo"+(eje)+"_null_eje"+" [ label =\"NULL "+"\"];\n";
+			 
+        }
+		
+		contador++;
+		
+		//dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+		
+		return dot;
     }
 }

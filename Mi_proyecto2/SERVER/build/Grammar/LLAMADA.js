@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LLAMADA = void 0;
 const instruccion_1 = require("./instruccion");
+let contador = 0;
 class LLAMADA extends instruccion_1.Instruccion {
     constructor(id, expresiones, linea, columna) {
         super(linea, columna);
@@ -51,6 +52,27 @@ class LLAMADA extends instruccion_1.Instruccion {
                 func.bloque.execute(newEnv)*/
     }
     ast() {
+        let dot = "";
+        let eje = contador;
+        dot += "nodo" + (eje) + "_eje;";
+        dot += "nodo" + (eje) + "_eje" + " [ label =\"LLAMADA " + "\"];\n";
+        dot += "nodo" + (eje + 1) + "_id_ej" + " [ label =\"" + this.id.toString() + "\"];\n";
+        dot += "nodo" + (eje) + "_eje" + " ->nodo" + (eje + 1) + "_id_ej;";
+        if (this.expresiones != null) {
+            dot += "nodo" + (eje) + "_param_ej" + " [ label =\"PARAMETROS\"];\n";
+            dot += "nodo" + (eje) + "_eje" + " ->nodo" + (eje) + "_param_ej;";
+            this.expresiones.forEach(x => {
+                dot += "nodo" + eje + "_param_ej" + " ->";
+                dot += x.ast();
+            });
+        }
+        else {
+            dot += "nodo" + eje + "_eje" + " ->" + "nodo" + eje + "_null_eje;";
+            dot += "nodo" + (eje) + "_null_eje" + " [ label =\"NULL " + "\"];\n";
+        }
+        contador++;
+        //dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+        return dot;
     }
 }
 exports.LLAMADA = LLAMADA;

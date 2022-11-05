@@ -5,6 +5,7 @@ const Expresion_1 = require("./Expresion");
 const Ret_1 = require("./Ret");
 const Error_det_1 = require("./Error_det");
 const Simbolo_rel_1 = require("./Simbolo_rel");
+let contador = 0;
 class Relacional extends Expresion_1.Expresion {
     constructor(left, right, type, linea, columna) {
         super(linea, columna);
@@ -103,9 +104,14 @@ class Relacional extends Expresion_1.Expresion {
         throw new Error_det_1.Error_det("Semantico", `Error tipo de datos en operando ${(0, Simbolo_rel_1.getName)(this.type)}, tipo [${(0, Ret_1.get)(izquierdo.type)}] con tipo [${(0, Ret_1.get)(derecho.type)}]`, this.linea, this.columna);
     }
     ast() {
-        return `
-        
-        `;
+        let dot = "";
+        contador += 1;
+        dot += "nodo" + (contador) + "_re;\n";
+        dot += "nodo" + (contador) + "_re" + " [ label = \"" + (0, Simbolo_rel_1.get_simbolo)(this.type) + " \"];\n";
+        dot += "nodo" + (contador) + "_re" + " ->" + (this.left.ast()) + "\n";
+        dot += "nodo" + (contador) + "_re ->" + (this.right.ast()) + "\n";
+        contador++;
+        return dot;
     }
 }
 exports.Relacional = Relacional;

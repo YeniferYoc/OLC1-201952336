@@ -1,9 +1,11 @@
 
 import express, {Application} from 'express'; 
 import ndexroutes from './routes/indexroutes';
+
 import morgan from 'morgan';
 import cors from 'cors';
 import { Tabla_s } from './Grammar/Tabla_s';
+import { Union } from './Grammar/Union';
 class Server {
     public app: Application;
     constructor(){
@@ -19,49 +21,14 @@ class Server {
     this.app.use(express.urlencoded({extended: false}));
     }
     routes():void{
-        this.app.use(ndexroutes)
+        this.app.use("/", ndexroutes);
+        //this.app.use(ndexroutes)
     }
     start():void{
-        this.app.listen(this.app.get('port'), ()=>{
-            console.log('server yoooooo', this.app.get('port'));
-            let variable:string = "hola"
-            console.log(variable.length)
-            let nu = 2;
-            let potencia = nu**6;
-            console.log(potencia+"pot")
-            let varible_:string = nu.toString()+" hola";
-            console.log(varible_)
-        for(let a of variable){
-            console.log(a);
-        }
-            let var1 = 1;
-            console.log(var1)
-           
-            
-            var fs= require('fs') ;
-
-            var mygramatica = require('./Grammar/Gramatica.js')
-            
-            
-            
-            fs.readFile('./src/entrada.txt',(err:any,data:any)=>{
-                //si hay un error
-                if (err) throw err;
-            
-            
-                //si no hay errores
-                //gramatica.parse
-                console.log("hola \\\' td  u");
-                console.log(data.toString());
-                console.log("ahora toca analizar              izarrrdD")
-                mygramatica.parse(data.toString())
-                console.log("termine ")
-            
-            })
-
-            console.log("ola")
-            
-        });
+        this.app.listen(this.app.get("port"), () => {
+            console.log("Server on port ", this.app.get("port"));
+          });
+       
     }
 }
 const server = new Server();

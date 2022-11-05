@@ -4,6 +4,8 @@ exports.Si = void 0;
 const Error_det_1 = require("./Error_det");
 const instruccion_1 = require("./instruccion");
 const Ret_1 = require("./Ret");
+const Union_1 = require("./Union");
+let contador = 0;
 class Si extends instruccion_1.Instruccion {
     constructor(condition, instrucciones, instrucciones_else, linea, columna) {
         super(linea, columna);
@@ -22,20 +24,34 @@ class Si extends instruccion_1.Instruccion {
             (_a = this.instrucciones_else) === null || _a === void 0 ? void 0 : _a.ejecutar(tabla);
     }
     ast() {
-        /*const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="\\<Instruccion\\>\\nif"];
-        ${name_node}1[label="\\<True\\>"];
-        ${name_node}2[label="\\<Else\\>"];
-        ${name_node}->${name_node}1;
-        ${name_node}->${name_node}2;
-        ${name_node}1->node_${this.code.line}_${this.code.column}_;`)
-        this.code.ast()
-        if (this.elsSt != null) {
-            s.add_ast(`${name_node}2->node_${this.elsSt.line}_${this.elsSt.column}_`)
-            this.elsSt.ast()
-        }*/
+        const s = Union_1.Union.getInstance();
+        let dot = "";
+        let mi_ = contador;
+        dot += "nodo" + (mi_) + "_SI;";
+        dot += "nodo" + (mi_) + "_SI" + " [ label =\"IF " + "\"];\n";
+        dot += "nodo" + mi_ + "_SI" + " ->" + this.condition.ast();
+        dot += "nodo" + (mi_) + "_SI" + " ->";
+        if (this.instrucciones != null) {
+            dot += this.instrucciones.ast();
+        }
+        else {
+            dot += "nodo" + mi_ + "_SI" + " ->" + "nodo" + mi_ + "_null_SI;";
+            dot += "nodo" + (mi_) + "_null_SI" + " [ label =\"NULL " + "\"];\n";
+            contador++;
+        }
+        dot += "nodo" + (mi_) + "_SI" + " ->";
+        if (this.instrucciones_else != null) {
+            dot += this.instrucciones_else.ast();
+        }
+        else {
+            dot += "nodo" + mi_ + "_SI" + " ->" + "nodo" + mi_ + "_null_SI;";
+            dot += "nodo" + (mi_) + "_null_SI" + " [ label =\"NULL " + "\"];\n";
+            contador++;
+        }
+        contador++;
+        //dot+="nodo"+declaracion+"_de"+" ->"+valor.CodigoDot();
+        s.add_ast(dot);
+        return dot;
     }
 }
 exports.Si = Si;

@@ -9,7 +9,7 @@ class Error_det {
         this.columna_mia = columna_mia;
     }
     obtener_error() {
-        console.log("tipo: " + this.tipo + " descripcion: " + this.err + " linea: " + this.linea + " col: " + this.columna_mia);
+        console.log("tipo : " + this.tipo + " descripcion: " + this.err + " linea: " + this.linea + " col: " + this.columna_mia);
     }
 }
 exports.Error_det = Error_det;

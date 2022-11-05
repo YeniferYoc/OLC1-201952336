@@ -1,9 +1,10 @@
 import { Expresion } from "./Expresion"
 import { Funcion } from "./Funcion"
 import { Instruccion } from "./instruccion"
+import { Retorno, Type } from "./Ret"
 import { Tabla_s } from "./Tabla_s"
-
-export class To_lower extends Instruccion {
+let contador:number = 0;
+export class To_lower extends Expresion {
 
     constructor(
         public expre: Expresion,
@@ -13,20 +14,25 @@ export class To_lower extends Instruccion {
         super(linea, columna)
     }
 
-    public ejecutar(tabla: Tabla_s) {
+    public ejecutar(tabla: Tabla_s):Retorno {
+        let resultado: Retorno
+        resultado = resultado = { value: ("error de operacion"), type: Type.STRING}
+
+        return resultado;
     }
     
-    public ast() {/*
+    public ast() {
+        let  dot:string = "";
+		//contador += 1;
+        dot+="nodo"+(contador)+"_to_low;\n";
+            dot+="nodo"+(contador)+"_to_low"+" [ label =\"TO LOWER\"];\n";
+            
+            dot+="nodo"+(contador)+"_to_low"+" ->"+this.expre.ast()+"\n";
+               
+        
+        contador++;
 
-        const s = Singleton.getInstance()
-        const name_node = `node_${this.line}_${this.column}_`
-        s.add_ast(`
-        ${name_node}[label="Lista Instrucciones"];        
-        `)
-        this.code.forEach(x => {
-            s.add_ast(`${name_node}->node_${x.line}_${x.column}_;`)
-            x.ast()
-        })*/
+        return dot;
 
     }
 }
