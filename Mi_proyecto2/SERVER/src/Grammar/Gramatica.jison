@@ -99,7 +99,7 @@
 "true"             {console.log("reconoci pr_true"); return 'pr_true'}
 "false"              {console.log("reconoci pr_false"); return 'pr_false'}
 "new"              {console.log("reconoci pr_new"); return 'pr_new'}
-
+\"[^\"]*\"				{ yytext = yytext.substr(1,yyleng-2);console.log("reconoci cadena "); return 'cadena'; }
 //signos de escape
 "\\n"             {console.log("reconoci salto_de_linea"); return 'salto_de_linea'}
 "\\\\"              {console.log("reconoci doble_b"); return 'doble_b'}
@@ -153,7 +153,7 @@
 "/="			{console.log("reconoci O_DIVIDIDO ");	return 'O_DIVIDIDO';}
 
 
-\"[^\"]*\"				{ yytext = yytext.substr(1,yyleng-2);console.log("reconoci cadena "); return 'cadena'; }
+
 [0-9]+("."[0-9]+)  	{console.log("reconoci decimal "); return 'decimal';}
 [0-9]+         			{console.log("reconoci entero"); return 'entero'}
 ([a-zA-Z])[a-zA-Z0-9_]*	{console.log("reconoci identificador "); return 'identificador';}
@@ -191,9 +191,9 @@
 
 Init    
     : INSTRUCCIONES EOF  {  console.log("termine de analizar"); return $1; }
-    |error EOF {console.log("ERROR SINTACTICO "+yytext +" en la linea "+yylineno  );}
-  //  |error EOF {console.log("ERROR SINTACTICO, NO SE ESPERABA: "+yytext +" en la linea "+yylineno  );}
-    //|error punto_c {console.log("ERROR SINTACTICO, NO SE ESPERABA: "+yytext +" en la linea "+yylineno  );}
+    //|error EOF {console.log("ERROR SINTACTICO "+yytext +" en la linea "+yylineno  );}
+    |error EOF {console.log("ERROR SINTACTICO, NO SE ESPERABA: "+yytext +" en la linea "+yylineno  );}
+    |error punto_c {console.log("ERROR SINTACTICO, NO SE ESPERABA: "+yytext +" en la linea "+yylineno  );}
 ;
 
 INSTRUCCIONES

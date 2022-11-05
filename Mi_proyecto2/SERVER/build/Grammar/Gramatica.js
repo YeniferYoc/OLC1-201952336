@@ -546,8 +546,7 @@ _handle_error:
                     loc: yyloc,
                     expected: expected,
                     recoverable: (error_rule_depth !== false)
-                });
-                let s=Union.getInstance();
+                });let s=Union.getInstance();
                 s.add_error(new Error_det("Sintactico", `El caracter ${(this.terminals_[symbol] || symbol)} no se esperaba en esta posicion`, yyloc.last_line, yyloc.last_column+1))                  
                  
             } else if (preErrorSymbol !== EOF) {
@@ -1108,83 +1107,83 @@ case 35:console.log("reconoci pr_false"); return 117
 break;
 case 36:console.log("reconoci pr_new"); return 43
 break;
-case 37:console.log("reconoci salto_de_linea"); return 'salto_de_linea'
+case 37: yy_.yytext = yy_.yytext.substr(1,yy_.yyleng-2);console.log("reconoci cadena "); return 114; 
 break;
-case 38:console.log("reconoci doble_b"); return 'doble_b'
+case 38:console.log("reconoci salto_de_linea"); return 'salto_de_linea'
 break;
-case 39:console.log("reconoci com_doble"); return 'com_doble'
+case 39:console.log("reconoci doble_b"); return 'doble_b'
 break;
-case 40:console.log("reconoci tab"); return 'tab'
+case 40:console.log("reconoci com_doble"); return 'com_doble'
 break;
-case 41:console.log("reconoci simple_barra"); return 'simple_barra'
+case 41:console.log("reconoci tab"); return 'tab'
 break;
-case 42:console.log("reconoci  ++"); return 65
+case 42:console.log("reconoci simple_barra"); return 'simple_barra'
 break;
-case 43:console.log("reconoci  --"); return 66
+case 43:console.log("reconoci  ++"); return 65
 break;
-case 44:console.log("reconoci * "); return 98
+case 44:console.log("reconoci  --"); return 66
 break;
-case 45:console.log("reconoci / "); return 99
+case 45:console.log("reconoci * "); return 98
 break;
-case 46:console.log("reconoci ^ "); return 101
+case 46:console.log("reconoci / "); return 99
 break;
-case 47:console.log("reconoci % "); return 100
+case 47:console.log("reconoci ^ "); return 101
 break;
-case 48:console.log("reconoci + "); return 97
+case 48:console.log("reconoci % "); return 100
 break;
-case 49:console.log("reconoci - "); return 96
+case 49:console.log("reconoci + "); return 97
 break;
-case 50:console.log("reconoci >=  "); return 105
+case 50:console.log("reconoci - "); return 96
 break;
-case 51:console.log("reconoci  <= ");  return 103
+case 51:console.log("reconoci >=  "); return 105
 break;
-case 52:console.log("reconoci  == ");  return 106
+case 52:console.log("reconoci  <= ");  return 103
 break;
-case 53:console.log("reconoci > "); return 104
+case 53:console.log("reconoci  == ");  return 106
 break;
-case 54:console.log("reconoci < "); return 102
+case 54:console.log("reconoci > "); return 104
 break;
-case 55:console.log("reconoci !=  "); return 107
+case 55:console.log("reconoci < "); return 102
 break;
-case 56:console.log("reconoci interrogacion_cierra "); return 34
+case 56:console.log("reconoci !=  "); return 107
 break;
-case 57:console.log("reconoci igual "); return 39 
+case 57:console.log("reconoci interrogacion_cierra "); return 34
 break;
-case 58:console.log("reconoci || ");  return 109
+case 58:console.log("reconoci igual "); return 39 
 break;
-case 59:console.log("reconoci && ");  return 108
+case 59:console.log("reconoci || ");  return 109
 break;
-case 60:console.log("reconoci  ! "); return 110
+case 60:console.log("reconoci && ");  return 108
 break;
-case 61:console.log("reconoci punto_c "); return 6
+case 61:console.log("reconoci  ! "); return 110
 break;
-case 62:console.log("reconoci coma "); return 50
+case 62:console.log("reconoci punto_c "); return 6
 break;
-case 63:console.log("reconoci punto "); return 92
+case 63:console.log("reconoci coma "); return 50
 break;
-case 64:console.log("reconoci dos_puntos "); return 36
+case 64:console.log("reconoci punto "); return 92
 break;
-case 65:console.log("reconoci llave_abre "); return 44
+case 65:console.log("reconoci dos_puntos "); return 36
 break;
-case 66:console.log("reconoci llave_cierra "); return 46
+case 66:console.log("reconoci llave_abre "); return 44
 break;
-case 67:console.log("reconoci par_abre "); return 31
+case 67:console.log("reconoci llave_cierra "); return 46
 break;
-case 68:console.log("reconoci par_cierra "); return 33
+case 68:console.log("reconoci par_abre "); return 31
 break;
-case 69:console.log("reconoci cor_abre "); return 40
+case 69:console.log("reconoci par_cierra "); return 33
 break;
-case 70:console.log("reconoci cor_cierra "); return 41
+case 70:console.log("reconoci cor_abre "); return 40
 break;
-case 71:console.log("reconoci O_MAS ");	return 'O_MAS';
+case 71:console.log("reconoci cor_cierra "); return 41
 break;
-case 72:console.log("reconoci O_MENOS ");	return 'O_MENOS';
+case 72:console.log("reconoci O_MAS ");	return 'O_MAS';
 break;
-case 73:console.log("reconoci O_POR ");	return 'O_POR';
+case 73:console.log("reconoci O_MENOS ");	return 'O_MENOS';
 break;
-case 74:console.log("reconoci O_DIVIDIDO ");	return 'O_DIVIDIDO';
+case 74:console.log("reconoci O_POR ");	return 'O_POR';
 break;
-case 75: yy_.yytext = yy_.yytext.substr(1,yy_.yyleng-2);console.log("reconoci cadena "); return 114; 
+case 75:console.log("reconoci O_DIVIDIDO ");	return 'O_DIVIDIDO';
 break;
 case 76:console.log("reconoci decimal "); return 113;
 break;
@@ -1204,7 +1203,7 @@ case 81:
 break;
 }
 },
-rules: [/^(?:\s+)/i,/^(?:\/\/.*)/i,/^(?:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/])/i,/^(?:if\b)/i,/^(?:else\b)/i,/^(?:elif\b)/i,/^(?:print\b)/i,/^(?:println\b)/i,/^(?:switch\b)/i,/^(?:case\b)/i,/^(?:default\b)/i,/^(?:break\b)/i,/^(?:while\b)/i,/^(?:for\b)/i,/^(?:do\b)/i,/^(?:until\b)/i,/^(?:return\b)/i,/^(?:continue\b)/i,/^(?:tolower\b)/i,/^(?:toupper\b)/i,/^(?:round\b)/i,/^(?:void\b)/i,/^(?:length\b)/i,/^(?:typeof\b)/i,/^(?:tostring\b)/i,/^(?:tochararray\b)/i,/^(?:push\b)/i,/^(?:pop\b)/i,/^(?:run\b)/i,/^(?:int\b)/i,/^(?:double\b)/i,/^(?:boolean\b)/i,/^(?:char\b)/i,/^(?:string\b)/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:new\b)/i,/^(?:\\n)/i,/^(?:\\\\)/i,/^(?:\\")/i,/^(?:\\t)/i,/^(?:\\\\')/i,/^(?:\+\+)/i,/^(?:--)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:\^)/i,/^(?:%)/i,/^(?:\+)/i,/^(?:-)/i,/^(?:>=)/i,/^(?:<=)/i,/^(?:==)/i,/^(?:>)/i,/^(?:<)/i,/^(?:!=)/i,/^(?:\?)/i,/^(?:=)/i,/^(?:\|\|)/i,/^(?:&&)/i,/^(?:!)/i,/^(?:;)/i,/^(?:,)/i,/^(?:\.)/i,/^(?::)/i,/^(?:\{)/i,/^(?:\})/i,/^(?:\()/i,/^(?:\))/i,/^(?:\[)/i,/^(?:\])/i,/^(?:\+=)/i,/^(?:-=)/i,/^(?:\*=)/i,/^(?:\/=)/i,/^(?:"[^\"]*")/i,/^(?:[0-9]+(\.[0-9]+))/i,/^(?:[0-9]+)/i,/^(?:([a-zA-Z])[a-zA-Z0-9_]*)/i,/^(?:'[^\']*')/i,/^(?:$)/i,/^(?:.)/i],
+rules: [/^(?:\s+)/i,/^(?:\/\/.*)/i,/^(?:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/])/i,/^(?:if\b)/i,/^(?:else\b)/i,/^(?:elif\b)/i,/^(?:print\b)/i,/^(?:println\b)/i,/^(?:switch\b)/i,/^(?:case\b)/i,/^(?:default\b)/i,/^(?:break\b)/i,/^(?:while\b)/i,/^(?:for\b)/i,/^(?:do\b)/i,/^(?:until\b)/i,/^(?:return\b)/i,/^(?:continue\b)/i,/^(?:tolower\b)/i,/^(?:toupper\b)/i,/^(?:round\b)/i,/^(?:void\b)/i,/^(?:length\b)/i,/^(?:typeof\b)/i,/^(?:tostring\b)/i,/^(?:tochararray\b)/i,/^(?:push\b)/i,/^(?:pop\b)/i,/^(?:run\b)/i,/^(?:int\b)/i,/^(?:double\b)/i,/^(?:boolean\b)/i,/^(?:char\b)/i,/^(?:string\b)/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:new\b)/i,/^(?:"[^\"]*")/i,/^(?:\\n)/i,/^(?:\\\\)/i,/^(?:\\")/i,/^(?:\\t)/i,/^(?:\\\\')/i,/^(?:\+\+)/i,/^(?:--)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:\^)/i,/^(?:%)/i,/^(?:\+)/i,/^(?:-)/i,/^(?:>=)/i,/^(?:<=)/i,/^(?:==)/i,/^(?:>)/i,/^(?:<)/i,/^(?:!=)/i,/^(?:\?)/i,/^(?:=)/i,/^(?:\|\|)/i,/^(?:&&)/i,/^(?:!)/i,/^(?:;)/i,/^(?:,)/i,/^(?:\.)/i,/^(?::)/i,/^(?:\{)/i,/^(?:\})/i,/^(?:\()/i,/^(?:\))/i,/^(?:\[)/i,/^(?:\])/i,/^(?:\+=)/i,/^(?:-=)/i,/^(?:\*=)/i,/^(?:\/=)/i,/^(?:[0-9]+(\.[0-9]+))/i,/^(?:[0-9]+)/i,/^(?:([a-zA-Z])[a-zA-Z0-9_]*)/i,/^(?:'[^\']*')/i,/^(?:$)/i,/^(?:.)/i],
 conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81],"inclusive":true}}
 });
 return lexer;

@@ -308,11 +308,11 @@ expresion
 tip   
     : par_abre expresion par_cierra  
     |cor_abre expresion cor_cierra
-    | entero      {  $$ = new Variable($1,                   Type.INT , @1.first_line, @1.first_column); }
-    | decimal         {  $$ = new Variable($1,                   Type.DOUBLE , @1.first_line, @1.first_column); }
-    | cadena        {  $$ = new Variable($1.replace(/\"/g,""), Type.STRING , @1.first_line, @1.first_column); }
-    | caracter       {  $$ = new Variable($1.replace(/\'/g,""), Type.CHAR , @1.first_line, @1.first_column); }
-    | pr_true          {  $$ = new Variable(true,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
-    | pr_false         {  $$ = new Variable(false,                   Type.BOOLEAN, @1.first_line, @1.first_column); }
-    | identificador            {  $$ = new Acceso($1,@1.first_line, @1.first_column);  }
+    | entero
+    | decimal      
+    | cadena     
+    | caracter  
+    | pr_true         
+    | pr_false         
+    | identificador          
 ;
